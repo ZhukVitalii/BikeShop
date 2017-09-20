@@ -229,14 +229,7 @@
                         <td>Default</td>
                     </c:otherwise>
                 </c:choose>
-                <c:choose>
-                    <c:when test="${handlebar.handlebarMaterial ne null}">
-                        <td>${handlebar.handlebarMaterial.material}</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td>Default</td>
-                    </c:otherwise>
-                </c:choose>
+                <td>${headset.material}</td>
                 <td>${headset.size}</td>
                 <td>${headset.color}</td>
                 <td>${headset.price}</td>
@@ -320,14 +313,7 @@
                         <td>Default</td>
                     </c:otherwise>
                 </c:choose>
-                <c:choose>
-                    <c:when test="${stem.handlebarMaterial ne null}">
-                        <td>${stem.handlebarMaterial.material}</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td>Default</td>
-                    </c:otherwise>
-                </c:choose>
+                <td>${stem.material}</td>
                 <td>${stem.length}</td>
                 <td>${stem.color}</td>
                 <td>${stem.price}</td>

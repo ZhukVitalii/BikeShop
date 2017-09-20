@@ -18,10 +18,11 @@ public class Winding {
     @Id
     @GeneratedValue
     private long id;
-
     @ManyToOne
     @JoinColumn(name="maker_id")
     private HandlebarMaker handlebarMaker;
+    private Long article;
+    private String url;
     private String name;
     private String length;
     private String wide;
@@ -32,9 +33,11 @@ public class Winding {
     private String description;
     private String way;
 
-    public Winding(HandlebarMaker handlebarMaker, String name, String length, String wide, String material,
+    public Winding(HandlebarMaker handlebarMaker,Long article, String url, String name, String length, String wide, String material,
                      String color, Double price, String description, String way) {
         this.handlebarMaker = handlebarMaker;
+        this.article = article;
+        this.url = url;
         this.name = name;
         this.length = length;
         this.wide = wide;

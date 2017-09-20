@@ -1,5 +1,6 @@
 package beetle.Brakes;
 
+import beetle.Handlebars.Handlebar;
 import beetle.Wheels.RotorFixType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,6 +23,12 @@ public interface BrakeDiscHydraulicRepository extends JpaRepository<BrakeDiscHyd
     List<BrakeDiscHydraulic> findByLocation(@Param("location") Location location, Pageable pageable);
     @Query("SELECT COUNT(c) FROM BrakeDiscHydraulic c WHERE c.location = :location")
     long countByLocation(@Param("location")  Location location);
+
+    @Query("SELECT c FROM BrakeDiscHydraulic c WHERE c.url = :url")
+    List<BrakeDiscHydraulic> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM BrakeDiscHydraulic c WHERE c.article = :article")
+    List<BrakeDiscHydraulic> findByArticle(@Param("article") Long article, Pageable pageable);
 
 
 

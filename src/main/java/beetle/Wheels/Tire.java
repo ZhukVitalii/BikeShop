@@ -23,6 +23,8 @@ public class Tire {
     @ManyToOne
     @JoinColumn(name="maker_id")
     private WheelMaker wheelMaker;
+    private Long article;
+    private String url;
     private String name;
     @ManyToOne
     @JoinColumn(name="size_id")
@@ -37,13 +39,16 @@ public class Tire {
     @JoinColumn(name="tire_wide_id")
     private TireWide tireWide;
     private String color;
+    @Column(name = "description", length = 10000)
     private String description;
     private Double price;
     private String way;
 
-    public Tire (WheelMaker wheelMaker, String name, WheelsDiam wheelsDiam, TireType tireType, CordType cordType,
+    public Tire (WheelMaker wheelMaker,Long article,String url, String name, WheelsDiam wheelsDiam, TireType tireType, CordType cordType,
                  TireWide tireWide, String color,String description, Double price,  String way) {
         this.wheelMaker = wheelMaker;
+        this.article = article;
+        this.url = url;
         this.name = name;
         this.wheelsDiam = wheelsDiam;
         this.tireType = tireType;

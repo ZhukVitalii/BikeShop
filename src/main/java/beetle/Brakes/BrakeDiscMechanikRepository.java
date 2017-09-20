@@ -29,6 +29,12 @@ public interface BrakeDiscMechanikRepository extends JpaRepository<BrakeDiscMech
     @Query("SELECT COUNT(c) FROM BrakeDiscMechanik c WHERE c.rotorDiam = :rotorDiam")
     long countByRotorDiam(@Param("rotorDiam")  RotorDiam rotorDiam);
 
+    @Query("SELECT c FROM BrakeDiscMechanik c WHERE c.url = :url")
+    List<BrakeDiscMechanik> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM BrakeDiscMechanik c WHERE c.article = :article")
+    List<BrakeDiscMechanik> findByArticle(@Param("article") Long article, Pageable pageable);
+
 
 
 

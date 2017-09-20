@@ -16,4 +16,10 @@ public interface WindingRepository extends JpaRepository<Winding, Long> {
 
     @Query("SELECT COUNT(c) FROM Winding c WHERE c.handlebarMaker = :handlebarMaker")
     long countByHandlebarMaker(@Param("handlebarMaker") HandlebarMaker handlebarMaker);
+
+    @Query("SELECT c FROM Winding c WHERE c.url = :url")
+    List<Winding> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM Winding c WHERE c.article = :article")
+    List<Winding> findByArticle(@Param("article") Long article, Pageable pageable);
 }

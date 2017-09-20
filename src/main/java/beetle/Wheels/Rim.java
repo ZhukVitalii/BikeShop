@@ -24,6 +24,8 @@ public class Rim {
     @ManyToOne
     @JoinColumn(name="maker_id")
     private WheelMaker wheelMaker;
+    private Long article;
+    private String url;
     private String name;
     @ManyToOne
     @JoinColumn(name="type_id")
@@ -56,14 +58,17 @@ public class Rim {
     @JoinColumn(name="nipple_id")
     private Nipple nipple;
     private String color;
+    @Column(name = "description", length = 10000)
     private String description;
     private Double price;
     private String way;
 
-    public Rim(WheelMaker wheelMaker, String name, BikeType bikeType,WheelsDiam wheelsDiam,EtrtoSize etrtoSize, String material,
+    public Rim(WheelMaker wheelMaker,Long article, String url, String name, BikeType bikeType,WheelsDiam wheelsDiam,EtrtoSize etrtoSize, String material,
                  SpokeNumber spokeNumber, InnerTubeDiameter innerTubeDiameter,RimWide rimWide,RimHeight rimHeight,BrakesType brakesType,
                String weight,Nipple nipple,String color, String description, Double price,  String way) {
         this.wheelMaker = wheelMaker;
+        this.article = article;
+        this.url = url;
         this.name = name;
         this.bikeType = bikeType;
         this.wheelsDiam = wheelsDiam;

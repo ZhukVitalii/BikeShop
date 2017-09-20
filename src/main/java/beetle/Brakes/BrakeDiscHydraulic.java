@@ -22,6 +22,8 @@ public class BrakeDiscHydraulic {
     @ManyToOne
     @JoinColumn(name="maker_id")
     private BrakeMaker brakeMaker;
+    private Long article;
+    private String url;
     private String name;
     @ManyToOne
     @JoinColumn(name="loc_id")
@@ -48,10 +50,12 @@ public class BrakeDiscHydraulic {
     private Double price;
     private String way;
 
-    public BrakeDiscHydraulic(BrakeMaker brakeMaker, String name, Location location,BrakeLiquid brakeLiquid, String materialHandle,
+    public BrakeDiscHydraulic(BrakeMaker brakeMaker,Long article,String url, String name, Location location,BrakeLiquid brakeLiquid, String materialHandle,
                               LengthHydroline lengthHydroline,RotorDiam rotorDiam,String rotorWeight,String material,
                               String brakeWeight,RotorFixType rotorFixType, String color, String description, Double price, String way) {
         this.brakeMaker = brakeMaker;
+        this.article = article;
+        this.url = url;
         this.name = name;
         this.location = location;
         this.brakeLiquid = brakeLiquid;

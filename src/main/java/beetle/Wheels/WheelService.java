@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,6 +78,157 @@ public class WheelService {
     private TireWideRepository tireWideRepository;
 
 
+    public List<Long> articlesBackHub = new ArrayList<>();
+    public List<Long> articlesFrontHub = new ArrayList<>();
+    public List<Long> articlesRim = new ArrayList<>();
+    public List<Long> articlesSpoke = new ArrayList<>();
+    public List<Long> articlesTire = new ArrayList<>();
+    public List<Long> articlesWheel = new ArrayList<>();
+
+    //For backHub
+    public void testPrintBackHub(){
+        for (Long articlo : articlesBackHub){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeBackHub(){
+        System.out.println("розмір корзини " + getSizeBackHub());
+    }
+
+    public void addToArticleBackHub(Long article) {
+        articlesBackHub.add(article);
+        testPrintBackHub();
+        getSizeBackHub();
+        printSizeBackHub();
+    }
+    public Long getArticleBackHubFromCart (int a) {
+        Long b = articlesBackHub.get(a);
+        return b;
+    }
+    public int getSizeBackHub() {
+        int a = articlesBackHub.size();
+        return a;
+    }
+    //For FrontHub
+    public void testPrintFrontHub(){
+        for (Long articlo : articlesFrontHub){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeFrontHub(){
+        System.out.println("розмір корзини " + getSizeFrontHub());
+    }
+
+    public void addToArticleFrontHub(Long article) {
+        articlesFrontHub.add(article);
+        testPrintFrontHub();
+        getSizeFrontHub();
+        printSizeFrontHub();
+    }
+    public Long getArticleFrontHubFromCart (int a) {
+        Long b = articlesFrontHub.get(a);
+        return b;
+    }
+    public int getSizeFrontHub() {
+        int a = articlesFrontHub.size();
+        return a;
+    }
+    //For Rim
+    public void testPrintRim(){
+        for (Long articlo : articlesRim){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeRim(){
+        System.out.println("розмір корзини " + getSizeRim());
+    }
+
+    public void addToArticleRim(Long article) {
+        articlesRim.add(article);
+        testPrintRim();
+        getSizeRim();
+        printSizeRim();
+    }
+    public Long getArticleRimFromCart (int a) {
+        Long b = articlesRim.get(a);
+        return b;
+    }
+    public int getSizeRim() {
+        int a = articlesRim.size();
+        return a;
+    }
+    //For Spoke
+    public void testPrintSpoke(){
+        for (Long articlo : articlesSpoke){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeSpoke(){
+        System.out.println("розмір корзини " + getSizeSpoke());
+    }
+
+    public void addToArticleSpoke(Long article) {
+        articlesSpoke.add(article);
+        testPrintSpoke();
+        getSizeSpoke();
+        printSizeSpoke();
+    }
+    public Long getArticleSpokeFromCart (int a) {
+        Long b = articlesSpoke.get(a);
+        return b;
+    }
+    public int getSizeSpoke() {
+        int a = articlesSpoke.size();
+        return a;
+    }
+    //For Tire
+    public void testPrintTire(){
+        for (Long articlo : articlesTire){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeTire(){
+        System.out.println("розмір корзини " + getSizeTire());
+    }
+
+    public void addToArticleTire(Long article) {
+        articlesTire.add(article);
+        testPrintTire();
+        getSizeTire();
+        printSizeTire();
+    }
+    public Long getArticleTireFromCart (int a) {
+        Long b = articlesTire.get(a);
+        return b;
+    }
+    public int getSizeTire() {
+        int a = articlesTire.size();
+        return a;
+    }
+    //For Wheel
+    public void testPrintWheel(){
+        for (Long articlo : articlesWheel){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeWheel(){
+        System.out.println("розмір корзини " + getSizeWheel());
+    }
+
+    public void addToArticleWheel(Long article) {
+        articlesWheel.add(article);
+        testPrintWheel();
+        getSizeWheel();
+        printSizeWheel();
+    }
+    public Long getArticleWheelFromCart (int a) {
+        Long b = articlesWheel.get(a);
+        return b;
+    }
+    public int getSizeWheel() {
+        int a = articlesWheel.size();
+        return a;
+    }
 
 // add
     @Transactional
@@ -399,6 +551,55 @@ public class WheelService {
     @Transactional(readOnly = true)
     public List<Wheel> findByRimWide(RimWide rimWide, Pageable pegeable) {
         return  wheelRepository.findByRimWide(rimWide, pegeable);
+    }
+
+    @Transactional(readOnly=true)
+    public List<Wheel> findWheelByArticle(Long article, Pageable pageable) {
+        return wheelRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Wheel> findWheelByUrl(String url, Pageable pageable) {
+        return wheelRepository.findByUrl(url, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BackHub> findBackHubByArticle(Long article, Pageable pageable) {
+        return backHubRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BackHub> findBackHubByUrl(String url, Pageable pageable) {
+        return backHubRepository.findByUrl(url, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<FrontHub> findFrontHubByArticle(Long article, Pageable pageable) {
+        return frontHubRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<FrontHub> findFrontHubByUrl(String url, Pageable pageable) {
+        return frontHubRepository.findByUrl(url, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Rim> findRimByArticle(Long article, Pageable pageable) {
+        return rimRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Rim> findRimByUrl(String url, Pageable pageable) {
+        return rimRepository.findByUrl(url, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Spoke> findSpokeByArticle(Long article, Pageable pageable) {
+        return spokeRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Spoke> findSpokeByUrl(String url, Pageable pageable) {
+        return spokeRepository.findByUrl(url, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Tire> findTireByArticle(Long article, Pageable pageable) {
+        return tireRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Tire> findTireByUrl(String url, Pageable pageable) {
+        return tireRepository.findByUrl(url, pageable);
     }
 
 

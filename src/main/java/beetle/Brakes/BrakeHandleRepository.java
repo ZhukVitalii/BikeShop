@@ -25,6 +25,13 @@ public interface BrakeHandleRepository extends JpaRepository<BrakeHandle, Long> 
     long countByBrakeHandleLocation(@Param("brakeHandleLocation")  BrakeHandleLocation brakeHandleLocation);
 
 
+    @Query("SELECT c FROM BrakeHandle c WHERE c.url = :url")
+    List<BrakeHandle> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM BrakeHandle c WHERE c.article = :article")
+    List<BrakeHandle> findByArticle(@Param("article") Long article, Pageable pageable);
+
+
     @Query("SELECT c FROM BrakeHandle c WHERE c.brakeHandleCompatibility = :brakeHandleCompatibility")
     List<BrakeHandle> findByBrakeHandleCompatibility(@Param("brakeHandleCompatibility") BrakeHandleCompatibility brakeHandleCompatibility, Pageable pageable);
     @Query("SELECT COUNT(c) FROM BrakeHandle c WHERE c.brakeHandleCompatibility = :brakeHandleCompatibility")

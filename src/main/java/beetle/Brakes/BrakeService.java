@@ -1,14 +1,15 @@
 package beetle.Brakes;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import beetle.Handlebars.HandlebarDiameter;
 import beetle.Handlebars.HandlebarDiameterRepository;
 import beetle.Wheels.RotorFixType;
 import beetle.Wheels.RotorFixTypeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,6 +50,111 @@ public class BrakeService {
     private BrakeLiquidRepository brakeLiquidRepository;
     @Autowired
     private RotorFixTypeRepository rotorFixTypeRepository;
+
+
+
+    public List<Long> articlesBrakeDiscHydraulic = new ArrayList<>();
+    public List<Long> articlesBrakeDiscMechanik = new ArrayList<>();
+    public List<Long> articlesBrakeVBrake = new ArrayList<>();
+    public List<Long> articlesBrakeHandle = new ArrayList<>();
+
+    //For BrakeDiscHydraulic
+    public void testPrintBrakeDiscHydraulic(){
+        for (Long articlo : articlesBrakeDiscHydraulic){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeBrakeDiscHydraulic(){
+        System.out.println("розмір корзини " + getSizeBrakeDiscHydraulic());
+    }
+
+    public void addToArticleBrakeDiscHydraulic(Long article) {
+        articlesBrakeDiscHydraulic.add(article);
+        testPrintBrakeDiscHydraulic();
+        getSizeBrakeDiscHydraulic();
+        printSizeBrakeDiscHydraulic();
+    }
+    public Long getArticleBrakeDiscHydraulicFromCart (int a) {
+        Long b = articlesBrakeDiscHydraulic.get(a);
+        return b;
+    }
+    public int getSizeBrakeDiscHydraulic() {
+        int a = articlesBrakeDiscHydraulic.size();
+        return a;
+    }
+    //For BrakeDiscDiscMechanik
+    public void testPrintBrakeDiscMechanik(){
+        for (Long articlo : articlesBrakeDiscMechanik){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeBrakeDiscMechanik(){
+        System.out.println("розмір корзини " + getSizeBrakeDiscMechanik());
+    }
+
+    public void addToArticleBrakeDiscMechanik(Long article) {
+        articlesBrakeDiscMechanik.add(article);
+        testPrintBrakeDiscMechanik();
+        getSizeBrakeDiscMechanik();
+        printSizeBrakeDiscMechanik();
+    }
+    public Long getArticleBrakeDiscMechanikFromCart (int a) {
+        Long b = articlesBrakeDiscMechanik.get(a);
+        return b;
+    }
+    public int getSizeBrakeDiscMechanik() {
+        int a = articlesBrakeDiscMechanik.size();
+        return a;
+    }
+    //For BrakeVBrake
+    public void testPrintBrakeVBrake(){
+        for (Long articlo : articlesBrakeVBrake){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeBrakeVBrake(){
+        System.out.println("розмір корзини " + getSizeBrakeVBrake());
+    }
+
+    public void addToArticleBrakeVBrake(Long article) {
+        articlesBrakeVBrake.add(article);
+        testPrintBrakeVBrake();
+        getSizeBrakeVBrake();
+        printSizeBrakeVBrake();
+    }
+    public Long getArticleBrakeVBrakeFromCart (int a) {
+        Long b = articlesBrakeVBrake.get(a);
+        return b;
+    }
+    public int getSizeBrakeVBrake() {
+        int a = articlesBrakeVBrake.size();
+        return a;
+    }
+
+    //For BrakeHandle
+    public void testPrintBrakeHandle(){
+        for (Long articlo : articlesBrakeHandle){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeBrakeHandle(){
+        System.out.println("розмір корзини " + getSizeBrakeHandle());
+    }
+
+    public void addToArticleBrakeHandle(Long article) {
+        articlesBrakeHandle.add(article);
+        testPrintBrakeHandle();
+        getSizeBrakeHandle();
+        printSizeBrakeHandle();
+    }
+    public Long getArticleBrakeHandleFromCart (int a) {
+        Long b = articlesBrakeHandle.get(a);
+        return b;
+    }
+    public int getSizeBrakeHandle() {
+        int a = articlesBrakeHandle.size();
+        return a;
+    }
 
 
 
@@ -230,6 +336,41 @@ public class BrakeService {
     public List<BrakeHandle> findByBrakeHandleMakers(BrakeMaker brakeMaker, Pageable pageable) {
         return brakeHandleRepository.findByBrakeMakers(brakeMaker, pageable);
     }
+
+    @Transactional(readOnly=true)
+    public List<BrakeDiscHydraulic> findBrakeDiscHydraulicByArticle(Long article, Pageable pageable) {
+        return brakeDiscHydraulicRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BrakeDiscHydraulic> findBrakeDiscHydraulicByUrl(String url, Pageable pageable) {
+        return brakeDiscHydraulicRepository.findByUrl(url,pageable);
+    }
+
+    @Transactional(readOnly=true)
+    public List<BrakeDiscMechanik> findBrakeDiscMechanikByArticle(Long article, Pageable pageable) {
+        return brakeDiscMechanikRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BrakeDiscMechanik> findBrakeDiscMechanikByUrl(String url, Pageable pageable) {
+        return brakeDiscMechanikRepository.findByUrl(url,pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BrakeVBrake> findBrakeVBrakeByArticle(Long article, Pageable pageable) {
+        return brakeVBrakeRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BrakeVBrake> findBrakeVBrakeByUrl(String url, Pageable pageable) {
+        return brakeVBrakeRepository.findByUrl(url,pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BrakeHandle> findBrakeHandleByArticle(Long article, Pageable pageable) {
+        return brakeHandleRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BrakeHandle> findBrakeHandleByUrl(String url, Pageable pageable) {
+        return brakeHandleRepository.findByUrl(url,pageable);
+    }
+
 
 
 

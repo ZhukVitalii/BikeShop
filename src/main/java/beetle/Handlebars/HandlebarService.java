@@ -42,37 +42,132 @@ public class HandlebarService {
     private BikeTypeRepository bikeTypeRepository;
 
 
-    public List<Long> articles = new ArrayList<>();
+    public List<Long> articlesHandlebar = new ArrayList<>();
+    public List<Long> articlesStem = new ArrayList<>();
+    public List<Long> articlesGrips = new ArrayList<>();
+    public List<Long> articlesHeadset = new ArrayList<>();
+    public List<Long> articlesWinding = new ArrayList<>();
 
-
-    public void testPrint(){
-        for (Long articlo : articles){
+//For handlebar
+    public void testPrintHandlebar(){
+        for (Long articlo : articlesHandlebar){
             System.out.println(articlo);
         }
     }
-    public  void printSize(){
-        System.out.println("розмір корзини " + getSize());
+    public  void printSizeHandlebar(){
+        System.out.println("розмір корзини " + getSizeHandlebar());
     }
 
-
-    public void addToArticle(Long article) {
-        articles.add(article);
-        testPrint();
-        getSize();
-        printSize();
+    public void addToArticleHandlebar(Long article) {
+        articlesHandlebar.add(article);
+        testPrintHandlebar();
+        getSizeHandlebar();
+        printSizeHandlebar();
     }
-    public Long getArticleFromCart (int a) {
-        Long b = articles.get(a);
+    public Long getArticleHandlebarFromCart (int a) {
+        Long b = articlesHandlebar.get(a);
         return b;
     }
-    public int getSize() {
-        int a = articles.size();
+    public int getSizeHandlebar() {
+        int a = articlesHandlebar.size();
         return a;
     }
+    //For stem
+    public void testPrintStem(){
+        for (Long articlo : articlesStem){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeStem(){
+        System.out.println("розмір корзини " + getSizeStem());
+    }
 
+    public void addToArticleStem(Long article) {
+        articlesStem.add(article);
+        testPrintStem();
+        getSizeStem();
+        printSizeStem();
+    }
+    public Long getArticleStemFromCart (int a) {
+        Long b = articlesStem.get(a);
+        return b;
+    }
+    public int getSizeStem() {
+        int a = articlesStem.size();
+        return a;
+    }
+    //For grips
+    public void testPrintGrips(){
+        for (Long articlo : articlesGrips){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeGrips(){
+        System.out.println("розмір корзини " + getSizeGrips());
+    }
 
+    public void addToArticleGrips(Long article) {
+        articlesGrips.add(article);
+        testPrintGrips();
+        getSizeGrips();
+        printSizeGrips();
+    }
+    public Long getArticleGripsFromCart (int a) {
+        Long b = articlesGrips.get(a);
+        return b;
+    }
+    public int getSizeGrips() {
+        int a = articlesGrips.size();
+        return a;
+    }
+    //For headset
+    public void testPrintHeadset(){
+        for (Long articlo : articlesHeadset){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeHeadset(){
+        System.out.println("розмір корзини " + getSizeHeadset());
+    }
 
+    public void addToArticleHeadset(Long article) {
+        articlesHeadset.add(article);
+        testPrintHeadset();
+        getSizeHeadset();
+        printSizeHeadset();
+    }
+    public Long getArticleHeadsetFromCart (int a) {
+        Long b = articlesHeadset.get(a);
+        return b;
+    }
+    public int getSizeHeadset() {
+        int a = articlesHeadset.size();
+        return a;
+    }
+    //For winding
+    public void testPrintWinding(){
+        for (Long articlo : articlesWinding){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeWinding(){
+        System.out.println("розмір корзини " + getSizeWinding());
+    }
 
+    public void addToArticleWinding(Long article) {
+        articlesWinding.add(article);
+        testPrintWinding();
+        getSizeWinding();
+        printSizeWinding();
+    }
+    public Long getArticleWindingFromCart (int a) {
+        Long b = articlesWinding.get(a);
+        return b;
+    }
+    public int getSizeWinding() {
+        int a = articlesWinding.size();
+        return a;
+    }
 
     @Transactional
     public void addHandlebar(Handlebar handlebar) {
@@ -186,12 +281,45 @@ public class HandlebarService {
     }
 
     @Transactional(readOnly=true)
-    public List<Handlebar> findByArticle(Long article, Pageable pageable) {
+    public List<Handlebar> findHandlebarByArticle(Long article, Pageable pageable) {
         return handlebarRepository.findByArticle(article, pageable);
     }
     @Transactional(readOnly=true)
-    public List<Handlebar> findByUrl(String url, Pageable pageable) {
+    public List<Handlebar> findHandlebarByUrl(String url, Pageable pageable) {
         return handlebarRepository.findByUrl(url,pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Stem> findStemByArticle(Long article, Pageable pageable) {
+        return stemRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Stem> findStemByUrl(String url, Pageable pageable) {
+        return stemRepository.findByUrl(url,pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Grips> findGripsByArticle(Long article, Pageable pageable) {
+        return gripsRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Grips> findGripsByUrl(String url, Pageable pageable) {
+        return gripsRepository.findByUrl(url,pageable);
+    }
+
+    @Transactional(readOnly=true)
+    public List<Headset> findHeadsetByArticle(Long article, Pageable pageable) {
+        return headsetRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Headset> findHeadsetByUrl(String url, Pageable pageable) {
+        return headsetRepository.findByUrl(url,pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Winding> findWindingByArticle(Long article, Pageable pageable) {
+        return windingRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Winding> findWindingByUrl(String url, Pageable pageable) {
+        return windingRepository.findByUrl(url,pageable);
     }
 
 

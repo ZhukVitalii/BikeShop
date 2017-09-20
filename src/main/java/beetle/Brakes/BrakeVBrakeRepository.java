@@ -22,6 +22,13 @@ public interface BrakeVBrakeRepository extends JpaRepository<BrakeVBrake, Long> 
     @Query("SELECT COUNT(c) FROM BrakeVBrake c WHERE c.location = :location")
     long countByLocation(@Param("location")  Location location);
 
+    @Query("SELECT c FROM BrakeVBrake c WHERE c.url = :url")
+    List<BrakeVBrake> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM BrakeVBrake c WHERE c.article = :article")
+    List<BrakeVBrake> findByArticle(@Param("article") Long article, Pageable pageable);
+
+
 
 
 

@@ -49,7 +49,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="resources/images/logo.png" alt=""/></a>
+                <a href="/"><img src="resources/images/logo.png"
+                                 alt=""
+                                 width="110"
+                                 height="112"/>
+                </a>
             </div>
             <div class="top-nav">
                 <label class="mobile_menu" for="mobile_menu">

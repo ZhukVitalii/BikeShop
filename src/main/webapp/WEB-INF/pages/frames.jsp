@@ -49,7 +49,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="resources/images/logo.png" alt=""/></a>
+                <a  href="/"><img  src="resources/images/logo.png"
+                                   width="110"
+                                   height="112"
+                                   alt=""/>
+                </a>
             </div>
             <div class="top-nav">
                 <label class="mobile_menu" for="mobile_menu">
@@ -153,8 +157,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                 </a>
 
                                     <div class="details-left-info">
-
-                                        <h3>${frame.name}</h3>
+                                        <div class="link-to-one">
+                                            <a href="<c:url value="/frame/${frame.url}"/>"
+                                               title="Перейти до <c:out value="${frame.name}"/>">
+                                            <h3>${frame.name}</h3>
+                                            </a>
+                                        </div>
                                         <h5> Артикул  : ${frame.article}</h5>
                                         <p class="maker"> <h3> Виробник  : ${frame.frameMaker.name} </h3></p>
                                         <h4></h4>

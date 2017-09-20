@@ -22,6 +22,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!--webfont-->
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
     <!--webfont-->
     <!-- dropdown -->
     <script src="resources/js/jquery.easydropdown.js"></script>
@@ -61,7 +62,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="resources/images/logo.png" alt=""/></a>
+                <a  href="/"><img src="resources/images/logo.png"
+                                 alt=""
+                                 width="110"
+                                 height="112"/>
+                </a>
             </div>
             <div class="top-nav">
                 <label class="mobile_menu" for="mobile_menu">
@@ -83,7 +88,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="/show_forks">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
-                            <li><a href="parts.html">Колеса та комплектуючі</a></li>
+                            <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
                             <li><a href="parts.html">Трансмісія</a></li>
                         </ul>
                     </li>
@@ -111,9 +116,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li><h1>МТВ</h1></li>
                     <li><h1>ШОССЕ</h1></li>
                     <li><h1>МІСЬКІЙ</h1></li>
-
                 </ul>
-                <p>You <span>create</span> the <span>journey,</span> we supply the <span>parts</span></p>
+                <p>Хочеш <span>унікальний</span> велосипед? <span>Твої</span> побажання - наші <span>запчастини!</span></p>
                 <a class="morebtn" href="bicycles.html">ЗІБРАТИ МТВ!</a>
                 <a class="morebtn" href="bicycles.html">ЗІБРАТИ ШОССЕ!</a>
                 <a class="morebtn" href="bicycles.html">ЗІБРАТИ МІСЬКИЙ!</a>
@@ -145,7 +149,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="store" href="/show_brakesHydro">Вибрати</a>
             </div></a>
             <a href="/show_brakesMech"><div class="col-md-4 cate-grid grid2">
-                <h4>Дискові гальма механічні</h4>
+                <h4>Дискові гальма<br> механічні</h4>
                 <a class="store" href="/show_brakesMech">Вибрати</a>
             </div></a>
             <a href="/show_brakesVBrake"><div class="col-md-4 cate-grid grid3">
@@ -162,29 +166,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <h3>Колеса та комплектуючі</h3>
         <div class="categorie-grids">
-            <a href="/show_brakesHydro"><div class="col-md-4 cate-grid grid6">
+            <a href="/show_wheels"><div class="col-md-4 cate-grid grid6">
                 <h4>Колеса</h4>
-                <a class="store" href="/show_brakesHydro">Вибрати</a>
+                <a class="store" href="/show_wheels">Вибрати</a>
             </div></a>
-            <a href="/show_brakesMech"><div class="col-md-4 cate-grid grid7">
+            <a href="/show_rims"><div class="col-md-4 cate-grid grid7">
                 <h4>Обода</h4>
-                <a class="store" href="/show_brakesMech">Вибрати</a>
+                <a class="store" href="/show_rims">Вибрати</a>
             </div></a>
-            <a href="/show_brakesVBrake"><div class="col-md-4 cate-grid grid8">
+            <a href="/show_frontHubs"><div class="col-md-4 cate-grid grid8">
                 <h4>Передні втулки</h4>
-                <a class="store" href="/show_brakesVBrake">Вибрати</a>
+                <a class="store" href="/show_frontHubs">Вибрати</a>
             </div></a>
-            <a href="/show_brakesHandle"><div class="col-md-4 cate-grid grid9">
+            <a href="/show_backHubs"><div class="col-md-4 cate-grid grid9">
                 <h4>Задні втулки</h4>
-                <a class="store" href="/show_brakesHandle">Вибрати</a>
+                <a class="store" href="/show_backHubs">Вибрати</a>
             </div></a>
-            <a href="/show_brakesHandle"><div class="col-md-4 cate-grid grid10">
+            <a href="/show_spokes"><div class="col-md-4 cate-grid grid10">
                 <h4>Спиці</h4>
-                <a class="store" href="/show_brakesHandle">Вибрати</a>
+                <a class="store" href="/show_spokes">Вибрати</a>
             </div></a>
-            <a href="/show_brakesHandle"><div class="col-md-4 cate-grid grid11">
+            <a href="/show_tires"><div class="col-md-4 cate-grid grid11">
                 <h4>Покришки</h4>
-                <a class="store" href="/show_brakesHandle">Вибрати</a>
+                <a class="store" href="/show_tires">Вибрати</a>
             </div></a>
             <div class="clearfix"></div>
         </div>
@@ -192,25 +196,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <h3>Рульове управління</h3>
         <div class="categorie-grids">
-            <a href="/show_brakesHydro"><div class="col-md-4 cate-grid grid12">
+            <a href="/show_handlebars"><div class="col-md-4 cate-grid grid12">
                 <h4>Рулі</h4>
-                <a class="store" href="/show_brakesHydro">Вибрати</a>
+                <a class="store" href="/show_handlebars">Вибрати</a>
             </div></a>
-            <a href="/show_brakesMech"><div class="col-md-4 cate-grid grid13">
+            <a href="/show_windings"><div class="col-md-4 cate-grid grid13">
                 <h4>Обмотки руля</h4>
-                <a class="store" href="/show_brakesMech">Вибрати</a>
+                <a class="store" href="/show_windings">Вибрати</a>
             </div></a>
-            <a href="/show_brakesVBrake"><div class="col-md-4 cate-grid grid14">
+            <a href="/show_headsets"><div class="col-md-4 cate-grid grid14">
                 <h4>Рульові колонки</h4>
-                <a class="store" href="/show_brakesVBrake">Вибрати</a>
+                <a class="store" href="/show_headsets">Вибрати</a>
             </div></a>
-            <a href="/show_brakesHandle"><div class="col-md-4 cate-grid grid15">
+            <a href="/show_stems"><div class="col-md-4 cate-grid grid15">
                 <h4>Виноси</h4>
-                <a class="store" href="/show_brakesHandle">Вибрати</a>
+                <a class="store" href="/show_stems">Вибрати</a>
             </div></a>
-            <a href="/show_brakesHandle"><div class="col-md-4 cate-grid grid16">
+            <a href="/show_grips"><div class="col-md-4 cate-grid grid16">
                 <h4>Гріпси</h4>
-                <a class="store" href="/show_brakesHandle">Вибрати</a>
+                <a class="store" href="/show_grips">Вибрати</a>
             </div></a>
             <div class="clearfix"></div>
         </div>

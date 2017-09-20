@@ -23,6 +23,8 @@ public class Crank {
     @ManyToOne
     @JoinColumn(name="maker_id")
     private TransmissionMaker transmissionMaker;
+    private Long article;
+    private String url;
     private String name;
     @ManyToOne
     @JoinColumn(name="bike_type_id")
@@ -56,10 +58,12 @@ public class Crank {
     private Double price;
     private String way;
 
-    public Crank(TransmissionMaker transmissionMaker, String name, BikeType bikeType, BackSprocketNumber backSprocketNumber, FrontSprocketNumber frontSprocketNumber,
+    public Crank(TransmissionMaker transmissionMaker, Long article, String url, String name, BikeType bikeType, BackSprocketNumber backSprocketNumber, FrontSprocketNumber frontSprocketNumber,
                  FrontSprocketSize frontSprocketSize,FrontSprocketMax frontSprocketMax,FrontSprocketMin frontSprocketMin,CrankLength crankLength, String sprocketMaterial, String  crankMaterial, BracketType bracketType, String color, String description,
                  Double price, String way) {
         this.transmissionMaker = transmissionMaker;
+        this.article = article;
+        this.url = url;
         this.name = name;
         this.bikeType = bikeType;
         this.backSprocketNumber = backSprocketNumber;

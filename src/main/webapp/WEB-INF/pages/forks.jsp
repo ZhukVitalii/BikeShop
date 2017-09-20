@@ -49,7 +49,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="resources/images/logo.png" alt=""/></a>
+                <a href="/"><img src="resources/images/logo.png"
+                                 alt=""
+                                 width="110"
+                                 height="112"/>
+                </a>
             </div>
             <div class="top-nav">
                 <label class="mobile_menu" for="mobile_menu">
@@ -70,7 +74,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="/show_frames">Рами</a></li>
                             <li><a href="/show_forks">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
-                            <li><a href="parts.html">Рульове управління</a></li>
+                            <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="parts.html">Колеса та комплектуючі</a></li>
                             <li><a href="parts.html">Трансмісія</a></li>
                         </ul>
@@ -147,12 +151,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </script>
                         <!--//details-product-slider-->
                         <div class="details-left-slider">
-                            <a href="optionallink.html">
+                            <a href="<c:url value="/fork/${fork.url}"/>"
+                               title="Перейти до <c:out value="${fork.name}"/>">
                                 <img height="300" width="300" src="${fork.way}" />
                             </a>
                             <div class="details-left-info">
 
-                                <h3>${fork.name}</h3>
+                                <div class="link-to-one">
+                                    <a href="<c:url value="/fork/${fork.url}"/>"
+                                       title="Перейти до <c:out value="${fork.name}"/>">
+                                        <h3>${fork.name}</h3>
+                                    </a>
+                                </div>
                                 <h5> Артикул  : ${fork.article}</h5>
                                 <p class="maker"> <h5> Виробник  : ${fork.forkMaker.name} </h5></p>
                                 <h4></h4>

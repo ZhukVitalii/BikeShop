@@ -140,6 +140,24 @@ public class ForkController {
         return "redirect:/show_forks";
     }
 
+    @RequestMapping("/fork/{url}")
+    public String listForkUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+
+        List<Fork> forks  = forkService
+                .findByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+
+        model.addAttribute("forks", forks);
+
+
+        return "OneFork";
+    }
+
+
 
 
 

@@ -16,4 +16,10 @@ public interface HeadsetRepository extends JpaRepository<Headset, Long> {
 
     @Query("SELECT COUNT(c) FROM Headset c WHERE c.handlebarMaker = :handlebarMaker")
     long countByHandlebarMaker(@Param("handlebarMaker") HandlebarMaker handlebarMaker);
+
+    @Query("SELECT c FROM Headset c WHERE c.url = :url")
+    List<Headset> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM Headset c WHERE c.article = :article")
+    List<Headset> findByArticle(@Param("article") Long article, Pageable pageable);
 }

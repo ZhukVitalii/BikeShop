@@ -1,0 +1,25 @@
+.container{
+    border: 3px solid rebeccapurple;
+    background: #5cb85c;
+}
+.number-error {
+    color: red;
+    font-size: 14px;
+    display: none;
+}
+.logo {
+    width: 110px;
+    height: 112px;
+}
+.img-logo {
+    width: 110px;
+    height: 112px;
+}
+
+input:invalid:active {
+    outline: 2px solid red;
+}
+
+input:invalid:focus + .number-error {
+    display: block;
+}

@@ -15,6 +15,14 @@ public interface SpokeRepository extends JpaRepository<Spoke, Long> {
     List<Spoke> findByWheelMakers(@Param("wheelMaker") WheelMaker wheelMaker, Pageable pageable);
 
 
+    @Query("SELECT c FROM Spoke c WHERE c.url = :url")
+    List<Spoke> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM Spoke c WHERE c.article = :article")
+    List<Spoke> findByArticle(@Param("article") Long article, Pageable pageable);
+
+
+
 
     @Query("SELECT COUNT(c) FROM Spoke c WHERE c.wheelMaker = :wheelMaker")
     long countByWheelMakers(@Param("wheelMaker")  WheelMaker wheelMaker);

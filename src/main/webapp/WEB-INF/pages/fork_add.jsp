@@ -5,70 +5,121 @@
 <head>
     <title>New fork</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/my.css"  type="text/css" media="all" />
+    <script src="resources/js/my.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
-    <form role="form" class="form-horizontal" action="/fork/add" method="post">
+    <form role="form"
+          class="form-horizontal"
+          action="/fork/add"
+          method="post">
+
         <h3>New fork</h3>
-        <select class="selectpicker form-control form-forkMaker" name="forkMaker">
+        <select class="btn btn-primary btn-select btn-select-light"
+                name="forkMaker">
             <option value="-1">Виробник</option>
             <c:forEach items="${forkMakers}" var="forkMaker">
                 <option value="${forkMaker.id}">${forkMaker.name}</option>
             </c:forEach>
         </select>
         <br>
-        <input class="form-control " type="text" name="article" placeholder="Артикул">
+        <div class="numbers">
+        <input class="form-control"
+               type="number"
+               name="article"
+               placeholder="Артикул">
+        </div>
         <br>
+        <input class="form-control"
+               type="text"
+               name="url"
+               placeholder="url">
         <br>
-        <input class="form-control " type="text" name="url" placeholder="url">
+        <input class="form-control"
+               type="text"
+               name="name"
+               placeholder="назва вилки">
         <br>
-        <input class="form-control form-forkMaker" type="text" name="name" placeholder="назва вилки">
-        <select class="selectpicker form-control form-frame" name="bikeType">
+        <select class="btn btn-primary btn-select btn-select-light"
+                name="bikeType">
             <option value="-1">Тип вилки</option>
             <c:forEach items="${bikeTypes}" var="bikeType">
                 <option value="${bikeType.id}">${bikeType.type}</option>
             </c:forEach>
         </select>
-
-        <select class="selectpicker form-control form-frame" name="wheelsDiam">
+        <br>
+        <select class="btn btn-primary btn-select btn-select-light"
+                name="wheelsDiam">
             <option value="-1">Розмір колес</option>
             <c:forEach items="${wheelsDiams}" var="wheelsDiam">
                 <option value="${wheelsDiam.id}">${wheelsDiam.diam}</option>
             </c:forEach>
         </select>
-
-
-        <select class="selectpicker form-control form-frame" name="tubeDiameter">
+        <br>
+        <select class="btn btn-primary btn-select btn-select-light"
+                name="tubeDiameter">
             <option value="-1">Діаметр штока</option>
             <c:forEach items="${tubeDiameters}" var="tubeDiameter">
                 <option value="${tubeDiameter.id}">${tubeDiameter.diam}</option>
             </c:forEach>
         </select>
-
-        <input class="form-control form-forkMaker" type="text" name="stTubeLength" placeholder="довжина штока">
-
-        <select class="selectpicker form-control form-frame" name="brakesType">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="stTubeLength"
+               placeholder="довжина штока">
+        <br>
+        <select class="btn btn-primary btn-select btn-select-light"
+                name="brakesType">
             <option value="-1">тип гальм</option>
             <c:forEach items="${brakesTypes}" var="brakesType">
                 <option value="${brakesType.id}">${brakesType.type}</option>
             </c:forEach>
         </select>
-
-        <input class="form-control form-forkMaker" type="text" name="forkMaterial" placeholder="Матеріал">
-        <input class="form-control form-forkMaker" type="text" name="weight" placeholder="вага">
-        <input class="form-control form-forkMaker" type="text" name="color" placeholder="колір">
-        <input class="form-control form-forkMaker" type="text" name="move" placeholder="хід вилки">
-        <input class="form-control form-forkMaker" type="text" name="price" placeholder="ціна">
-        <input class="form-control form-forkMaker" type="text" name="description" placeholder="опис вилки">
-        <input class="form-control form-forkMaker" type="text" name="way" placeholder="фото">
-
-
-        <input type="submit" class="btn btn-primary" value="Add">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="forkMaterial"
+               placeholder="Матеріал">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="weight"
+               placeholder="вага">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="color"
+               placeholder="колір">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="move"
+               placeholder="хід вилки">
+        <div class="numbers">
+            <input class="form-control"
+               type="number"
+               name="price"
+               placeholder="ціна">
+        </div>
+        <br>
+        <input class="form-control"
+               type="text"
+               name="description"
+               placeholder="опис вилки">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="way"
+               placeholder="фото">
+        <br>
+        <input type="submit"
+               class="btn btn-primary"
+               value="Add">
     </form>
-
 </div>
-
 <script>
     $('.selectpicker').selectpicker();
 </script>

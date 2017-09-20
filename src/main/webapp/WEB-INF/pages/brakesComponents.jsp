@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>Frames</title>
+    <title>Brakes</title>
     <spring:url value="resources/css/bootstrap.css" var="bootstrap"/>
     <link href="resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (Bootstrap's JavaScript plugins) -->
@@ -30,6 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--js-->
 
 
+
 </head>
 
 <body>
@@ -49,7 +50,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="resources/images/logo.png" alt=""/></a>
+                <a href="/"><img src="resources/images/logo.png"
+                                 alt=""
+                                 width="110"
+                                 height="112"/>
+                </a>
             </div>
             <div class="top-nav">
                 <label class="mobile_menu" for="mobile_menu">
@@ -67,11 +72,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li class="dropdown1"><a href="parts.html">КОМППОНЕНТИ</a>
                         <ul class="dropdown2">
                             <li><a href="parts.html">Підібрати декілька компонентів</a></li>
-                            <li><a href="parts.html">Підібрати декілька компонентів</a></li>
                             <li><a href="/show_frames">Рами</a></li>
                             <li><a href="/show_forks">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
-                            <li><a href="parts.html">Рульове управління</a></li>
+                            <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="parts.html">Колеса та комплектуючі</a></li>
                             <li><a href="parts.html">Трансмісія</a></li>
                         </ul>

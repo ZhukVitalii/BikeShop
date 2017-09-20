@@ -16,4 +16,11 @@ public interface GripsRepository extends JpaRepository<Grips, Long> {
 
     @Query("SELECT COUNT(c) FROM Grips c WHERE c.handlebarMaker = :handlebarMaker")
     long countByHandlebarMaker(@Param("handlebarMaker") HandlebarMaker handlebarMaker);
+
+    @Query("SELECT c FROM Grips c WHERE c.url = :url")
+    List<Grips> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM Grips c WHERE c.article = :article")
+    List<Grips> findByArticle(@Param("article") Long article, Pageable pageable);
+
 }

@@ -22,6 +22,8 @@ public class Pedal {
     @ManyToOne
     @JoinColumn(name="maker_id")
     private TransmissionMaker transmissionMaker;
+    private Long article;
+    private String url;
     private String name;
     @ManyToOne
     @JoinColumn(name="pedal_type_id")
@@ -38,10 +40,12 @@ public class Pedal {
     private Double price;
     private String way;
 
-    public Pedal(TransmissionMaker transmissionMaker, String name, PedalType pedalType, BearingType bearingType,
+    public Pedal(TransmissionMaker transmissionMaker, Long article, String url, String name, PedalType pedalType, BearingType bearingType,
                  String sizes, String material,String weight,String color, String description,
                  Double price, String way) {
         this.transmissionMaker = transmissionMaker;
+        this.article = article;
+        this.url = url;
         this.name = name;
         this.pedalType = pedalType;
         this.bearingType = bearingType;

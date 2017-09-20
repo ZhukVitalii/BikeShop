@@ -5,33 +5,86 @@
     <title>New winding</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/my.css"  type="text/css" media="all" />
+    <script src="resources/js/my.js"></script>
 </head>
 <body>
 <div class="container">
-    <form role="form" class="form-horizontal" action="/winding/add" method="post">
+    <form role="form"
+          class="form-horizontal"
+          action="/winding/add"
+          method="post">
 
-        <h3>New handlebar</h3>
-        <select class="selectpicker form-control form-handlebarMaker" name="handlebarMaker">
+        <h3>New winding</h3>
+        <select class="btn btn-primary btn-select btn-select-light"
+                name="handlebarMaker">
             <option value="-1">Виробник</option>
             <c:forEach items="${handlebarMakers}" var="handlebarMaker">
                 <option value="${handlebarMaker.id}">${handlebarMaker.name}</option>
             </c:forEach>
         </select>
-        <input class="form-control form-handlebarMaker" type="text" name="name" placeholder="назва обмотки">
-        <input class="form-control form-forkMaker" type="text" name="length" placeholder="довжина">
-        <input class="form-control form-forkMaker" type="text" name="wide" placeholder="ширина">
-        <input class="form-control form-forkMaker" type="text" name="material" placeholder="матеріал">
-        <input class="form-control form-forkMaker" type="text" name="color" placeholder="колір">
-        <input class="form-control form-forkMaker" type="text" name="price" placeholder="ціна">
-        <input class="form-control form-forkMaker" type="text" name="description" placeholder="опис обмотки">
-        <input class="form-control form-forkMaker" type="text" name="way" placeholder="зображення">
-
-
-        <input type="submit" class="btn btn-primary" value="Add">
+        <br>
+        <br>
+        <div class="numbers">
+            <input class="form-control"
+                   type="number"
+                   name="article"
+                   placeholder="Артикул">
+        </div>
+        <br>
+        <input class="form-control"
+               type="text"
+               name="url"
+               placeholder="url">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="name"
+               placeholder="назва обмотки">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="length"
+               placeholder="довжина">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="wide"
+               placeholder="ширина">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="material"
+               placeholder="матеріал">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="color"
+               placeholder="колір">
+        <br>
+        <div class="numbers">
+            <input class="form-control"
+                   type="number"
+                   name="price"
+                   placeholder="ціна">
+            <div class="number-error">Доступний тільки ввід числових значень</div>
+        </div>
+        <br>
+        <input class="form-control"
+               type="text"
+               name="description"
+               placeholder="опис обмотки">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="way"
+               placeholder="зображення">
+        <br>
+        <input type="submit"
+               class="btn btn-primary"
+               value="Add">
     </form>
-
 </div>
-
 <script>
     $('.selectpicker').selectpicker();
 </script>

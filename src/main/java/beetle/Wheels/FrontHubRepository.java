@@ -28,6 +28,13 @@ public interface FrontHubRepository extends JpaRepository<FrontHub, Long> {
     @Query("SELECT COUNT(c) FROM FrontHub c WHERE c.bearingType = :bearingType")
     long countByBearingType(@Param("bearingType") BearingType bearingType);
 
+    @Query("SELECT c FROM FrontHub c WHERE c.url = :url")
+    List<FrontHub> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM FrontHub c WHERE c.article = :article")
+    List<FrontHub> findByArticle(@Param("article") Long article, Pageable pageable);
+
+
 
 
     @Query("SELECT c FROM FrontHub c WHERE c.axisLength = :axisLength")

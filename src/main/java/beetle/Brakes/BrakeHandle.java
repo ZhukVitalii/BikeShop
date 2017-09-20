@@ -22,6 +22,8 @@ public class BrakeHandle {
     @ManyToOne
     @JoinColumn(name="maker_id")
     private BrakeMaker brakeMaker;
+    private Long article;
+    private String url;
     private String name;
     @ManyToOne
     @JoinColumn(name="loc_id")
@@ -44,10 +46,12 @@ public class BrakeHandle {
     private Double price;
     private String way;
 
-    public BrakeHandle(BrakeMaker brakeMaker, String name, BrakeHandleLocation brakeHandleLocation, BrakeHandleCompatibility brakeHandleCompatibility,
+    public BrakeHandle(BrakeMaker brakeMaker, Long article,String url,String name,BrakeHandleLocation brakeHandleLocation, BrakeHandleCompatibility brakeHandleCompatibility,
                        String materialHandle,String materialCorp,HandlebarDiameter handlebarDiameter,BrakeHandleWide brakeHandleWide,
                        String weight, String color, String description, Double price,  String way) {
         this.brakeMaker = brakeMaker;
+        this.article = article;
+        this.url = url;
         this.name = name;
         this.brakeHandleLocation = brakeHandleLocation;
         this.brakeHandleCompatibility = brakeHandleCompatibility;

@@ -16,7 +16,9 @@
                 <option value="${handlebarMaker.id}">${handlebarMaker.name}</option>
             </c:forEach>
         </select>
-        <input class="form-control " type="text" name="article" placeholder="Артикул">
+        <div class="numbers">
+        <input class="form-control " type="number" name="article" placeholder="Артикул">
+        </div>
         <input class="form-control " type="text" name="url" placeholder="URL">
         <input class="form-control " type="text" name="name" placeholder="назва керма">
         <select class="btn btn-primary btn-select btn-select-light "  name="bikeType">
@@ -36,7 +38,12 @@
         <input class="form-control " type="text" name="material" placeholder="Матеріал">
         <input class="form-control " type="text" name="weight" placeholder="вага">
         <input class="form-control " type="text" name="color" placeholder="колір">
-        <input class="form-control " type="text" name="price" placeholder="ціна">
+        <div class="numbers">
+        <input class="form-control"
+               type="number"
+               name="price"
+               placeholder="ціна">
+        </div>
         <input class="form-control " type="text" name="description" placeholder="опис керма">
         <input class="form-control " type="text" name="way" placeholder="зображення">
         <input type="submit" class="btn btn-primary" value="Add">

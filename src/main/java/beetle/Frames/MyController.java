@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -50,23 +49,7 @@ public class MyController {
 
         List<Frame> frames = frameService
                 .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-
-
-
-        model.addAttribute("frameMakers", frameService.findFrameMakers());
-        model.addAttribute("frameSizes", frameService.findFrameSize());
-        model.addAttribute("wheelsDiams", frameService.findWheelsDiam());
-        model.addAttribute("trunkBindings", frameService.findTrunkBinding());
-        model.addAttribute("bikeTypes", frameService.findBikeType());
-        model.addAttribute("bracketWides", frameService.findBracketWide());
-        model.addAttribute("headsetTypes", frameService.findHeadsetType());
-        model.addAttribute("tubeDiameters", frameService.findTubeDiameter());
-        model.addAttribute("underSaddleTubes", frameService.findUnderSaddleTube());
-        model.addAttribute("brakesTypes", frameService.findBrakesType());
-
-
         model.addAttribute("frames", frames);
-
         model.addAttribute("allPages", getPageCount());
         int a = cartService.getSize();
         System.out.println(a);
@@ -80,18 +63,6 @@ public class MyController {
         List<Frame> frames = frameService
                 .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
 
-
-
-        model.addAttribute("frameMakers", frameService.findFrameMakers());
-        model.addAttribute("frameSizes", frameService.findFrameSize());
-        model.addAttribute("wheelsDiams", frameService.findWheelsDiam());
-        model.addAttribute("trunkBindings", frameService.findTrunkBinding());
-        model.addAttribute("bikeTypes", frameService.findBikeType());
-        model.addAttribute("bracketWides", frameService.findBracketWide());
-        model.addAttribute("headsetTypes", frameService.findHeadsetType());
-        model.addAttribute("tubeDiameters", frameService.findTubeDiameter());
-        model.addAttribute("underSaddleTubes", frameService.findUnderSaddleTube());
-        model.addAttribute("brakesTypes", frameService.findBrakesType());
 
 
         model.addAttribute("frames", frames);
@@ -136,18 +107,6 @@ public class MyController {
                 .findByFrameMaker(frameMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
 
 
-        model.addAttribute("frameMakers", frameService.findFrameMakers());
-        model.addAttribute("frameSizes", frameService.findFrameSize());
-        model.addAttribute("wheelsDiams", frameService.findWheelsDiam());
-        model.addAttribute("trunkBindings", frameService.findTrunkBinding());
-        model.addAttribute("bikeTypes", frameService.findBikeType());
-        model.addAttribute("bracketWides", frameService.findBracketWide());
-        model.addAttribute("headsetTypes", frameService.findHeadsetType());
-        model.addAttribute("tubeDiameters", frameService.findTubeDiameter());
-        model.addAttribute("underSaddleTubes", frameService.findUnderSaddleTube());
-        model.addAttribute("brakesTypes", frameService.findBrakesType());
-
-
         model.addAttribute("frames", frames);
 
         model.addAttribute("byGroupPages", getPageCount(frameMaker));
@@ -173,19 +132,6 @@ public class MyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-    @RequestMapping("/saveFoto")
-    public class FileUploadController {
-
-        @RequestMapping(value = "form", method = RequestMethod.POST)
-        public String processForm(@RequestParam MultipartFile file, Model model) {
-           // model.addAttribute("originalFileName", file.getOriginalFilename());
-
-                return "redirect:/show_frames";
-            }
-
-
-    }
 
     @RequestMapping(value="/frame/add", method = RequestMethod.POST)
     public String frameAdd(
@@ -221,9 +167,6 @@ public class MyController {
         BrakesType brakesType =  (brakesTypeId != DEFAULT_GROUP_ID) ? frameService.findBrakesType(bikeTypeId) : null;
         TrunkBinding trunkBinding = (trunkBindingId != DEFAULT_GROUP_ID) ? frameService.findTrunkBinding(trunkBindingId) : null;
 
-        //String way = file.getOriginalFilename();
-
-
 
         Frame frame = new Frame(frameMaker,article,url,name,bikeType,frameSize, wheelsDiam, material,bracketWide,headsetType,tubeDiameter,
                 underSaddleTube,brakesType,trunkBinding,weight,color,price,description,way);
@@ -236,6 +179,23 @@ public class MyController {
     public String groupAdd(@RequestParam String name) {
         frameService.addFrameMaker(new FrameMaker(name));
         return "redirect:/show_frames";
+    }
+
+    @RequestMapping("/frame/{url}")
+    public String listFrameUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+
+        List<Frame> frames = frameService
+                .findByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+
+        model.addAttribute("frames", frames);
+
+
+        return "OneFrame";
     }
 
 

@@ -20,10 +20,11 @@ public class Headset {
     @Id
     @GeneratedValue
     private long id;
-
     @ManyToOne
     @JoinColumn(name="maker_id")
     private HandlebarMaker handlebarMaker;
+    private Long article;
+    private String url;
     private String name;
     @ManyToOne
     @JoinColumn(name="type_id")
@@ -39,9 +40,11 @@ public class Headset {
     private String description;
     private String way;
 
-    public Headset(HandlebarMaker handlebarMaker, String name, HeadsetType headsetType,TubeDiameter tubeDiameter, String material,
+    public Headset(HandlebarMaker handlebarMaker,Long article, String url, String name, HeadsetType headsetType,TubeDiameter tubeDiameter, String material,
                    String size, String color, Double price, String description, String way) {
         this.handlebarMaker = handlebarMaker;
+        this.article = article;
+        this.url = url;
         this.name = name;
         this.headsetType = headsetType;
         this.tubeDiameter = tubeDiameter;

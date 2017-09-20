@@ -18,10 +18,11 @@ public class Grips {
     @Id
     @GeneratedValue
     private long id;
-
     @ManyToOne
     @JoinColumn(name="maker_id")
     private HandlebarMaker handlebarMaker;
+    private Long article;
+    private String url;
     private String name;
     private String length;
     private String weight;
@@ -32,9 +33,11 @@ public class Grips {
     private String description;
     private String way;
 
-    public Grips (HandlebarMaker handlebarMaker, String name, String length, String weight, String material,
+    public Grips (HandlebarMaker handlebarMaker,Long article,String url, String name, String length, String weight, String material,
                    String color, Double price, String description, String way) {
         this.handlebarMaker = handlebarMaker;
+        this.article = article;
+        this.url = url;
         this.name = name;
         this.length = length;
         this.weight = weight;

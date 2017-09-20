@@ -4,78 +4,135 @@
 <head>
     <title>New brakeDiscHydr</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/my.css"  type="text/css" media="all" />
+    <script src="resources/js/my.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
-    <form role="form" class="form-horizontal" action="/brakeDiscHydr/add" method="post">
+    <form role="form"
+          class="form-horizontal"
+          action="/brakeDiscHydr/add"
+          method="post">
         <h3>New brakeDiscHydr</h3>
-        <select class="btn btn-primary btn-select btn-select-light" name="brakeMaker">
+        <select class="btn btn-primary btn-select btn-select-light"
+                name="brakeMaker">
             <option value="-1">Виробник</option>
             <c:forEach items="${brakeMakers}" var="brakeMaker">
                 <option value="${brakeMaker.id}">${brakeMaker.name}</option>
             </c:forEach>
         </select>
         <br>
-        <input class="form-control " type="text" name="name" placeholder="Назва">
         <br>
-        <select class="btn btn-primary btn-select btn-select-light" name="location">
+        <div class="numbers">
+            <input class="form-control"
+                   type="number"
+                   name="article"
+                   placeholder="Артикул">
+        </div>
+        <br>
+        <input class="form-control"
+               type="text"
+               name="url"
+               placeholder="url">
+        <br>
+        <input class="form-control"
+               type="text"
+               name="name"
+               placeholder="Назва">
+        <br>
+        <select class="btn btn-primary btn-select btn-select-light"
+                name="location">
             <option value="-1">Розташування</option>
             <c:forEach items="${locations}" var="location">
                 <option value="${location.id}">${location.local}</option>
             </c:forEach>
         </select>
         <br>
-        <select class="btn btn-primary btn-select btn-select-light" name="brakeLiquid">
+        <br>
+        <select class="btn btn-primary btn-select btn-select-light"
+                name="brakeLiquid">
             <option value="-1">Гальмівна рідина</option>
             <c:forEach items="${brakeLiquids}" var="brakeLiquid">
                 <option value="${brakeLiquid.id}">${brakeLiquid.liq}</option>
             </c:forEach>
         </select>
         <br>
-        <input class="form-control " type="text" name="materialHandle" placeholder="Матеріал ручки">
         <br>
-        <select class="btn btn-primary btn-select btn-select-light" name="lengthHydroline">
+        <input class="form-control"
+               type="text"
+               name="materialHandle"
+               placeholder="Матеріал ручки">
+        <br>
+        <select class="btn btn-primary btn-select btn-select-light"
+                name="lengthHydroline">
             <option value="-1">Довжина гідролінії</option>
             <c:forEach items="${lengthHydrolines}" var="lengthHydroline">
                 <option value="${lengthHydroline.id}">${lengthHydroline.length}</option>
             </c:forEach>
         </select>
         <br>
-        <select class="btn btn-primary btn-select btn-select-light" name="rotorDiam">
+        <br>
+        <select class="btn btn-primary btn-select btn-select-light"
+                name="rotorDiam">
             <option value="-1">Діаметр ротора</option>
             <c:forEach items="${rotorDiams}" var="rotorDiam">
                 <option value="${rotorDiam.id}">${rotorDiam.diam}</option>
             </c:forEach>
         </select>
         <br>
-        <input class="form-control " type="text" name="rotorWeight" placeholder="Вага ротора">
         <br>
-        <input class="form-control " type="text" name="material" placeholder="Матеріал гальм">
+        <input class="form-control"
+               type="text"
+               name="rotorWeight"
+               placeholder="Вага ротора">
         <br>
-        <input class="form-control " type="text" name="brakeWeight" placeholder="Вага гальм">
+        <input class="form-control"
+               type="text"
+               name="material"
+               placeholder="Матеріал гальм">
         <br>
-        <select class="btn btn-primary btn-select btn-select-light" name="rotorFixType">
+        <input class="form-control"
+               type="text"
+               name="brakeWeight"
+               placeholder="Вага гальм">
+        <br>
+        <select class="btn btn-primary btn-select btn-select-light"
+                name="rotorFixType">
             <option value="-1">Кріплення ротора</option>
             <c:forEach items="${rotorFixTypes}" var="rotorFixType">
                 <option value="${rotorFixType.id}">${rotorFixType.type}</option>
             </c:forEach>
         </select>
         <br>
-        <input class="form-control " type="text" name="color" placeholder="Колір">
         <br>
-        <input class="form-control " type="text" name="description" placeholder="Опис">
+        <input class="form-control"
+               type="text"
+               name="color"
+               placeholder="Колір">
         <br>
-        <input class="form-control " type="text" name="price" placeholder="Ціна">
+        <input class="form-control"
+               type="text"
+               name="description"
+               placeholder="Опис">
         <br>
-        <input class="form-control " type="text" name="way" placeholder="зображення">
-
-
-        <input type="submit" class="btn btn-primary" value="Add">
+        <div class="numbers">
+            <input class="form-control"
+                   type="number"
+                   name="price"
+                   placeholder="ціна">
+        </div>
+        <br>
+        <input class="form-control"
+               type="text"
+               name="way"
+               placeholder="зображення">
+        <br>
+        <input type="submit"
+               class="btn btn-primary"
+               value="Add">
     </form>
-
 </div>
-
 <script>
     $('.selectpicker').selectpicker();
 </script>

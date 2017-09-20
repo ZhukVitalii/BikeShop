@@ -1,5 +1,6 @@
 package beetle.Wheels;
 
+import beetle.Handlebars.Handlebar;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,6 +28,15 @@ public interface BackHubRepository extends JpaRepository<BackHub, Long>  {
         List<BackHub> findByBearingType(@Param("bearingType") BearingType bearingType, Pageable pageable);
         @Query("SELECT COUNT(c) FROM BackHub c WHERE c.bearingType = :bearingType")
         long countByBearingType(@Param("bearingType") BearingType bearingType);
+
+        @Query("SELECT c FROM BackHub c WHERE c.url = :url")
+        List<BackHub> findByUrl(@Param("url") String url, Pageable pageable);
+
+        @Query("SELECT c FROM BackHub c WHERE c.article = :article")
+        List<BackHub> findByArticle(@Param("article") Long article, Pageable pageable);
+
+
+
 
 
 

@@ -320,6 +320,8 @@ public class TransmissionController {
     @RequestMapping(value="/backDerailleur/add", method = RequestMethod.POST)
     public String backDerailleurAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "backSprocketNumber") long backSprocketNumberId,
             @RequestParam(value = "backSprocketMax") long backSprocketMaxId,
@@ -338,7 +340,7 @@ public class TransmissionController {
         BackSprocketMin backSprocketMin = (backSprocketMinId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketMin(backSprocketMinId) : null;
         PawLength pawLength = (pawLengthId != DEFAULT_GROUP_ID) ? transmissionService.findPawLength(pawLengthId) : null;
 
-        BackDerailleur backDerailleur = new BackDerailleur(transmissionMaker,name,backSprocketNumber,backSprocketMax,
+        BackDerailleur backDerailleur = new BackDerailleur(transmissionMaker,article,url,name,backSprocketNumber,backSprocketMax,
                 backSprocketMin,pawLength,material,weight,color,description,price,way);
 
         transmissionService.addBackDerailleur(backDerailleur);
@@ -349,6 +351,8 @@ public class TransmissionController {
     @RequestMapping(value="/backGearKas/add", method = RequestMethod.POST)
     public String backGearKasAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "backSprocketNumber") long backSprocketNumberId,
             @RequestParam(value = "backSprocketMax") long backSprocketMaxId,
@@ -366,7 +370,7 @@ public class TransmissionController {
         BackSprocketMin backSprocketMin = (backSprocketMinId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketMin(backSprocketMinId) : null;
         BackSprocketSize backSprocketSize = (backSprocketSizeId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketSize(backSprocketSizeId) : null;
 
-        BackGearKas backGearKas = new BackGearKas(transmissionMaker,name,backSprocketNumber,backSprocketMax,backSprocketMin,
+        BackGearKas backGearKas = new BackGearKas(transmissionMaker,article,url,name,backSprocketNumber,backSprocketMax,backSprocketMin,
                 backSprocketSize,material,color,description,price,way);
 
 
@@ -378,6 +382,8 @@ public class TransmissionController {
     @RequestMapping(value="/backGearTr/add", method = RequestMethod.POST)
     public String backGearTrAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "backSprocketNumber") long backSprocketNumberId,
             @RequestParam(value = "backSprocketMax") long backSprocketMaxId,
@@ -395,7 +401,7 @@ public class TransmissionController {
         BackSprocketMin backSprocketMin = (backSprocketMinId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketMin(backSprocketMinId) : null;
         BackSprocketSize backSprocketSize = (backSprocketSizeId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketSize(backSprocketSizeId) : null;
 
-        BackGearTr backGearTr = new BackGearTr(transmissionMaker,name,backSprocketNumber,backSprocketMax,backSprocketMin,
+        BackGearTr backGearTr = new BackGearTr(transmissionMaker,article,url,name,backSprocketNumber,backSprocketMax,backSprocketMin,
                 backSprocketSize,material,color,description,price,way);
 
 
@@ -407,6 +413,8 @@ public class TransmissionController {
     @RequestMapping(value="/bracket/add", method = RequestMethod.POST)
     public String bracketAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "bracketAxisLength") long bracketAxisLengthId,
             @RequestParam(value = "bracketWide") long bracketWideId,
@@ -426,7 +434,7 @@ public class TransmissionController {
         BearingType bearingType = (bearingTypeId != DEFAULT_GROUP_ID) ? transmissionService.findBearingType(bearingTypeId) : null;
         CarvingType carvingType = (carvingTypeId != DEFAULT_GROUP_ID) ? transmissionService.findCarvingType(carvingTypeId) : null;
 
-        Bracket bracket = new Bracket(transmissionMaker,name,bracketAxisLength, bracketWide,bracketType,bearingType,axisMaterial,carvingType,color,description,price,way);
+        Bracket bracket = new Bracket(transmissionMaker,article, url,name,bracketAxisLength, bracketWide,bracketType,bearingType,axisMaterial,carvingType,color,description,price,way);
 
         transmissionService.addBracket(bracket);
 
@@ -436,6 +444,8 @@ public class TransmissionController {
     @RequestMapping(value="/chain/add", method = RequestMethod.POST)
     public String chainAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "backSprocketNumber") long backSprocketNumberId,
             @RequestParam(value = "chainElementNumber") long chainElementNumberId,
@@ -450,7 +460,7 @@ public class TransmissionController {
         BackSprocketNumber backSprocketNumber = (backSprocketNumberId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketNumber(backSprocketNumberId) : null;
         ChainElementNumber chainElementNumber = (chainElementNumberId != DEFAULT_GROUP_ID) ? transmissionService.findChainElementNumber(chainElementNumberId) : null;
 
-        Chain chain = new Chain(transmissionMaker,name,backSprocketNumber,chainElementNumber,weight,material,color,description,price,way);
+        Chain chain = new Chain(transmissionMaker,article,url,name,backSprocketNumber,chainElementNumber,weight,material,color,description,price,way);
 
         transmissionService.addChain(chain);
 
@@ -460,6 +470,8 @@ public class TransmissionController {
     @RequestMapping(value="/crank/add", method = RequestMethod.POST)
     public String crankAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "bikeType") long bikeTypeId,
             @RequestParam(value = "backSprocketNumber") long backSprocketNumberId,
@@ -486,7 +498,7 @@ public class TransmissionController {
         CrankLength crankLength = (crankLengthId != DEFAULT_GROUP_ID) ? transmissionService.findCrankLength(crankLengthId) : null;
         BracketType bracketType = (bracketTypeId != DEFAULT_GROUP_ID) ? transmissionService.findBracketType(bikeTypeId) : null;
 
-        Crank crank = new Crank(transmissionMaker,name,bikeType,backSprocketNumber,frontSprocketNumber,frontSprocketSize,frontSprocketMax,
+        Crank crank = new Crank(transmissionMaker,article,url,name,bikeType,backSprocketNumber,frontSprocketNumber,frontSprocketSize,frontSprocketMax,
                 frontSprocketMin,crankLength,sprocketMaterial,crankMaterial,bracketType,color,description,price,way);
 
         transmissionService.addCrank(crank);
@@ -497,6 +509,8 @@ public class TransmissionController {
     @RequestMapping(value="/frontDerailleur/add", method = RequestMethod.POST)
     public String frontDerailleurAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "frontSprocketNumber") long frontSprocketNumberId,
             @RequestParam(value = "backSprocketNumber") long backSprocketNumberId,
@@ -524,7 +538,7 @@ public class TransmissionController {
         CollarDiam collarDiam = (collarDiamId != DEFAULT_GROUP_ID) ? transmissionService.findCollarDiam(collarDiamId) : null;
         TractionType tractionType = (tractionTypeId != DEFAULT_GROUP_ID) ? transmissionService.findTractionType(tractionTypeId) : null;
 
-        FrontDerailleur frontDerailleur = new FrontDerailleur(transmissionMaker,name,frontSprocketNumber,backSprocketNumber,frontSprocketMax,frontSprocketMin,
+        FrontDerailleur frontDerailleur = new FrontDerailleur(transmissionMaker,article,url,name,frontSprocketNumber,backSprocketNumber,frontSprocketMax,frontSprocketMin,
                 teethCapasity,chainLine,frontDerailleurFixType,collarDiam,tractionType,material,weight,color,description,price,way);
 
         transmissionService.addFrontDerailleur(frontDerailleur);
@@ -534,6 +548,8 @@ public class TransmissionController {
     @RequestMapping(value="/pedal/add", method = RequestMethod.POST)
     public String pedalAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "pedalType") long pedalTypeId,
             @RequestParam(value = "bearingType") long bearingTypeId,
@@ -549,7 +565,7 @@ public class TransmissionController {
         PedalType pedalType = (pedalTypeId != DEFAULT_GROUP_ID) ? transmissionService.findPedalType(pedalTypeId) : null;
         BearingType bearingType = (bearingTypeId != DEFAULT_GROUP_ID) ? transmissionService.findBearingType(bearingTypeId) : null;
 
-        Pedal pedal = new Pedal(transmissionMaker,name,pedalType,bearingType,sizes,material,weight,color,description,price,way);
+        Pedal pedal = new Pedal(transmissionMaker,article,url,name,pedalType,bearingType,sizes,material,weight,color,description,price,way);
 
         transmissionService.addPedal(pedal);
         return "redirect:/show_transmissions";

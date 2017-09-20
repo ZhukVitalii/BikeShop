@@ -30,6 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--js-->
 
 
+
 </head>
 
 <body>
@@ -49,7 +50,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="resources/images/logo.png" alt=""/></a>
+                <a href="/"><img src="resources/images/logo.png"
+                                 alt=""
+                                 width="110"
+                                 height="112"/>
+                </a>
             </div>
             <div class="top-nav">
                 <label class="mobile_menu" for="mobile_menu">
@@ -69,10 +74,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li class="dropdown1"><a href="parts.html">КОМППОНЕНТИ</a>
                         <ul class="dropdown2">
                             <li><a href="parts.html">Підібрати декілька компонентів</a></li>
-                            <li><a href="parts.html">Рами</a></li>
-                            <li><a href="parts.html">Вилки</a></li>
-                            <li><a href="parts.html">Гальма</a></li>
-                            <li><a href="parts.html">Рульове управління</a></li>
+                            <li><a href="/show_frames">Рами</a></li>
+                            <li><a href="/show_forks">Вилки</a></li>
+                            <li><a href="/show_brakesComponents">Гальма</a></li>
+                            <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="parts.html">Колеса та комплектуючі</a></li>
                             <li><a href="parts.html">Трансмісія</a></li>
                         </ul>
@@ -149,18 +154,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </script>
                         <!--//details-product-slider-->
                         <div class="details-left-slider">
-                            <a href="optionallink.html">
+                            <a href="<c:url value="/brakeDiscHydraulic/${brakeDiscHydraulic.url}"/>"
+                               title="Перейти до <c:out value="${brakeDiscHydraulic.name}"/>">
                                 <img height="300" width="300" src="${brakeDiscHydraulic.way}" />
                             </a>
                             <div class="details-left-info">
 
-                                <h3>${brakeDiscHydraulic.name}</h3>
+                                <div class="link-to-one">
+                                    <a href="<c:url value="/brakeDiscHydraulic/${brakeDiscHydraulic.url}"/>"
+                                       title="Перейти до <c:out value="${brakeDiscHydraulic.name}"/>">
+                                        <h3>${brakeDiscHydraulic.name}</h3>
+                                    </a>
+                                </div>
+                                <h5> Артикул  : ${brakeDiscHydraulic.article}</h5>
                                 <p class="maker"> <h5> Виробник  : ${brakeDiscHydraulic.brakeMaker.name} </h5></p>
                                 <h4></h4>
                                 <p>${brakeDiscHydraulic.price}<label>грн</label><a href="#"></a></p>
                                 <div class="btn_form">
                                     <a href="cart.html">Купити</a>
-                                    <a href="cart.html">Додати до корзини</a>
+                                    <a href="/cartAddBrakeDiscHydraulic/${brakeDiscHydraulic.article}">Додати до корзини</a>
                                 </div>
                                 <div class="bike-type">
 

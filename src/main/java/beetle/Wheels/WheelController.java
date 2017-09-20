@@ -1,6 +1,9 @@
 package beetle.Wheels;
 
 import beetle.Bakes.BikeType;
+import beetle.Forks.BrakesType;
+import beetle.Forks.ForkService;
+import beetle.Forks.WheelsDiam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -12,9 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import beetle.Forks.BrakesType;
-import beetle.Forks.ForkService;
-import beetle.Forks.WheelsDiam;
 
 import java.util.List;
 
@@ -33,10 +33,14 @@ public class WheelController {
     private ForkService forkService;
 
 
+    @RequestMapping("/show_wheelsComponent")
+    public String wheelsComponentsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        return "wheelsComponent";
+    }
 
-
-    @RequestMapping("/show_wheels")
-    public String wheelsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+    @RequestMapping("/show_wheelsAdmin")
+    public String wheelsAdminVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
 
         List<Wheel> wheels = wheelService
@@ -83,28 +87,86 @@ public class WheelController {
         model.addAttribute("allPages", getPageCountRim());
         model.addAttribute("allPages", getPageCountTire());
 
+        return "wheelsAdmin";
+    }
+
+    @RequestMapping("/show_backHubs")
+    public String backHubVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<BackHub> backHubs = wheelService
+                .findAllFor(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("wheelMakers", wheelService.findWheelMakers());
+        model.addAttribute("backHubs", backHubs);
+        model.addAttribute("allPages", getPageCountBackHub());
+
+        return "backHubs";
+    }
+    @RequestMapping("/show_wheels")
+    public String wheelsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+
+        List<Wheel> wheels = wheelService
+                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("wheelMakers", wheelService.findWheelMakers());
+        model.addAttribute("wheels", wheels);
+        model.addAttribute("allPages", getPageCount());
         return "wheels";
+    }
+    @RequestMapping("/show_frontHubs")
+    public String frontHubsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+
+        List<FrontHub> frontHubs = wheelService
+                .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("wheelMakers", wheelService.findWheelMakers());
+        model.addAttribute("frontHubs", frontHubs);
+        model.addAttribute("allPages", getPageCountFrontHub());
+        return "frontHubs";
+    }
+    @RequestMapping("/show_rims")
+    public String rimsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<Rim> rims = wheelService
+                .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("wheelMakers", wheelService.findWheelMakers());
+        model.addAttribute("rims", rims);
+        model.addAttribute("allPages", getPageCountRim());
+        return "rims";
+    }
+    @RequestMapping("/show_spokes")
+    public String spokesVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<Spoke> spokes = wheelService
+                .findAllOne(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("wheelMakers", wheelService.findWheelMakers());
+        model.addAttribute("spokes", spokes);
+        model.addAttribute("allPages", getPageCountSpoke());
+        return "spokes";
+    }
+    @RequestMapping("/show_tires")
+    public String tiresVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<Tire> tires = wheelService
+                .findAllFive(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("wheelMakers", wheelService.findWheelMakers());
+        model.addAttribute("tires", tires);
+        model.addAttribute("allPages", getPageCountTire());
+        return "tires";
     }
 
     @RequestMapping("/wheel_add_page")
     public String wheelAddPage(Model model) {
-
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
         model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
         model.addAttribute("rimWide", wheelService.findRimWide());
-
         model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
         model.addAttribute("brakesType", forkService.findBrakesType());
         model.addAttribute("bikeType", forkService.findBikeType());
-
-
         return "wheel_add_page";
     }
-
     @RequestMapping("/spoke_add_page")
     public String spokeAddPage(Model model) {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
-
         return "spoke_add_page";
     }
     @RequestMapping("/rim_add_page")
@@ -119,10 +181,8 @@ public class WheelController {
         model.addAttribute("rimHeight", wheelService.findRimHeight());
         model.addAttribute("brakesType", forkService.findBrakesType());
         model.addAttribute("nipple", wheelService.findNipple());
-
         return "rim_add_page";
     }
-
     @RequestMapping("/frontHub_add_page")
     public String frontHubAddPage(Model model) {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
@@ -133,7 +193,6 @@ public class WheelController {
         model.addAttribute("hubFixType", wheelService.findHubFixType());
         model.addAttribute("rotorFixType", wheelService.findRotorFixType());
         model.addAttribute("bearingType", wheelService.findBearingType());
-
         return "frontHub_add_page";
     }
     @RequestMapping("/backHub_add_page")
@@ -157,18 +216,13 @@ public class WheelController {
         model.addAttribute("cordType", wheelService.findCordType());
         model.addAttribute("tireWide", wheelService.findTireWide());
         model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
-
         return "tire_add_page";
     }
-
-
 
     @RequestMapping("/wheelMaker_add_page")
     public String wheelMakerAddPage() {
         return "wheelMaker_add_page";
     }
-
-
 
     @RequestMapping("/wheelMaker/{id}")
     public String listWheelMaker(
@@ -177,25 +231,31 @@ public class WheelController {
             Model model)
     {
         WheelMaker wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
-
-
         if (page < 0) page = 0;
-
         List<Wheel> wheels = wheelService
                 .findByWheelMakers(wheelMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-
+        List<BackHub> backHubs = wheelService
+                .findByBackHubMaker(wheelMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        List<FrontHub> frontHubs = wheelService
+                .findByFrontHubMaker(wheelMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        List<Rim> rims = wheelService
+                .findByRimMaker(wheelMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        List<Spoke> spokes = wheelService
+                .findBySpokeMaker(wheelMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        List<Tire> tires = wheelService
+                .findByTireMaker(wheelMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
 
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
-
         model.addAttribute("wheels", wheels);
-
+        model.addAttribute("backHubs", backHubs);
+        model.addAttribute("frontHubs", frontHubs);
+        model.addAttribute("rims", rims);
+        model.addAttribute("spokes", spokes);
+        model.addAttribute("tires", tires);
         model.addAttribute("byWheelMakerPages", getPageCount(wheelMaker));
-
         model.addAttribute("groupId", wheelMakerId);
-
-        return "wheels";
+        return "wheelsAdmin";
     }
-
 
     @RequestMapping(value = "/wheel/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> delete(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
@@ -208,7 +268,6 @@ public class WheelController {
     public ResponseEntity<Void> deleteOne(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             wheelService.deleteSpoke(toDelete);
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -223,30 +282,26 @@ public class WheelController {
     public ResponseEntity<Void> deleteThree(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             wheelService.deleteFrontHub(toDelete);
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @RequestMapping(value = "/backHub/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteFor(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             wheelService.deleteBackHub(toDelete);
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @RequestMapping(value = "/tire/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteFive(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             wheelService.deleteTire(toDelete);
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
-
 
     @RequestMapping(value="/wheel/add", method = RequestMethod.POST)
     public String wheelAdd(
             @RequestParam(value = "wheelMaker") long wheelMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "wheelsDiam") long wheelsDiamId,
             @RequestParam(value = "bikeType") long bikeTypeId,
@@ -267,18 +322,16 @@ public class WheelController {
         BrakesType brakesType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
         SpokeNumber spokeNumber = (spokeNumberId != DEFAULT_GROUP_ID) ? wheelService.findSpokeNumber(spokeNumberId) : null;
         RimWide rimWide = (rimWideId != DEFAULT_GROUP_ID) ? wheelService.findRimWide(rimWideId) : null;
-        Wheel wheel = new Wheel(wheelMaker,  name, wheelsDiam, bikeType, brakesType, spokeNumber,
+        Wheel wheel = new Wheel(wheelMaker, article,url, name, wheelsDiam, bikeType, brakesType, spokeNumber,
                 rimName,rimWide, rimDescription , hubName, hubDescription, description,price,way);
-
-
         wheelService.addWheel(wheel);
         return "redirect:/show_wheels";
     }
-
-
     @RequestMapping(value="/spoke/add", method = RequestMethod.POST)
     public String spokeAdd(
             @RequestParam(value = "wheelMaker") long wheelMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam String length,
             @RequestParam String diameter,
@@ -289,19 +342,17 @@ public class WheelController {
             @RequestParam String way)
     {
         WheelMaker wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
-
-        Spoke spoke = new Spoke(wheelMaker,  name, length, diameter, material, color ,
+        Spoke spoke = new Spoke(wheelMaker,article,url, name, length, diameter, material, color ,
                 description, price, way);
-
-
        wheelService.addSpoke(spoke);
-
-        return "redirect:/show_wheels";
+        return "redirect:/show_spokes";
     }
 
     @RequestMapping(value="/rim/add", method = RequestMethod.POST)
     public String rimAdd(
             @RequestParam(value = "wheelMaker") long wheelMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "bikeType") long bikeTypeId,
             @RequestParam(value = "wheelsDiam") long wheelsDiamId,
@@ -329,17 +380,17 @@ public class WheelController {
         RimWide rimWide = (rimWideId != DEFAULT_GROUP_ID) ? wheelService.findRimWide(rimWideId) : null;
         RimHeight rimHeight = (rimHeightId != DEFAULT_GROUP_ID) ? wheelService.findRimHeight(rimHeightId) : null;
         Nipple nipple = (nippleId != DEFAULT_GROUP_ID) ? wheelService.findNipple(nippleId) : null;
-        Rim rim = new Rim (wheelMaker,  name, bikeType, wheelsDiam,etrtoSize, material, spokeNumber,
+        Rim rim = new Rim (wheelMaker,article,url, name, bikeType, wheelsDiam,etrtoSize, material, spokeNumber,
                 innerTubeDiameter,rimWide,rimHeight,brakesType,weight, nipple ,color,description,price,way);
-
-
         wheelService.addRim(rim);
-        return "redirect:/show_wheels";
+        return "redirect:/show_rims";
     }
 
     @RequestMapping(value="/frontHub/add", method = RequestMethod.POST)
     public String frontHubAdd(
             @RequestParam(value = "wheelMaker") long wheelMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "hubFixType") long hubFixTypeId,
             @RequestParam(value = "bearingType") long bearingTypeId,
@@ -363,17 +414,17 @@ public class WheelController {
         BrakesType brakesType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
         RotorFixType rotorFixType = (rotorFixTypeId != DEFAULT_GROUP_ID) ? wheelService.findRotorFixType(rotorFixTypeId) : null;
         SpokeNumber spokeNumber = (spokeNumberId != DEFAULT_GROUP_ID) ? wheelService.findSpokeNumber(spokeNumberId) : null;
-        FrontHub frontHub = new FrontHub (wheelMaker,  name,hubFixType, bearingType, material,axisLength, axisDiam, brakesType,
+        FrontHub frontHub = new FrontHub (wheelMaker,article,url, name,hubFixType, bearingType, material,axisLength, axisDiam, brakesType,
                 rotorFixType,spokeNumber,weight, color,description,price,way);
-
-
         wheelService.addFrontHub(frontHub);
-        return "redirect:/show_wheels";
+        return "redirect:/show_frontHubs";
     }
 
     @RequestMapping(value="/backHub/add", method = RequestMethod.POST)
     public String backHubAdd(
             @RequestParam(value = "wheelMaker") long wheelMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "hubFixType") long hubFixTypeId,
             @RequestParam(value = "bearingType") long bearingTypeId,
@@ -401,17 +452,17 @@ public class WheelController {
         SpokeNumber spokeNumber = (spokeNumberId != DEFAULT_GROUP_ID) ? wheelService.findSpokeNumber(spokeNumberId) : null;
         BackSprocketType backSprocketType = (backSprocketTypeId != DEFAULT_GROUP_ID) ? wheelService.findBackSprocketType(backSprocketTypeId) : null;
         BackSprocketNumber backSprocketNumber = (backSprocketNumberId != DEFAULT_GROUP_ID) ? wheelService.findBackSprocketNumber(backSprocketNumberId) : null;
-        BackHub backHub = new BackHub (wheelMaker,  name,hubFixType, bearingType, material,axisLength, axisDiam, brakesType,
+        BackHub backHub = new BackHub (wheelMaker,article,url, name,hubFixType, bearingType, material,axisLength, axisDiam, brakesType,
                 rotorFixType,spokeNumber,backSprocketType,backSprocketNumber,weight, color,description,price,way);
-
-
         wheelService.addBackHub(backHub);
-        return "redirect:/show_wheels";
+        return "redirect:/show_backHubs";
     }
 
     @RequestMapping(value="/tire/add", method = RequestMethod.POST)
     public String tireAdd(
             @RequestParam(value = "wheelMaker") long wheelMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
             @RequestParam String name,
             @RequestParam(value = "wheelsDiam") long wheelsDiamId,
             @RequestParam(value = "tireType") long tireTypeId,
@@ -427,30 +478,95 @@ public class WheelController {
         TireType tireType = (tireTypeId != DEFAULT_GROUP_ID) ? wheelService.findTireType(tireTypeId) : null;
         CordType cordType = (cordTypeId != DEFAULT_GROUP_ID) ? wheelService.findCordType(cordTypeId) : null;
         TireWide tireWide = (tireWideId != DEFAULT_GROUP_ID) ? wheelService.findTireWide(tireWideId) : null;
-
-        Tire tire = new Tire( wheelMaker,  name, wheelsDiam, tireType, cordType, tireWide,
+        Tire tire = new Tire( wheelMaker,article,url, name, wheelsDiam, tireType, cordType, tireWide,
                 color, description,price,way);
-
-
         wheelService.addTire(tire);
-        return "redirect:/show_wheels";
+        return "redirect:/show_tires";
     }
 
+    @RequestMapping("/wheel/{url}")
+    public String listWheelUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<Wheel> wheels = wheelService
+                .findWheelByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("wheels", wheels);
+        return "OneWheel";
+    }
 
+    @RequestMapping("/backHub/{url}")
+    public String listBachHubUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<BackHub> backHubs = wheelService
+                .findBackHubByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("backHubs", backHubs);
+        return "OneBackHub";
+    }
 
+    @RequestMapping("/frontHub/{url}")
+    public String listFrontHubUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<FrontHub> frontHubs = wheelService
+                .findFrontHubByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("frontHubs", frontHubs);
+        return "OneFrontHub";
+    }
 
+    @RequestMapping("/rim/{url}")
+    public String listRimUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<Rim> rims = wheelService
+                .findRimByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("rims", rims);
+        return "OneRim";
+    }
 
+    @RequestMapping("/spoke/{url}")
+    public String listSpokeUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<Spoke> spokes = wheelService
+                .findSpokeByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("spokes", spokes);
+        return "OneSpoke";
+    }
 
+    @RequestMapping("/tire/{url}")
+    public String listTireUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<Tire> tires = wheelService
+                .findTireByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("tires", tires);
+        return "OneTire";
+    }
 
     @RequestMapping(value="/wheelMaker/add", method = RequestMethod.POST)
     public String wheelMakerAdd(@RequestParam String name) {
         wheelService.addWheelMaker(new WheelMaker(name));
         return "redirect:/show_wheels";
     }
-
-
-
-
 
     private long getPageCount() {
         long totalCount = wheelService.count();
@@ -466,14 +582,17 @@ public class WheelController {
         long totalCount = wheelService.countRim();
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
+
     private long getPageCountFrontHub() {
         long totalCount = wheelService.countFrontHub();
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
+
     private long getPageCountBackHub() {
         long totalCount = wheelService.countBackHub();
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
+
     private long getPageCountTire() {
         long totalCount = wheelService.countTire();
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
@@ -483,15 +602,6 @@ public class WheelController {
         long totalCount = wheelService.countByWheelMaker(wheelMaker);
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
-    private long getPageCount(SpokeNumber spokeNumber) {
-        long totalCount = wheelService.countBySpokeNumber(spokeNumber);
-        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
-    }
-    private long getPageCount(RimWide rimWide) {
-        long totalCount = wheelService.countByRimWide(rimWide);
-        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
-    }
-
 
 }
 

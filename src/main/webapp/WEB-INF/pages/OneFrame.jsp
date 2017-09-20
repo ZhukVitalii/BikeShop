@@ -49,7 +49,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="${frame.url}/resources/images/logo.png" alt=""/></a>
+                <a href="/"><img src="${frame.url}/resources/images/logo.png"
+                                 alt=""
+                                 width="110"
+                                 height="112"/>
+                </a>
             </div>
             <div class="top-nav">
                 <label class="mobile_menu" for="mobile_menu">
@@ -70,7 +74,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="/show_frames">Рами</a></li>
                             <li><a href="/show_forks">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
-                            <li><a href="parts.html">Рульове управління</a></li>
+                            <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="parts.html">Колеса та комплектуючі</a></li>
                             <li><a href="parts.html">Трансмісія</a></li>
                         </ul>
@@ -139,11 +143,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </script>
                         <!--//details-product-slider-->
                         <div class="details-left-slider">
-                            <a href="<c:url value="/frames/${frame.url}"/>"
-                               title="Перейти до <c:out value="${frame.name}"/>">
                                 <img height="300" width="300" src="${frame.way}" />
-                            </a>
-
                             <div class="details-left-info">
 
                                 <h3>${frame.name}</h3>
@@ -157,7 +157,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <a class="length" href="#">S</a>
                                 <div class="btn_form">
                                     <a href="cart.html">Купити</a>
-                                    <a href="cart.html">Додати до корзини</a>
+                                    <a href="/cartAddFrame/${frame.article}">Додати до корзини</a>
                                 </div>
                                 <div class="bike-type">
 

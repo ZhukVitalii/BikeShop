@@ -21,6 +21,8 @@ public class BrakeVBrake {
     @ManyToOne
     @JoinColumn(name="maker_id")
     private BrakeMaker brakeMaker;
+    private Long article;
+    private String url;
     private String name;
     @ManyToOne
     @JoinColumn(name="loc_id")
@@ -32,9 +34,11 @@ public class BrakeVBrake {
     private Double price;
     private String way;
 
-    public BrakeVBrake(BrakeMaker brakeMaker, String name, Location location, String material,
+    public BrakeVBrake(BrakeMaker brakeMaker,Long article,String url, String name, Location location, String material,
                  String color, String description, Double price,  String way) {
         this.brakeMaker = brakeMaker;
+        this.article = article;
+        this.url = url;
         this.name = name;
         this.location = location;
         this.material = material;

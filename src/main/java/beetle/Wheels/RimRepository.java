@@ -19,6 +19,13 @@ public interface RimRepository extends JpaRepository<Rim, Long> {
     @Query("SELECT COUNT(c) FROM Rim c WHERE c.wheelMaker = :wheelMaker")
     long countByWheelMakers(@Param("wheelMaker")  WheelMaker wheelMaker);
 
+    @Query("SELECT c FROM Rim c WHERE c.url = :url")
+    List<Rim> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM Rim c WHERE c.article = :article")
+    List<Rim> findByArticle(@Param("article") Long article, Pageable pageable);
+
+
 
 
     @Query("SELECT c FROM Rim c WHERE c.bikeType = :bikeType")
