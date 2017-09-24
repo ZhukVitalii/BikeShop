@@ -36,9 +36,13 @@ public class TransmissionController {
 
 
 
+    @RequestMapping("/show_transmissionComponent")
+    public String brakesComponentsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        return "transmissionComponents";
+    }
 
-
-    @RequestMapping("/show_transmissions")
+    @RequestMapping("/show_transmission")
     public String transmissionsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
 
@@ -58,35 +62,7 @@ public class TransmissionController {
                 .findAllSix(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<Pedal> pedals  = transmissionService
                 .findAllSeven(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-
-
-
         model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
-        model.addAttribute("backSprocketMax", transmissionService.findBackSprocketMax());
-        model.addAttribute("backSprocketMin", transmissionService.findBackSprocketMin());
-        model.addAttribute("backSprocketSize", transmissionService.findBackSprocketSize());
-        model.addAttribute("bracketAxisLength", transmissionService.findBracketAxisLength());
-        model.addAttribute("bracketWide", transmissionService.findBracketWide());
-        model.addAttribute("bracketType", transmissionService.findBracketType());
-        model.addAttribute("carvingType", transmissionService.findCarvingType());
-        model.addAttribute("chainElementNumber", transmissionService.findChainElementNumber());
-        model.addAttribute("collarDiam", transmissionService.findCollarDiam());
-        model.addAttribute("crankLength", transmissionService.findCrankLength());
-        model.addAttribute("frontDerailleurFixType", transmissionService.findFrontDerailleurFixType());
-        model.addAttribute("frontSprocketMax", transmissionService.findFrontSprocketMax());
-        model.addAttribute("frontSprocketMin", transmissionService.findFrontSprocketMin());
-        model.addAttribute("frontSprocketNumber", transmissionService.findFrontSprocketNumber());
-        model.addAttribute("frontSprocketSize", transmissionService.findFrontSprocketSize());
-        model.addAttribute("pawLength", transmissionService.findPawLength());
-        model.addAttribute("backSprocketNumber", transmissionService.findBackSprocketNumber());
-        model.addAttribute("bearingType", transmissionService.findBearingType());
-        model.addAttribute("pedalType", transmissionService.findPedalType());
-        model.addAttribute("teethCapasity", transmissionService.findTeethCapasity());
-        model.addAttribute("tractionType", transmissionService.findTractionType());
-        model.addAttribute("bikeType", transmissionService.findBikeType());
-
-
-
 
         model.addAttribute("backDerailleurs", backDerailleurs);
         model.addAttribute("backGearKass", backGearKass);
@@ -101,6 +77,91 @@ public class TransmissionController {
 
         return "transmissions";
     }
+
+
+    @RequestMapping("/show_backDerailleurs")
+    public String backDerailleursVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+
+        List<BackDerailleur> backDerailleurs = transmissionService
+                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
+        model.addAttribute("backDerailleurs", backDerailleurs);
+        model.addAttribute("allPages", getPageCount());
+        return "backDerailleurs";
+    }
+    @RequestMapping("/show_backGearKass")
+    public String backGearKassVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<BackGearKas> backGearKass = transmissionService
+                .findAllOne(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
+        model.addAttribute("backGearKass", backGearKass);
+        model.addAttribute("allPages", getPageCount());
+        return "backGearKass";
+    }
+    @RequestMapping("/show_backGearTrs")
+    public String backGearTrsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<BackGearTr> backGearTrs = transmissionService
+                .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
+        model.addAttribute("backGearTrs", backGearTrs);
+        model.addAttribute("allPages", getPageCount());
+        return "backGearTrs";
+    }
+    @RequestMapping("/show_brackets")
+    public String bracketsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<Bracket> brackets = transmissionService
+                .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
+        model.addAttribute("brackets", brackets);
+        model.addAttribute("allPages", getPageCount());
+        return "brackets";
+    }
+    @RequestMapping("/show_chains")
+    public String chainsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<Chain>  chains = transmissionService
+                .findAllFor(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
+        model.addAttribute("chains", chains);
+        model.addAttribute("allPages", getPageCount());
+        return "chains";
+    }
+    @RequestMapping("/show_cranks")
+    public String cranksVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<Crank> cranks = transmissionService
+                .findAllFive(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
+        model.addAttribute("cranks", cranks);
+        model.addAttribute("allPages", getPageCount());
+        return "cranks";
+    }
+    @RequestMapping("/show_frontDerailleurs")
+    public String frontDerailleursVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<FrontDerailleur> frontDerailleurs = transmissionService
+                .findAllSix(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
+        model.addAttribute("frontDerailleurs", frontDerailleurs);
+        model.addAttribute("allPages", getPageCount());
+        return "frontDerailleurs";
+    }
+    @RequestMapping("/show_pedals")
+    public String pedalsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<Pedal> pedals  = transmissionService
+                .findAllSeven(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
+        model.addAttribute("pedals", pedals);
+        model.addAttribute("allPages", getPageCount());
+        return "pedals";
+    }
+
+
 
     @RequestMapping("/backDerailleur_add_page")
     public String backDerailleurAddPage(Model model) {
@@ -182,8 +243,6 @@ public class TransmissionController {
         model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
         model.addAttribute("bearingType", transmissionService.findBearingType());
         model.addAttribute("pedalType", transmissionService.findPedalType());
-
-
         return "pedal_add_page";
     }
 
@@ -193,8 +252,6 @@ public class TransmissionController {
     public String transmissionMakerAddPage() {
         return "transmissionMaker_add_page";
     }
-
-
 
     @RequestMapping("/transmissionMaker/{id}")
     public String listTransmissionMaker(
@@ -344,10 +401,8 @@ public class TransmissionController {
                 backSprocketMin,pawLength,material,weight,color,description,price,way);
 
         transmissionService.addBackDerailleur(backDerailleur);
-        return "redirect:/show_transmissions";
+        return "redirect:/show_backDerailleurs";
     }
-
-
     @RequestMapping(value="/backGearKas/add", method = RequestMethod.POST)
     public String backGearKasAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
@@ -369,14 +424,10 @@ public class TransmissionController {
         BackSprocketMax backSprocketMax = (backSprocketMaxId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketMax(backSprocketMaxId) : null;
         BackSprocketMin backSprocketMin = (backSprocketMinId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketMin(backSprocketMinId) : null;
         BackSprocketSize backSprocketSize = (backSprocketSizeId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketSize(backSprocketSizeId) : null;
-
         BackGearKas backGearKas = new BackGearKas(transmissionMaker,article,url,name,backSprocketNumber,backSprocketMax,backSprocketMin,
                 backSprocketSize,material,color,description,price,way);
-
-
         transmissionService.addBackGearKas(backGearKas);
-
-        return "redirect:/show_transmissions";
+        return "redirect:/show_backGearKass";
     }
 
     @RequestMapping(value="/backGearTr/add", method = RequestMethod.POST)
@@ -400,14 +451,10 @@ public class TransmissionController {
         BackSprocketMax backSprocketMax = (backSprocketMaxId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketMax(backSprocketMaxId) : null;
         BackSprocketMin backSprocketMin = (backSprocketMinId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketMin(backSprocketMinId) : null;
         BackSprocketSize backSprocketSize = (backSprocketSizeId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketSize(backSprocketSizeId) : null;
-
         BackGearTr backGearTr = new BackGearTr(transmissionMaker,article,url,name,backSprocketNumber,backSprocketMax,backSprocketMin,
                 backSprocketSize,material,color,description,price,way);
-
-
         transmissionService.addBackGearTr(backGearTr);
-
-        return "redirect:/show_transmissions";
+        return "redirect:/show_backGearTrs";
     }
 
     @RequestMapping(value="/bracket/add", method = RequestMethod.POST)
@@ -433,12 +480,9 @@ public class TransmissionController {
         BracketType bracketType = (bracketTypeId != DEFAULT_GROUP_ID) ? transmissionService.findBracketType(bracketTypeId) : null;
         BearingType bearingType = (bearingTypeId != DEFAULT_GROUP_ID) ? transmissionService.findBearingType(bearingTypeId) : null;
         CarvingType carvingType = (carvingTypeId != DEFAULT_GROUP_ID) ? transmissionService.findCarvingType(carvingTypeId) : null;
-
         Bracket bracket = new Bracket(transmissionMaker,article, url,name,bracketAxisLength, bracketWide,bracketType,bearingType,axisMaterial,carvingType,color,description,price,way);
-
         transmissionService.addBracket(bracket);
-
-        return "redirect:/show_transmissions";
+        return "redirect:/show_brackets";
     }
 
     @RequestMapping(value="/chain/add", method = RequestMethod.POST)
@@ -459,12 +503,9 @@ public class TransmissionController {
         TransmissionMaker transmissionMaker = (transmissionMakerId != DEFAULT_GROUP_ID) ? transmissionService.findTransmissionMaker(transmissionMakerId) : null;
         BackSprocketNumber backSprocketNumber = (backSprocketNumberId != DEFAULT_GROUP_ID) ? transmissionService.findBackSprocketNumber(backSprocketNumberId) : null;
         ChainElementNumber chainElementNumber = (chainElementNumberId != DEFAULT_GROUP_ID) ? transmissionService.findChainElementNumber(chainElementNumberId) : null;
-
         Chain chain = new Chain(transmissionMaker,article,url,name,backSprocketNumber,chainElementNumber,weight,material,color,description,price,way);
-
         transmissionService.addChain(chain);
-
-        return "redirect:/show_transmissions";
+        return "redirect:/show_chains";
     }
 
     @RequestMapping(value="/crank/add", method = RequestMethod.POST)
@@ -497,14 +538,11 @@ public class TransmissionController {
         FrontSprocketMin frontSprocketMin = (frontSprocketMinId != DEFAULT_GROUP_ID) ? transmissionService.findFrontSprocketMin(frontSprocketMinId) : null;
         CrankLength crankLength = (crankLengthId != DEFAULT_GROUP_ID) ? transmissionService.findCrankLength(crankLengthId) : null;
         BracketType bracketType = (bracketTypeId != DEFAULT_GROUP_ID) ? transmissionService.findBracketType(bikeTypeId) : null;
-
         Crank crank = new Crank(transmissionMaker,article,url,name,bikeType,backSprocketNumber,frontSprocketNumber,frontSprocketSize,frontSprocketMax,
                 frontSprocketMin,crankLength,sprocketMaterial,crankMaterial,bracketType,color,description,price,way);
-
         transmissionService.addCrank(crank);
-        return "redirect:/show_transmissions";
+        return "redirect:/show_cranks";
     }
-
 
     @RequestMapping(value="/frontDerailleur/add", method = RequestMethod.POST)
     public String frontDerailleurAdd(
@@ -537,12 +575,10 @@ public class TransmissionController {
         FrontDerailleurFixType frontDerailleurFixType = (frontDerailleurFixTypeId != DEFAULT_GROUP_ID) ? transmissionService.findFrontDerailleurFixType(frontDerailleurFixTypeId) : null;
         CollarDiam collarDiam = (collarDiamId != DEFAULT_GROUP_ID) ? transmissionService.findCollarDiam(collarDiamId) : null;
         TractionType tractionType = (tractionTypeId != DEFAULT_GROUP_ID) ? transmissionService.findTractionType(tractionTypeId) : null;
-
         FrontDerailleur frontDerailleur = new FrontDerailleur(transmissionMaker,article,url,name,frontSprocketNumber,backSprocketNumber,frontSprocketMax,frontSprocketMin,
                 teethCapasity,chainLine,frontDerailleurFixType,collarDiam,tractionType,material,weight,color,description,price,way);
-
         transmissionService.addFrontDerailleur(frontDerailleur);
-        return "redirect:/show_transmissions";
+        return "redirect:/show_frontDerailleurs";
     }
 
     @RequestMapping(value="/pedal/add", method = RequestMethod.POST)
@@ -564,16 +600,107 @@ public class TransmissionController {
         TransmissionMaker transmissionMaker = (transmissionMakerId != DEFAULT_GROUP_ID) ? transmissionService.findTransmissionMaker(transmissionMakerId) : null;
         PedalType pedalType = (pedalTypeId != DEFAULT_GROUP_ID) ? transmissionService.findPedalType(pedalTypeId) : null;
         BearingType bearingType = (bearingTypeId != DEFAULT_GROUP_ID) ? transmissionService.findBearingType(bearingTypeId) : null;
-
         Pedal pedal = new Pedal(transmissionMaker,article,url,name,pedalType,bearingType,sizes,material,weight,color,description,price,way);
-
         transmissionService.addPedal(pedal);
-        return "redirect:/show_transmissions";
+        return "redirect:/show_pedals";
     }
 
-
-
-
+    @RequestMapping("/backDerailleur/{url}")
+    public String listBackDerailleurUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<BackDerailleur> backDerailleurs = transmissionService
+                .findBackDerailleurByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("backDerailleurs", backDerailleurs);
+        return "OneBackDerailleur";
+    }
+    @RequestMapping("/backGearKas/{url}")
+    public String listBackGearKasUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<BackGearKas> backGearKass = transmissionService
+                .findBackGearKasByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("backGearKass", backGearKass);
+        return "OneBackGearKas";
+    }
+    @RequestMapping("/backGearTr/{url}")
+    public String listBackGearTrUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<BackGearTr> backGearTrs = transmissionService
+                .findBackGearTrByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("backGearTrs", backGearTrs);
+        return "OneBackGearTr";
+    }
+    @RequestMapping("/bracket/{url}")
+    public String listBracketUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<Bracket> brackets = transmissionService
+                .findBracketByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("brackets", brackets);
+        return "OneBracket";
+    }
+    @RequestMapping("/chain/{url}")
+    public String listChainUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<Chain> chains = transmissionService
+                .findChainByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("chains", chains);
+        return "OneChain";
+    }
+    @RequestMapping("/crank/{url}")
+    public String listCrankUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<Crank> cranks = transmissionService
+                .findCrankByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("cranks", cranks);
+        return "OneCrank";
+    }
+    @RequestMapping("/frontDerailleur/{url}")
+    public String listFrontDerailleurUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<FrontDerailleur> frontDerailleurs = transmissionService
+                .findFrontDerailleurByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("frontDerailleurs", frontDerailleurs);
+        return "OneFrontDerailleur";
+    }
+    @RequestMapping("/pedal/{url}")
+    public String listPedalUrl(
+            @PathVariable(value = "url") String url,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<Pedal> pedals = transmissionService
+                .findPedalByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("pedals", pedals);
+        return "OnePedal";
+    }
 
     @RequestMapping(value="/transmissionMaker/add", method = RequestMethod.POST)
     public String transmissionMakerAdd(@RequestParam String name) {
@@ -581,16 +708,10 @@ public class TransmissionController {
         return "redirect:/show_transmissions";
     }
 
-
-
-
-
     private long getPageCount() {
         long totalCount = wheelService.count();
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
-
-
     private long getPageCountBackDerailleurMaker(TransmissionMaker transmissionMaker) {
         long totalCount = transmissionService.countByBackDerailleurMaker(transmissionMaker);
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
@@ -623,8 +744,6 @@ public class TransmissionController {
         long totalCount = transmissionService.countByPedalMaker(transmissionMaker);
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
-
-
 
 }
 

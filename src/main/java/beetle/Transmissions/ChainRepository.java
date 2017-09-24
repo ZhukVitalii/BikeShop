@@ -24,6 +24,12 @@ public interface ChainRepository extends JpaRepository<Chain, Long> {
     @Query("SELECT COUNT(c) FROM Chain c WHERE c.backSprocketNumber = :backSprocketNumber")
     long countByBackSprocketNumber(@Param("backSprocketNumber")  BackSprocketNumber backSprocketNumber);
 
+    @Query("SELECT c FROM Chain c WHERE c.url = :url")
+    List<Chain> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM Chain c WHERE c.article = :article")
+    List<Chain> findByArticle(@Param("article") Long article, Pageable pageable);
+
     @Query("SELECT c FROM Chain c WHERE c.chainElementNumber = :chainElementNumber")
     List<Chain> findByChainElementNumber(@Param("chainElementNumber") ChainElementNumber chainElementNumber, Pageable pageable);
     @Query("SELECT COUNT(c) FROM Chain c WHERE c.chainElementNumber = :chainElementNumber")

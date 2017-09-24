@@ -29,6 +29,12 @@ public interface FrontDerailleurRepository extends JpaRepository<FrontDerailleur
     @Query("SELECT COUNT(c) FROM FrontDerailleur c WHERE c.backSprocketNumber = :backSprocketNumber")
     long countByBackSprocketNumber(@Param("backSprocketNumber")  BackSprocketNumber backSprocketNumber);
 
+    @Query("SELECT c FROM FrontDerailleur c WHERE c.url = :url")
+    List<FrontDerailleur> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM FrontDerailleur c WHERE c.article = :article")
+    List<FrontDerailleur> findByArticle(@Param("article") Long article, Pageable pageable);
+
     @Query("SELECT c FROM FrontDerailleur c WHERE c.frontSprocketMax = :frontSprocketMax")
     List<FrontDerailleur> findByFrontSprocketMax(@Param("frontSprocketMax") FrontSprocketMax frontSprocketMax, Pageable pageable);
     @Query("SELECT COUNT(c) FROM FrontDerailleur c WHERE c.frontSprocketMax = :frontSprocketMax")

@@ -25,6 +25,12 @@ public interface PedalRepository extends JpaRepository<Pedal, Long> {
     @Query("SELECT COUNT(c) FROM Pedal c WHERE c.bearingType = :bearingType")
     long countByBearingType(@Param("bearingType")  BearingType bearingType);
 
+    @Query("SELECT c FROM Pedal c WHERE c.url = :url")
+    List<Pedal> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM Pedal c WHERE c.article = :article")
+    List<Pedal> findByArticle(@Param("article") Long article, Pageable pageable);
+
     @Query("SELECT c FROM Pedal c WHERE c.pedalType = :pedalType")
     List<Pedal> findByPedalType(@Param("pedalType")  PedalType pedalType, Pageable pageable);
     @Query("SELECT COUNT(c) FROM Pedal c WHERE c.pedalType = :pedalType")

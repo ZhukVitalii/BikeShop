@@ -7,6 +7,8 @@
 <html>
 <head>
     <title>Frames</title>
+    <link rel="shortcut icon"
+          href="resources/images/logo_brauser.png" >
     <spring:url value="${framesize.id}/resources/css/bootstrap.css" var="bootstrap"/>
     <link href="${framesize.id}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (Bootstrap's JavaScript plugins) -->
@@ -75,21 +77,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="/show_forks">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
-                            <li><a href="parts.html">Колеса та комплектуючі</a></li>
-                            <li><a href="parts.html">Трансмісія</a></li>
+                            <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
+                            <li><a href="/show_transmissionComponent">Трансмісія</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown1"><a href="accessories.html">ДОДАТКОВІ КОМПЛЕКТУЮЧІ</a>
+                    <li class="dropdown1"><a href="#">ДОДАТКОВІ КОМПЛЕКТУЮЧІ</a>
                         <ul class="dropdown2">
-                            <li><a href="accessories.html">Сідла</a></li>
-                            <li><a href="accessories.html">Підсидільні штирі</a></li>
-                            <li><a href="accessories.html">Покришки</a></li>
-                            <li><a href="accessories.html">Камери</a></li>
-                            <li><a href="accessories.html">Баудени</a></li>
-                            <li><a href="accessories.html">Троси</a></li>
+                            <li><a href="#">Сідла</a></li>
+                            <li><a href="#">Підсидільні штирі</a></li>
+                            <li><a href="#">Покришки</a></li>
+                            <li><a href="#">Камери</a></li>
+                            <li><a href="#">Баудени</a></li>
+                            <li><a href="#">Троси</a></li>
                         </ul>
                     </li>
-
                     <a class="shop" href="cart.html"><img src="${framesize.id}/resources/images/cart.png" alt=""/></a>
                 </ul>
             </div>

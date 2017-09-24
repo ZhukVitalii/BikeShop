@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>New brakeHandle</title>
+    <link rel="shortcut icon"
+          href="resources/images/logo_brauser.png" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resources/css/my.css"  type="text/css" media="all" />
     <script src="resources/js/my.js"></script>

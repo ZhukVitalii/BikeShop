@@ -24,6 +24,12 @@ public interface BackGearKasRepository extends JpaRepository<BackGearKas, Long> 
     @Query("SELECT COUNT(c) FROM BackGearKas c WHERE c.backSprocketNumber = :backSprocketNumber")
     long countByBackSprocketNumber(@Param("backSprocketNumber")  BackSprocketNumber backSprocketNumber);
 
+    @Query("SELECT c FROM BackGearKas c WHERE c.url = :url")
+    List<BackGearKas> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM BackGearKas c WHERE c.article = :article")
+    List<BackGearKas> findByArticle(@Param("article") Long article, Pageable pageable);
+
 
     @Query("SELECT c FROM BackGearKas c WHERE c.backSprocketMax = :backSprocketMax")
     List<BackGearKas> findByBackSprocketMax(@Param("backSprocketMax") BackSprocketMax backSprocketMax, Pageable pageable);

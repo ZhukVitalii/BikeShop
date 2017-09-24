@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>New Back Derailleur</title>
+    <link rel="shortcut icon"
+          href="resources/images/logo_brauser.png" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/resources/css/my.css"  type="text/css" media="all" />
@@ -24,11 +26,22 @@
         </select>
         <br>
         <br>
+        <div class="numbers">
+            <input class="form-control"
+                   type="number"
+                   name="article"
+                   placeholder="Артикул">
+        </div>
+        <br>
+        <input class="form-control"
+               type="text"
+               name="url"
+               placeholder="url">
+        <br>
         <input class="form-control"
                type="text"
                name="name"
                placeholder="Назва">
-        <br>
         <br>
         <select class="btn btn-primary btn-select btn-select-light"
                 name="backSprocketNumber">

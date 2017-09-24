@@ -28,6 +28,12 @@ public interface BracketRepository extends JpaRepository<Bracket, Long> {
     @Query("SELECT COUNT(c) FROM Bracket c WHERE c.bracketWide = :bracketWide")
     long countByBracketWide(@Param("bracketWide") BracketWide bracketWide);
 
+    @Query("SELECT c FROM Bracket c WHERE c.url = :url")
+    List<Bracket> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM Bracket c WHERE c.article = :article")
+    List<Bracket> findByArticle(@Param("article") Long article, Pageable pageable);
+
     @Query("SELECT c FROM Bracket c WHERE c.bracketType = :bracketType")
     List<Bracket> findByBracketType(@Param("bracketType") BracketType bracketType, Pageable pageable);
     @Query("SELECT COUNT(c) FROM Bracket c WHERE c.bracketType = :bracketType")

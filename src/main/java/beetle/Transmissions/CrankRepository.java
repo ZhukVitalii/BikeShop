@@ -24,6 +24,12 @@ public interface CrankRepository extends JpaRepository<Crank, Long> {
     @Query("SELECT COUNT(c) FROM Crank c WHERE c.bikeType = :bikeType")
     long countByBikeType(@Param("bikeType")  BikeType bikeType);
 
+    @Query("SELECT c FROM Crank c WHERE c.url = :url")
+    List<Crank> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM Crank c WHERE c.article = :article")
+    List<Crank> findByArticle(@Param("article") Long article, Pageable pageable);
+
 
     @Query("SELECT c FROM Crank c WHERE c.backSprocketNumber = :backSprocketNumber")
     List<Crank> findByBackSprocketNumber(@Param("backSprocketNumber")BackSprocketNumber backSprocketNumber, Pageable pageable);

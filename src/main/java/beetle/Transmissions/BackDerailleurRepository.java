@@ -1,6 +1,7 @@
 package beetle.Transmissions;
 
 import beetle.Forks.BrakesType;
+import beetle.Handlebars.Grips;
 import beetle.Wheels.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,6 +24,12 @@ public interface BackDerailleurRepository extends JpaRepository<BackDerailleur, 
     List<BackDerailleur> findByBackSprocketNumber(@Param("backSprocketNumber") BackSprocketNumber backSprocketNumber, Pageable pageable);
     @Query("SELECT COUNT(c) FROM BackDerailleur c WHERE c.backSprocketNumber = :backSprocketNumber")
     long countByBackSprocketNumber(@Param("backSprocketNumber")  BackSprocketNumber backSprocketNumber);
+
+    @Query("SELECT c FROM BackDerailleur c WHERE c.url = :url")
+    List<BackDerailleur> findByUrl(@Param("url") String url, Pageable pageable);
+
+    @Query("SELECT c FROM BackDerailleur c WHERE c.article = :article")
+    List<BackDerailleur> findByArticle(@Param("article") Long article, Pageable pageable);
 
     @Query("SELECT c FROM BackDerailleur c WHERE c.backSprocketMax = :backSprocketMax")
     List<BackDerailleur> findByBackSprocketMax(@Param("backSprocketMax") BackSprocketMax backSprocketMax, Pageable pageable);

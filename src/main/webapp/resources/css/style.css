@@ -193,60 +193,135 @@ a.morebtn:hover{
 	padding:10em 0 0 0; 
 	min-height:290px;
 	background-size: 100%;
-	margin:0 12px;
+	margin:12px 12px;
 	width:31%;
 }
 .grid1{
-	background:url(../images/disc_hydro.jpg) no-repeat;
+	background:url(../images/disc_hydro_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid2{
-	background:url(../images/discMech.jpg) no-repeat;
+	background:url(../images/discMech_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid3{
-	background:url(../images/vBrake.jpeg) no-repeat;
+	background:url(../images/vBrake_logo.jpeg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid4{
-	background:url(../images/handleBrake.jpg) no-repeat;
+	background:url(../images/handleBrake_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid5{
 	background:url(../images/frame_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid6{
 	background:url(../images/wheels_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid7{
 	background:url(../images/rim_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid8{
 	background:url(../images/front_hub_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid9{
 	background:url(../images/back_hub_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid10{
 	background:url(../images/spoke_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid11{
 	background:url(../images/tires_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid12{
 	background:url(../images/handlebar_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid13{
 	background:url(../images/winding_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid14{
 	background:url(../images/headset_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid15{
 	background:url(../images/stem_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid16{
 	background:url(../images/grips_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
 .grid17{
 	background:url(../images/stem_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
 }
+.grid18{
+	background:url(../images/backDer_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
+}
+.grid19{
+	background:url(../images/frontDer_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
+}
+.grid20{
+	background:url(../images/bracket_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
+}
+.grid21{
+	background:url(../images/backGearKas_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
+}
+.grid22{
+	background:url(../images/backGearTr_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
+}
+.grid23{
+	background:url(../images/chain_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
+}
+.grid24{
+	background:url(../images/crank_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
+}
+.grid25{
+	background:url(../images/pedal_logo.jpg) no-repeat;
+	width: 350px;
+	height: 280px;
+}
+
 
 
 

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -86,7 +87,206 @@ public class TransmissionService {
     @Autowired
     private BearingTypeRepository bearingTypeRepository;
 
+    public List<Long> articlesBackDerailleur = new ArrayList<>();
+    public List<Long> articlesBackGearKas = new ArrayList<>();
+    public List<Long> articlesBackGearTr = new ArrayList<>();
+    public List<Long> articlesBracket = new ArrayList<>();
+    public List<Long> articlesChain = new ArrayList<>();
+    public List<Long> articlesCrank = new ArrayList<>();
+    public List<Long> articlesFrontDerailleur = new ArrayList<>();
+    public List<Long> articlesPedal = new ArrayList<>();
 
+
+    //For BackDerailleur
+    public void testPrintBackDerailleur(){
+        for (Long articlo : articlesBackDerailleur){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeBackDerailleur(){
+        System.out.println("розмір корзини " + getSizeBackDerailleur());
+    }
+    public void addToArticleBackDerailleur(Long article) {
+        articlesBackDerailleur.add(article);
+        testPrintBackDerailleur();
+        getSizeBackDerailleur();
+        printSizeBackDerailleur();
+    }
+    public Long getArticleBackDerailleurFromCart (int a) {
+        Long b = articlesBackDerailleur.get(a);
+        return b;
+    }
+    public int getSizeBackDerailleur() {
+        int a = articlesBackDerailleur.size();
+        return a;
+    }
+    //For BackGearKas
+    public void testPrintBackGearKas(){
+        for (Long articlo : articlesBackGearKas){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeBackGearKas(){
+        System.out.println("розмір корзини " + getSizeBackGearKas());
+    }
+    public void addToArticleBackGearKas(Long article) {
+        articlesBackGearKas.add(article);
+        testPrintBackGearKas();
+        getSizeBackGearKas();
+        printSizeBackGearKas();
+    }
+    public Long getArticleBackGearKasFromCart (int a) {
+        Long b = articlesBackGearKas.get(a);
+        return b;
+    }
+    public int getSizeBackGearKas() {
+        int a = articlesBackGearKas.size();
+        return a;
+    }
+
+    //For BackGearTr
+    public void testPrintBackGearTr(){
+        for (Long articlo : articlesBackGearTr){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeBackGearTr(){
+        System.out.println("розмір корзини " + getSizeBackGearTr());
+    }
+    public void addToArticleBackGearTr(Long article) {
+        articlesBackGearTr.add(article);
+        testPrintBackGearTr();
+        getSizeBackGearTr();
+        printSizeBackGearTr();
+    }
+    public Long getArticleBackGearTrFromCart (int a) {
+        Long b = articlesBackGearTr.get(a);
+        return b;
+    }
+    public int getSizeBackGearTr() {
+        int a = articlesBackGearTr.size();
+        return a;
+    }
+
+    //For Bracket
+    public void testPrintBracket(){
+        for (Long articlo : articlesBracket){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeBracket(){
+        System.out.println("розмір корзини " + getSizeBracket());
+    }
+    public void addToArticleBracket(Long article) {
+        articlesBracket.add(article);
+        testPrintBracket();
+        getSizeBracket();
+        printSizeBracket();
+    }
+    public Long getArticleBracketFromCart (int a) {
+        Long b = articlesBracket.get(a);
+        return b;
+    }
+    public int getSizeBracket() {
+        int a = articlesBracket.size();
+        return a;
+    }
+
+    //For Chain
+    public void testPrintChain(){
+        for (Long articlo : articlesChain){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeChain(){
+        System.out.println("розмір корзини " + getSizeChain());
+    }
+    public void addToArticleChain(Long article) {
+        articlesChain.add(article);
+        testPrintChain();
+        getSizeChain();
+        printSizeChain();
+    }
+    public Long getArticleChainFromCart (int a) {
+        Long b = articlesChain.get(a);
+        return b;
+    }
+    public int getSizeChain() {
+        int a = articlesChain.size();
+        return a;
+    }
+
+    //For Crank
+    public void testPrintCrank(){
+        for (Long articlo : articlesCrank){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeCrank(){
+        System.out.println("розмір корзини " + getSizeCrank());
+    }
+    public void addToArticleCrank(Long article) {
+        articlesCrank.add(article);
+        testPrintCrank();
+        getSizeCrank();
+        printSizeCrank();
+    }
+    public Long getArticleCrankFromCart (int a) {
+        Long b = articlesCrank.get(a);
+        return b;
+    }
+    public int getSizeCrank() {
+        int a = articlesCrank.size();
+        return a;
+    }
+
+    //For hFrontDerailleur
+    public void testPrintFrontDerailleur(){
+        for (Long articlo : articlesFrontDerailleur){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizeFrontDerailleur(){
+        System.out.println("розмір корзини " + getSizeFrontDerailleur());
+    }
+    public void addToArticleFrontDerailleur(Long article) {
+        articlesFrontDerailleur.add(article);
+        testPrintFrontDerailleur();
+        getSizeFrontDerailleur();
+        printSizeFrontDerailleur();
+    }
+    public Long getArticleFrontDerailleurFromCart (int a) {
+        Long b = articlesFrontDerailleur.get(a);
+        return b;
+    }
+    public int getSizeFrontDerailleur() {
+        int a = articlesFrontDerailleur.size();
+        return a;
+    }
+
+    //For Pedal
+    public void testPrintPedal(){
+        for (Long articlo : articlesPedal){
+            System.out.println(articlo);
+        }
+    }
+    public  void printSizePedal(){
+        System.out.println("розмір корзини " + getSizePedal());
+    }
+    public void addToArticlePedal(Long article) {
+        articlesPedal.add(article);
+        testPrintPedal();
+        getSizePedal();
+        printSizePedal();
+    }
+    public Long getArticlePedalFromCart (int a) {
+        Long b = articlesPedal.get(a);
+        return b;
+    }
+    public int getSizePedal() {
+        int a = articlesPedal.size();
+        return a;
+    }
 
 
     // add
@@ -122,8 +322,6 @@ public class TransmissionService {
     public  void addPedal (Pedal pedal) {
         pedalRepository.save(pedal);
     }
-
-
     @Transactional
     public  void addTransmissionMaker (TransmissionMaker transmissionMaker) {
         transmissionMakerRepository.save(transmissionMaker);
@@ -392,15 +590,6 @@ public class TransmissionService {
     public List<BikeType> findBikeType() {
         return bikeTypeRepository.findAll();
     }
-
-
-
-
-
-
-
-
-
     //findBy
 
     @Transactional(readOnly=true)
@@ -436,9 +625,70 @@ public class TransmissionService {
         return pedalRepository.findByTransmissionMakers(transmissionMaker, pageable);
     }
 
-
-
-
+    @Transactional(readOnly=true)
+    public List<BackDerailleur> findBackDerailleurByArticle(Long article, Pageable pageable) {
+        return backDerailleurRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BackDerailleur> findBackDerailleurByUrl(String url, Pageable pageable) {
+        return backDerailleurRepository.findByUrl(url,pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BackGearKas> findBackGearKasByArticle(Long article, Pageable pageable) {
+        return backGearKasRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BackGearKas> findBackGearKasByUrl(String url, Pageable pageable) {
+        return backGearKasRepository.findByUrl(url,pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BackGearTr> findBackGearTrByArticle(Long article, Pageable pageable) {
+        return backGearTrRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<BackGearTr> findBackGearTrByUrl(String url, Pageable pageable) {
+        return backGearTrRepository.findByUrl(url,pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Bracket> findBracketByArticle(Long article, Pageable pageable) {
+        return bracketRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Bracket> findBracketByUrl(String url, Pageable pageable) {
+        return bracketRepository.findByUrl(url,pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Chain> findChainByArticle(Long article, Pageable pageable) {
+        return chainRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Chain> findChainByUrl(String url, Pageable pageable) {
+        return chainRepository.findByUrl(url,pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Crank> findCrankByArticle(Long article, Pageable pageable) {
+        return crankRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Crank> findCrankByUrl(String url, Pageable pageable) {
+        return crankRepository.findByUrl(url,pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<FrontDerailleur> findFrontDerailleurByArticle(Long article, Pageable pageable) {
+        return frontDerailleurRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<FrontDerailleur> findFrontDerailleurByUrl(String url, Pageable pageable) {
+        return frontDerailleurRepository.findByUrl(url,pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Pedal> findPedalByArticle(Long article, Pageable pageable) {
+        return pedalRepository.findByArticle(article, pageable);
+    }
+    @Transactional(readOnly=true)
+    public List<Pedal> findPedalByUrl(String url, Pageable pageable) {
+        return pedalRepository.findByUrl(url,pageable);
+    }
 
 
     @Transactional(readOnly=true)
@@ -457,7 +707,6 @@ public class TransmissionService {
     public List<BackDerailleur> findByPawLength(PawLength pawLength, Pageable pageable) {
         return backDerailleurRepository.findByPawLength(pawLength, pageable);
     }
-
     @Transactional(readOnly=true)
     public List<BackGearKas> findByBackSprocketNumberBackGearKas(BackSprocketNumber backSprocketNumber, Pageable pageable) {
         return backGearKasRepository.findByBackSprocketNumber(backSprocketNumber, pageable);
@@ -474,7 +723,6 @@ public class TransmissionService {
     public List<BackGearKas> findByBackSprocketSizeBackGearKas(BackSprocketSize backSprocketSize, Pageable pageable) {
         return backGearKasRepository.findByBackSprocketSize(backSprocketSize, pageable);
     }
-
     @Transactional(readOnly=true)
     public List<BackGearTr> findByBackSprocketNumberBackGearTr(BackSprocketNumber backSprocketNumber, Pageable pageable) {
         return backGearTrRepository.findByBackSprocketNumber(backSprocketNumber, pageable);
@@ -491,7 +739,6 @@ public class TransmissionService {
     public List<BackGearTr> findByBackSprocketSizeBackGearTr(BackSprocketSize backSprocketSize, Pageable pageable) {
         return backGearTrRepository.findByBackSprocketSize(backSprocketSize, pageable);
     }
-
     @Transactional(readOnly=true)
     public List<Bracket> findByBracketAxisLength(BracketAxisLength bracketAxisLength, Pageable pageable) {
         return bracketRepository.findByBracketAxisLength(bracketAxisLength, pageable);
@@ -512,7 +759,6 @@ public class TransmissionService {
     public List<Bracket> findByCarvingType(CarvingType carvingType, Pageable pageable) {
         return bracketRepository.findByCarvingType(carvingType, pageable);
     }
-
     @Transactional(readOnly=true)
     public List<Chain> findByBackSprocketNumberChain (BackSprocketNumber backSprocketNumber, Pageable pageable) {
         return chainRepository.findByBackSprocketNumber(backSprocketNumber, pageable);
@@ -521,7 +767,6 @@ public class TransmissionService {
     public List<Chain> findByChainElementNumber (ChainElementNumber chainElementNumber, Pageable pageable) {
         return chainRepository.findByChainElementNumber(chainElementNumber, pageable);
     }
-
     @Transactional(readOnly=true)
     public List<Crank> findByBikeType (BikeType bikeType, Pageable pageable) {
         return crankRepository.findByBikeType(bikeType, pageable);
@@ -554,7 +799,6 @@ public class TransmissionService {
     public List<Crank> findByBracketTypeCrank (BracketType bracketType, Pageable pageable) {
         return crankRepository.findByBracketType(bracketType, pageable);
     }
-
     @Transactional(readOnly=true)
     public List<FrontDerailleur> findByFrontSprocketNumberFrontDerailleur (FrontSprocketNumber frontSprocketNumber, Pageable pageable) {
         return frontDerailleurRepository.findByFrontSprocketNumber(frontSprocketNumber, pageable);
@@ -587,7 +831,6 @@ public class TransmissionService {
     public List<FrontDerailleur> findByTractionType (TractionType tractionType, Pageable pageable) {
         return frontDerailleurRepository.findByTractionType(tractionType, pageable);
     }
-
     @Transactional(readOnly=true)
     public List<Pedal> findByPedalType (PedalType pedalType, Pageable pageable) {
         return pedalRepository.findByPedalType(pedalType, pageable);

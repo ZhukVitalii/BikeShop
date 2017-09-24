@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>New front derailleur</title>
+    <link rel="shortcut icon"
+          href="resources/images/logo_brauser.png" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/resources/css/my.css"  type="text/css" media="all" />
@@ -10,12 +12,15 @@
 </head>
 <body>
 <div class="container">
-    <form role="form" class="form-horizontal" action="/frontDerailleur/add" method="post">
+    <form role="form" class="form-horizontal"
+          action="/frontDerailleur/add"
+          method="post">
         <h3>Додати передню перекидку</h3>
         <select class="btn btn-primary btn-select btn-select-light"
                 name="transmissionMaker">
             <option value="-1">Виробник</option>
-            <c:forEach items="${transmissionMakers}" var="transmissionMaker">
+            <c:forEach items="${transmissionMakers}"
+                       var="transmissionMaker">
                 <option value="${transmissionMaker.id}">${transmissionMaker.name}</option>
             </c:forEach>
         </select>
@@ -33,7 +38,6 @@
                name="url"
                placeholder="url">
         <br>
-        <br>
         <input class="form-control"
                type="text"
                name="name"
@@ -42,7 +46,8 @@
         <select class="btn btn-primary btn-select btn-select-light"
                 name="frontSprocketNumber">
             <option value="-1">Кількість зірок</option>
-            <c:forEach items="${frontSprocketNumber}" var="frontSprocketNumber">
+            <c:forEach items="${frontSprocketNumber}"
+                       var="frontSprocketNumber">
                 <option value="${frontSprocketNumber.id}">${frontSprocketNumber.number}</option>
             </c:forEach>
         </select>
@@ -51,7 +56,8 @@
         <select class="btn btn-primary btn-select btn-select-light"
                 name="backSprocketNumber">
             <option value="-1">Сумісність з кількістю задніх зірок</option>
-            <c:forEach items="${backSprocketNumber}" var="backSprocketNumber">
+            <c:forEach items="${backSprocketNumber}"
+                       var="backSprocketNumber">
                 <option value="${backSprocketNumber.id}">${backSprocketNumber.number}</option>
             </c:forEach>
         </select>
@@ -60,15 +66,18 @@
         <select class="btn btn-primary btn-select btn-select-light"
                 name="frontSprocketMax">
             <option value="-1">Найбільша зірка</option>
-            <c:forEach items="${frontSprocketMax}" var="frontSprocketMax">
+            <c:forEach items="${frontSprocketMax}"
+                       var="frontSprocketMax">
                 <option value="${frontSprocketMax.id}">${frontSprocketMax.number}</option>
             </c:forEach>
         </select>
         <br>
+        <br>
         <select class="btn btn-primary btn-select btn-select-light"
                 name="frontSprocketMin">
             <option value="-1">Найменша зірка</option>
-            <c:forEach items="${frontSprocketMin}" var="frontSprocketMin">
+            <c:forEach items="${frontSprocketMin}"
+                       var="frontSprocketMin">
                 <option value="${frontSprocketMin.id}">${frontSprocketMin.number}</option>
             </c:forEach>
         </select>
@@ -77,7 +86,8 @@
         <select class="btn btn-primary btn-select btn-select-light"
                 name="teethCapasity">
             <option value="-1">Ємність зубів</option>
-            <c:forEach items="${teethCapasity}" var="teethCapasity">
+            <c:forEach items="${teethCapasity}"
+                       var="teethCapasity">
                 <option value="${teethCapasity.id}">${teethCapasity.number}</option>
             </c:forEach>
         </select>
@@ -88,11 +98,11 @@
                name="chainLine"
                placeholder="Лінія ланцюга">
         <br>
-        <br>
         <select class="btn btn-primary btn-select btn-select-light"
                 name="frontDerailleurFixType">
             <option value="-1">Тип кріплення</option>
-            <c:forEach items="${frontDerailleurFixType}" var="frontDerailleurFixType">
+            <c:forEach items="${frontDerailleurFixType}"
+                       var="frontDerailleurFixType">
                 <option value="${frontDerailleurFixType.id}">${frontDerailleurFixType.type}</option>
             </c:forEach>
         </select>
@@ -101,7 +111,8 @@
         <select class="btn btn-primary btn-select btn-select-light"
                 name="collarDiam">
             <option value="-1">Діаметр хомута</option>
-            <c:forEach items="${collarDiam}" var="collarDiam">
+            <c:forEach items="${collarDiam}"
+                       var="collarDiam">
                 <option value="${collarDiam.id}">${collarDiam.diam}</option>
             </c:forEach>
         </select>
@@ -110,7 +121,8 @@
         <select class="btn btn-primary btn-select btn-select-light"
                 name="tractionType">
             <option value="-1">Тип тяги</option>
-            <c:forEach items="${tractionType}" var="tractionType">
+            <c:forEach items="${tractionType}"
+                       var="tractionType">
                 <option value="${tractionType.id}">${tractionType.type}</option>
             </c:forEach>
         </select>
@@ -121,18 +133,15 @@
                name="material"
                placeholder="Матеріал">
         <br>
-        <br>
         <input class="form-control"
                type="text"
                name="weight"
                placeholder="Вага">
         <br>
-        <br>
         <input class="form-control"
                type="text"
                name="color"
                placeholder="Колір">
-        <br>
         <br>
         <input class="form-control"
                type="text"

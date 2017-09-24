@@ -11,7 +11,7 @@ import beetle.Frames.Frame;
 import beetle.Frames.FrameService;
 import beetle.Frames.FrameSize;
 import beetle.Handlebars.*;
-import beetle.Transmissions.TransmissionService;
+import beetle.Transmissions.*;
 import beetle.Wheels.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -90,8 +90,6 @@ public class UserController {
 
         return "cityBike";
     }
-
-
     @RequestMapping("/chooseMTBSize")
     public String chooseMTBSizeVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
@@ -115,10 +113,7 @@ public class UserController {
     }
 
 
-
-
-
-
+    // Select Bike By Type and Size
     @RequestMapping("/framesMTB/{id}")
     public String listFrameMTBSize(
             @PathVariable(value = "id") Long id,
@@ -163,10 +158,7 @@ public class UserController {
         model.addAttribute("frames", frames);
         return "cityBike";
     }
-
-
-
-
+    //Add frame to cart
     @RequestMapping("/cartAddFrame/{article}")
     public String listArticleFrame(
             @PathVariable(value = "article") Long article,
@@ -177,6 +169,7 @@ public class UserController {
         cartService.addToArticle(article);
         return "redirect:/show_frames";
     }
+    //Add fork to cart
     @RequestMapping("/cartAddFork/{article}")
     public String listArticleFork(
             @PathVariable(value = "article") Long article,
@@ -187,6 +180,7 @@ public class UserController {
         forkService.addToArticle(article);
         return "redirect:/show_forks";
     }
+    //Add handlebars component to cart
     @RequestMapping("/cartAddHandlebar/{article}")
     public String listArticleHandlebar(
             @PathVariable(value = "article") Long article,
@@ -238,6 +232,7 @@ public class UserController {
         handlebarService.addToArticleWinding(article);
         return "redirect:/show_windings";
     }
+    //Add Brakes component to cart
     @RequestMapping("/cartAddBrakeDiscHydraulic/{article}")
     public String listArticleBrakeDiscHydraulic(
             @PathVariable(value = "article") Long article,
@@ -278,6 +273,7 @@ public class UserController {
         brakeService.addToArticleBrakeHandle(article);
         return "redirect:/show_brakesHandle";
     }
+    //Add whells components
     @RequestMapping("/cartAddWheel/{article}")
     public String listArticleWheel(
             @PathVariable(value = "article") Long article,
@@ -338,11 +334,92 @@ public class UserController {
         wheelService.addToArticleTire(article);
         return "redirect:/show_tires";
     }
+    //For Transmission
+    @RequestMapping("/cartAddBackDerailleur/{article}")
+    public String listArticleBackDerailleur(
+            @PathVariable(value = "article") Long article,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        transmissionService.addToArticleBackDerailleur(article);
+        return "redirect:/show_backDerailleurs";
+    }
+    @RequestMapping("/cartAddBackGearKas/{article}")
+    public String listArticleBackGearKas(
+            @PathVariable(value = "article") Long article,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        transmissionService.addToArticleBackGearKas(article);
+        return "redirect:/show_backGearKass";
+    }
+    @RequestMapping("/cartAddBackGearTr/{article}")
+    public String listArticleBackGearTr(
+            @PathVariable(value = "article") Long article,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        transmissionService.addToArticleBackGearTr(article);
+        return "redirect:/show_backGearTrs";
+    }
+    @RequestMapping("/cartAddBracket/{article}")
+    public String listArticleBracket(
+            @PathVariable(value = "article") Long article,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        transmissionService.addToArticleBracket(article);
+        return "redirect:/show_brackets";
+    }
+    @RequestMapping("/cartAddChain/{article}")
+    public String listArticleChain(
+            @PathVariable(value = "article") Long article,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        transmissionService.addToArticleChain(article);
+        return "redirect:/show_chains";
+    }
+    @RequestMapping("/cartAddCrank/{article}")
+    public String listArticleCrank(
+            @PathVariable(value = "article") Long article,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        transmissionService.addToArticleCrank(article);
+        return "redirect:/show_cranks";
+    }
+    @RequestMapping("/cartAddFrontDerailleur/{article}")
+    public String listArticleFrontDerailleur(
+            @PathVariable(value = "article") Long article,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        transmissionService.addToArticleFrontDerailleur(article);
+        return "redirect:/show_frontDerailleurs";
+    }
+    @RequestMapping("/cartAddPedal/{article}")
+    public String listArticlePedal(
+            @PathVariable(value = "article") Long article,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        transmissionService.addToArticlePedal(article);
+        return "redirect:/show_pedals";
+    }
 
 
 
 
-
+// Cart
     @RequestMapping("/cart")
 
     public String cartVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
@@ -365,6 +442,15 @@ public class UserController {
         List<Spoke> spokes = new ArrayList<>();
         List<Tire> tires = new ArrayList<>();
         List<Wheel> wheels = new ArrayList<>();
+        List<BackDerailleur> backDerailleurs = new ArrayList<>();
+        List<BackGearKas> backGearKass = new ArrayList<>();
+        List<BackGearTr> backGearTrs = new ArrayList<>();
+        List<Bracket> brackets = new ArrayList<>();
+        List<Chain> chains = new ArrayList<>();
+        List<Crank> cranks = new ArrayList<>();
+        List<FrontDerailleur> frontDerailleurs = new ArrayList<>();
+        List<Pedal> pedals = new ArrayList<>();
+
 
         for (int i = 0; i < cartService.getSize(); i++) {
             System.out.println("артиклі рами в корзині" + " " + cartService.getArticleFromCart(i));
@@ -468,24 +554,87 @@ public class UserController {
                     .findWheelByArticle(wheelService.getArticleWheelFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             wheels.add(wheel.get(0));
         }
+        //For transmission
+        for (int i = 0; i < transmissionService.getSizeBackDerailleur(); i++) {
+            System.out.println("артиклі задніх перекидок в корзині" + " " + transmissionService.getArticleBackDerailleurFromCart(i));
+            List<BackDerailleur> backDerailleur  = transmissionService
+                    .findBackDerailleurByArticle(transmissionService.getArticleBackDerailleurFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            backDerailleurs.add(backDerailleur.get(0));
+        }
+        for (int i = 0; i < transmissionService.getSizeBackGearKas(); i++) {
+            System.out.println("артиклі касет в корзині" + " " + transmissionService.getArticleBackGearKasFromCart(i));
+            List<BackGearKas> backGearKas  = transmissionService
+                    .findBackGearKasByArticle(transmissionService.getArticleBackGearKasFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            backGearKass.add(backGearKas.get(0));
+        }
+        for (int i = 0; i < transmissionService.getSizeBackGearTr(); i++) {
+            System.out.println("артиклі трещіток в корзині" + " " + transmissionService.getArticleBackGearTrFromCart(i));
+            List<BackGearTr> backGearTr  = transmissionService
+                    .findBackGearTrByArticle(transmissionService.getArticleBackGearTrFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            backGearTrs.add(backGearTr.get(0));
+        }
+        for (int i = 0; i < transmissionService.getSizeBracket(); i++) {
+            System.out.println("артиклі кареток в корзині" + " " + transmissionService.getArticleBracketFromCart(i));
+            List<Bracket> bracket  = transmissionService
+                    .findBracketByArticle(transmissionService.getArticleBracketFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            brackets.add(bracket.get(0));
+        }
+        for (int i = 0; i < transmissionService.getSizeChain(); i++) {
+            System.out.println("артиклі ланцюгів в корзині" + " " + transmissionService.getArticleChainFromCart(i));
+            List<Chain> chain  = transmissionService
+                    .findChainByArticle(transmissionService.getArticleBracketFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            chains.add(chain.get(0));
+        }
+        for (int i = 0; i < transmissionService.getSizeCrank(); i++) {
+            System.out.println("артиклі шатунів в корзині" + " " + transmissionService.getArticleCrankFromCart(i));
+            List<Crank> crank  = transmissionService
+                    .findCrankByArticle(transmissionService.getArticleCrankFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            cranks.add(crank.get(0));
+        }
+        for (int i = 0; i < transmissionService.getSizeFrontDerailleur(); i++) {
+            System.out.println("артиклі передніх перекидок в корзині" + " " + transmissionService.getArticleFrontDerailleurFromCart(i));
+            List<FrontDerailleur> frontDerailleur  = transmissionService
+                    .findFrontDerailleurByArticle(transmissionService.getArticleFrontDerailleurFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            frontDerailleurs.add(frontDerailleur.get(0));
+        }
+        for (int i = 0; i < transmissionService.getSizePedal(); i++) {
+            System.out.println("артиклі педалей в корзині" + " " + transmissionService.getArticlePedalFromCart(i));
+            List<Pedal> pedal  = transmissionService
+                    .findPedalByArticle(transmissionService.getArticlePedalFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            pedals.add(pedal.get(0));
+        }
 
-        model.addAttribute("handlebars", handlebars);
+        //Forks
         model.addAttribute("forks", forks);
+        //Frames
         model.addAttribute("frames", frames);
+        // Handlebar Components
+        model.addAttribute("handlebars", handlebars);
         model.addAttribute("stems", stems);
         model.addAttribute("grips", grips);
         model.addAttribute("headsets", headsets);
         model.addAttribute("windings", windings);
+        //Brakes Components
         model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
         model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
         model.addAttribute("brakeVBrakes", brakeVBrakes);
         model.addAttribute("brakeHandles", brakeHandles);
+        //Wheels Components
         model.addAttribute("backHubs", backHubs);
         model.addAttribute("frontHubs", frontHubs);
         model.addAttribute("rims", rims);
         model.addAttribute("spokes", spokes);
         model.addAttribute("tires", tires);
         model.addAttribute("wheels", wheels);
+        //Transmission Components
+        model.addAttribute("backDerailleurs", backDerailleurs);
+        model.addAttribute("backGearKass", backGearKass);
+        model.addAttribute("backGearTrs", backGearTrs);
+        model.addAttribute("brackets", brackets);
+        model.addAttribute("chains", chains);
+        model.addAttribute("cranks", cranks);
+        model.addAttribute("frontDerailleurs", frontDerailleurs);
+        model.addAttribute("pedals", pedals);
         System.out.println("всього рам в корзині в корзині" +" = "+ frames.size());
         System.out.println("всього вилок в корзині в корзині"+" = " + forks.size());
         System.out.println("всього рулів в корзині в корзині" +" = "+ handlebars.size());
@@ -503,25 +652,33 @@ public class UserController {
         System.out.println("всього спиць ручок в корзині в корзині" +" = "+ spokes.size());
         System.out.println("всього покришок в корзині в корзині" +" = "+ tires.size());
         System.out.println("всього колес в корзині в корзині" +" = "+ wheels.size());
+        System.out.println("всього передніх перекидок в корзині в корзині" +" = "+ backDerailleurs.size());
+        System.out.println("всього касет в корзині в корзині" +" = "+ backGearKass.size());
+        System.out.println("всього трещіток в корзині в корзині" +" = "+ backGearTrs.size());
+        System.out.println("всього кареток в корзині в корзині" +" = "+ brackets.size());
+        System.out.println("всього ланцюгів в корзині в корзині" +" = "+ chains.size());
+        System.out.println("всього шатунів в корзині в корзині" +" = "+ cranks.size());
+        System.out.println("всього передніх перекидок в корзині в корзині" +" = "+ frontDerailleurs.size());
+        System.out.println("всього педалей в корзині в корзині" +" = "+ pedals.size());
 
             return "cart";
 
         }
-    @RequestMapping("/chooseFork/{name}/{url}")
+
+
+// Select Forks
+     @RequestMapping("/chooseFork/{name}/{url}")
     public String listForkForMTB(
             @PathVariable(value = "name") String name,
             @PathVariable(value = "url") String url,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
-
-
         if (page < 0) page = 0;
      System.out.println("Вибрано тип " + name);
      System.out.println("Вибрано діаметер колес" + url);
         return "show_forks";
     }
-
 
     }
 

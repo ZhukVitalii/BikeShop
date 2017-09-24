@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>Transmissions</title>
+    <link rel="shortcut icon"
+          href="resources/images/logo_brauser.png" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
@@ -550,7 +552,6 @@
                         <td>Default</td>
                     </c:otherwise>
                 </c:choose>
-
                 <c:choose>
                     <c:when test="${frontDerailleur.frontSprocketMin ne null}">
                         <td>${frontDerailleur.frontSprocketMin.number}</td>
@@ -775,7 +776,6 @@
                 <td><input type="checkbox" name="toDelete[]" value="${pedal.id}" id="checkbox_${pedal.id}"/></td>
 
                 <td>${pedal.name}</td>
-
                 <c:choose>
                     <c:when test="${pedal.pedalType ne null}">
                         <td>${pedal.pedalType.type}</td>
@@ -784,8 +784,6 @@
                         <td>Default</td>
                     </c:otherwise>
                 </c:choose>
-
-
                 <c:choose>
                     <c:when test="${pedal.bearingType ne null}">
                         <td>${pedal.bearingType.type}</td>

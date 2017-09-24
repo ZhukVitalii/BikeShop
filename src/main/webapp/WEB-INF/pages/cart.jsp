@@ -5,7 +5,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
-    <title>Bike Shop a Ecommerce Category Flat Bootstarp Responsive Website Template| Cart :: w3layouts</title>
+    <title>Cart</title>
+    <link rel="shortcut icon"
+          href="resources/images/logo_brauser.png" >
     <link href="resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (Bootstrap's JavaScript plugins) -->
     <script src="resources/js/jquery.min.js"></script>
@@ -72,25 +74,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="/show_forks">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
-                            <li><a href="parts.html">Колеса та комплектуючі</a></li>
-                            <li><a href="parts.html">Трансмісія</a></li>
+                            <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
+                            <li><a href="/show_transmissionComponent">Трансмісія</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown1"><a href="accessories.html">ДОДАТКОВІ КОМПЛЕКТУЮЧІ</a>
+                    <li class="dropdown1"><a href="#">ДОДАТКОВІ КОМПЛЕКТУЮЧІ</a>
                         <ul class="dropdown2">
-                            <li><a href="accessories.html">Сідла</a></li>
-                            <li><a href="accessories.html">Підсидільні штирі</a></li>
-                            <li><a href="accessories.html">Покришки</a></li>
-                            <li><a href="accessories.html">Камери</a></li>
-                            <li><a href="accessories.html">Баудени</a></li>
-                            <li><a href="accessories.html">Троси</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown1"><a href="404.html">EXTRAS</a>
-                        <ul class="dropdown2">
-                            <li><a href="404.html">CLASSIC BELL</a></li>
-                            <li><a href="404.html">BOTTLE CAGE</a></li>
-                            <li><a href="404.html">TRUCK GRIP</a></li>
+                            <li><a href="#">Сідла</a></li>
+                            <li><a href="#">Підсидільні штирі</a></li>
+                            <li><a href="#">Покришки</a></li>
+                            <li><a href="#">Камери</a></li>
+                            <li><a href="#">Баудени</a></li>
+                            <li><a href="#">Троси</a></li>
                         </ul>
                     </li>
                     <a class="shop" href="/cart"><img src="resources/images/cart.png" alt=""/></a>
@@ -117,6 +112,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 });
             });
             </script>
+<!-- Frames----------------------------------------------------------------------------------- -->
 <c:forEach items="${frames}" var="frame">
             <div class="cart-header">
                 <div class="close1"> </div>
@@ -153,6 +149,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             });
             </script>
     </c:forEach>
+<!-- Forks ----------------------------------------------------------------------------------- -->
             <c:forEach items="${forks}" var="fork">
                 <div class="cart-header">
                     <div class="close1"> </div>
@@ -189,6 +186,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 });
                 </script>
             </c:forEach>
+<!-- Handlebars Components ----------------------------------------------------------------------------------- -->
             <c:forEach items="${handlebars}" var="handlebar">
                 <div class="cart-header">
                     <div class="close1"> </div>
@@ -369,6 +367,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 });
                 </script>
             </c:forEach>
+<!-- Brakes Components ----------------------------------------------------------------------------------- -->
             <c:forEach items="${brakeHandles}" var="brakeHandle">
                 <div class="cart-header">
                     <div class="close1"> </div>
@@ -477,7 +476,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 });
                 </script>
             </c:forEach>
-
             <c:forEach items="${brakeVBrakes}" var="brakeVBrake">
                 <div class="cart-header">
                     <div class="close1"> </div>
@@ -514,6 +512,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 });
                 </script>
             </c:forEach>
+<!-- Wheels Components ----------------------------------------------------------------------------------- -->
             <c:forEach items="${wheels}" var="wheel">
                 <div class="cart-header">
                     <div class="close1"> </div>
@@ -710,6 +709,295 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${backHub.price}<label>грн</label><a href="#"></a></p>
+                            <p class="qty">Qty ::</p>
+                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="delivery">
+                            <p>Service Charges:: Rs.100.00</p>
+                            <span>Delivered in 2-3 bussiness days</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <script>$(document).ready(function(c) {
+                    $('.close2').on('click', function(c){
+                        $('.cart-header2').fadeOut('slow', function(c){
+                            $('.cart-header2').remove();
+                        });
+                    });
+                });
+                </script>
+            </c:forEach>
+<!--Transmission ----------------------------------------------------------------------------------- -->
+            <c:forEach items="${backDerailleurs}" var="backDerailleur">
+                <div class="cart-header">
+                    <div class="close1"> </div>
+                    <div class="cart-sec">
+                        <div class="cart-item cyc">
+                            <img src="${backDerailleur.way}"/>
+                        </div>
+                        <div class="cart-item-info">
+                            <div class="link-to-one">
+                                <a href="<c:url value="/backDerailleur/${backDerailleur.url}"/>"
+                                   title="Перейти до <c:out value="${backDerailleur.name}"/>">
+                                    <h3>${backDerailleur.name}</h3>
+                                </a>
+                            </div>
+                            <h4></h4>
+                            <p>${backDerailleur.price}<label>грн</label><a href="#"></a></p>
+                            <p class="qty">Qty ::</p>
+                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="delivery">
+                            <p>Service Charges:: Rs.100.00</p>
+                            <span>Delivered in 2-3 bussiness days</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <script>$(document).ready(function(c) {
+                    $('.close2').on('click', function(c){
+                        $('.cart-header2').fadeOut('slow', function(c){
+                            $('.cart-header2').remove();
+                        });
+                    });
+                });
+                </script>
+            </c:forEach>
+            <c:forEach items="${backGearKass}" var="backGearKas">
+                <div class="cart-header">
+                    <div class="close1"> </div>
+                    <div class="cart-sec">
+                        <div class="cart-item cyc">
+                            <img src="${backGearKas.way}"/>
+                        </div>
+                        <div class="cart-item-info">
+                            <div class="link-to-one">
+                                <a href="<c:url value="/backGearKas/${backGearKas.url}"/>"
+                                   title="Перейти до <c:out value="${backGearKas.name}"/>">
+                                    <h3>${backGearKas.name}</h3>
+                                </a>
+                            </div>
+                            <h4></h4>
+                            <p>${backGearKas.price}<label>грн</label><a href="#"></a></p>
+                            <p class="qty">Qty ::</p>
+                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="delivery">
+                            <p>Service Charges:: Rs.100.00</p>
+                            <span>Delivered in 2-3 bussiness days</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <script>$(document).ready(function(c) {
+                    $('.close2').on('click', function(c){
+                        $('.cart-header2').fadeOut('slow', function(c){
+                            $('.cart-header2').remove();
+                        });
+                    });
+                });
+                </script>
+            </c:forEach>
+            <c:forEach items="${backGearTrs}" var="backGearTr">
+                <div class="cart-header">
+                    <div class="close1"> </div>
+                    <div class="cart-sec">
+                        <div class="cart-item cyc">
+                            <img src="${backGearTr.way}"/>
+                        </div>
+                        <div class="cart-item-info">
+                            <div class="link-to-one">
+                                <a href="<c:url value="/backGearTr/${backGearTr.url}"/>"
+                                   title="Перейти до <c:out value="${backGearTr.name}"/>">
+                                    <h3>${backGearTr.name}</h3>
+                                </a>
+                            </div>
+                            <h4></h4>
+                            <p>${backGearTr.price}<label>грн</label><a href="#"></a></p>
+                            <p class="qty">Qty ::</p>
+                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="delivery">
+                            <p>Service Charges:: Rs.100.00</p>
+                            <span>Delivered in 2-3 bussiness days</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <script>$(document).ready(function(c) {
+                    $('.close2').on('click', function(c){
+                        $('.cart-header2').fadeOut('slow', function(c){
+                            $('.cart-header2').remove();
+                        });
+                    });
+                });
+                </script>
+            </c:forEach>
+            <c:forEach items="${brackets}" var="bracket">
+                <div class="cart-header">
+                    <div class="close1"> </div>
+                    <div class="cart-sec">
+                        <div class="cart-item cyc">
+                            <img src="${bracket.way}"/>
+                        </div>
+                        <div class="cart-item-info">
+                            <div class="link-to-one">
+                                <a href="<c:url value="/bracket/${bracket.url}"/>"
+                                   title="Перейти до <c:out value="${bracket.name}"/>">
+                                    <h3>${bracket.name}</h3>
+                                </a>
+                            </div>
+                            <h4></h4>
+                            <p>${bracket.price}<label>грн</label><a href="#"></a></p>
+                            <p class="qty">Qty ::</p>
+                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="delivery">
+                            <p>Service Charges:: Rs.100.00</p>
+                            <span>Delivered in 2-3 bussiness days</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <script>$(document).ready(function(c) {
+                    $('.close2').on('click', function(c){
+                        $('.cart-header2').fadeOut('slow', function(c){
+                            $('.cart-header2').remove();
+                        });
+                    });
+                });
+                </script>
+            </c:forEach>
+            <c:forEach items="${chains}" var="chain">
+                <div class="cart-header">
+                    <div class="close1"> </div>
+                    <div class="cart-sec">
+                        <div class="cart-item cyc">
+                            <img src="${chain.way}"/>
+                        </div>
+                        <div class="cart-item-info">
+                            <div class="link-to-one">
+                                <a href="<c:url value="/chain/${chain.url}"/>"
+                                   title="Перейти до <c:out value="${chain.name}"/>">
+                                    <h3>${chain.name}</h3>
+                                </a>
+                            </div>
+                            <h4></h4>
+                            <p>${chain.price}<label>грн</label><a href="#"></a></p>
+                            <p class="qty">Qty ::</p>
+                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="delivery">
+                            <p>Service Charges:: Rs.100.00</p>
+                            <span>Delivered in 2-3 bussiness days</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <script>$(document).ready(function(c) {
+                    $('.close2').on('click', function(c){
+                        $('.cart-header2').fadeOut('slow', function(c){
+                            $('.cart-header2').remove();
+                        });
+                    });
+                });
+                </script>
+            </c:forEach>
+            <c:forEach items="${cranks}" var="crank">
+                <div class="cart-header">
+                    <div class="close1"> </div>
+                    <div class="cart-sec">
+                        <div class="cart-item cyc">
+                            <img src="${crank.way}"/>
+                        </div>
+                        <div class="cart-item-info">
+                            <div class="link-to-one">
+                                <a href="<c:url value="/crank/${crank.url}"/>"
+                                   title="Перейти до <c:out value="${crank.name}"/>">
+                                    <h3>${crank.name}</h3>
+                                </a>
+                            </div>
+                            <h4></h4>
+                            <p>${crank.price}<label>грн</label><a href="#"></a></p>
+                            <p class="qty">Qty ::</p>
+                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="delivery">
+                            <p>Service Charges:: Rs.100.00</p>
+                            <span>Delivered in 2-3 bussiness days</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <script>$(document).ready(function(c) {
+                    $('.close2').on('click', function(c){
+                        $('.cart-header2').fadeOut('slow', function(c){
+                            $('.cart-header2').remove();
+                        });
+                    });
+                });
+                </script>
+            </c:forEach>
+            <c:forEach items="${frontDerailleurs}" var="frontDerailleur">
+                <div class="cart-header">
+                    <div class="close1"> </div>
+                    <div class="cart-sec">
+                        <div class="cart-item cyc">
+                            <img src="${frontDerailleur.way}"/>
+                        </div>
+                        <div class="cart-item-info">
+                            <div class="link-to-one">
+                                <a href="<c:url value="/frontDerailleur/${frontDerailleur.url}"/>"
+                                   title="Перейти до <c:out value="${frontDerailleur.name}"/>">
+                                    <h3>${frontDerailleur.name}</h3>
+                                </a>
+                            </div>
+                            <h4></h4>
+                            <p>${frontDerailleur.price}<label>грн</label><a href="#"></a></p>
+                            <p class="qty">Qty ::</p>
+                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="delivery">
+                            <p>Service Charges:: Rs.100.00</p>
+                            <span>Delivered in 2-3 bussiness days</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <script>$(document).ready(function(c) {
+                    $('.close2').on('click', function(c){
+                        $('.cart-header2').fadeOut('slow', function(c){
+                            $('.cart-header2').remove();
+                        });
+                    });
+                });
+                </script>
+            </c:forEach>
+            <c:forEach items="${pedals}" var="pedal">
+                <div class="cart-header">
+                    <div class="close1"> </div>
+                    <div class="cart-sec">
+                        <div class="cart-item cyc">
+                            <img src="${pedal.way}"/>
+                        </div>
+                        <div class="cart-item-info">
+                            <div class="link-to-one">
+                                <a href="<c:url value="/pedal/${pedal.url}"/>"
+                                   title="Перейти до <c:out value="${pedal.name}"/>">
+                                    <h3>${pedal.name}</h3>
+                                </a>
+                            </div>
+                            <h4></h4>
+                            <p>${pedal.price}<label>грн</label><a href="#"></a></p>
                             <p class="qty">Qty ::</p>
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
