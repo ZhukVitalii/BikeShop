@@ -188,6 +188,10 @@ a.morebtn:hover{
 }
 .categorie-grids {
 	 margin-top:4em;
+	display: flex;
+
+
+
 }
 .cate-grid{	
 	padding:10em 0 0 0; 
@@ -198,132 +202,348 @@ a.morebtn:hover{
 }
 .grid1{
 	background:url(../images/disc_hydro_logo.jpg) no-repeat;
-	width: 350px;
-	height: 280px;
+
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
+
 }
 .grid2{
 	background:url(../images/discMech_logo.jpg) no-repeat;
-	width: 350px;
-	height: 280px;
+
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
+	border: 2px;
+	border-color: #1B242F;
 }
 .grid3{
 	background:url(../images/vBrake_logo.jpeg) no-repeat;
-	width: 350px;
-	height: 280px;
+
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
+	border: 2px;
+	border-color: #1B242F;
 }
 .grid4{
 	background:url(../images/handleBrake_logo.jpg) no-repeat;
-	width: 350px;
-	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
+	border: 2px;
+	border-color: #1B242F;
 }
 .grid5{
 	background:url(../images/frame_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	text-align: center;
+	justify-content: center;
+
+
 }
 .grid6{
 	background:url(../images/wheels_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid7{
 	background:url(../images/rim_logo.jpg) no-repeat;
 	width: 350px;
-	height: 280px;
+	height: 280px;	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid8{
 	background:url(../images/front_hub_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid9{
 	background:url(../images/back_hub_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid10{
 	background:url(../images/spoke_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid11{
 	background:url(../images/tires_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid12{
 	background:url(../images/handlebar_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid13{
 	background:url(../images/winding_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid14{
 	background:url(../images/headset_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid15{
 	background:url(../images/stem_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid16{
 	background:url(../images/grips_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid17{
 	background:url(../images/stem_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid18{
 	background:url(../images/backDer_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid19{
 	background:url(../images/frontDer_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid20{
 	background:url(../images/bracket_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid21{
 	background:url(../images/backGearKas_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid22{
 	background:url(../images/backGearTr_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid23{
 	background:url(../images/chain_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 }
 .grid24{
 	background:url(../images/crank_logo.jpg) no-repeat;
+	background-size: 100% 100%;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
+
 }
 .grid25{
 	background:url(../images/pedal_logo.jpg) no-repeat;
 	width: 350px;
 	height: 280px;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
+	border: 2px;
+	border-color: #1B242F;
 }
+.grid26{
+	background: url(../images/bg_sizes.jpg) no-repeat;
+	background-size: 100% 100%;
+	flex-grow: 1;
+	text-align: center;
+	/*flex-shrink: 3;*/
+	flex-basis: 150px;
+	list-style:none;
+	justify-content: center;
+	margin: 10px 10px 20px 10px;
 
-
-
+}
+.grid26 a{
+	font-size: 45px;
+	text-align: center;
+	color: #fcff19;
+}
 
 .cate-grid h4{
 	color:#FF0000;

@@ -28,6 +28,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- dropdown -->
     <script src="resources/js/jquery.easydropdown.js"></script>
     <link href="resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/resources/css/sizes.css"  type="text/css" media="all" />
     <script src="resources/js/scripts.js" type="text/javascript"></script>
     <!--js-->
 
@@ -113,59 +114,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </nav>
 
-    <div class="product">
-        <div class="container">
-            <div class="ctnt-bar cntnt">
-                <div class="content-bar">
-                    <div class="single-page">
-                        <div class="product-head">
-                            <a href="index.html">Home</a> <span>::</span>
-                        </div>
+    <div class="product-head">
+        <a href="index.html">Home</a> <span>::</span>
+    </div>
 
-                        <c:forEach items="${framesizes}" var="framesize">
-                        <!--Include the Etalage files-->
-                        <link rel="stylesheet" href="resources/css/etalage.css">
-                        <script src="resources/js/jquery.etalage.min.js"></script>
-                        <script>
-                            jQuery(document).ready(function($){
 
-                                $('#etalage').etalage({
-                                    thumb_image_width: 400,
-                                    thumb_image_height: 400,
-                                    source_image_width: 800,
-                                    source_image_height: 1000,
-                                    show_hint: true,
-                                    click_callback: function(image_anchor, instance_id){
-                                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-                                    }
-                                });
+        <h3>Доступні розміри</h3>
+        <div class="categorie-grids">
+            <c:forEach items="${framesizes}" var="framesize">
+                <link rel="stylesheet" href="resources/css/etalage.css">
+                <script src="resources/js/jquery.etalage.min.js"></script>
+                <script>
+                    jQuery(document).ready(function($){
 
-                            });
-                        </script>
-                        <!--//details-product-slider-->
-                        <div class="details-left-slider">
+                        $('#etalage').etalage({
+                            thumb_image_width: 400,
+                            thumb_image_height: 400,
+                            source_image_width: 800,
+                            source_image_height: 1000,
+                            show_hint: true,
+                            click_callback: function(image_anchor, instance_id){
+                                alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                            }
+                        });
 
-                            <div class="details-left-info">
-                                <a href="<c:url value="/framesCity/${framesize.id}"/>">
+                    });
+                </script>
+                <div class="col-md-4 cate-grid grid26">
+            <a href="<c:url value="/framesCity/${framesize.id}"/>">
 
-                                    <font size="8" color="#0080C0" >
-                                        <b><i>${framesize.size} </i></b></font>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
+                    <b><i>${framesize.size} </i></b></font>
+            </a>
+        </div>
+            </c:forEach>
+            <div class="clearfix"></div>
         </div>
     </div>
-    </c:forEach>
 
 
-</div>
-
-
-</div>
 </body>
 </html>

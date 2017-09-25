@@ -120,9 +120,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li><h1>МІСЬКІЙ</h1></li>
                 </ul>
                 <p>Хочеш <span>унікальний</span> велосипед? <span>Твої</span> побажання - наші <span>запчастини!</span></p>
-                <a class="morebtn" href="bicycles.html">ЗІБРАТИ МТВ!</a>
-                <a class="morebtn" href="bicycles.html">ЗІБРАТИ ШОССЕ!</a>
-                <a class="morebtn" href="bicycles.html">ЗІБРАТИ МІСЬКИЙ!</a>
+                <a class="morebtn" href="/chooseMTBSize">ЗІБРАТИ МТВ!</a>
+                <a class="morebtn" href="/chooseShosseSize">ЗІБРАТИ ШОССЕ!</a>
+                <a class="morebtn" href="/chooseCitySize">ЗІБРАТИ МІСЬКИЙ!</a>
 
             </div>
         </div>
