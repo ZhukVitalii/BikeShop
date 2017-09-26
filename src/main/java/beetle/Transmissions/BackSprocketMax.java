@@ -24,14 +24,15 @@ public class BackSprocketMax {
 
     @OneToMany(mappedBy="backSprocketMax", cascade=CascadeType.ALL)
     private List<BackDerailleur> backDerailleurs  = new ArrayList<BackDerailleur>();
+
     @OneToMany(mappedBy="backSprocketMax", cascade=CascadeType.ALL)
     private List<BackGearKas> backGearKass  = new ArrayList<BackGearKas>();
+
     @OneToMany(mappedBy="backSprocketMax", cascade=CascadeType.ALL)
     private List<BackGearTr> backGearTrs  = new ArrayList<BackGearTr>();
 
     @OneToMany(mappedBy="backSprocketMax", cascade= CascadeType.ALL)
     private List<BackSprocketMax> backSprocketMax = new ArrayList<BackSprocketMax>();
-
 
     public BackSprocketMax(String number) {
         this.number = number;

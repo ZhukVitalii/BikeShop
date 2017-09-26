@@ -25,11 +25,8 @@ public class TeethCapasity {
     @OneToMany(mappedBy="teethCapasity", cascade=CascadeType.ALL)
     private List<FrontDerailleur> frontDerailleurs  = new ArrayList<FrontDerailleur>();
 
-
-
     @OneToMany(mappedBy="teethCapasity", cascade= CascadeType.ALL)
     private List<TeethCapasity> teethCapasity = new ArrayList<TeethCapasity>();
-
 
     public TeethCapasity(String number) {
         this.number = number;

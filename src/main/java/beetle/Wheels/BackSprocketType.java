@@ -29,7 +29,6 @@ public class BackSprocketType {
     @OneToMany(mappedBy="backSprocketType", cascade= CascadeType.ALL)
     private List<BackSprocketType> backSprocketType = new ArrayList<BackSprocketType>();
 
-
     public BackSprocketType(String type) {
         this.type = type;
     }

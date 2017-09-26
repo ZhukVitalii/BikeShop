@@ -48,7 +48,6 @@ public class BrakesType {
     @OneToMany (mappedBy="brakesType", cascade= CascadeType.ALL)
     private List<BrakesType> brakesType = new ArrayList<BrakesType>();
 
-
     public BrakesType(String type) {
         this.type = type;
     }

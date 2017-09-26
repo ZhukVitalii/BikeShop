@@ -1,0 +1,32 @@
+.sizes {
+    width: 30%;
+    margin: 30px auto;
+    overflow: hidden;
+
+}
+
+.sizes ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sizes ul li {
+    background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBzLrmB_dj98nBtq-564BPqWW3Ws8JHbFqkBZv_lCH2uxblfRY) no-repeat;
+    background-size: 100% 100%;
+    flex-grow: 1;
+    /*flex-shrink: 3;*/
+    flex-basis: 70px;
+    list-style:none;
+    font: 10px/1.5 Verdana, Helvetica, Sans-serif;
+    width: 16%;
+    margin: 2% 2% 40px 2%;
+}
+
+
+.sizes ul li a {
+    color: #5d5f5d;
+}
+
+.sizes ul li a img {
+    max-width: 100%;
+}

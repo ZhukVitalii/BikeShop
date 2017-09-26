@@ -24,14 +24,12 @@ public class BracketType{
 
     @OneToMany(mappedBy="bracketType", cascade=CascadeType.ALL)
     private List<Crank> cranks = new ArrayList<Crank>();
+
     @OneToMany(mappedBy="bracketType", cascade=CascadeType.ALL)
     private List<Bracket> brackets = new ArrayList<Bracket>();
 
-
-
     @OneToMany(mappedBy="bracketType", cascade= CascadeType.ALL)
     private List<BracketType> bracketType = new ArrayList<BracketType>();
-
 
     public BracketType(String type) {
         this.type = type;

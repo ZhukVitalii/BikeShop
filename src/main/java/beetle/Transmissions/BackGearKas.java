@@ -29,7 +29,6 @@ public class BackGearKas {
     @ManyToOne
     @JoinColumn(name="back_spr_num_id")
     private BackSprocketNumber backSprocketNumber;
-
     @ManyToOne
     @JoinColumn(name="back_spr_max_id")
     private BackSprocketMax backSprocketMax;

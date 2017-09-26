@@ -1,6 +1,6 @@
 package beetle.Wheels;
 
-import beetle.Bakes.BikeType;
+import beetle.Frames.BikeType;
 import beetle.Forks.BrakesType;
 import beetle.Forks.WheelsDiam;
 import lombok.Getter;

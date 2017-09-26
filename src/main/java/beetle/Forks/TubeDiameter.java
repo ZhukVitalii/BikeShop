@@ -25,12 +25,12 @@ public class TubeDiameter {
 
     @OneToMany(mappedBy="tubeDiameter", cascade=CascadeType.ALL)
     private List<Fork> forks = new ArrayList<Fork>();
+
     @OneToMany(mappedBy="tubeDiameter", cascade=CascadeType.ALL)
     private List<Frame> frames = new ArrayList<Frame>();
 
     @OneToMany (mappedBy="tubeDiameter", cascade= CascadeType.ALL)
     private List<TubeDiameter> tubeDiameter = new ArrayList<TubeDiameter>();
-
 
     public TubeDiameter(String diam) {
         this.diam = diam;

@@ -25,11 +25,8 @@ public class CrankLength{
     @OneToMany(mappedBy="crankLength", cascade=CascadeType.ALL)
     private List<Crank> cranks = new ArrayList<Crank>();
 
-
-
     @OneToMany(mappedBy="crankLength", cascade= CascadeType.ALL)
     private List<CrankLength> crankLength = new ArrayList<CrankLength>();
-
 
     public CrankLength(String length) {
         this.length = length;

@@ -25,10 +25,8 @@ public class TireWide {
     @OneToMany(mappedBy="tireWide", cascade=CascadeType.ALL)
     private List<Tire> tires = new ArrayList<Tire>();
 
-
     @OneToMany(mappedBy="tireWide", cascade= CascadeType.ALL)
     private List<TireWide> tireWide = new ArrayList<TireWide>();
-
 
     public TireWide(String wide) {
         this.wide = wide;

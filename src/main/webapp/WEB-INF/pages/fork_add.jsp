@@ -27,6 +27,7 @@
             </c:forEach>
         </select>
         <br>
+        <br>
         <div class="numbers">
         <input class="form-control"
                type="number"
@@ -52,6 +53,7 @@
             </c:forEach>
         </select>
         <br>
+        <br>
         <select class="btn btn-primary btn-select btn-select-light"
                 name="wheelsDiam">
             <option value="-1">Розмір колес</option>
@@ -59,6 +61,7 @@
                 <option value="${wheelsDiam.id}">${wheelsDiam.diam}</option>
             </c:forEach>
         </select>
+        <br>
         <br>
         <select class="btn btn-primary btn-select btn-select-light"
                 name="tubeDiameter">
@@ -68,10 +71,11 @@
             </c:forEach>
         </select>
         <br>
+        <br>
         <input class="form-control"
                type="text"
                name="stTubeLength"
-               placeholder="довжина штока">
+               placeholder="Довжина штока">
         <br>
         <select class="btn btn-primary btn-select btn-select-light"
                 name="brakesType">
@@ -80,6 +84,7 @@
                 <option value="${brakesType.id}">${brakesType.type}</option>
             </c:forEach>
         </select>
+        <br>
         <br>
         <input class="form-control"
                type="text"
@@ -101,7 +106,8 @@
                name="move"
                placeholder="хід вилки">
         <div class="numbers">
-            <input class="form-control"
+        <br>
+        <input class="form-control"
                type="number"
                name="price"
                placeholder="ціна">

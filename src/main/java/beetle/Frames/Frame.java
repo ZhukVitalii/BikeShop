@@ -1,6 +1,5 @@
 package beetle.Frames;
 
-import beetle.Bakes.BikeType;
 import beetle.Forks.BrakesType;
 import beetle.Forks.TubeDiameter;
 import beetle.Forks.WheelsDiam;
@@ -21,13 +20,11 @@ public class Frame {
     @Id
     @GeneratedValue
     private long id;
-    
     @ManyToOne
     @JoinColumn(name="maker_id")
     private FrameMaker frameMaker;
     private Long article;
     private String url;
-
     private String name;
     @ManyToOne
     @JoinColumn(name="bike_type_id")

@@ -28,7 +28,6 @@ public class EtrtoSize {
     @OneToMany(mappedBy="etrtoSize", cascade= CascadeType.ALL)
     private List<EtrtoSize> etrtoSize = new ArrayList<EtrtoSize>();
 
-
     public EtrtoSize(String size) {
         this.size = size;
     }

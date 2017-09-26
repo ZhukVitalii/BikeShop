@@ -24,12 +24,12 @@ public class HubFixType {
 
     @OneToMany(mappedBy="hubFixType", cascade=CascadeType.ALL)
     private List<FrontHub> frontHubs = new ArrayList<FrontHub>();
+
     @OneToMany(mappedBy="hubFixType", cascade=CascadeType.ALL)
     private List<BackHub>  backHubs = new ArrayList<BackHub>();
 
     @OneToMany(mappedBy="hubFixType", cascade= CascadeType.ALL)
     private List<HubFixType> hubFixType = new ArrayList<HubFixType>();
-
 
     public HubFixType(String type) {
         this.type = type;

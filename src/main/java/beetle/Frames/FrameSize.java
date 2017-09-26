@@ -22,13 +22,11 @@ public class FrameSize {
     private long id;
     private String size;
 
-
     @OneToMany(mappedBy="frameSize", cascade=CascadeType.ALL)
     private List<Frame> frames = new ArrayList<Frame>();
 
     @OneToMany(mappedBy="frameSize", cascade= CascadeType.ALL)
     private List<FrameSize> frameSize = new ArrayList<FrameSize>();
-
 
     public FrameSize (String size) {
         this.size = size;

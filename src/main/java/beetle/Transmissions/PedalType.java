@@ -25,11 +25,8 @@ public class PedalType {
     @OneToMany(mappedBy="pedalType", cascade=CascadeType.ALL)
     private List<Pedal> pedals  = new ArrayList<Pedal>();
 
-
-
     @OneToMany(mappedBy="pedalType", cascade= CascadeType.ALL)
     private List<PedalType> pedalType = new ArrayList<PedalType>();
-
 
     public PedalType (String type) {
         this.type = type;

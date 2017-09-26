@@ -24,26 +24,30 @@ public class TransmissionMaker {
 
     @OneToMany(mappedBy="transmissionMaker", cascade=CascadeType.ALL)
     private List<Crank> cranks = new ArrayList<Crank>();
+
     @OneToMany(mappedBy="transmissionMaker", cascade=CascadeType.ALL)
     private List<Bracket> brackets = new ArrayList<Bracket>();
+
     @OneToMany(mappedBy="transmissionMaker", cascade=CascadeType.ALL)
     private List<BackGearTr> backGearTrs = new ArrayList<BackGearTr>();
+
     @OneToMany(mappedBy="transmissionMaker", cascade=CascadeType.ALL)
     private List<BackGearKas> backGearKass = new ArrayList<BackGearKas>();
+
     @OneToMany(mappedBy="transmissionMaker", cascade=CascadeType.ALL)
     private List<Chain> chains = new ArrayList<Chain>();
+
     @OneToMany(mappedBy="transmissionMaker", cascade=CascadeType.ALL)
     private List<FrontDerailleur> frontDerailleurs= new ArrayList<FrontDerailleur>();
+
     @OneToMany(mappedBy="transmissionMaker", cascade=CascadeType.ALL)
     private List<BackDerailleur> backDerailleurs = new ArrayList<BackDerailleur>();
+
     @OneToMany(mappedBy="transmissionMaker", cascade=CascadeType.ALL)
     private List<Pedal> pedals = new ArrayList<Pedal>();
 
-
-
     @OneToMany(mappedBy="transmissionMaker", cascade= CascadeType.ALL)
     private List<TransmissionMaker> transmissionMaker = new ArrayList<TransmissionMaker>();
-
 
     public TransmissionMaker(String name) {
         this.name = name;

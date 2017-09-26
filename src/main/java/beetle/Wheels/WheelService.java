@@ -1,7 +1,7 @@
 package beetle.Wheels;
 
-import beetle.Bakes.BikeType;
-import beetle.Bakes.BikeTypeRepository;
+import beetle.Frames.BikeType;
+import beetle.Frames.BikeTypeRepository;
 import beetle.Forks.BrakesType;
 import beetle.Forks.BrakesTypeRepository;
 import beetle.Forks.WheelsDiam;
@@ -77,7 +77,7 @@ public class WheelService {
     @Autowired
     private TireWideRepository tireWideRepository;
 
-
+    //Lists with articles of components, that user added to cart
     public List<Long> articlesBackHub = new ArrayList<>();
     public List<Long> articlesFrontHub = new ArrayList<>();
     public List<Long> articlesRim = new ArrayList<>();
@@ -86,44 +86,26 @@ public class WheelService {
     public List<Long> articlesWheel = new ArrayList<>();
 
     //For backHub
-    public void testPrintBackHub(){
-        for (Long articlo : articlesBackHub){
-            System.out.println(articlo);
-        }
-    }
-    public  void printSizeBackHub(){
-        System.out.println("розмір корзини " + getSizeBackHub());
-    }
-
+    //add articles to List
     public void addToArticleBackHub(Long article) {
         articlesBackHub.add(article);
-        testPrintBackHub();
         getSizeBackHub();
-        printSizeBackHub();
     }
+    //get article from List
     public Long getArticleBackHubFromCart (int a) {
         Long b = articlesBackHub.get(a);
         return b;
     }
+    //get size of List
     public int getSizeBackHub() {
         int a = articlesBackHub.size();
         return a;
     }
-    //For FrontHub
-    public void testPrintFrontHub(){
-        for (Long articlo : articlesFrontHub){
-            System.out.println(articlo);
-        }
-    }
-    public  void printSizeFrontHub(){
-        System.out.println("розмір корзини " + getSizeFrontHub());
-    }
 
+    //For FrontHub
     public void addToArticleFrontHub(Long article) {
         articlesFrontHub.add(article);
-        testPrintFrontHub();
-        getSizeFrontHub();
-        printSizeFrontHub();
+        getSizeFrontHub();;
     }
     public Long getArticleFrontHubFromCart (int a) {
         Long b = articlesFrontHub.get(a);
@@ -133,21 +115,11 @@ public class WheelService {
         int a = articlesFrontHub.size();
         return a;
     }
-    //For Rim
-    public void testPrintRim(){
-        for (Long articlo : articlesRim){
-            System.out.println(articlo);
-        }
-    }
-    public  void printSizeRim(){
-        System.out.println("розмір корзини " + getSizeRim());
-    }
 
+    //For Rim
     public void addToArticleRim(Long article) {
         articlesRim.add(article);
-        testPrintRim();
-        getSizeRim();
-        printSizeRim();
+        getSizeRim();;
     }
     public Long getArticleRimFromCart (int a) {
         Long b = articlesRim.get(a);
@@ -157,21 +129,11 @@ public class WheelService {
         int a = articlesRim.size();
         return a;
     }
-    //For Spoke
-    public void testPrintSpoke(){
-        for (Long articlo : articlesSpoke){
-            System.out.println(articlo);
-        }
-    }
-    public  void printSizeSpoke(){
-        System.out.println("розмір корзини " + getSizeSpoke());
-    }
 
+    //For Spoke
     public void addToArticleSpoke(Long article) {
         articlesSpoke.add(article);
-        testPrintSpoke();
         getSizeSpoke();
-        printSizeSpoke();
     }
     public Long getArticleSpokeFromCart (int a) {
         Long b = articlesSpoke.get(a);
@@ -181,21 +143,11 @@ public class WheelService {
         int a = articlesSpoke.size();
         return a;
     }
-    //For Tire
-    public void testPrintTire(){
-        for (Long articlo : articlesTire){
-            System.out.println(articlo);
-        }
-    }
-    public  void printSizeTire(){
-        System.out.println("розмір корзини " + getSizeTire());
-    }
 
+    //For Tire
     public void addToArticleTire(Long article) {
         articlesTire.add(article);
-        testPrintTire();
         getSizeTire();
-        printSizeTire();
     }
     public Long getArticleTireFromCart (int a) {
         Long b = articlesTire.get(a);
@@ -205,21 +157,11 @@ public class WheelService {
         int a = articlesTire.size();
         return a;
     }
-    //For Wheel
-    public void testPrintWheel(){
-        for (Long articlo : articlesWheel){
-            System.out.println(articlo);
-        }
-    }
-    public  void printSizeWheel(){
-        System.out.println("розмір корзини " + getSizeWheel());
-    }
 
+    //For Wheel
     public void addToArticleWheel(Long article) {
         articlesWheel.add(article);
-        testPrintWheel();
         getSizeWheel();
-        printSizeWheel();
     }
     public Long getArticleWheelFromCart (int a) {
         Long b = articlesWheel.get(a);
@@ -230,7 +172,7 @@ public class WheelService {
         return a;
     }
 
-// add
+    // add
     @Transactional
     public void addWheel(Wheel wheel) {
         wheelRepository.save(wheel);
@@ -255,16 +197,17 @@ public class WheelService {
     public  void addBackHub (BackHub backHub) {
         backHubRepository.save(backHub);
     }
+
     @Transactional
     public  void addTire (Tire tire) {
         tireRepository.save(tire);
     }
 
-
     @Transactional
     public  void addWheelMaker (WheelMaker wheelMaker) {
         wheelMakerRepository.save(wheelMaker);
     }
+
     @Transactional
     public  void addSpokeNumber(SpokeNumber spokeNumber) {
         spokeNumberRepository.save(spokeNumber);
@@ -275,8 +218,6 @@ public class WheelService {
         rimWideRepository.save(rimWide);
     }
 
-
-
     @Transactional
     public void addBrakesType(BrakesType brakesType) {
         brakesTypeRepository.save(brakesType);
@@ -286,6 +227,7 @@ public class WheelService {
     public void addWheelsDiam(WheelsDiam wheelsDiam) {
         wheelsDiamRepository.save(wheelsDiam);
     }
+
     @Transactional
     public void addBikeType(BikeType bikeType) {
         bikeTypeRepository.save(bikeType);
@@ -314,6 +256,7 @@ public class WheelService {
     public void addAxisLength (AxisLength axisLength) {
         axisLengthRepository.save(axisLength);
     }
+
     @Transactional
     public void addAxisDiam(AxisDiam axisDiam) {
         axisDiamRepository.save(axisDiam);
@@ -348,24 +291,25 @@ public class WheelService {
     public void addCordType(CordType cordType) {
         cordTypeRepository.save(cordType);
     }
+
     @Transactional
     public void addTireType(TireType tireType) {
         tireTypeRepository.save(tireType);
     }
+
     @Transactional
     public void addTireWide(TireWide tireWide) {
         tireWideRepository.save(tireWide);
     }
 
-
-
-//delete
+    //delete component from database for admin
 
     @Transactional
     public void deleteWheel(long[] idList) {
         for (long id : idList)
             wheelRepository.delete(id);
     }
+
     @Transactional
     public void deleteSpoke(long[] idList) {
         for (long id : idList)
@@ -383,6 +327,7 @@ public class WheelService {
         for (long id : idList)
             frontHubRepository.delete(id);
     }
+
     @Transactional
     public void deleteBackHub(long[] idList) {
         for (long id : idList)
@@ -395,15 +340,18 @@ public class WheelService {
             tireRepository.delete(id);
     }
 
-//find
+    //find all components from database
+
     @Transactional(readOnly=true)
     public List<Wheel> findAll(Pageable pageable) {
         return wheelRepository.findAll(pageable).getContent();
     }
+
     @Transactional(readOnly=true)
     public List<Spoke> findAllOne(Pageable pageable) {
         return spokeRepository.findAll(pageable).getContent();
     }
+
     @Transactional(readOnly=true)
     public List<Rim> findAllTwo(Pageable pageable) {
         return rimRepository.findAll(pageable).getContent();
@@ -413,20 +361,22 @@ public class WheelService {
     public List<FrontHub> findAllThree(Pageable pageable) {
         return frontHubRepository.findAll(pageable).getContent();
     }
+
     @Transactional(readOnly=true)
     public List<BackHub> findAllFor(Pageable pageable) {
         return backHubRepository.findAll(pageable).getContent();
     }
+
     @Transactional(readOnly=true)
     public List<Tire> findAllFive(Pageable pageable) {
         return tireRepository.findAll(pageable).getContent();
     }
 
-
     @Transactional(readOnly=true)
     public List<WheelMaker> findWheelMakers() {
         return wheelMakerRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<WheelsDiam> findWheelsDiam() {
         return wheelsDiamRepository.findAll();
@@ -436,6 +386,7 @@ public class WheelService {
     public List<SpokeNumber> findSpokeNumber() {
         return spokeNumberRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<RimWide> findRimWide() {
         return rimWideRepository.findAll();
@@ -445,54 +396,67 @@ public class WheelService {
     public List<EtrtoSize> findEtrtoSize() {
         return etrtoSizeRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<InnerTubeDiameter> findInnerTubeDiameter() {
         return innerTubeDiameterRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<RimHeight> findRimHeight() {
         return rimHeightRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<BrakesType> findBrakesType() {
         return brakesTypeRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<Nipple> findNipple() {
         return nippleRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<AxisDiam> findAxisDiam() {
         return axisDiamRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<AxisLength> findAxisLength() {
         return axisLengthRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<BackSprocketType> findBackSprocketType() {
         return backSprocketTypeRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<BackSprocketNumber> findBackSprocketNumber() {
         return backSprocketNumberRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<BearingType> findBearingType() {
         return bearingTypeRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<HubFixType> findHubFixType() {
         return hubFixTypeRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<RotorFixType> findRotorFixType() {
         return rotorFixTypeRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<TireType> findTireType() {
         return tireTypeRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<CordType> findCordType() {
         return cordTypeRepository.findAll();
@@ -503,15 +467,7 @@ public class WheelService {
         return tireWideRepository.findAll();
     }
 
-
-
-
-
-
-
-
-
-    //findBy
+    //select from database by parametrs
 
     @Transactional(readOnly=true)
     public List<Wheel> findByWheelMakers(WheelMaker wheelMaker, Pageable pageable) {
@@ -527,10 +483,12 @@ public class WheelService {
     public List<Rim> findByRimMaker(WheelMaker wheelMaker, Pageable pageable) {
         return rimRepository.findByWheelMakers(wheelMaker, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<FrontHub> findByFrontHubMaker(WheelMaker wheelMaker, Pageable pageable) {
         return frontHubRepository.findByWheelMakers(wheelMaker, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<BackHub> findByBackHubMaker(WheelMaker wheelMaker, Pageable pageable) {
         return backHubRepository.findByWheelMakers(wheelMaker, pageable);
@@ -541,13 +499,11 @@ public class WheelService {
         return tireRepository.findByWheelMakers(wheelMaker, pageable);
     }
 
-
-
-
     @Transactional(readOnly=true)
     public List<Wheel> findBySpokeNumber(SpokeNumber spokeNumber, Pageable pageable) {
         return wheelRepository.findBySpokeNumber(spokeNumber, pageable);
     }
+
     @Transactional(readOnly = true)
     public List<Wheel> findByRimWide(RimWide rimWide, Pageable pegeable) {
         return  wheelRepository.findByRimWide(rimWide, pegeable);
@@ -557,26 +513,32 @@ public class WheelService {
     public List<Wheel> findWheelByArticle(Long article, Pageable pageable) {
         return wheelRepository.findByArticle(article, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Wheel> findWheelByUrl(String url, Pageable pageable) {
         return wheelRepository.findByUrl(url, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<BackHub> findBackHubByArticle(Long article, Pageable pageable) {
         return backHubRepository.findByArticle(article, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<BackHub> findBackHubByUrl(String url, Pageable pageable) {
         return backHubRepository.findByUrl(url, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<FrontHub> findFrontHubByArticle(Long article, Pageable pageable) {
         return frontHubRepository.findByArticle(article, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<FrontHub> findFrontHubByUrl(String url, Pageable pageable) {
         return frontHubRepository.findByUrl(url, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Rim> findRimByArticle(Long article, Pageable pageable) {
         return rimRepository.findByArticle(article, pageable);
@@ -585,40 +547,47 @@ public class WheelService {
     public List<Rim> findRimByUrl(String url, Pageable pageable) {
         return rimRepository.findByUrl(url, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Spoke> findSpokeByArticle(Long article, Pageable pageable) {
         return spokeRepository.findByArticle(article, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Spoke> findSpokeByUrl(String url, Pageable pageable) {
         return spokeRepository.findByUrl(url, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Tire> findTireByArticle(Long article, Pageable pageable) {
         return tireRepository.findByArticle(article, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Tire> findTireByUrl(String url, Pageable pageable) {
         return tireRepository.findByUrl(url, pageable);
     }
 
-
     @Transactional(readOnly=true)
     public List<Rim> findByBikeTypeRim(BikeType bikeType, Pageable pageable) {
         return rimRepository.findByBikeType(bikeType, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Rim> findByWheelsDiamRim(WheelsDiam wheelsDiam, Pageable pageable) {
         return rimRepository.findByWheelsDiam(wheelsDiam, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Rim> findByEtrtoSize(EtrtoSize etrtoSize, Pageable pageable) {
         return rimRepository.findByEtrtoSize(etrtoSize, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Rim> findBySpokeNumberRim(SpokeNumber spokeNumber, Pageable pageable) {
         return rimRepository.findBySpokeNumber(spokeNumber, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Rim> findByInnerTubeDiam(InnerTubeDiameter innerTubeDiameter, Pageable pageable) {
         return rimRepository.findByInnerTubeDiameter(innerTubeDiameter, pageable);
@@ -643,10 +612,12 @@ public class WheelService {
     public List<Rim> findByNipple(Nipple nipple, Pageable pageable) {
         return rimRepository.findByNipple(nipple, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<FrontHub> findByFrontHubFixType(HubFixType hubFixType, Pageable pageable) {
         return frontHubRepository.findByHubFixType(hubFixType, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<FrontHub> findByBearingTypeFront(BearingType bearingType, Pageable pageable) {
         return frontHubRepository.findByBearingType(bearingType, pageable);
@@ -656,28 +627,32 @@ public class WheelService {
     public List<FrontHub> findByAxisLengthFrontHub(AxisLength axisLength, Pageable pageable) {
         return frontHubRepository.findByAxisLength(axisLength, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<FrontHub> findByAxisDiamFrontHub(AxisDiam axisDiam, Pageable pageable) {
         return frontHubRepository.findByAxisDiam(axisDiam, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<FrontHub> findByBrakesTypeFrontHub(BrakesType brakesType, Pageable pageable) {
         return frontHubRepository.findByBrakesType(brakesType, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<FrontHub> findByRotorFixeTypeFrontHub(RotorFixType rotorFixType, Pageable pageable) {
         return frontHubRepository.findByRotorFixeType(rotorFixType, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<FrontHub> findBySpokeNumberFrontHub(SpokeNumber spokeNumber, Pageable pageable) {
         return frontHubRepository.findBySpokeNumber(spokeNumber, pageable);
     }
 
-
     @Transactional(readOnly=true)
     public List<BackHub> findByBackHubFixType(HubFixType hubFixType, Pageable pageable) {
         return backHubRepository.findByHubFixType(hubFixType, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<BackHub> findByBearingTypeBackHub(BearingType bearingType, Pageable pageable) {
         return backHubRepository.findByBearingType(bearingType, pageable);
@@ -687,26 +662,32 @@ public class WheelService {
     public List<BackHub> findByAxisLengthBackHub(AxisLength axisLength, Pageable pageable) {
         return backHubRepository.findByAxisLength(axisLength, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<BackHub> findByAxisDiamBackHub(AxisDiam axisDiam, Pageable pageable) {
         return backHubRepository.findByAxisDiam(axisDiam, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<BackHub> findByBrakesTypeBackHub(BrakesType brakesType, Pageable pageable) {
         return backHubRepository.findByBrakesType(brakesType, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<BackHub> findByRotorFixeTypeBackHub(RotorFixType rotorFixType, Pageable pageable) {
         return backHubRepository.findByRotorFixeType(rotorFixType, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<BackHub> findBySpokeNumberBackHub(SpokeNumber spokeNumber, Pageable pageable) {
         return backHubRepository.findBySpokeNumber(spokeNumber, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<BackHub> findByBackSprocketType(BackSprocketType backSprocketType, Pageable pageable) {
         return backHubRepository.findByBackSprocketType(backSprocketType, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<BackHub> findByBackSprocketNumber(BackSprocketNumber backSprocketNumber, Pageable pageable) {
         return backHubRepository.findByBackSprocketNumber(backSprocketNumber, pageable);
@@ -716,192 +697,21 @@ public class WheelService {
     public List<Tire> findByWheelsDiamTire(WheelsDiam wheelsDiam, Pageable pageable) {
         return tireRepository.findByWheelsDiam(wheelsDiam, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Tire> findByCordType(CordType cordType, Pageable pageable) {
         return tireRepository.findByCordType(cordType, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Tire> findByTireType(TireType tireType, Pageable pageable) {
         return tireRepository.findByTireType(tireType, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Tire> findByTireWide(TireWide tireWide, Pageable pageable) {
         return tireRepository.findByTireWide(tireWide, pageable);
     }
-
-
-
-// count by
-
-
-    @Transactional(readOnly = true)
-    public long countByWheelMaker(WheelMaker wheelMaker) {
-        return wheelRepository.countByWheelMakers(wheelMaker);
-    }
-    @Transactional(readOnly = true)
-    public long countByWheelMakerSpoke(WheelMaker wheelMaker) {
-        return spokeRepository.countByWheelMakers(wheelMaker);
-    }
-    @Transactional(readOnly = true)
-    public long countByWheelMakerRim(WheelMaker wheelMaker) {
-        return rimRepository.countByWheelMakers(wheelMaker);
-    }
-    @Transactional(readOnly = true)
-    public long countByWheelMakerFrontHub(WheelMaker wheelMaker) {
-        return frontHubRepository.countByWheelMakers(wheelMaker);
-    }
-    @Transactional(readOnly = true)
-    public long countByWheelMakerBackHub(WheelMaker wheelMaker) {
-        return backHubRepository.countByWheelMakers(wheelMaker);
-    }
-
-    @Transactional(readOnly = true)
-    public long countByWheelMakerTire(WheelMaker wheelMaker) {
-        return tireRepository.countByWheelMakers(wheelMaker);
-    }
-
-
-    @Transactional(readOnly = true)
-    public long countBySpokeNumber(SpokeNumber spokeNumber) {
-        return wheelRepository.countBySpokeNumber(spokeNumber);
-    }
-
-    @Transactional(readOnly = true)
-    public long countByRimWide(RimWide rimWide) {
-        return wheelRepository.countByRimWide(rimWide);
-    }
-
-
-
-
-
-
-
-
-    @Transactional(readOnly = true)
-    public long countByBikeTypeRim(BikeType bikeType) {
-        return rimRepository.countByBikeType(bikeType);
-    }
-    @Transactional(readOnly = true)
-    public long countByWheelsDiamRim(WheelsDiam wheelsDiam) {
-        return rimRepository.countByWheelsDiam(wheelsDiam);
-    }
-    @Transactional(readOnly = true)
-    public long countByEtrtoSize(EtrtoSize etrtoSize) {
-        return rimRepository.countByEtrtoSize(etrtoSize);
-    }
-    @Transactional(readOnly = true)
-    public long countBySpokeNumberRim(SpokeNumber spokeNumber) {
-        return rimRepository.countBySpokeNumber(spokeNumber);
-    }
-    @Transactional(readOnly = true)
-    public long countByInnerTubeDiameter(InnerTubeDiameter innerTubeDiameter) {
-        return rimRepository.countByInnerTubeDiameter(innerTubeDiameter);
-    }
-    @Transactional(readOnly = true)
-    public long countByRimWideRim(RimWide rimWide) {
-        return rimRepository.countByRimWide(rimWide);
-    }
-    @Transactional(readOnly = true)
-    public long countByRimHeight(RimHeight rimHeight) {
-        return rimRepository.countByRimHeight(rimHeight);
-    }
-
-    @Transactional(readOnly = true)
-    public long countByBrakesTypeRim(BrakesType brakesType) {
-        return rimRepository.countByBrakesType(brakesType);
-    }
-    @Transactional(readOnly = true)
-    public long countByNipple(Nipple nipple) {
-        return rimRepository.countByNipple(nipple);
-    }
-    @Transactional(readOnly = true)
-    public long countByHubFixTypeFrontHub(HubFixType hubFixType) {
-        return frontHubRepository.countByHubFixType(hubFixType);
-    }
-    @Transactional(readOnly = true)
-    public long countByBearingTypeFrontHub(BearingType bearingType) {
-        return frontHubRepository.countByBearingType(bearingType);
-    }
-
-    @Transactional(readOnly = true)
-    public long countByAxisLengthFrontHub(AxisLength axisLength) {
-        return frontHubRepository.countByAxisLength(axisLength);
-    }
-    @Transactional(readOnly = true)
-    public long countByAxisDiamFrontHub(AxisDiam axisDiam) {
-        return frontHubRepository.countByAxisDiam(axisDiam);
-    }
-    @Transactional(readOnly = true)
-    public long countByBrakesTypeFrontHub(BrakesType brakesType) {
-        return frontHubRepository.countByBrakesType(brakesType);
-    }
-    @Transactional(readOnly = true)
-    public long countByRotorFixTypeFrontHub(RotorFixType rotorFixType) {
-        return frontHubRepository.countByRotorFixType(rotorFixType);
-    }
-    @Transactional(readOnly = true)
-    public long countBySpokeNumberFrontHub(SpokeNumber spokeNumber) {
-        return frontHubRepository.countBySpokeNumber(spokeNumber);
-    }
-    @Transactional(readOnly = true)
-    public long countByHubFixTypeBackHub(HubFixType hubFixType) {
-        return backHubRepository.countByHubFixType(hubFixType);
-    }
-    @Transactional(readOnly = true)
-    public long countByBearingTypeBackHub(BearingType bearingType) {
-        return backHubRepository.countByBearingType(bearingType);
-    }
-
-    @Transactional(readOnly = true)
-    public long countByAxisLengthBackHub(AxisLength axisLength) {
-        return backHubRepository.countByAxisLength(axisLength);
-    }
-    @Transactional(readOnly = true)
-    public long countByAxisDiamBackHub(AxisDiam axisDiam) {
-        return backHubRepository.countByAxisDiam(axisDiam);
-    }
-    @Transactional(readOnly = true)
-    public long countByBrakesTypeBackHub(BrakesType brakesType) {
-        return backHubRepository.countByBrakesType(brakesType);
-    }
-    @Transactional(readOnly = true)
-    public long countByRotorFixTypeBackHub(RotorFixType rotorFixType) {
-        return backHubRepository.countByRotorFixType(rotorFixType);
-    }
-    @Transactional(readOnly = true)
-    public long countBySpokeNumberBackHub(SpokeNumber spokeNumber) {
-        return backHubRepository.countBySpokeNumber(spokeNumber);
-    }
-    @Transactional(readOnly = true)
-    public long countByBackSprocketType(BackSprocketType backSprocketType) {
-        return backHubRepository.countByBackSprocketType(backSprocketType);
-    }
-    @Transactional(readOnly = true)
-    public long countByBackSprocketNumber(BackSprocketNumber backSprocketNumber) {
-        return backHubRepository.countByBackSprocketNumber(backSprocketNumber);
-    }
-    @Transactional(readOnly = true)
-    public long countByWheelsDiamTire(WheelsDiam wheelsDiam) {
-        return tireRepository.countByWheelsDiam(wheelsDiam);
-    }
-    @Transactional(readOnly = true)
-    public long countByTireType (TireType tireType) {
-        return tireRepository.countByTireType(tireType);
-    }
-    @Transactional(readOnly = true)
-    public long countByCordType(CordType cordType) {
-        return tireRepository.countByCordType(cordType);
-    }
-    @Transactional(readOnly = true)
-    public long countByTireWide(TireWide tireWide) {
-        return tireRepository.countByTireWide(tireWide);
-    }
-
-
-
-
-
 
     @Transactional(readOnly=true)
     public List<Wheel> findByPattern(String pattern, Pageable pageable) {
@@ -912,17 +722,52 @@ public class WheelService {
     public List<Spoke> findByPatternSpoke(String pattern, Pageable pageable) {
         return spokeRepository.findByPattern(pattern, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Rim> findByPatternRim(String pattern, Pageable pageable) {
         return  rimRepository.findByPattern(pattern, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<FrontHub> findByPatternFromtHub(String pattern, Pageable pageable) {
         return  frontHubRepository.findByPattern(pattern, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<BackHub> findByPatternBackHub(String pattern, Pageable pageable) {
         return  backHubRepository.findByPattern(pattern, pageable);
+    }
+
+    // count by
+
+    @Transactional(readOnly = true)
+    public long countByWheelMaker(WheelMaker wheelMaker) {
+        return wheelRepository.countByWheelMakers(wheelMaker);
+    }
+
+    @Transactional(readOnly = true)
+    public long countByWheelMakerSpoke(WheelMaker wheelMaker) {
+        return spokeRepository.countByWheelMakers(wheelMaker);
+    }
+
+    @Transactional(readOnly = true)
+    public long countByWheelMakerRim(WheelMaker wheelMaker) {
+        return rimRepository.countByWheelMakers(wheelMaker);
+    }
+
+    @Transactional(readOnly = true)
+    public long countByWheelMakerFrontHub(WheelMaker wheelMaker) {
+        return frontHubRepository.countByWheelMakers(wheelMaker);
+    }
+
+    @Transactional(readOnly = true)
+    public long countByWheelMakerBackHub(WheelMaker wheelMaker) {
+        return backHubRepository.countByWheelMakers(wheelMaker);
+    }
+
+    @Transactional(readOnly = true)
+    public long countByWheelMakerTire(WheelMaker wheelMaker) {
+        return tireRepository.countByWheelMakers(wheelMaker);
     }
 
     @Transactional(readOnly = true)
@@ -939,21 +784,24 @@ public class WheelService {
     public long countRim() {
         return rimRepository.count();
     }
+
     @Transactional(readOnly = true)
     public long countFrontHub() {
         return frontHubRepository.count();
     }
+
     @Transactional(readOnly = true)
     public long countBackHub() {
         return backHubRepository.count();
     }
+
     @Transactional(readOnly = true)
     public long countTire() {
         return tireRepository.count();
     }
 
+    //find by id
 
-    //find
     @Transactional(readOnly=true)
     public WheelMaker findWheelMaker(long id) {
         return wheelMakerRepository.findOne(id);
@@ -969,17 +817,16 @@ public class WheelService {
         return rimWideRepository.findOne(id);
     }
 
-
-
-
     @Transactional(readOnly=true)
     public BikeType findBikeType(long id) {
         return bikeTypeRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public WheelsDiam findWheelsDiam(long id) {
         return wheelsDiamRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public EtrtoSize findEtrtoSize(long id) {
         return etrtoSizeRepository.findOne(id);
@@ -989,22 +836,27 @@ public class WheelService {
     public InnerTubeDiameter findInnerTubeDiameter(long id) {
         return innerTubeDiameterRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public RimHeight findRimHeight(long id) {
         return rimHeightRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public BrakesType findBrakesType(long id) {
         return brakesTypeRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public Nipple findNipple(long id) {
         return nippleRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public AxisLength findAxisLength(long id) {
         return axisLengthRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public AxisDiam findAxisDiam(long id) {
         return axisDiamRepository.findOne(id);
@@ -1014,14 +866,17 @@ public class WheelService {
     public BackSprocketNumber findBackSprocketNumber(long id) {
         return backSprocketNumberRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public BackSprocketType findBackSprocketType(long id) {
         return backSprocketTypeRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public BearingType findBearingType(long id) {
         return bearingTypeRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public HubFixType findHubFixType(long id) {
         return hubFixTypeRepository.findOne(id);
@@ -1031,18 +886,20 @@ public class WheelService {
     public RotorFixType findRotorFixType(long id) {
         return rotorFixTypeRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public TireType findTireType(long id) {
         return tireTypeRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public CordType findCordType(long id) {
         return cordTypeRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public TireWide findTireWide(long id) {
         return tireWideRepository.findOne(id);
     }
-
 
 }

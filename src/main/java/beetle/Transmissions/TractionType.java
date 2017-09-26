@@ -25,11 +25,8 @@ public class TractionType {
     @OneToMany(mappedBy="tractionType", cascade=CascadeType.ALL)
     private List<FrontDerailleur> frontDerailleurs  = new ArrayList<FrontDerailleur>();
 
-
-
     @OneToMany(mappedBy="tractionType", cascade= CascadeType.ALL)
     private List<TractionType> tractionType = new ArrayList<TractionType>();
-
 
     public TractionType (String type) {
         this.type = type;

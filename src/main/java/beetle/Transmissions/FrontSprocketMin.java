@@ -24,14 +24,12 @@ public class FrontSprocketMin{
 
     @OneToMany(mappedBy="frontSprocketMin", cascade=CascadeType.ALL)
     private List<FrontDerailleur> frontDerailleurs  = new ArrayList<FrontDerailleur>();
+
     @OneToMany(mappedBy="frontSprocketMin", cascade=CascadeType.ALL)
     private List<Crank> cranks  = new ArrayList<Crank>();
 
-
-
     @OneToMany(mappedBy="frontSprocketMin", cascade= CascadeType.ALL)
     private List<FrontSprocketMin> frontSprocketMin = new ArrayList<FrontSprocketMin>();
-
 
     public FrontSprocketMin(String number) {
         this.number = number;

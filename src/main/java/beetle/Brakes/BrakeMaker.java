@@ -31,11 +31,8 @@ public class BrakeMaker {
     @OneToMany(mappedBy="brakeMaker", cascade=CascadeType.ALL)
     private List<BrakeDiscMechanik> brakeDiscMechaniks  = new ArrayList<BrakeDiscMechanik>();
 
-
     @OneToMany(mappedBy="brakeMaker", cascade= CascadeType.ALL)
     private List<BrakeMaker> brakeMaker = new ArrayList<BrakeMaker>();
-
-
 
     public BrakeMaker(String name) {
         this.name = name;

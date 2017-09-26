@@ -31,18 +31,10 @@ import java.util.Properties;
 public class AppConfig extends WebMvcConfigurerAdapter  {
     private static final String RESOURCES_URL = "/resources/";
 
-
-
-
-
     @Value("${hibernate.dialect}")
     private String sqlDialect;
-
-   @Value("${hbm2ddl.auto}")
+    @Value("${hbm2ddl.auto}")
     private String hbm2dllAuto;
-
-
-
 
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
@@ -64,12 +56,9 @@ public class AppConfig extends WebMvcConfigurerAdapter  {
         return entityManagerFactory;
     }
 
-
-
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-
         adapter.setDatabasePlatform(sqlDialect);
         return adapter;
     }
@@ -83,27 +72,14 @@ public class AppConfig extends WebMvcConfigurerAdapter  {
         resolver.setOrder(1);
         return resolver;
     }
-    /*
-    @Bean
-    public CommonsMultipartResolver multipartResolver() {
-        return new CommonsMultipartResolver();
-    }
-    */
+/*
     @Bean
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setMaxUploadSize(500000000);
         return multipartResolver;
     }
-/*
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-                .addResourceHandler("/static/**")
-                .addResourceLocations("/WEB-INF/static/");
-    }
-*/
-
+   */
     public void addResourceHandlers(final ResourceHandlerRegistry resource) {
         resource.addResourceHandler(RESOURCES_URL + "**")
                 .addResourceLocations(RESOURCES_URL);

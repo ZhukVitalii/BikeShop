@@ -25,11 +25,8 @@ public class BrakeHandleLocation {
     @OneToMany(mappedBy="brakeHandleLocation", cascade=CascadeType.ALL)
     private List<BrakeHandle> brakeHandles  = new ArrayList<BrakeHandle>();
 
-
-
     @OneToMany(mappedBy="brakeHandleLocation", cascade= CascadeType.ALL)
     private List<BrakeHandleLocation> brakeHandleLocation= new ArrayList<BrakeHandleLocation>();
-
 
     public BrakeHandleLocation(String local) {
         this.local = local;

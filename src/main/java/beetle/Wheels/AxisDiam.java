@@ -31,7 +31,6 @@ public class AxisDiam {
     @OneToMany(mappedBy="axisDiam", cascade= CascadeType.ALL)
     private List<AxisDiam> axisDiam = new ArrayList<AxisDiam>();
 
-
     public AxisDiam(String diam) {
         this.diam = diam;
     }

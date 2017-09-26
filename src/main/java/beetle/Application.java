@@ -1,11 +1,8 @@
 package beetle;
 
-import beetle.Bakes.BikeService;
 import beetle.Forks.ForkService;
 import beetle.Frames.FrameService;
 import beetle.Handlebars.HandlebarService;
-import beetle.Transmissions.TransmissionService;
-import beetle.Wheels.WheelService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -130,117 +127,6 @@ handlebarService.addStem(stem);
 */
                 }
 
-        };
-
-    }
-    @Bean
-    public CommandLineRunner demoThree(final WheelService wheelService) {
-        return new CommandLineRunner() {
-            @Override
-            public void run(String... strings) throws Exception {
-/*
-                WheelMaker wheelMaker = new WheelMaker("Kellis");
-                wheelService.addWheelMaker(wheelMaker);
-                SpokeNumber spokeNumber = new SpokeNumber("32");
-                wheelService.addSpokeNumber(spokeNumber);
-                SpokeNumber spokeNumber1 = new SpokeNumber("36");
-                wheelService.addSpokeNumber(spokeNumber1);
-                RimWide rimWide = new RimWide("20");
-                wheelService.addRimWide(rimWide);
-                BrakesType brakesType6 = new BrakesType("disc");
-                wheelService.addBrakesType(brakesType6);
-                ForkType forkType6 = new ForkType("mnb");
-                wheelService.addForkType(forkType6);
-                WheelsDiam wheelsDiam6 = new WheelsDiam("26");
-                wheelService.addWheelsDiam(wheelsDiam6);
-                Wheel wheel = new Wheel(wheelMaker,"at-6",wheelsDiam6,forkType6,brakesType6,spokeNumber,"alex Rim",rimWide,"mtb-rim","novatec","hub for mtb","cool wheelset","2560","/static/DSCN8243.png");
-                wheelService.addWheel(wheel);
-                AxisDiam axisDiam = new AxisDiam("9");
-                AxisDiam axisDiam1 = new AxisDiam("10");
-                wheelService.addAxisDiam(axisDiam);
-                wheelService.addAxisDiam(axisDiam1);
-                AxisLength axisLength = new AxisLength("108");
-                AxisLength axisLength1 = new AxisLength("110");
-                wheelService.addAxisLength(axisLength);
-                wheelService.addAxisLength(axisLength1);
-                BearingType bearingType = new BearingType("Насипні");
-                wheelService.addBearingType(bearingType);
-                BearingType bearingType1 = new BearingType("Пром");
-                wheelService.addBearingType(bearingType1);
-                HubFixType hubFixType = new HubFixType("Ексцентрик");
-                wheelService.addHubFixType(hubFixType);
-                HubFixType hubFixType1 = new HubFixType("Болти");
-                wheelService.addHubFixType(hubFixType1);
-                TireType tireType = new TireType("Country");
-                wheelService.addTireType(tireType);
-                TireType tireType1 = new TireType("Shosse");
-                wheelService.addTireType(tireType);
-                CordType cordType = new CordType("Steel");
-                wheelService.addCordType(cordType);
-                TireWide tireWide = new TireWide("2.5");
-                TireWide tireWide1 = new TireWide("2.75");
-                wheelService.addTireWide(tireWide);
-                wheelService.addTireWide(tireWide1);
-*/
-            }
-        };
-
-    }
-    @Bean
-    public CommandLineRunner demoFor(final TransmissionService transmissionService) {
-        return new CommandLineRunner() {
-            @Override
-            public void run(String... strings) throws Exception {
-/*
-                TransmissionMaker transmissionMaker = new TransmissionMaker("Kellis");
-                transmissionService.addTransmissionMaker(transmissionMaker);
-                BikeType bikeType = new BikeType("MTB");
-                transmissionService.addBikeType(bikeType);
-                BikeType bikeType1 = new BikeType("Шоссе");
-                transmissionService.addBikeType(bikeType1);
-                BackSprocketNumber backSprocketNumber = new BackSprocketNumber("9");
-                transmissionService.addBackSprocketNumber(backSprocketNumber);
-                FrontSprocketNumber frontSprocketNumber = new FrontSprocketNumber("3");
-                transmissionService.addFrontSprocketNumber(frontSprocketNumber);
-                FrontSprocketSize frontSprocketSize = new FrontSprocketSize("22/36/42") ;
-                transmissionService.addFrontSprocketSize(frontSprocketSize);
-                FrontSprocketMax frontSprocketMax = new FrontSprocketMax("42");
-                transmissionService.addFrontSprocketMax(frontSprocketMax);
-                FrontSprocketMin frontSprocketMin = new FrontSprocketMin("22");
-                transmissionService.addFrontSprocketMin(frontSprocketMin);
-                CrankLength crankLength = new CrankLength("175");
-                transmissionService.addCrankLength(crankLength);
-                BracketType bracketType = new BracketType("square");
-                transmissionService.addBracketType(bracketType);
-                Crank crank = new Crank(transmissionMaker,"UF-45",bikeType,backSprocketNumber,
-                        frontSprocketNumber,frontSprocketSize,frontSprocketMax,frontSprocketMin,crankLength,
-                        "alum","alum",bracketType,"white","fanny","25480","static/DSCN8243.png");
-                transmissionService.addCrank(crank);
-                */
-            }
-        };
-
-    }
-    @Bean
-    public CommandLineRunner demoFive(final BikeService bikeService) {
-        return new CommandLineRunner() {
-            @Override
-            public void run(String... strings) throws Exception {
-/*
-                Component component = new Component("Рама");
-                bikeService.addComponent(component);
-                Component component1 = new Component("Вилка");
-                bikeService.addComponent(component1);
-                Component component2 = new Component("Колеса");
-                bikeService.addComponent(component2);
-                Component component3 = new Component("Гальма");
-                bikeService.addComponent(component3);
-                Component component4 = new Component("Трансмісія");
-                bikeService.addComponent(component4);
-                Component component5 = new Component("Рульове управління");
-                bikeService.addComponent(component5);
-            */
-            }
         };
 
     }

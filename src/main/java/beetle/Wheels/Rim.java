@@ -1,6 +1,6 @@
 package beetle.Wheels;
 
-import beetle.Bakes.BikeType;
+import beetle.Frames.BikeType;
 import beetle.Forks.BrakesType;
 import beetle.Forks.WheelsDiam;
 import lombok.Getter;
@@ -36,7 +36,6 @@ public class Rim {
     @ManyToOne
     @JoinColumn(name="etrto_id")
     private EtrtoSize etrtoSize;
-
     private String material;
     @ManyToOne
     @JoinColumn(name="Spoke_num_id")

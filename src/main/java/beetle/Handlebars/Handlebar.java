@@ -1,6 +1,6 @@
 package beetle.Handlebars;
 
-import beetle.Bakes.BikeType;
+import beetle.Frames.BikeType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

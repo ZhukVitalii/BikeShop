@@ -28,7 +28,6 @@ public class HandlebarMaker {
     @OneToMany(mappedBy="handlebarMaker", cascade= CascadeType.ALL)
     private List<HandlebarMaker> handlebarMaker = new ArrayList<HandlebarMaker>();
 
-
     public HandlebarMaker(String name) {
         this.name = name;
     }

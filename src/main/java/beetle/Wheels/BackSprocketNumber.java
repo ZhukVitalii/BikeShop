@@ -28,7 +28,6 @@ public class BackSprocketNumber {
     @OneToMany(mappedBy="backSprocketNumber", cascade= CascadeType.ALL)
     private List<BackSprocketNumber> backSprocketNumber = new ArrayList<BackSprocketNumber>();
 
-
     public BackSprocketNumber(String number) {
         this.number = number;
     }

@@ -39,7 +39,6 @@ public class BearingType {
     @OneToMany(mappedBy="bearingType", cascade= CascadeType.ALL)
     private List<BearingType> bearingType = new ArrayList<BearingType>();
 
-
     public BearingType(String type) {
         this.type = type;
     }

@@ -1,6 +1,6 @@
 package beetle.Transmissions;
 
-import beetle.Bakes.BikeType;
+import beetle.Frames.BikeType;
 import beetle.Wheels.BackSprocketNumber;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

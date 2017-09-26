@@ -25,11 +25,8 @@ public class BrakeHandleWide {
     @OneToMany(mappedBy="brakeHandleWide", cascade=CascadeType.ALL)
     private List<BrakeHandle> brakeHandles  = new ArrayList<BrakeHandle>();
 
-
-
     @OneToMany(mappedBy="brakeHandleWide", cascade= CascadeType.ALL)
     private List<BrakeHandleWide> brakeHandleWide= new ArrayList<BrakeHandleWide>();
-
 
     public BrakeHandleWide(String wide) {
         this.wide = wide;

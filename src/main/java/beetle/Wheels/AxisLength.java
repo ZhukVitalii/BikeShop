@@ -24,12 +24,12 @@ public class AxisLength {
 
     @OneToMany(mappedBy="axisLength", cascade=CascadeType.ALL)
     private List<FrontHub> frontHubs = new ArrayList<FrontHub>();
+
     @OneToMany(mappedBy="axisLength", cascade=CascadeType.ALL)
     private List<BackHub> backHubs = new ArrayList<BackHub>();
 
     @OneToMany(mappedBy="axisLength", cascade= CascadeType.ALL)
     private List<AxisLength> axisLength = new ArrayList<AxisLength>();
-
 
     public AxisLength(String length) {
         this.length = length;

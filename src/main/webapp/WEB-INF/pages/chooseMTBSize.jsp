@@ -123,7 +123,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="categorie-grids">
         <c:forEach items="${framesizes}" var="framesize">
             <div class="col-md-4 cate-grid grid26">
-                <a href="<c:url value="/framesCity/${framesize.id}"/>">
+                <a href="<c:url value="/framesMTB/${framesize.id}"/>">
 
                     <b><i>${framesize.size} </i></b></font>
                 </a>

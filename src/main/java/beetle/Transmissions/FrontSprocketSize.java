@@ -28,7 +28,6 @@ public class FrontSprocketSize {
     @OneToMany(mappedBy="frontSprocketSize", cascade= CascadeType.ALL)
     private List<FrontSprocketSize> frontSprocketSize = new ArrayList<FrontSprocketSize>();
 
-
     public FrontSprocketSize(String size) {
         this.size = size;
     }

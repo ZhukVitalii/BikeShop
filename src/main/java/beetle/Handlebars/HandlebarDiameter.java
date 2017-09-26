@@ -32,7 +32,6 @@ public class HandlebarDiameter {
     @OneToMany(mappedBy="handlebarDiameter", cascade= CascadeType.ALL)
     private List<HandlebarDiameter> handlebarDiameter = new ArrayList<HandlebarDiameter>();
 
-
     public HandlebarDiameter(String diam) {
         this.diam = diam;
     }

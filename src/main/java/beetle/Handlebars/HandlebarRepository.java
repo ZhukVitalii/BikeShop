@@ -1,7 +1,6 @@
 package beetle.Handlebars;
 
-import beetle.Bakes.BikeType;
-import beetle.Frames.Frame;
+import beetle.Frames.BikeType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +17,6 @@ public interface HandlebarRepository extends JpaRepository<Handlebar, Long> {
     @Query("SELECT c FROM Handlebar c WHERE c.handlebarMaker = :handlebarMaker")
     List<Handlebar> findByHandlebarMakers(@Param("handlebarMaker") HandlebarMaker handlebarMaker, Pageable pageable);
 
-
     @Query("SELECT c FROM Handlebar c WHERE c.handlebarDiameter = :handlebarDiameter")
     List<Handlebar> findByHandlebarDiameter(@Param("handlebarDiameter") HandlebarDiameter handlebarDiameter, Pageable pageable);
 
@@ -31,18 +29,11 @@ public interface HandlebarRepository extends JpaRepository<Handlebar, Long> {
     @Query("SELECT c FROM Handlebar c WHERE c.bikeType = :bikeType")
     List<Handlebar> findByBikeType(@Param("bikeType")BikeType bikeType, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM Handlebar c WHERE c.handlebarMaker = :handlebarMaker")
-    long countByHandlebarMaker(@Param("handlebarMaker") HandlebarMaker handlebarMaker);
-
-    @Query("SELECT COUNT(c) FROM Handlebar c WHERE c.bikeType = :bikeType")
-    long countByBikeType(@Param("bikeType") BikeType bikeType);
-
-    @Query("SELECT COUNT(c) FROM Handlebar c WHERE c.handlebarDiameter = :handlebarDiameter")
-    long countByHandlebarDiameter(@Param("handlebarDiameter") HandlebarDiameter handlebarDiameter);
-
-
     @Query("SELECT c FROM Handlebar c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<Handlebar> findByPattern(@Param("pattern") String pattern, Pageable pageable);
+
+    @Query("SELECT COUNT(c) FROM Handlebar c WHERE c.handlebarMaker = :handlebarMaker")
+    long countByHandlebarMaker(@Param("handlebarMaker") HandlebarMaker handlebarMaker);
 
 
 }

@@ -25,21 +25,14 @@ public class Location {
     @OneToMany(mappedBy="location", cascade=CascadeType.ALL)
     private List<BrakeVBrake> brakeVBrakes  = new ArrayList<BrakeVBrake>();
 
-
     @OneToMany(mappedBy="location", cascade=CascadeType.ALL)
     private List<BrakeDiscHydraulic> brakeDiscHydraulics  = new ArrayList<BrakeDiscHydraulic>();
-
 
     @OneToMany(mappedBy="location", cascade=CascadeType.ALL)
     private List<BrakeDiscMechanik> brakeDiscMechaniks  = new ArrayList<BrakeDiscMechanik>();
 
-
-
-
-
     @OneToMany(mappedBy="location", cascade= CascadeType.ALL)
     private List<Location> location = new ArrayList<Location>();
-
 
     public Location(String local) {
         this.local = local;

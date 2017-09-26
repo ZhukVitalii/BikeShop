@@ -28,7 +28,6 @@ public class CordType {
     @OneToMany(mappedBy="cordType", cascade= CascadeType.ALL)
     private List<CordType> cordType = new ArrayList<CordType>();
 
-
     public CordType(String type) {
         this.type = type;
     }

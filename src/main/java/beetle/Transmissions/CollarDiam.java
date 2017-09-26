@@ -25,11 +25,8 @@ public class CollarDiam{
     @OneToMany(mappedBy="collarDiam", cascade=CascadeType.ALL)
     private List<FrontDerailleur> frontDerailleurs = new ArrayList<FrontDerailleur>();
 
-
-
     @OneToMany(mappedBy="collarDiam", cascade= CascadeType.ALL)
     private List<CollarDiam> collarDiam = new ArrayList<CollarDiam>();
-
 
     public CollarDiam(String diam) {
         this.diam = diam;

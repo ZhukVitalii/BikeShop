@@ -25,11 +25,8 @@ public class ChainElementNumber{
     @OneToMany(mappedBy="chainElementNumber", cascade=CascadeType.ALL)
     private List<ChainElementNumber> chainElementNumbers = new ArrayList<ChainElementNumber>();
 
-
-
     @OneToMany(mappedBy="chainElementNumber", cascade= CascadeType.ALL)
     private List<ChainElementNumber> chainElementNumber = new ArrayList<ChainElementNumber>();
-
 
     public ChainElementNumber(String number) {
         this.number = number ;

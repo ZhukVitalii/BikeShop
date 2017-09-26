@@ -25,11 +25,8 @@ public class FrontDerailleurFixType{
     @OneToMany(mappedBy="frontDerailleurFixType", cascade=CascadeType.ALL)
     private List<FrontDerailleur> frontDerailleurs  = new ArrayList<FrontDerailleur>();
 
-
-
     @OneToMany(mappedBy="frontDerailleurFixType", cascade= CascadeType.ALL)
     private List<FrontDerailleurFixType> frontDerailleurFixType = new ArrayList<FrontDerailleurFixType>();
-
 
     public FrontDerailleurFixType(String type) {
         this.type = type;

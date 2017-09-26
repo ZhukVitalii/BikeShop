@@ -19,7 +19,6 @@ public class Tire {
     @Id
     @GeneratedValue
     private long id;
-
     @ManyToOne
     @JoinColumn(name="maker_id")
     private WheelMaker wheelMaker;

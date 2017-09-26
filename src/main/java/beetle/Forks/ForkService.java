@@ -1,7 +1,7 @@
 package beetle.Forks;
 
-import beetle.Bakes.BikeType;
-import beetle.Bakes.BikeTypeRepository;
+import beetle.Frames.BikeType;
+import beetle.Frames.BikeTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,43 +35,35 @@ public class ForkService {
 
 
 
-
-    public void testPrint(){
-        for (Long articlo : articles){
-            System.out.println(articlo);
-        }
-    }
-    public  void printSize(){
-        System.out.println("розмір корзини " + getSize());
-    }
-
-
+    //add articles to List
     public void addToArticle(Long article) {
         articles.add(article);
-        testPrint();
         getSize();
-        printSize();
+
     }
+    //get article from List
     public Long getArticleFromCart (int a) {
         Long b = articles.get(a);
         return b;
     }
+    ////get size of List
     public int getSize() {
         int a = articles.size();
         return a;
     }
 
 
+    // add
     @Transactional
     public void addFork(Fork fork) {
         forkRepository.save(fork);
     }
 
-
     @Transactional
     public void addForkMaker(ForkMaker forkMaker) {
         forkMakerRepository.save(forkMaker);
     }
+
     @Transactional
     public void addBikeType(BikeType bikeType) {
         bikeTypeRepository.save(bikeType);
@@ -81,6 +73,7 @@ public class ForkService {
     public void addTubeDiameter(TubeDiameter tubeDiameter) {
         tubeDiameterRepository.save(tubeDiameter);
     }
+
     @Transactional
     public void addWheelsDiam(WheelsDiam wheelsDiam) {
         wheelsDiamRepository.save(wheelsDiam);
@@ -91,15 +84,14 @@ public class ForkService {
         brakesTypeRepository.save(brakesType);
     }
 
-
-
+    //delete component from database for admin
     @Transactional
     public void deleteForks(long[] idList) {
         for (long id : idList)
             forkRepository.delete(id);
     }
 
-
+    //find all components and from database
     @Transactional(readOnly=true)
     public List<ForkMaker> findForkMakers() {
         return forkMakerRepository.findAll();
@@ -114,25 +106,28 @@ public class ForkService {
     public List<BikeType> findBikeType() {
         return bikeTypeRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<WheelsDiam> findWheelsDiam() {
         return wheelsDiamRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<TubeDiameter> findTubeDiameter() {
         return tubeDiameterRepository.findAll();
     }
+
     @Transactional(readOnly=true)
     public List<BrakesType> findBrakesType() {
         return brakesTypeRepository.findAll();
     }
 
-
-
+    //select from database by parametrs
     @Transactional(readOnly=true)
     public List<Fork> findByForkMakers(ForkMaker forkMaker, Pageable pageable) {
         return forkRepository.findByForkMakers(forkMaker, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Fork> findByBikeType(BikeType bikeType, Pageable pageable) {
         return forkRepository.findByBikeType(bikeType, pageable);
@@ -142,6 +137,7 @@ public class ForkService {
     public List<Fork> findByUrl(String url, Pageable pageable) {
         return forkRepository.findByUrl(url,pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Fork> findByArticle(Long article, Pageable pageable) {
         return forkRepository.findByArticle(article, pageable);
@@ -151,7 +147,6 @@ public class ForkService {
     public List<Fork> findByTubeDiameter(TubeDiameter tubeDiameter, Pageable pageable) {
         return forkRepository.findByTubeDiameter(tubeDiameter, pageable);
     }
-
 
     @Transactional(readOnly=true)
     public List<Fork> findByWheelsDiam(WheelsDiam wheelsDiam, Pageable pageable) {
@@ -163,9 +158,12 @@ public class ForkService {
         return forkRepository.findByBrakesType(brakesType, pageable);
     }
 
+    @Transactional(readOnly=true)
+    public List<Fork> findByPattern(String pattern, Pageable pageable) {
+        return forkRepository.findByPattern(pattern, pageable);
+    }
 
-
-
+    // count by
     @Transactional(readOnly = true)
     public long countByForkMaker(ForkMaker forkMaker) {
         return forkRepository.countByForkMaker(forkMaker);
@@ -191,20 +189,12 @@ public class ForkService {
         return forkRepository.countByBrakesType(brakesType);
     }
 
-
-
-
-
-    @Transactional(readOnly=true)
-    public List<Fork> findByPattern(String pattern, Pageable pageable) {
-        return forkRepository.findByPattern(pattern, pageable);
-    }
-
     @Transactional(readOnly = true)
     public long count() {
         return forkRepository.count();
     }
 
+    //Find by id
     @Transactional(readOnly=true)
     public ForkMaker findForkMaker(long id) {
         return forkMakerRepository.findOne(id);
@@ -224,6 +214,7 @@ public class ForkService {
     public WheelsDiam findWheelsDiam(long id) {
         return wheelsDiamRepository.findOne(id);
     }
+
     @Transactional(readOnly=true)
     public BrakesType findBrakesType(long id) {
         return brakesTypeRepository.findOne(id);

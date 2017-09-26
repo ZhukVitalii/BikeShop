@@ -25,11 +25,8 @@ public class BrakeHandleCompatibility {
     @OneToMany(mappedBy="brakeHandleCompatibility", cascade=CascadeType.ALL)
     private List<BrakeHandle> brakeHandles  = new ArrayList<BrakeHandle>();
 
-
-
     @OneToMany(mappedBy="brakeHandleCompatibility", cascade= CascadeType.ALL)
     private List<BrakeHandleCompatibility> brakeHandleCompatibility= new ArrayList<BrakeHandleCompatibility>();
-
 
     public BrakeHandleCompatibility(String comp) {
         this.comp = comp;

@@ -28,7 +28,6 @@ public class UnderSaddleTube {
     @OneToMany(mappedBy="underSaddleTube", cascade= CascadeType.ALL)
     private List<UnderSaddleTube> underSaddleTube = new ArrayList<UnderSaddleTube>();
 
-
     public UnderSaddleTube(String diam) {
         this.diam = diam;
     }

@@ -1,7 +1,7 @@
 package beetle.Handlebars;
 
-import beetle.Bakes.BikeType;
-import beetle.Bakes.BikeTypeRepository;
+import beetle.Frames.BikeType;
+import beetle.Frames.BikeTypeRepository;
 import beetle.Forks.TubeDiameter;
 import beetle.Forks.TubeDiameterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +30,8 @@ public class HandlebarService {
 
     @Autowired
     private HandlebarDiameterRepository handlebarDiameterRepository ;
-
     @Autowired
     private HandlebarMakerRepository handlebarMakerRepository ;
-
     @Autowired
     private HeadsetTypeRepository headsetTypeRepository ;
     @Autowired
@@ -41,133 +39,99 @@ public class HandlebarService {
     @Autowired
     private BikeTypeRepository bikeTypeRepository;
 
-
+    //Lists with articles of components, that user added to cart
     public List<Long> articlesHandlebar = new ArrayList<>();
     public List<Long> articlesStem = new ArrayList<>();
     public List<Long> articlesGrips = new ArrayList<>();
     public List<Long> articlesHeadset = new ArrayList<>();
     public List<Long> articlesWinding = new ArrayList<>();
 
-//For handlebar
-    public void testPrintHandlebar(){
-        for (Long articlo : articlesHandlebar){
-            System.out.println(articlo);
-        }
-    }
-    public  void printSizeHandlebar(){
-        System.out.println("розмір корзини " + getSizeHandlebar());
-    }
-
+    //For handlebar
+    //add articles to List
     public void addToArticleHandlebar(Long article) {
         articlesHandlebar.add(article);
-        testPrintHandlebar();
         getSizeHandlebar();
-        printSizeHandlebar();
     }
+    //get article from List
     public Long getArticleHandlebarFromCart (int a) {
         Long b = articlesHandlebar.get(a);
         return b;
     }
+    //get size of List
     public int getSizeHandlebar() {
         int a = articlesHandlebar.size();
         return a;
     }
-    //For stem
-    public void testPrintStem(){
-        for (Long articlo : articlesStem){
-            System.out.println(articlo);
-        }
-    }
-    public  void printSizeStem(){
-        System.out.println("розмір корзини " + getSizeStem());
-    }
 
+    //For stem
+    //add articles to List
     public void addToArticleStem(Long article) {
         articlesStem.add(article);
-        testPrintStem();
         getSizeStem();
-        printSizeStem();
     }
+    //get article from List
     public Long getArticleStemFromCart (int a) {
         Long b = articlesStem.get(a);
         return b;
     }
+    //get size of List
     public int getSizeStem() {
         int a = articlesStem.size();
         return a;
     }
-    //For grips
-    public void testPrintGrips(){
-        for (Long articlo : articlesGrips){
-            System.out.println(articlo);
-        }
-    }
-    public  void printSizeGrips(){
-        System.out.println("розмір корзини " + getSizeGrips());
-    }
 
+    //For grips
+    //add articles to List
     public void addToArticleGrips(Long article) {
         articlesGrips.add(article);
-        testPrintGrips();
         getSizeGrips();
-        printSizeGrips();
     }
+    //get article from List
     public Long getArticleGripsFromCart (int a) {
         Long b = articlesGrips.get(a);
         return b;
     }
+    //get size of List
     public int getSizeGrips() {
         int a = articlesGrips.size();
         return a;
     }
-    //For headset
-    public void testPrintHeadset(){
-        for (Long articlo : articlesHeadset){
-            System.out.println(articlo);
-        }
-    }
-    public  void printSizeHeadset(){
-        System.out.println("розмір корзини " + getSizeHeadset());
-    }
 
+    //For headset
+    //add articles to List
     public void addToArticleHeadset(Long article) {
         articlesHeadset.add(article);
-        testPrintHeadset();
         getSizeHeadset();
-        printSizeHeadset();
     }
+    //get article from List
     public Long getArticleHeadsetFromCart (int a) {
         Long b = articlesHeadset.get(a);
         return b;
     }
+    //get size of List
     public int getSizeHeadset() {
         int a = articlesHeadset.size();
         return a;
     }
-    //For winding
-    public void testPrintWinding(){
-        for (Long articlo : articlesWinding){
-            System.out.println(articlo);
-        }
-    }
-    public  void printSizeWinding(){
-        System.out.println("розмір корзини " + getSizeWinding());
-    }
 
+    //For winding
+    //add articles to List
     public void addToArticleWinding(Long article) {
         articlesWinding.add(article);
-        testPrintWinding();
         getSizeWinding();
-        printSizeWinding();
     }
+    //get article from List
     public Long getArticleWindingFromCart (int a) {
         Long b = articlesWinding.get(a);
         return b;
     }
+    //get size of List
     public int getSizeWinding() {
         int a = articlesWinding.size();
         return a;
     }
+
+    //  add
 
     @Transactional
     public void addHandlebar(Handlebar handlebar) {
@@ -178,10 +142,12 @@ public class HandlebarService {
     public  void addWinding (Winding winding) {
         windingRepository.save(winding);
     }
+
     @Transactional
     public  void addGrips (Grips grips) {
         gripsRepository.save(grips);
     }
+
     @Transactional
     public  void addHeadset (Headset headset) {
         headsetRepository.save(headset);
@@ -196,11 +162,11 @@ public class HandlebarService {
     public void addHandlebarMaker(HandlebarMaker handlebarMaker) {
         handlebarMakerRepository.save(handlebarMaker);
     }
+
     @Transactional
     public void addHandlebarDiameter(HandlebarDiameter handlebarDiameter) {
         handlebarDiameterRepository.save(handlebarDiameter);
     }
-
 
     @Transactional
     public void addBikeType(BikeType bikeType) {
@@ -218,18 +184,19 @@ public class HandlebarService {
     }
 
 
+    //delete component from database for admin
 
     @Transactional
     public void deleteHandlebar(long[] idList) {
         for (long id : idList)
             handlebarRepository.delete(id);
     }
+
     @Transactional
     public void deleteWinding(long[] idList) {
         for (long id : idList)
             windingRepository.delete(id);
     }
-
 
     @Transactional
     public void deleteGrips(long[] idList) {
@@ -249,10 +216,13 @@ public class HandlebarService {
             stemRepository.delete(id);
     }
 
+    //find all components from database
+
     @Transactional(readOnly=true)
     public List<Handlebar> findAll(Pageable pageable) {
         return handlebarRepository.findAll(pageable).getContent();
     }
+
     @Transactional(readOnly=true)
     public List<Winding> findAllTwo(Pageable pageable) {
         return windingRepository.findAll(pageable).getContent();
@@ -273,33 +243,53 @@ public class HandlebarService {
         return stemRepository.findAll(pageable).getContent();
     }
 
-
-
     @Transactional(readOnly=true)
     public List<HandlebarMaker> findHandlebarMakers() {
         return handlebarMakerRepository.findAll();
     }
 
     @Transactional(readOnly=true)
+    public List<BikeType> findBikeType() {
+        return bikeTypeRepository.findAll();
+    }
+
+    @Transactional(readOnly=true)
+    public List<HandlebarDiameter> findHandlebarDiameter() {
+        return handlebarDiameterRepository.findAll();
+    }
+
+    @Transactional(readOnly=true)
+    public List<HeadsetType> findHeadsetType() {
+        return headsetTypeRepository.findAll();
+    }
+
+    //select from database by parametrs
+
+    @Transactional(readOnly=true)
     public List<Handlebar> findHandlebarByArticle(Long article, Pageable pageable) {
         return handlebarRepository.findByArticle(article, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Handlebar> findHandlebarByUrl(String url, Pageable pageable) {
         return handlebarRepository.findByUrl(url,pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Stem> findStemByArticle(Long article, Pageable pageable) {
         return stemRepository.findByArticle(article, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Stem> findStemByUrl(String url, Pageable pageable) {
         return stemRepository.findByUrl(url,pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Grips> findGripsByArticle(Long article, Pageable pageable) {
         return gripsRepository.findByArticle(article, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Grips> findGripsByUrl(String url, Pageable pageable) {
         return gripsRepository.findByUrl(url,pageable);
@@ -309,32 +299,20 @@ public class HandlebarService {
     public List<Headset> findHeadsetByArticle(Long article, Pageable pageable) {
         return headsetRepository.findByArticle(article, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Headset> findHeadsetByUrl(String url, Pageable pageable) {
         return headsetRepository.findByUrl(url,pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Winding> findWindingByArticle(Long article, Pageable pageable) {
         return windingRepository.findByArticle(article, pageable);
     }
+
     @Transactional(readOnly=true)
     public List<Winding> findWindingByUrl(String url, Pageable pageable) {
         return windingRepository.findByUrl(url,pageable);
-    }
-
-
-
-    @Transactional(readOnly=true)
-    public List<BikeType> findBikeType() {
-        return bikeTypeRepository.findAll();
-    }
-    @Transactional(readOnly=true)
-    public List<HandlebarDiameter> findHandlebarDiameter() {
-        return handlebarDiameterRepository.findAll();
-    }
-    @Transactional(readOnly=true)
-    public List<HeadsetType> findHeadsetType() {
-        return headsetTypeRepository.findAll();
     }
 
     @Transactional(readOnly=true)
@@ -366,27 +344,10 @@ public class HandlebarService {
     public List<Handlebar> findByHandlebarDiameter(HandlebarDiameter handlebarDiameter, Pageable pageable) {
         return handlebarRepository.findByHandlebarDiameter(handlebarDiameter, pageable);
     }
+
     @Transactional(readOnly = true)
     public List<Handlebar> findByBikeType(BikeType bikeType, Pageable pegeable) {
         return  handlebarRepository.findByBikeType(bikeType, pegeable);
-    }
-
-
-
-
-    @Transactional(readOnly = true)
-    public long countByHandlebarMaker(HandlebarMaker handlebarMaker) {
-        return handlebarRepository.countByHandlebarMaker(handlebarMaker);
-    }
-
-    @Transactional(readOnly = true)
-    public long countByBikeType(BikeType bikeType) {
-        return handlebarRepository.countByBikeType(bikeType);
-    }
-
-    @Transactional(readOnly = true)
-    public long countByHandlebarDiameter(HandlebarDiameter handlebarDiameter) {
-        return handlebarRepository.countByHandlebarDiameter(handlebarDiameter);
     }
 
     @Transactional(readOnly=true)
@@ -394,10 +355,20 @@ public class HandlebarService {
         return handlebarRepository.findByPattern(pattern, pageable);
     }
 
+    // count by
+
+    @Transactional(readOnly = true)
+    public long countByHandlebarMaker(HandlebarMaker handlebarMaker) {
+        return handlebarRepository.countByHandlebarMaker(handlebarMaker);
+    }
+
     @Transactional(readOnly = true)
     public long count() {
         return handlebarRepository.count();
     }
+
+
+    //find by id
 
     @Transactional(readOnly=true)
     public HandlebarMaker findHandlebarMaker(long id) {
@@ -413,7 +384,6 @@ public class HandlebarService {
     public HandlebarDiameter findHandlebarDiameter(long id) {
         return handlebarDiameterRepository.findOne(id);
     }
-
 
     @Transactional(readOnly=true)
     public HeadsetType findHeadsetType(long id) {

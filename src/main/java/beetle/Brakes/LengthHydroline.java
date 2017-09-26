@@ -22,18 +22,11 @@ public class LengthHydroline {
     private long id;
     private String length;
 
-
-
     @OneToMany(mappedBy="lengthHydroline", cascade=CascadeType.ALL)
     private List<BrakeDiscHydraulic> brakeDiscHydraulics  = new ArrayList<BrakeDiscHydraulic>();
 
-
-
-
-
     @OneToMany(mappedBy="lengthHydroline", cascade= CascadeType.ALL)
     private List<LengthHydroline> lengthHydroline = new ArrayList<LengthHydroline>();
-
 
     public LengthHydroline(String length) {
         this.length = length;

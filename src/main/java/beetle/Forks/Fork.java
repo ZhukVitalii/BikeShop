@@ -1,6 +1,6 @@
 package beetle.Forks;
 
-import beetle.Bakes.BikeType;
+import beetle.Frames.BikeType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,7 +22,6 @@ public class Fork {
     @Id
     @GeneratedValue
     private long id;
-
     @ManyToOne
     @JoinColumn(name="group_id")
     private ForkMaker forkMaker;

@@ -1,9 +1,6 @@
 package beetle;
 
-import beetle.Bakes.BikeService;
-import beetle.Bakes.BikeType;
-import beetle.Bakes.CartRepository;
-import beetle.Bakes.CartService;
+import beetle.Frames.BikeType;
 import beetle.Brakes.*;
 import beetle.Forks.Fork;
 import beetle.Forks.ForkService;
@@ -33,9 +30,6 @@ public class UserController {
     static final int DEFAULT_GROUP_ID = -1;
     static final int ITEMS_PER_PAGE = 6;
 
-
-
-
     @Autowired
     private TransmissionService transmissionService;
     @Autowired
@@ -48,48 +42,48 @@ public class UserController {
     private FrameService frameService;
     @Autowired
     private HandlebarService handlebarService;
-    @Autowired
-    private BikeService bikeService;
-    @Autowired
-    private CartRepository cartRepository;
-    @Autowired
-    private CartService cartService;
 
+    //Return HOME-PAGE
+    @RequestMapping("/")
+    public String index(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        return "index";
+    }
+
+    //Select from database bike type MTB
     @RequestMapping("/MTB_page")
     public String mtbVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         BikeType bikeType = frameService.findBikeType(1);
-
         List<Frame> frames = frameService.
                 findByBikeType(bikeType ,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-
         model.addAttribute("frames", frames);
-
         return "mtbBike";
     }
+
+    //Select from database bike type Shosse
     @RequestMapping("/Shosse_page")
     public String shosseVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         BikeType bikeType = frameService.findBikeType(2);
-
         List<Frame> frames = frameService.
                 findByBikeType(bikeType ,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-
         model.addAttribute("frames", frames);
-
         return "shosseBike";
     }
+
+    //Select from database bike type City
     @RequestMapping("/City_page")
     public String cityVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         BikeType bikeType = frameService.findBikeType(3);
-
         List<Frame> frames = frameService.
                 findByBikeType(bikeType ,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("frames", frames);
-
         return "cityBike";
     }
+
+    //select from database frame by size for MTB
     @RequestMapping("/chooseMTBSize")
     public String chooseMTBSizeVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
@@ -97,6 +91,8 @@ public class UserController {
         model.addAttribute("framesizes", frameSizes);
         return "chooseMTBSize";
     }
+
+    //select from database frame by size for Shosse
     @RequestMapping("/chooseShosseSize")
     public String chooseShosseSizeVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
@@ -104,6 +100,8 @@ public class UserController {
         model.addAttribute("framesizes", frameSizes);
         return "chooseShosseSize";
     }
+
+    //select from database frame by size for city
     @RequestMapping("/chooseCitySize")
     public String chooseCitySizeVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
@@ -111,7 +109,6 @@ public class UserController {
         model.addAttribute("framesizes", frameSizes);
         return "chooseCITYSize";
     }
-
 
     // Select Bike By Type and Size
     @RequestMapping("/framesMTB/{id}")
@@ -129,6 +126,7 @@ public class UserController {
         return "mtbBike";
     }
 
+    // Select Bike By Type and Size
     @RequestMapping("/framesShosse/{id}")
     public String listFrameShosseSize(
             @PathVariable(value = "id") Long id,
@@ -144,6 +142,8 @@ public class UserController {
         model.addAttribute("frames", frames);
         return "shosseBike";
     }
+
+    // Select Bike By Type and Size
     @RequestMapping("/framesCity/{id}")
     public String listFrameCitySize(
             @PathVariable(value = "id") Long id,
@@ -158,6 +158,7 @@ public class UserController {
         model.addAttribute("frames", frames);
         return "cityBike";
     }
+
     //Add frame to cart
     @RequestMapping("/cartAddFrame/{article}")
     public String listArticleFrame(
@@ -166,9 +167,10 @@ public class UserController {
             Model model)
     {
         if (page < 0) page = 0;
-        cartService.addToArticle(article);
+        frameService.addToArticle(article);
         return "redirect:/show_frames";
     }
+
     //Add fork to cart
     @RequestMapping("/cartAddFork/{article}")
     public String listArticleFork(
@@ -180,6 +182,7 @@ public class UserController {
         forkService.addToArticle(article);
         return "redirect:/show_forks";
     }
+
     //Add handlebars component to cart
     @RequestMapping("/cartAddHandlebar/{article}")
     public String listArticleHandlebar(
@@ -192,6 +195,7 @@ public class UserController {
         handlebarService.addToArticleHandlebar(article);
         return "redirect:/show_handlebars";
     }
+
     @RequestMapping("/cartAddStem/{article}")
     public String listArticleStem(
             @PathVariable(value = "article") Long article,
@@ -202,6 +206,7 @@ public class UserController {
         handlebarService.addToArticleStem(article);
         return "redirect:/show_stems";
     }
+
     @RequestMapping("/cartAddGrips/{article}")
     public String listArticleGrips(
             @PathVariable(value = "article") Long article,
@@ -212,6 +217,7 @@ public class UserController {
         handlebarService.addToArticleGrips(article);
         return "redirect:/show_grips";
     }
+
     @RequestMapping("/cartAddHeadset/{article}")
     public String listArticleHeadset(
             @PathVariable(value = "article") Long article,
@@ -222,6 +228,7 @@ public class UserController {
         handlebarService.addToArticleHeadset(article);
         return "redirect:/show_headsets";
     }
+
     @RequestMapping("/cartAddWinding/{article}")
     public String listArticleWinding(
             @PathVariable(value = "article") Long article,
@@ -232,6 +239,7 @@ public class UserController {
         handlebarService.addToArticleWinding(article);
         return "redirect:/show_windings";
     }
+
     //Add Brakes component to cart
     @RequestMapping("/cartAddBrakeDiscHydraulic/{article}")
     public String listArticleBrakeDiscHydraulic(
@@ -243,6 +251,7 @@ public class UserController {
         brakeService.addToArticleBrakeDiscHydraulic(article);
         return "redirect:/show_brakesHydro";
     }
+
     @RequestMapping("/cartAddBrakeDiscMechanik/{article}")
     public String listArticleBrakeDiscMechanik(
             @PathVariable(value = "article") Long article,
@@ -253,6 +262,7 @@ public class UserController {
         brakeService.addToArticleBrakeDiscMechanik(article);
         return "redirect:/show_brakesMech";
     }
+
     @RequestMapping("/cartAddBrakeVBrake/{article}")
     public String listArticleBrakeVBrake(
             @PathVariable(value = "article") Long article,
@@ -263,6 +273,7 @@ public class UserController {
         brakeService.addToArticleBrakeVBrake(article);
         return "redirect:/show_brakesVBrake";
     }
+
     @RequestMapping("/cartAddBrakeHandle/{article}")
     public String listArticleBrakeHandle(
             @PathVariable(value = "article") Long article,
@@ -273,7 +284,8 @@ public class UserController {
         brakeService.addToArticleBrakeHandle(article);
         return "redirect:/show_brakesHandle";
     }
-    //Add whells components
+
+    //Add whells components to cart
     @RequestMapping("/cartAddWheel/{article}")
     public String listArticleWheel(
             @PathVariable(value = "article") Long article,
@@ -284,6 +296,7 @@ public class UserController {
         wheelService.addToArticleWheel(article);
         return "redirect:/show_wheels";
     }
+
     @RequestMapping("/cartAddBackHub/{article}")
     public String listArticleBackHub(
             @PathVariable(value = "article") Long article,
@@ -294,6 +307,7 @@ public class UserController {
         wheelService.addToArticleBackHub(article);
         return "redirect:/show_backHubs";
     }
+
     @RequestMapping("/cartAddFrontHub/{article}")
     public String listArticleFrontHub(
             @PathVariable(value = "article") Long article,
@@ -304,6 +318,7 @@ public class UserController {
         wheelService.addToArticleFrontHub(article);
         return "redirect:/show_frontHubs";
     }
+
     @RequestMapping("/cartAddRim/{article}")
     public String listArticleRim(
             @PathVariable(value = "article") Long article,
@@ -314,6 +329,7 @@ public class UserController {
         wheelService.addToArticleRim(article);
         return "redirect:/show_rims";
     }
+
     @RequestMapping("/cartAddSpoke/{article}")
     public String listArticleSpoke(
             @PathVariable(value = "article") Long article,
@@ -324,6 +340,7 @@ public class UserController {
         wheelService.addToArticleSpoke(article);
         return "redirect:/show_spokes";
     }
+
     @RequestMapping("/cartAddTire/{article}")
     public String listArticleTire(
             @PathVariable(value = "article") Long article,
@@ -334,7 +351,8 @@ public class UserController {
         wheelService.addToArticleTire(article);
         return "redirect:/show_tires";
     }
-    //For Transmission
+
+    //For Transmission to cart
     @RequestMapping("/cartAddBackDerailleur/{article}")
     public String listArticleBackDerailleur(
             @PathVariable(value = "article") Long article,
@@ -345,6 +363,7 @@ public class UserController {
         transmissionService.addToArticleBackDerailleur(article);
         return "redirect:/show_backDerailleurs";
     }
+
     @RequestMapping("/cartAddBackGearKas/{article}")
     public String listArticleBackGearKas(
             @PathVariable(value = "article") Long article,
@@ -355,6 +374,7 @@ public class UserController {
         transmissionService.addToArticleBackGearKas(article);
         return "redirect:/show_backGearKass";
     }
+
     @RequestMapping("/cartAddBackGearTr/{article}")
     public String listArticleBackGearTr(
             @PathVariable(value = "article") Long article,
@@ -365,6 +385,7 @@ public class UserController {
         transmissionService.addToArticleBackGearTr(article);
         return "redirect:/show_backGearTrs";
     }
+
     @RequestMapping("/cartAddBracket/{article}")
     public String listArticleBracket(
             @PathVariable(value = "article") Long article,
@@ -375,6 +396,7 @@ public class UserController {
         transmissionService.addToArticleBracket(article);
         return "redirect:/show_brackets";
     }
+
     @RequestMapping("/cartAddChain/{article}")
     public String listArticleChain(
             @PathVariable(value = "article") Long article,
@@ -385,6 +407,7 @@ public class UserController {
         transmissionService.addToArticleChain(article);
         return "redirect:/show_chains";
     }
+
     @RequestMapping("/cartAddCrank/{article}")
     public String listArticleCrank(
             @PathVariable(value = "article") Long article,
@@ -395,6 +418,7 @@ public class UserController {
         transmissionService.addToArticleCrank(article);
         return "redirect:/show_cranks";
     }
+
     @RequestMapping("/cartAddFrontDerailleur/{article}")
     public String listArticleFrontDerailleur(
             @PathVariable(value = "article") Long article,
@@ -405,6 +429,7 @@ public class UserController {
         transmissionService.addToArticleFrontDerailleur(article);
         return "redirect:/show_frontDerailleurs";
     }
+
     @RequestMapping("/cartAddPedal/{article}")
     public String listArticlePedal(
             @PathVariable(value = "article") Long article,
@@ -417,14 +442,11 @@ public class UserController {
     }
 
 
-
-
 // Cart
     @RequestMapping("/cart")
-
     public String cartVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
-
+        //Lists with components, that user added to cart
         List<Frame> frames = new ArrayList<Frame>();
         List<Fork> forks = new ArrayList<Fork>();
         List<Handlebar> handlebars = new ArrayList<Handlebar>();
@@ -451,11 +473,11 @@ public class UserController {
         List<FrontDerailleur> frontDerailleurs = new ArrayList<>();
         List<Pedal> pedals = new ArrayList<>();
 
-
-        for (int i = 0; i < cartService.getSize(); i++) {
-            System.out.println("артиклі рами в корзині" + " " + cartService.getArticleFromCart(i));
+//Select components from database by article, that user added to cart, and add this components to List
+        for (int i = 0; i < frameService.getSize(); i++) {
+            System.out.println("артиклі рами в корзині" + " " + frameService.getArticleFromCart(i));
             List<Frame> frame = frameService
-                    .findByArticle(cartService.getArticleFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                    .findByArticle(frameService.getArticleFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             frames.add(frame.get(0));
         }
         for (int i = 0; i < forkService.getSize(); i++) {
@@ -603,7 +625,7 @@ public class UserController {
                     .findPedalByArticle(transmissionService.getArticlePedalFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             pedals.add(pedal.get(0));
         }
-
+//models for cart
         //Forks
         model.addAttribute("forks", forks);
         //Frames
@@ -635,6 +657,7 @@ public class UserController {
         model.addAttribute("cranks", cranks);
         model.addAttribute("frontDerailleurs", frontDerailleurs);
         model.addAttribute("pedals", pedals);
+        //for checking myself in console
         System.out.println("всього рам в корзині в корзині" +" = "+ frames.size());
         System.out.println("всього вилок в корзині в корзині"+" = " + forks.size());
         System.out.println("всього рулів в корзині в корзині" +" = "+ handlebars.size());
@@ -664,9 +687,7 @@ public class UserController {
             return "cart";
 
         }
-
-
-// Select Forks
+// Select Forks, test
      @RequestMapping("/chooseFork/{name}/{url}")
     public String listForkForMTB(
             @PathVariable(value = "name") String name,

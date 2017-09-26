@@ -25,12 +25,12 @@ public class BracketWide {
 
     @OneToMany(mappedBy="bracketWide", cascade=CascadeType.ALL)
     private List<Bracket> brackets = new ArrayList<Bracket>();
+
     @OneToMany(mappedBy="bracketWide", cascade=CascadeType.ALL)
     private List<Frame> frames = new ArrayList<Frame>();
 
     @OneToMany (mappedBy="bracketWide", cascade= CascadeType.ALL)
     private List<BracketWide> bracketWide = new ArrayList<BracketWide>();
-
 
     public BracketWide(String wide) {
         this.wide = wide;

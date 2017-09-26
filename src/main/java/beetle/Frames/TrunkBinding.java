@@ -28,7 +28,6 @@ public class TrunkBinding {
     @OneToMany(mappedBy="trunkBinding", cascade= CascadeType.ALL)
     private List<TrunkBinding> trunkBinding = new ArrayList<TrunkBinding>();
 
-
     public TrunkBinding(String trunk) {
         this.trunk = trunk;
     }

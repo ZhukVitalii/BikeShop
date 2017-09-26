@@ -23,13 +23,13 @@ public class RimWide {
     private String wide;
 
     @OneToMany(mappedBy="rimWide", cascade=CascadeType.ALL)
+
     private List<Wheel> wheels = new ArrayList<Wheel>();
     @OneToMany(mappedBy="rimWide", cascade=CascadeType.ALL)
     private List<Rim> rims = new ArrayList<Rim>();
 
     @OneToMany(mappedBy="rimWide", cascade= CascadeType.ALL)
     private List<RimWide> rimWide = new ArrayList<RimWide>();
-
 
     public RimWide(String wide) {
         this.wide = wide;

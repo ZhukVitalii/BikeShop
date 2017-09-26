@@ -25,11 +25,8 @@ public class CarvingType{
     @OneToMany(mappedBy="carvingType", cascade=CascadeType.ALL)
     private List<Bracket> brackets  = new ArrayList<Bracket>();
 
-
-
     @OneToMany(mappedBy="carvingType", cascade= CascadeType.ALL)
     private List<CarvingType> carvingType = new ArrayList<CarvingType>();
-
 
     public CarvingType(String type) {
         this.type = type;

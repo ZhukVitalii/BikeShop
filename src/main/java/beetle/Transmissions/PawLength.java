@@ -25,11 +25,8 @@ public class PawLength {
     @OneToMany(mappedBy="pawLength", cascade=CascadeType.ALL)
     private List<BackDerailleur> backDerailleurs  = new ArrayList<BackDerailleur>();
 
-
-
     @OneToMany(mappedBy="pawLength", cascade= CascadeType.ALL)
     private List<PawLength> pawLength = new ArrayList<PawLength>();
-
 
     public PawLength(String length) {
         this.length = length;

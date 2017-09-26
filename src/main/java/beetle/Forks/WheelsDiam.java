@@ -32,7 +32,6 @@ public class WheelsDiam {
     @OneToMany (mappedBy="wheelsDiam", cascade= CascadeType.ALL)
     private List<WheelsDiam> wheelsDiam = new ArrayList<WheelsDiam>();
 
-
     public WheelsDiam(String diam) {
         this.diam = diam;
     }

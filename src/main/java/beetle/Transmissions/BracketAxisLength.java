@@ -28,7 +28,6 @@ public class BracketAxisLength {
     @OneToMany(mappedBy="bracketAxisLength", cascade= CascadeType.ALL)
     private List<BracketAxisLength> bracketAxisLength = new ArrayList<BracketAxisLength>();
 
-
     public BracketAxisLength(String length) {
         this.length = length;
     }

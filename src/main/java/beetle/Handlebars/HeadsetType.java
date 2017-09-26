@@ -25,6 +25,7 @@ public class HeadsetType {
 
     @OneToMany(mappedBy="headsetType", cascade=CascadeType.ALL)
     private List<Headset> headsets = new ArrayList<Headset>();
+
     @OneToMany(mappedBy="headsetType", cascade=CascadeType.ALL)
     private List<Frame> frames = new ArrayList<Frame>();
 

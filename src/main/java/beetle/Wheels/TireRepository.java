@@ -27,29 +27,14 @@ public interface TireRepository extends JpaRepository<Tire, Long> {
     @Query("SELECT c FROM Tire c WHERE c.tireWide = :tireWide")
     List<Tire> findByTireWide(@Param("tireWide")TireWide tireWide, Pageable pageable);
 
-
-
     @Query("SELECT c FROM Tire c WHERE c.url = :url")
     List<Tire> findByUrl(@Param("url") String url, Pageable pageable);
 
     @Query("SELECT c FROM Tire c WHERE c.article = :article")
     List<Tire> findByArticle(@Param("article") Long article, Pageable pageable);
 
-
     @Query("SELECT COUNT(c) FROM Tire c WHERE c.wheelMaker = :wheelMaker")
     long countByWheelMakers(@Param("wheelMaker")  WheelMaker wheelMaker);
-
-    @Query("SELECT COUNT(c) FROM Tire c WHERE c.wheelsDiam = :wheelsDiam")
-    long countByWheelsDiam(@Param("wheelsDiam")  WheelsDiam wheelsDiam);
-
-    @Query("SELECT COUNT(c) FROM Tire c WHERE c.tireType = :tireType")
-    long countByTireType(@Param("tireType")  TireType tireType);
-
-    @Query("SELECT COUNT(c) FROM Tire c WHERE c.cordType = :cordType")
-    long countByCordType(@Param("cordType")  CordType cordType);
-
-    @Query("SELECT COUNT(c) FROM Tire c WHERE c.tireWide = :tireWide")
-    long countByTireWide(@Param("tireWide")  TireWide tireWide);
 
     @Query("SELECT c FROM Tire c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<Tire> findByPattern(@Param("pattern") String pattern, Pageable pageable);

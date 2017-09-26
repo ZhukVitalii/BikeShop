@@ -28,7 +28,6 @@ public class Nipple {
     @OneToMany(mappedBy="nipple", cascade= CascadeType.ALL)
     private List<Nipple> nipples = new ArrayList<Nipple>();
 
-
     public Nipple(String nipple) {
         this.nipple = nipple;
     }

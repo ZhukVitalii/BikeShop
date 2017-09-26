@@ -24,14 +24,15 @@ public class BackSprocketMin {
 
     @OneToMany(mappedBy="backSprocketMin", cascade=CascadeType.ALL)
     private List<BackDerailleur> backDerailleurs  = new ArrayList<BackDerailleur>();
+
     @OneToMany(mappedBy="backSprocketMin", cascade=CascadeType.ALL)
     private List<BackGearTr> backGearTrs  = new ArrayList<BackGearTr>();
+
     @OneToMany(mappedBy="backSprocketMin", cascade=CascadeType.ALL)
     private List<BackGearKas> backGearKass  = new ArrayList<BackGearKas>();
 
     @OneToMany(mappedBy="backSprocketMin", cascade= CascadeType.ALL)
     private List<BackSprocketMin> backSprocketMin = new ArrayList<BackSprocketMin>();
-
 
     public BackSprocketMin(String number) {
         this.number = number;

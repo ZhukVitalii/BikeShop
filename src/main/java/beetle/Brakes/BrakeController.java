@@ -35,7 +35,7 @@ public class BrakeController {
 
 
 
-
+    //for admin with all brakes components
     @RequestMapping("/show_brakes")
     public String brakesVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
@@ -72,10 +72,11 @@ public class BrakeController {
         return "brakes";
     }
 
+    // return pages with type of brakes components
     @RequestMapping("/show_brakesHydro")
+
     public String brakesHydroVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
-
         List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
                 .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
@@ -83,6 +84,7 @@ public class BrakeController {
         model.addAttribute("allPages", getPageCountBrakeDiscHydr());
         return "brakesHydro";
     }
+
     @RequestMapping("/show_brakesMech")
     public String brakesMechVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
@@ -108,7 +110,6 @@ public class BrakeController {
     @RequestMapping("/show_brakesHandle")
     public String brakesHandleVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
-
         List<BrakeHandle> brakeHandles = brakeService
                 .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
@@ -117,25 +118,22 @@ public class BrakeController {
         return "brakesHandle";
     }
 
-
+    //return page with links to pages with components
     @RequestMapping("/show_brakesComponents")
     public String brakesComponentsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
-
         return "brakesComponents";
     }
 
+    //add components from browser
     @RequestMapping("/brakeDiscHydr_add_page")
     public String brakeDiscHydrAddPage(Model model) {
-
         model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
         model.addAttribute("locations", brakeService.findLocation());
         model.addAttribute("brakeLiquids", brakeService.findBrakeLiquid());
         model.addAttribute("lengthHydrolines", brakeService.findLengthHydroline());
         model.addAttribute("rotorDiams", brakeService.findRotorDiam());
         model.addAttribute("rotorFixTypes", wheelService.findRotorFixType());
-
-
         return "brakeDiscHydr_add_page";
     }
 
@@ -145,7 +143,6 @@ public class BrakeController {
         model.addAttribute("locations", brakeService.findLocation());
         model.addAttribute("rotorDiams", brakeService.findRotorDiam());
         model.addAttribute("rotorFixTypes", wheelService.findRotorFixType());
-
         return "brakeDiscMech_add_page";
     }
 
@@ -153,8 +150,6 @@ public class BrakeController {
     public String brakeVBrakeAddPage(Model model) {
         model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
         model.addAttribute("locations", brakeService.findLocation());
-
-
         return "brakeVBrake_add_page";
     }
 
@@ -169,16 +164,12 @@ public class BrakeController {
         return "brakeHandle_add_page";
     }
 
-
-
-
     @RequestMapping("/brakeMaker_add_page")
     public String brakeMakerAddPage() {
         return "brakeMaker_add_page";
     }
 
-
-
+    // for filter by Maker
     @RequestMapping("/brakeMaker/{id}")
     public String listBrakeMaker(
             @PathVariable(value = "id") long brakeMakerId,
@@ -186,10 +177,7 @@ public class BrakeController {
             Model model)
     {
         BrakeMaker brakeMaker = (brakeMakerId != DEFAULT_GROUP_ID) ? brakeService.findBrakeMaker(brakeMakerId) : null;
-
-
         if (page < 0) page = 0;
-
         List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
                 .findByBrakeDiscHydraulicMakers(brakeMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
@@ -198,39 +186,34 @@ public class BrakeController {
                 .findByBrakeVBrakeMakers(brakeMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<BrakeHandle> brakeHandles = brakeService
                 .findByBrakeHandleMakers(brakeMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-
-
         model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
-
         model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
         model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
         model.addAttribute("brakeVBrakes", brakeVBrakes);
         model.addAttribute("brakeHandles", brakeHandles);
-
         model.addAttribute("byBrakeMakerDiscHydrPages", getPageCountBrakeDiscHydr(brakeMaker));
         model.addAttribute("byBrakeMakerDiscMechPages", getPageCountBrakeDiscMech(brakeMaker));
         model.addAttribute("byBrakeMakerVbrake", getPageCountBrakeVBrake(brakeMaker));
         model.addAttribute("byBrakeMakerHandle", getPageCountBrakeHandle(brakeMaker));
         model.addAttribute("groupId", brakeMakerId);
-
         return "brakes";
     }
 
-
+    //for delete components for admin
     @RequestMapping(value = "/brakeDiscHydr/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> delete(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             brakeService.deleteBrakeDiscHydraulic(toDelete);
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @RequestMapping(value = "/brakeDiscMech/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteOne(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             brakeService.deleteBrakeDiscMechanik(toDelete);
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @RequestMapping(value = "/brakeVBrake/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteTwo(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
@@ -238,6 +221,7 @@ public class BrakeController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @RequestMapping(value = "/brakeHandle/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteThree(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
@@ -246,10 +230,7 @@ public class BrakeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-
-
-
+    // Add components to database
     @RequestMapping(value="/brakeDiscHydr/add", method = RequestMethod.POST)
     public String brakeDiscHydrAdd(
             @RequestParam(value = "brakeMaker") long brakeMakerId,
@@ -276,7 +257,6 @@ public class BrakeController {
         LengthHydroline lengthHydroline = (lengthHydrolineId != DEFAULT_GROUP_ID) ? brakeService.findLengthHydroline(lengthHydrolineId) : null;
         RotorDiam rotorDiam = (rotorDiamId != DEFAULT_GROUP_ID) ? brakeService.findRotorDiam(rotorDiamId) : null;
         RotorFixType rotorFixType = (rotorFixTypeId != DEFAULT_GROUP_ID) ? wheelService.findRotorFixType(rotorFixTypeId) : null;
-
         BrakeDiscHydraulic brakeDiscHydraulic = new BrakeDiscHydraulic(brakeMaker,article,url, name,location,brakeLiquid,materialHandle,lengthHydroline,
                 rotorDiam,rotorWeight,material,brakeWeight,rotorFixType,color,description,price,way);
 
@@ -305,10 +285,8 @@ public class BrakeController {
         Location location = (locationId != DEFAULT_GROUP_ID) ? brakeService.findLication(locationId) : null;
         RotorDiam rotorDiam = (rotorDiamId != DEFAULT_GROUP_ID) ? brakeService.findRotorDiam(rotorDiamId) : null;
         RotorFixType rotorFixType = (rotorFixTypeId != DEFAULT_GROUP_ID) ? wheelService.findRotorFixType(rotorFixTypeId) : null;
-
         BrakeDiscMechanik brakeDiscMechanik = new BrakeDiscMechanik(brakeMaker,article,url,name,location,rotorDiam,rotorWeight,materialBrake,brakeWeight,
                 rotorFixType,color,description,price,way);
-
         brakeService.addBrakeDiscMechanik(brakeDiscMechanik);
         return "redirect:/show_brakesMech";
     }
@@ -328,10 +306,7 @@ public class BrakeController {
     {
         BrakeMaker brakeMaker = (brakeMakerId != DEFAULT_GROUP_ID) ? brakeService.findBrakeMaker(brakeMakerId) : null;
         Location location = (locationId != DEFAULT_GROUP_ID) ? brakeService.findLication(locationId) : null;
-
-
         BrakeVBrake brakeVBrake = new BrakeVBrake(brakeMaker,article,url, name,location,material,color,description,price,way);
-
         brakeService.addBrakeVBrake(brakeVBrake);
         return "redirect:/show_brakesVBrake";
     }
@@ -359,24 +334,20 @@ public class BrakeController {
         BrakeHandleCompatibility brakeHandleCompatibility = (brakeHandleCompatibilityId != DEFAULT_GROUP_ID) ? brakeService.findBrakeHandleCompatibility(brakeHandleCompatibilityId) : null;
         HandlebarDiameter handlebarDiameter = (handlebarDiameterId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarDiameter(handlebarDiameterId) : null;
         BrakeHandleWide brakeHandleWide = (brakeHandleWideId != DEFAULT_GROUP_ID) ? brakeService.findBrakeHandleWide(brakeHandleWideId) : null;
-
         BrakeHandle brakeHandle = new BrakeHandle(brakeMaker,article,url,name,brakeHandleLocation,brakeHandleCompatibility,materialHandle,materialCorp,
                 handlebarDiameter,brakeHandleWide,weight,color,description,price,way);
-
-
         brakeService.addBrakeHandle(brakeHandle);
         return "redirect:/show_brakesHandle";
     }
 
-
-
-
+    //Add Maker to database
     @RequestMapping(value="/brakeMaker/add", method = RequestMethod.POST)
     public String brakeMakerAdd(@RequestParam String name) {
         brakeService.addBrakeMaker(new BrakeMaker(name));
         return "redirect:/show_brakes";
     }
 
+    // Select one product by url and open in separate page
     @RequestMapping("/brakeDiscHydraulic/{url}")
     public String listBrakeDiscHydraulicUrl(
             @PathVariable(value = "url") String url,
@@ -389,6 +360,7 @@ public class BrakeController {
         model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
         return "OneBrakeDiscHydraulic";
     }
+
     @RequestMapping("/brakeDiscMechanik/{url}")
     public String listBrakeDiscMechanikUrl(
             @PathVariable(value = "url") String url,
@@ -401,6 +373,7 @@ public class BrakeController {
         model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
         return "OneBrakeDiscMechanik";
     }
+
     @RequestMapping("/brakeVBrake/{url}")
     public String listBrakeVBrakeUrl(
             @PathVariable(value = "url") String url,
@@ -413,6 +386,7 @@ public class BrakeController {
         model.addAttribute("brakeVBrakes", brakeVBrakes);
         return "OneBrakeVBrake";
     }
+
     @RequestMapping("/brakeHandle/{url}")
     public String listBrakeHandleUrl(
             @PathVariable(value = "url") String url,
@@ -427,19 +401,14 @@ public class BrakeController {
     }
 
 
-
-
-
     private long getPageCountBrakeDiscHydr() {
         long totalCount = brakeService.countBrakeDiscHydr();
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
-
     private long getPageCountBrakeDiscMech() {
         long totalCount = brakeService.countBrakeDiscMech();
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
-
     private long getPageCountVBrake() {
         long totalCount = brakeService.countVBrake();
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
@@ -448,8 +417,6 @@ public class BrakeController {
         long totalCount = brakeService.countBrakeHandle();
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
-
-
     private long getPageCountBrakeDiscHydr(BrakeMaker brakeMaker) {
         long totalCount = brakeService.countByBrakeMakerDiscHydr(brakeMaker);
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
@@ -466,41 +433,6 @@ public class BrakeController {
         long totalCount = brakeService.countByBrakeMakerHandle(brakeMaker);
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
-    private long getPageCountLocationDiscHydr(Location location) {
-        long totalCount = brakeService.countByLocationDiscHydr(location);
-        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
-    }
-    private long getPageCountLocationDiscMech(Location location) {
-        long totalCount = brakeService.countByLocationDiscMech(location);
-        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
-    }
-
-    private long getPageCountBrakeLiquid(BrakeLiquid brakeLiquid) {
-        long totalCount = brakeService.countByBrakeLiquid(brakeLiquid);
-        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
-    }
-    private long getPageCountLengthHydroline(LengthHydroline lengthHydroline) {
-        long totalCount = brakeService.countByLengthHydroline(lengthHydroline);
-        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
-    }
-    private long getPageCountRotorDiamDiscHydr(RotorDiam rotorDiam) {
-        long totalCount = brakeService.countByRotorDiamDiscHydr(rotorDiam);
-        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
-    }
-    private long getPageCountRotorDiamDiscMech(RotorDiam rotorDiam) {
-        long totalCount = brakeService.countByRotorDiamDiscMech(rotorDiam);
-        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
-    }
-    private long getPageCountRotorFixTypeDiscHydr(RotorFixType rotorFixType) {
-        long totalCount = brakeService.countByRotorFixTypeDiscHydr(rotorFixType);
-        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
-    }
-    private long getPageCountRotorFixTypeDiscMech(RotorFixType rotorFixType) {
-        long totalCount = brakeService.countByRotorFixTypeDiscMech(rotorFixType);
-        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
-    }
-
-
 
 }
 

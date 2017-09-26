@@ -19,7 +19,6 @@ public class Stem {
     @Id
     @GeneratedValue
     private long id;
-
     @ManyToOne
     @JoinColumn(name="maker_id")
     private HandlebarMaker handlebarMaker;

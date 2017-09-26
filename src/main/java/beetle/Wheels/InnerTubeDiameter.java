@@ -28,7 +28,6 @@ public class InnerTubeDiameter {
     @OneToMany(mappedBy="innerTubeDiameter", cascade= CascadeType.ALL)
     private List<InnerTubeDiameter> innerTubeDiameter = new ArrayList<InnerTubeDiameter>();
 
-
     public InnerTubeDiameter(String diam) {
         this.diam = diam;
     }

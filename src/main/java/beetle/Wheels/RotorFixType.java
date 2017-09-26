@@ -26,18 +26,18 @@ public class RotorFixType {
 
     @OneToMany(mappedBy="rotorFixType", cascade=CascadeType.ALL)
     private List<FrontHub> frontHubs = new ArrayList<FrontHub>();
+
     @OneToMany(mappedBy="rotorFixType", cascade=CascadeType.ALL)
     private List<BackHub> backHubs = new ArrayList<BackHub>();
 
     @OneToMany(mappedBy="rotorFixType", cascade=CascadeType.ALL)
     private List<BrakeDiscHydraulic> brakeDiscHydraulics  = new ArrayList<BrakeDiscHydraulic>();
+
     @OneToMany(mappedBy="rotorFixType", cascade=CascadeType.ALL)
     private List<BrakeDiscMechanik> brakeDiscMechaniks  = new ArrayList<BrakeDiscMechanik>();
 
-
     @OneToMany(mappedBy="rotorFixType", cascade= CascadeType.ALL)
     private List<RotorFixType> rotorFixType = new ArrayList<RotorFixType>();
-
 
     public RotorFixType(String type) {
         this.type = type;

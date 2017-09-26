@@ -28,7 +28,6 @@ public class RimHeight {
     @OneToMany(mappedBy="rimHeight", cascade= CascadeType.ALL)
     private List<RimHeight> rimHeight = new ArrayList<RimHeight>();
 
-
     public RimHeight(String height) {
         this.height = height;
     }
