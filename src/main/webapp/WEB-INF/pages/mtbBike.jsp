@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+
 <html>
 <head>
     <title>Frames</title>
@@ -91,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Троси</a></li>
                         </ul>
                     </li>
-                    <a class="shop" href="cart.html"><img src="${framesize.id}/resources/images/cart.png" alt=""/></a>
+                    <a class="shop" href="/cart"><img src="${framesize.id}/resources/images/cart.png" alt=""/></a>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -129,7 +130,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="product-head">
                             <a href="/">Home</a> <span>::</span>
                         </div>
-
                         <c:forEach items="${frames}" var="frame">
                         <!--Include the Etalage files-->
                         <link rel="stylesheet" href="${framesize.id}/resources/css/etalage.css">
@@ -165,8 +165,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
                                 <div class="btn_form">
-                                    <a href="<c:url value="/chooseFork/${frame.name}/${frame.url}"/>">Підбрати комплектуючі під дану раму</a>
-                                    <a href="cart.html">Додати до корзини</a>
+                                    <a href="<c:url
+                                     value="/chooseFork/${frame.bikeType.id}/${frame.wheelsDiam.id}/${frame.tubeDiameter.id}"/>">Підбрати комплектуючі під дану раму</a>
+                                    <a href="/cartAddFrame/${frame.article}">Додати до корзини</a>
                                 </div>
                                 <div class="bike-type">
 

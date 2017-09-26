@@ -163,6 +163,12 @@ public class ForkService {
         return forkRepository.findByPattern(pattern, pageable);
     }
 
+    @Transactional(readOnly=true)
+    public List<Fork> findByTypeAndWhDiamAndTubeDiam(BikeType bikeType, WheelsDiam wheelsDiam,TubeDiameter tubeDiameter, Pageable pageable) {
+        return forkRepository.findByTypeAndWhDiamAndTubeDiam(bikeType, wheelsDiam,tubeDiameter, pageable);
+    }
+
+
     // count by
     @Transactional(readOnly = true)
     public long countByForkMaker(ForkMaker forkMaker) {
@@ -219,7 +225,6 @@ public class ForkService {
     public BrakesType findBrakesType(long id) {
         return brakesTypeRepository.findOne(id);
     }
-
 
 }
 

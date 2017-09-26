@@ -148,8 +148,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <a class="length" href="#">M</a>
                                 <a class="length" href="#">S</a>
                                 <div class="btn_form">
-                                    <a href="cart.html">Купити</a>
-                                    <a href="cart.html">Додати до корзини</a>
+                                    <a href="<c:url
+                                     value="/chooseFork/${frame.bikeType.id}/${frame.wheelsDiam.id}/${frame.tubeDiameter.id}"/>">Підбрати комплектуючі під дану раму</a>
+                                    <a href="/cartAddFrame/${frame.article}">Додати до корзини</a>
                                 </div>
                                 <div class="bike-type">
 

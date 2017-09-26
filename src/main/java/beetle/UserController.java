@@ -1,9 +1,11 @@
 package beetle;
 
-import beetle.Frames.BikeType;
 import beetle.Brakes.*;
 import beetle.Forks.Fork;
 import beetle.Forks.ForkService;
+import beetle.Forks.TubeDiameter;
+import beetle.Forks.WheelsDiam;
+import beetle.Frames.BikeType;
 import beetle.Frames.Frame;
 import beetle.Frames.FrameService;
 import beetle.Frames.FrameSize;
@@ -56,7 +58,7 @@ public class UserController {
         if (page < 0) page = 0;
         BikeType bikeType = frameService.findBikeType(1);
         List<Frame> frames = frameService.
-                findByBikeType(bikeType ,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                findByBikeType(bikeType, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("frames", frames);
         return "mtbBike";
     }
@@ -67,7 +69,7 @@ public class UserController {
         if (page < 0) page = 0;
         BikeType bikeType = frameService.findBikeType(2);
         List<Frame> frames = frameService.
-                findByBikeType(bikeType ,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                findByBikeType(bikeType, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("frames", frames);
         return "shosseBike";
     }
@@ -78,7 +80,7 @@ public class UserController {
         if (page < 0) page = 0;
         BikeType bikeType = frameService.findBikeType(3);
         List<Frame> frames = frameService.
-                findByBikeType(bikeType ,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                findByBikeType(bikeType, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("frames", frames);
         return "cityBike";
     }
@@ -115,13 +117,12 @@ public class UserController {
     public String listFrameMTBSize(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
+            Model model) {
         if (page < 0) page = 0;
         BikeType bikeType = frameService.findBikeType(1);
         FrameSize frameSize = frameService.findFrameSize(id);
         List<Frame> frames = frameService
-                .findByTypeAndSize(bikeType,frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("frames", frames);
         return "mtbBike";
     }
@@ -131,13 +132,12 @@ public class UserController {
     public String listFrameShosseSize(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
+            Model model) {
         if (page < 0) page = 0;
         BikeType bikeType = frameService.findBikeType(2);
         FrameSize frameSize = frameService.findFrameSize(id);
         List<Frame> frames = frameService
-                .findByTypeAndSize(bikeType,frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         ;
         model.addAttribute("frames", frames);
         return "shosseBike";
@@ -148,13 +148,12 @@ public class UserController {
     public String listFrameCitySize(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
+            Model model) {
         if (page < 0) page = 0;
         BikeType bikeType = frameService.findBikeType(3);
         FrameSize frameSize = frameService.findFrameSize(id);
         List<Frame> frames = frameService
-                .findByTypeAndSize(bikeType,frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("frames", frames);
         return "cityBike";
     }
@@ -164,8 +163,7 @@ public class UserController {
     public String listArticleFrame(
             @PathVariable(value = "article") Long article,
             @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
+            Model model) {
         if (page < 0) page = 0;
         frameService.addToArticle(article);
         return "redirect:/show_frames";
@@ -688,17 +686,25 @@ public class UserController {
 
         }
 // Select Forks, test
-     @RequestMapping("/chooseFork/{name}/{url}")
+     @RequestMapping("/chooseFork/{bikeType.id}/{wheelsDiam.id}/{tubeDiameter.id}")
     public String listForkForMTB(
-            @PathVariable(value = "name") String name,
-            @PathVariable(value = "url") String url,
+            @PathVariable(value = "bikeType.id") Long bike,
+            @PathVariable(value = "wheelsDiam.id") Long wheel,
+            @PathVariable(value = "tubeDiameter.id") Long tube,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-     System.out.println("Вибрано тип " + name);
-     System.out.println("Вибрано діаметер колес" + url);
-        return "show_forks";
+        BikeType bikeType = forkService.findBikeType(bike);
+        WheelsDiam wheelsDiam = forkService.findWheelsDiam(wheel);
+        TubeDiameter tubeDiameter = forkService.findTubeDiameter(tube);
+        List<Fork> forks = forkService.
+                findByTypeAndWhDiamAndTubeDiam(bikeType,wheelsDiam,tubeDiameter,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+     model.addAttribute("forks", forks);
+     System.out.println("Вибрано тип " + bike);
+     System.out.println("Вибрано діаметер колес " + wheel);
+     System.out.println("Вибрано діаметер труби " + tube);
+        return "forksToFrame";
     }
 
     }

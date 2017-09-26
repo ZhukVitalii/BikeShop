@@ -1,6 +1,8 @@
 package beetle.Forks;
 
 import beetle.Frames.BikeType;
+import beetle.Frames.Frame;
+import beetle.Frames.FrameSize;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -35,8 +37,10 @@ public interface ForkRepository extends JpaRepository<Fork, Long> {
     @Query("SELECT c FROM Fork c WHERE c.article = :article")
     List<Fork> findByArticle(@Param("article") Long article, Pageable pageable);
 
-
-
+    @Query("SELECT c FROM Fork c WHERE c.bikeType = :bikeType AND c.wheelsDiam = :wheelsDiam AND c.tubeDiameter = :tubeDiameter ")
+    List<Fork> findByTypeAndWhDiamAndTubeDiam(@Param("bikeType" )BikeType bikeType,
+                                              @Param("wheelsDiam") WheelsDiam wheelsDiam,
+                                              @Param("tubeDiameter") TubeDiameter tubeDiameter, Pageable pageable);
 
     @Query("SELECT COUNT(c) FROM Fork c WHERE c.forkMaker = :forkMaker")
     long countByForkMaker(@Param("forkMaker") ForkMaker forkMaker);
