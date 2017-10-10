@@ -70,5 +70,32 @@ public class Fork {
         this.description = description;
         this.way = way;
     }
+    public Double getPrice() {
+        return price;
+    }
+
+    public BikeType getBikeType() {
+        return bikeType;
+    }
+
+    public WheelsDiam getWheelsDiam() {
+        return wheelsDiam;
+    }
+
+    public TubeDiameter getTubeDiameter() {
+        return tubeDiameter;
+    }
+
+    public BrakesType getBrakesType() {
+        return brakesType;
+    }
+
+    public Long getArticle() {
+        return article;
+    }
+
+    public String getName() {
+        return name;
+    }
 
 }

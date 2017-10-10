@@ -9,14 +9,14 @@
 <head>
     <title>Frames</title>
     <link rel="shortcut icon"
-          href="resources/images/logo_brauser.png" >
-    <spring:url value="${framesize.id}/resources/css/bootstrap.css" var="bootstrap"/>
-    <link href="${framesize.id}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
+          href="/resources/images/logo_brauser.png" >
+    <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
+    <link href="/resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (Bootstrap's JavaScript plugins) -->
-    <script src="${framesize.id}/resources/js/jquery.min.js"></script>
+    <script src="/resources/js/jquery.min.js"></script>
     <!-- Custom Theme files -->
-    <link href="${framesize.id}/resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${framesize.id}/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -27,16 +27,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
     <!--webfont-->
     <!-- dropdown -->
-    <script src="${framesize.id}/resources/js/jquery.easydropdown.js"></script>
-    <link href="${framesize.id}/resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="${framesize.id}/resources/js/scripts.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.easydropdown.js"></script>
+    <link href="/resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
+    <script src="/resources/js/scripts.js" type="text/javascript"></script>
     <!--js-->
 
 
 </head>
 
 <body>
-<script src="${framesize.id}/resources/js/responsiveslides.min.js"></script>
+<script src="/resources/js/responsiveslides.min.js"></script>
 <script>
     $(function () {
         $("#slider").responsiveSlides({
@@ -52,7 +52,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="${framesize.id}/resources/images/logo.png"
+                <a href="/"><img src="/resources/images/logo.png"
                                  alt=""
                                  width="110"
                                  height="112"/>
@@ -64,16 +64,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </label>
                 <input id="mobile_menu" type="checkbox">
                 <ul class="nav">
-                    <li class="dropdown1"><a href="bicycles.html">Зібрати велосипед</a>
+                    <li class="dropdown1"><a href="#chooseBike">Зібрати велосипед</a>
                         <ul class="dropdown2">
                             <li><a href="/chooseMTBSize">МТВ</a></li>
                             <li><a href="/chooseShosseSize">ШОССЕ</a></li>
                             <li><a href="/chooseCitySize">МІСЬКИЙ</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown1"><a href="parts.html">КОМППОНЕНТИ</a>
+                    <li class="dropdown1"><a href="#cate">КОМППОНЕНТИ</a>
                         <ul class="dropdown2">
-                            <li><a href="parts.html">Підібрати декілька компонентів</a></li>
+                            <!--
+                            <li><a href="#">Підібрати декілька компонентів</a></li>
+                            -->
                             <li><a href="/show_frames">Рами</a></li>
                             <li><a href="/show_forks">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
@@ -92,7 +94,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Троси</a></li>
                         </ul>
                     </li>
-                    <a class="shop" href="/cart"><img src="${framesize.id}/resources/images/cart.png" alt=""/></a>
+                    <a class="shop" href="/cart"><img src="resources/images/cart.png" alt=""/></a>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -101,27 +103,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 
 <div class="container">
-
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul id="groupList" class="nav navbar-nav">
-                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Виробник <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/">Default</a></li>
-                            <c:forEach items="${frameMakers}" var="frameMaker">
-                                <li><a href="/frameMaker/${frameMaker.id}">${frameMaker.name}</a></li>
-                            </c:forEach>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
     <div class="product">
         <div class="container">
             <div class="ctnt-bar cntnt">
@@ -133,7 +114,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <c:forEach items="${frames}" var="frame">
                         <!--Include the Etalage files-->
                         <link rel="stylesheet" href="${framesize.id}/resources/css/etalage.css">
-                        <script src="${framesize.id}/resources/js/jquery.etalage.min.js"></script>
+                        <script src="/resources/js/jquery.etalage.min.js"></script>
                         <script>
                             jQuery(document).ready(function($){
 
@@ -163,10 +144,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <p>${frame.price}<label>грн</label><a href="#"></a></p>
                                 <p class="size"><label>Розмір ::</label> ${frame.frameSize.size}</p>
 
-
                                 <div class="btn_form">
                                     <a href="<c:url
-                                     value="/chooseFork/${frame.bikeType.id}/${frame.wheelsDiam.id}/${frame.tubeDiameter.id}"/>">Підбрати комплектуючі під дану раму</a>
+                                     value="/chooseFork/${frame.id}"/>">Підібрати компоненти під дану раму</a>
                                     <a href="/cartAddFrame/${frame.article}">Додати до корзини</a>
                                 </div>
                                 <div class="bike-type">
@@ -240,10 +220,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             <th><p align="center"><font size="4" color="#0080C0" >
                                                 <b><i>   ${frame.color} </i></b></font></th>
                                         </tr>
-
                                     </table>
-
-
                                     <h5>Опис  ::</h5>
                                     <p class="desc">${frame.description}</p>
                                 </div>
@@ -252,14 +229,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         </c:forEach>
-
-
     </div>
-
 </div>
 </body>
 </html>

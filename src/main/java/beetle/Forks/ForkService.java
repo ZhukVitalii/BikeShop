@@ -164,8 +164,8 @@ public class ForkService {
     }
 
     @Transactional(readOnly=true)
-    public List<Fork> findByTypeAndWhDiamAndTubeDiam(BikeType bikeType, WheelsDiam wheelsDiam,TubeDiameter tubeDiameter, Pageable pageable) {
-        return forkRepository.findByTypeAndWhDiamAndTubeDiam(bikeType, wheelsDiam,tubeDiameter, pageable);
+    public List<Fork> findByTypeAndWhDiamAndTubeDiamAndBrType(BikeType bikeType, WheelsDiam wheelsDiam,TubeDiameter tubeDiameter, BrakesType brakesType, Pageable pageable) {
+        return forkRepository.findByTypeAndWhDiamAndTubeDiamAndBrType(bikeType, wheelsDiam,tubeDiameter,brakesType, pageable);
     }
 
 
@@ -201,6 +201,12 @@ public class ForkService {
     }
 
     //Find by id
+
+    @Transactional(readOnly = true)
+    public Fork findFork(Long id) {
+        return forkRepository.findOne(id);
+    }
+
     @Transactional(readOnly=true)
     public ForkMaker findForkMaker(long id) {
         return forkMakerRepository.findOne(id);

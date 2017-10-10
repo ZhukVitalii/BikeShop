@@ -39,7 +39,7 @@ public class TransmissionController {
     }
 
     //for admin with all brakes components
-    @RequestMapping("/show_transmission")
+    @RequestMapping("/admin/show_transmissions")
     public String transmissionsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<BackDerailleur> backDerailleurs = transmissionService
@@ -68,7 +68,7 @@ public class TransmissionController {
         model.addAttribute("frontDerailleurs", frontDerailleurs);
         model.addAttribute("pedals", pedals);
         model.addAttribute("allPages", getPageCount());
-        return "transmissions";
+        return "transmissionsAdmin";
     }
 
     // return pages with type of brakes components
@@ -163,7 +163,7 @@ public class TransmissionController {
 
     //add components from browser
 
-    @RequestMapping("/backDerailleur_add_page")
+    @RequestMapping("/admin/backDerailleur_add_page")
     public String backDerailleurAddPage(Model model) {
         model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
         model.addAttribute("backSprocketMax", transmissionService.findBackSprocketMax());
@@ -173,7 +173,7 @@ public class TransmissionController {
         return "backDerailleur_add_page";
     }
 
-    @RequestMapping("/backGearKas_add_page")
+    @RequestMapping("/admin/backGearKas_add_page")
     public String backGearKasAddPage(Model model) {
         model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
         model.addAttribute("backSprocketMax", transmissionService.findBackSprocketMax());
@@ -183,7 +183,7 @@ public class TransmissionController {
         return "backGearKas_add_page";
     }
 
-    @RequestMapping("/backGearTr_add_page")
+    @RequestMapping("/admin/backGearTr_add_page")
     public String backGearTrAddPage(Model model) {
         model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
         model.addAttribute("backSprocketMax", transmissionService.findBackSprocketMax());
@@ -194,7 +194,7 @@ public class TransmissionController {
         return "backGearTr_add_page";
     }
 
-    @RequestMapping("/bracket_add_page")
+    @RequestMapping("/admin/bracket_add_page")
     public String bracketAddPage(Model model) {
         model.addAttribute("bracketAxisLength", transmissionService.findBracketAxisLength());
         model.addAttribute("bracketWide", transmissionService.findBracketWide());
@@ -206,7 +206,7 @@ public class TransmissionController {
         return "bracket_add_page";
     }
 
-    @RequestMapping("/chain_add_page")
+    @RequestMapping("/admin/chain_add_page")
     public String chainAddPage(Model model) {
         model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
         model.addAttribute("backSprocketNumber", transmissionService.findBackSprocketNumber());
@@ -214,7 +214,7 @@ public class TransmissionController {
         return "chain_add_page";
     }
 
-    @RequestMapping("/crank_add_page")
+    @RequestMapping("/admin/crank_add_page")
     public String crankAddPage(Model model) {
         model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
         model.addAttribute("frontSprocketMax", transmissionService.findFrontSprocketMax());
@@ -229,7 +229,7 @@ public class TransmissionController {
         return "crank_add_page";
     }
 
-    @RequestMapping("/frontDerailleur_add_page")
+    @RequestMapping("/admin/frontDerailleur_add_page")
     public String frontDerailleurAddPage(Model model) {
         model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
         model.addAttribute("frontDerailleurFixType", transmissionService.findFrontDerailleurFixType());
@@ -244,7 +244,7 @@ public class TransmissionController {
         return "frontDerailleur_add_page";
     }
 
-    @RequestMapping("/pedal_add_page")
+    @RequestMapping("/admin/pedal_add_page")
     public String pedalAddPage(Model model) {
         model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
         model.addAttribute("bearingType", transmissionService.findBearingType());
@@ -252,7 +252,7 @@ public class TransmissionController {
         return "pedal_add_page";
     }
 
-    @RequestMapping("/transmissionMaker_add_page")
+    @RequestMapping("/admin/transmissionMaker_add_page")
     public String transmissionMakerAddPage() {
         return "transmissionMaker_add_page";
     }
@@ -305,56 +305,56 @@ public class TransmissionController {
 
     //for delete components for admin
 
-    @RequestMapping(value = "/backDerailleur/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/backDerailleur/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> delete(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             transmissionService.deleteBackDerailleur(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/backGearKas/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/backGearKas/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteOne(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             transmissionService.deleteBackGearKas(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/backGearTr/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/backGearTr/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteTwo(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             transmissionService.deleteBackGearTr(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/bracket/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/bracket/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteThree(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             transmissionService.deleteBracket(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/chain/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/chain/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteFor(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             transmissionService.deleteChain(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/crank/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/crank/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteFive(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             transmissionService.deleteCrank(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/frontDerailleur/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/frontDerailleur/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteSix(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             transmissionService.deleteFrontDerailleur(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/pedal/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/pedal/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteSeven(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             transmissionService.deletePedal(toDelete);
@@ -364,7 +364,7 @@ public class TransmissionController {
 
 
     // Add components to database
-    @RequestMapping(value="/backDerailleur/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/backDerailleur/add", method = RequestMethod.POST)
     public String backDerailleurAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
             @RequestParam Long article,
@@ -392,7 +392,7 @@ public class TransmissionController {
         return "redirect:/show_backDerailleurs";
     }
 
-    @RequestMapping(value="/backGearKas/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/backGearKas/add", method = RequestMethod.POST)
     public String backGearKasAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
             @RequestParam Long article,
@@ -419,7 +419,7 @@ public class TransmissionController {
         return "redirect:/show_backGearKass";
     }
 
-    @RequestMapping(value="/backGearTr/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/backGearTr/add", method = RequestMethod.POST)
     public String backGearTrAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
             @RequestParam Long article,
@@ -446,7 +446,7 @@ public class TransmissionController {
         return "redirect:/show_backGearTrs";
     }
 
-    @RequestMapping(value="/bracket/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/bracket/add", method = RequestMethod.POST)
     public String bracketAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
             @RequestParam Long article,
@@ -474,7 +474,7 @@ public class TransmissionController {
         return "redirect:/show_brackets";
     }
 
-    @RequestMapping(value="/chain/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/chain/add", method = RequestMethod.POST)
     public String chainAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
             @RequestParam Long article,
@@ -497,7 +497,7 @@ public class TransmissionController {
         return "redirect:/show_chains";
     }
 
-    @RequestMapping(value="/crank/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/crank/add", method = RequestMethod.POST)
     public String crankAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
             @RequestParam Long article,
@@ -533,7 +533,7 @@ public class TransmissionController {
         return "redirect:/show_cranks";
     }
 
-    @RequestMapping(value="/frontDerailleur/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/frontDerailleur/add", method = RequestMethod.POST)
     public String frontDerailleurAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
             @RequestParam Long article,
@@ -570,7 +570,7 @@ public class TransmissionController {
         return "redirect:/show_frontDerailleurs";
     }
 
-    @RequestMapping(value="/pedal/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/pedal/add", method = RequestMethod.POST)
     public String pedalAdd(
             @RequestParam(value = "transmissionMaker") long transmissionMakerId,
             @RequestParam Long article,
@@ -595,7 +595,7 @@ public class TransmissionController {
     }
 
     //Add Maker to database
-    @RequestMapping(value="/transmissionMaker/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/transmissionMaker/add", method = RequestMethod.POST)
     public String transmissionMakerAdd(@RequestParam String name) {
         transmissionService.addTransmissionMaker(new TransmissionMaker(name));
         return "redirect:/show_transmissions";

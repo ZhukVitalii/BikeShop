@@ -192,7 +192,7 @@ public class BrakeService {
     }
 
     @Transactional
-    public void deleteRBrakeVBrake(long[] idList) {
+    public void deleteBrakeVBrake(long[] idList) {
         for (long id : idList)
             brakeVBrakeRepository.delete(id);
     }

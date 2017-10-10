@@ -38,9 +38,20 @@ public class ForkController {
         model.addAttribute("allPages", getPageCount());
         return "forks";
     }
+    @RequestMapping("/admin/show_forks")
+    public String forksAdminVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+
+        List<Fork> forks = forkService
+                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("forkMakers", forkService.findForkMakers());
+        model.addAttribute("forks", forks);
+        model.addAttribute("allPages", getPageCount());
+        return "forksAdmin";
+    }
 
     //add components from browser
-    @RequestMapping("/fork_add")
+    @RequestMapping("/admin/fork_add")
     public String contactAddPage(Model model) {
         model.addAttribute("forkMakers", forkService.findForkMakers());
         model.addAttribute("bikeTypes", forkService.findBikeType());
@@ -50,7 +61,7 @@ public class ForkController {
         return "fork_add";
     }
 
-    @RequestMapping("/forkMaker_add_page")
+    @RequestMapping("/admin/forkMaker_add_page")
     public String forkMakerAddPage() {
         return "forkMaker_add_page";
     }
@@ -74,7 +85,7 @@ public class ForkController {
     }
 
     //for delete components for admin
-    @RequestMapping(value = "/fork/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/fork/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> delete(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             forkService.deleteForks(toDelete);
@@ -82,7 +93,7 @@ public class ForkController {
     }
 
     // Add fork to database
-    @RequestMapping(value="/fork/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/fork/add", method = RequestMethod.POST)
     public String forkAdd(
             @RequestParam(value = "forkMaker") long forkMakerId,
             @RequestParam Long article,
@@ -113,7 +124,7 @@ public class ForkController {
     }
 
     //Add Maker to database
-    @RequestMapping(value="/forkMaker/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/forkMaker/add", method = RequestMethod.POST)
     public String forkMakerAdd(@RequestParam String name) {
         forkService.addForkMaker(new ForkMaker(name));
         return "redirect:/show_forks";

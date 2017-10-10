@@ -91,6 +91,22 @@ public class Frame {
         return price;
     }
 
+    public BikeType getBikeType() {
+        return bikeType;
+    }
+
+    public WheelsDiam getWheelsDiam() {
+        return wheelsDiam;
+    }
+
+    public TubeDiameter getTubeDiameter() {
+        return tubeDiameter;
+    }
+
+    public BrakesType getBrakesType() {
+        return brakesType;
+    }
+
     public Long getArticle() {
         return article;
     }

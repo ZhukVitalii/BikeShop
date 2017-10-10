@@ -4,17 +4,17 @@
 <head>
     <title>New wheel</title>
     <link rel="shortcut icon"
-          href="resources/images/logo_brauser.png" >
+          href="/resources/images/logo_brauser.png" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/resources/css/my.css"  type="text/css" media="all" />
-    <script src="resources/js/my.js"></script>
+    <script src="/resources/js/my.js"></script>
 </head>
 <body>
 <div class="container">
     <form role="form"
           class="form-horizontal"
-          action="/wheel/add"
+          action="/admin/wheel/add"
           method="post">
         <h3>New wheel</h3>
         <select class="btn btn-primary btn-select btn-select-light"
@@ -83,7 +83,6 @@
                type="text"
                name="rimName"
                placeholder="Обод">
-        <br>
         <br>
         <select class="btn btn-primary btn-select btn-select-light "
                 name="rimWide">

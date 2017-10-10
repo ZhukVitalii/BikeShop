@@ -42,7 +42,7 @@ public class HandlebarController {
     }
 
     //for admin with all handlebars components
-    @RequestMapping("/show_handlebarsAdmin")
+    @RequestMapping("/admin/show_handlebars")
     public String handlebarsAdminVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<Handlebar> handlebars = handlebarService
@@ -127,7 +127,7 @@ public class HandlebarController {
 
     //add components from browser
 
-    @RequestMapping("/handlebars_add_page")
+    @RequestMapping("/admin/handlebars_add_page")
     public String contactAddPage(Model model) {
         model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
         model.addAttribute("bikeType", handlebarService.findBikeType());
@@ -136,19 +136,19 @@ public class HandlebarController {
         return "handlebars_add_page";
     }
 
-    @RequestMapping("/winding_add_page")
+    @RequestMapping("/admin/winding_add_page")
     public String windingAddPage(Model model) {
         model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
         return "winding_add_page";
     }
 
-    @RequestMapping("/grips_add_page")
+    @RequestMapping("/admin/grips_add_page")
     public String gripsAddPage(Model model) {
         model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
         return "grips_add_page";
     }
 
-    @RequestMapping("/headset_add_page")
+    @RequestMapping("/admin/headset_add_page")
     public String headsetAddPage(Model model) {
         model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
         model.addAttribute("headsetType", handlebarService.findHeadsetType());
@@ -156,7 +156,7 @@ public class HandlebarController {
         return "headset_add_page";
     }
 
-    @RequestMapping("/stem_add_page")
+    @RequestMapping("/admin/stem_add_page")
     public String stemAddPage(Model model) {
         model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
         model.addAttribute("handlebarDiameter", handlebarService.findHandlebarDiameter());
@@ -164,7 +164,7 @@ public class HandlebarController {
         return "stem_add_page";
     }
 
-    @RequestMapping("/handlebarMaker_add_page")
+    @RequestMapping("/admin/handlebarMaker_add_page")
     public String handlebarMakerAddPage() {
         return "handlebarMaker_add_page";
     }
@@ -189,44 +189,44 @@ public class HandlebarController {
     }
 
     //for delete components for admin
-    @RequestMapping(value = "/handlebar/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/handlebar/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> delete(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             handlebarService.deleteHandlebar(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/winding/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/winding/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteOne(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             handlebarService.deleteWinding(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/grips/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/grips/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteTwo(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             handlebarService.deleteGrips(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/headset/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/headset/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteThree(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             handlebarService.deleteHeadset(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/stem/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/stem/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteFor(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
-            handlebarService.deleteHeadset(toDelete);
+            handlebarService.deleteStem(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // Add components to database
 
-    @RequestMapping(value="/handlebar/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/handlebar/add", method = RequestMethod.POST)
     public String handlebarAdd(
             @RequestParam(value = "handlebarMaker") long handlebarMakerId,
             @RequestParam Long article,
@@ -252,7 +252,7 @@ public class HandlebarController {
         return "redirect:/show_handlebars";
     }
 
-    @RequestMapping(value="/winding/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/winding/add", method = RequestMethod.POST)
     public String windingAdd(
             @RequestParam(value = "handlebarMaker") long handlebarMakerId,
             @RequestParam Long article,
@@ -273,7 +273,7 @@ public class HandlebarController {
         return "redirect:/show_windings";
     }
 
-    @RequestMapping(value="/headset/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/headset/add", method = RequestMethod.POST)
     public String headsetAdd(
             @RequestParam(value = "handlebarMaker") long handlebarMakerId,
             @RequestParam Long article,
@@ -297,7 +297,7 @@ public class HandlebarController {
         return "redirect:/show_headsets";
     }
 
-    @RequestMapping(value="/stem/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/stem/add", method = RequestMethod.POST)
     public String stemAdd(
             @RequestParam(value = "handlebarMaker") long handlebarMakerId,
             @RequestParam Long article,
@@ -322,7 +322,7 @@ public class HandlebarController {
         return "redirect:/show_stems";
     }
 
-    @RequestMapping(value="/grips/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/grips/add", method = RequestMethod.POST)
     public String gripsAdd(
             @RequestParam(value = "handlebarMaker") long handlebarMakerId,
             @RequestParam Long article,
@@ -343,7 +343,7 @@ public class HandlebarController {
         return "redirect:/show_grips";
     }
 
-    @RequestMapping(value="/handlebarMaker/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/handlebarMaker/add", method = RequestMethod.POST)
     public String handlebarMakerAdd(@RequestParam String name) {
         handlebarService.addHandlebarMaker(new HandlebarMaker(name));
         return "redirect:/show_handlebars";

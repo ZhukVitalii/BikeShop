@@ -15,7 +15,7 @@
 <div class="container">
     <form role="form"
           class="form-horizontal"
-          action="/fork/add"
+          action="/admin/fork/add"
           method="post">
 
         <h3>New fork</h3>

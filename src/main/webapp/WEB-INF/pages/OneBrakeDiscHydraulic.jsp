@@ -60,16 +60,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </label>
                 <input id="mobile_menu" type="checkbox">
                 <ul class="nav">
-                    <li class="dropdown1"><a href="bicycles.html">Зібрати велосипед</a>
+                    <li class="dropdown1"><a href="#chooseBike">Зібрати велосипед</a>
                         <ul class="dropdown2">
                             <li><a href="/chooseMTBSize">МТВ</a></li>
                             <li><a href="/chooseShosseSize">ШОССЕ</a></li>
                             <li><a href="/chooseCitySize">МІСЬКИЙ</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown1"><a href="parts.html">КОМППОНЕНТИ</a>
+                    <li class="dropdown1"><a href="#cate">КОМППОНЕНТИ</a>
                         <ul class="dropdown2">
-                            <li><a href="parts.html">Підібрати декілька компонентів</a></li>
+                            <!--
+                            <li><a href="#">Підібрати декілька компонентів</a></li>
+                            -->
                             <li><a href="/show_frames">Рами</a></li>
                             <li><a href="/show_forks">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
@@ -88,7 +90,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Троси</a></li>
                         </ul>
                     </li>
-                    <a class="shop" href="/cart"><img src="${brakeDiscHydraulic.url}/resources/images/cart.png" alt=""/></a>
+                    <a class="shop" href="/cart"><img src="resources/images/cart.png" alt=""/></a>
                 </ul>
             </div>
             <div class="clearfix"></div>

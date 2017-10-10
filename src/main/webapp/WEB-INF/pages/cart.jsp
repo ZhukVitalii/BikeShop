@@ -60,16 +60,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </label>
                 <input id="mobile_menu" type="checkbox">
                 <ul class="nav">
-                    <li class="dropdown1"><a href="bicycles.html">BICYCLES</a>
+                    <li class="dropdown1"><a href="#chooseBike">Зібрати велосипед</a>
                         <ul class="dropdown2">
                             <li><a href="/chooseMTBSize">МТВ</a></li>
                             <li><a href="/chooseShosseSize">ШОССЕ</a></li>
                             <li><a href="/chooseCitySize">МІСЬКИЙ</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown1"><a href="parts.html">КОМППОНЕНТИ</a>
+                    <li class="dropdown1"><a href="#cate">КОМППОНЕНТИ</a>
                         <ul class="dropdown2">
-                            <li><a href="parts.html">Підібрати декілька компонентів</a></li>
+                            <!--
+                            <li><a href="#">Підібрати декілька компонентів</a></li>
+                            -->
                             <li><a href="/show_frames">Рами</a></li>
                             <li><a href="/show_forks">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
@@ -103,7 +105,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
 
         <div class="col-md-9 cart-items">
-            <h2>My Shopping Bag (2)</h2>
+            <h2>${total} <label> товарів в корзині</label></h2>
             <script>$(document).ready(function(c) {
                 $('.close1').on('click', function(c){
                     $('.cart-header').fadeOut('slow', function(c){
@@ -133,11 +135,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                     </div>
                     <div class="clearfix"></div>
-                    <div class="delivery">
-                        <p>Service Charges:: Rs.100.00</p>
-                        <span>Delivered in 2-3 bussiness days</span>
-                        <div class="clearfix"></div>
-                    </div>
                 </div>
             </div>
             <script>$(document).ready(function(c) {
@@ -170,11 +167,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -207,11 +199,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -243,11 +230,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -279,11 +261,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -315,11 +292,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -351,11 +323,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -388,11 +355,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -424,11 +386,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -460,11 +417,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -496,11 +448,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -533,11 +480,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -569,11 +511,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -605,11 +542,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -641,11 +573,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -677,11 +604,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -713,11 +635,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -750,11 +667,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -786,11 +698,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -822,11 +729,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -858,11 +760,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -894,11 +791,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -930,11 +822,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -966,11 +853,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -1002,11 +884,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="delivery">
-                            <p>Service Charges:: Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
                 </div>
                 <script>$(document).ready(function(c) {
@@ -1020,41 +897,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </c:forEach>
         </div>
         <div class="col-md-3 cart-total">
-            <a class="continue" href="#">Continue to basket</a>
-            <div class="price-details">
-                <h3>Price Details</h3>
-                <span>Total</span>
-                <span class="total">6200.00</span>
-                <span>Discount</span>
-                <span class="total">---</span>
-                <span>Delivery Charges</span>
-                <span class="total">150.00</span>
-                <div class="clearfix"></div>
-            </div>
-            <h4 class="last-price">TOTAL</h4>
-            <span class="total final">6350.00</span>
+            <h4 class="last-price">Загальна сума</h4>
             <div class="clearfix"></div>
-            <a class="order" href="#">Place Order</a>
-            <div class="total-item">
-                <h3>OPTIONS</h3>
-                <h4>COUPONS</h4>
-                <a class="cpns" href="#">Apply Coupons</a>
-                <p><a href="#">Log In</a> to use accounts - linked coupons</p>
-            </div>
+            <span class="total final">${totalPrice}</span>
+            <div class="clearfix"></div>
+            <a class="order" href="#">Оформити замовлення</a>
         </div>
     </div>
 </div>
 <div class="footer">
     <div class="container wrap">
         <div class="logo2">
-            <a href="/"><img src="resources/images/logo2.png" alt=""/></a>
+            <a href="/"><img src="resources/images/logo.png"
+                             alt="logo"
+                             width="60"
+                             height="62"/>
+            </a>
         </div>
         <div class="ftr-menu">
             <ul>
-                <li><a href="bicycles.html">BICYCLES</a></li>
-                <li><a href="parts.html">PARTS</a></li>
-                <li><a href="accessories.html">ACCESSORIES</a></li>
-                <li><a href="404.html">EXTRAS</a></li>
+                <li><a href="#chooseBike">ЗІБРАТИ ВЕЛОСИПЕД</a></li>
+                <li><a href="#cate">КОМПОНЕНТИ</a></li>
+                <li><a href="#">ДОДАТКОВІ КОМПЛЕКТУЮЧІ</a></li>
             </ul>
         </div>
         <div class="clearfix"></div>

@@ -1,11 +1,8 @@
 package beetle.Wheels;
 
+import beetle.Forks.*;
 import beetle.Frames.BikeType;
 import beetle.Frames.BikeTypeRepository;
-import beetle.Forks.BrakesType;
-import beetle.Forks.BrakesTypeRepository;
-import beetle.Forks.WheelsDiam;
-import beetle.Forks.WheelsDiamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -736,6 +733,11 @@ public class WheelService {
     @Transactional(readOnly=true)
     public List<BackHub> findByPatternBackHub(String pattern, Pageable pageable) {
         return  backHubRepository.findByPattern(pattern, pageable);
+    }
+
+    @Transactional(readOnly=true)
+    public List<Wheel> findByTypeAndWhDiamAndBrType(BikeType bikeType, WheelsDiam wheelsDiam,BrakesType brakesType, Pageable pageable) {
+        return wheelRepository.findByTypeAndWhDiamAndBrType(bikeType, wheelsDiam, brakesType, pageable);
     }
 
     // count by

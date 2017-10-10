@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>Transmission</title>
+    <title>Admin</title>
     <link rel="shortcut icon"
           href="resources/images/logo_brauser.png" >
     <spring:url value="resources/css/bootstrap.css" var="bootstrap"/>
@@ -30,10 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
     <script src="resources/js/scripts.js" type="text/javascript"></script>
     <!--js-->
-
-
 </head>
-
 <body>
 <script src="resources/js/responsiveslides.min.js"></script>
 <script>
@@ -100,47 +97,47 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
-<!--/banner-->
-<div id="cate" class="categories">
-    <div class="container">
-        <h3>Категорії</h3>
-        <div class="categorie-grids">
-            <a href="/show_backDerailleurs"><div class="col-md-4 cate-grid grid18">
-                <h4>Задні перекидки</h4>
-                <a class="store" href="/show_backDerailleurs">Вибрати</a>
-            </div></a>
-            <a href="/show_backGearKass"><div class="col-md-4 cate-grid grid21">
-                <h4>Касети</h4>
-                <a class="store" href="/show_backGearKass">Вибрати</a>
-            </div></a>
-            <a href="/show_backGearTrs"><div class="col-md-4 cate-grid grid22">
-                <h4>Трещітки</h4>
-                <a class="store" href="/show_backGearTrs">Вибрати</a>
-            </div></a>
-            <a href="/show_brackets"><div class="col-md-4 cate-grid grid20">
-                <h4>Каретки</h4>
-                <a class="store" href="/show_brackets">Вибрати</a>
-            </div></a>
-            <a href="/show_chains"><div class="col-md-4 cate-grid grid23">
-                <h4>Ланцюги</h4>
-                <a class="store" href="/show_chains">Вибрати</a>
-            </div></a>
-            <a href="/show_cranks"><div class="col-md-4 cate-grid grid24">
-                <h4>Шатуни</h4>
-                <a class="store" href="/show_cranks">Вибрати</a>
-            </div></a>
-            <a href="/show_frontDerailleurs"><div class="col-md-4 cate-grid grid19">
-                <h4>Передні перекидки</h4>
-                <a class="store" href="/show_frontDerailleurs">Вибрати</a>
-            </div></a>
-            <a href="/show_pedals"><div class="col-md-4 cate-grid grid25">
-                <h4>Педалі</h4>
-                <a class="store" href="/show_pedals">Вибрати</a>
-            </div></a>
-            <div class="clearfix"></div>
-        </div>
-    </div>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul id="groupList" class="nav navbar-nav">
+                    <li><button type="button" id="show_frames" class="btn btn-default navbar-btn">Рами</button></li>
+                    <li><button type="button" id="show_forks" class="btn btn-default navbar-btn">Вилки</button></li>
+                    <li><button type="button" id="show_handlebars" class="btn btn-default navbar-btn">Рульове управління</button></li>
+                    <li><button type="button" id="show_wheels" class="btn btn-default navbar-btn">Колеса та комплектуючі</button></li>
+                    <li><button type="button" id="show_brakes" class="btn btn-default navbar-btn">Гальма</button></li>
+                    <li><button type="button" id="show_transmissions" class="btn btn-default navbar-btn">Трансмісія</button></li>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
 </div>
+
+<script>
+
+    $('#show_frames').click(function(){
+        window.location.href='/admin/show_framesAdmin';
+    });
+    $('#show_forks').click(function(){
+        window.location.href='/admin/show_forks';
+    });
+    $('#show_handlebars').click(function(){
+        window.location.href='/admin/show_handlebars';
+    });
+    $('#show_wheels').click(function(){
+        window.location.href='/admin/show_wheels';
+    });
+    $('#show_brakes').click(function(){
+        window.location.href='/admin/show_brakes';
+    });
+    $('#show_transmissions').click(function(){
+        window.location.href='/admin/show_transmissions';
+    });
+    $('.dropdown-toggle').dropdown();
+
+</script>
 </body>
 </html>
-

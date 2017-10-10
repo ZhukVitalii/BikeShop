@@ -1,10 +1,7 @@
 package beetle;
 
 import beetle.Brakes.*;
-import beetle.Forks.Fork;
-import beetle.Forks.ForkService;
-import beetle.Forks.TubeDiameter;
-import beetle.Forks.WheelsDiam;
+import beetle.Forks.*;
 import beetle.Frames.BikeType;
 import beetle.Frames.Frame;
 import beetle.Frames.FrameService;
@@ -44,6 +41,8 @@ public class UserController {
     private FrameService frameService;
     @Autowired
     private HandlebarService handlebarService;
+    @Autowired
+    private UserService userService;
 
     //Return HOME-PAGE
     @RequestMapping("/")
@@ -51,6 +50,7 @@ public class UserController {
         if (page < 0) page = 0;
         return "index";
     }
+
 
     //Select from database bike type MTB
     @RequestMapping("/MTB_page")
@@ -471,108 +471,134 @@ public class UserController {
         List<FrontDerailleur> frontDerailleurs = new ArrayList<>();
         List<Pedal> pedals = new ArrayList<>();
 
+        double totalPrice = 0; //Total price in cart
+        int total = 0; // number of product in cart
+
 //Select components from database by article, that user added to cart, and add this components to List
         for (int i = 0; i < frameService.getSize(); i++) {
             System.out.println("артиклі рами в корзині" + " " + frameService.getArticleFromCart(i));
             List<Frame> frame = frameService
                     .findByArticle(frameService.getArticleFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            frames.add(frame.get(0));
+            Frame frameToCart = frame.get(0);
+            double price = frameToCart.getPrice();
+            frames.add(frameToCart);
+            totalPrice += price;
+            total++;
         }
         for (int i = 0; i < forkService.getSize(); i++) {
             System.out.println("артиклі вилок в корзині" + " " + forkService.getArticleFromCart(i));
             List<Fork> fork = forkService
                     .findByArticle(forkService.getArticleFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            forks.add(fork.get(0));
+            Fork forkToCart = fork.get(0);
+            double price = forkToCart.getPrice();
+            forks.add(forkToCart);
+            totalPrice += price;
+            total++;
         }
         for (int i = 0; i < handlebarService.getSizeHandlebar(); i++) {
             System.out.println("артиклі рулів в корзині" + " " + handlebarService.getArticleHandlebarFromCart(i));
             List<Handlebar> handlebar = handlebarService
                     .findHandlebarByArticle(handlebarService.getArticleHandlebarFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             handlebars.add(handlebar.get(0));
+            total++;
         }
         for (int i = 0; i < handlebarService.getSizeStem(); i++) {
             System.out.println("артиклі виносів в корзині" + " " + handlebarService.getArticleStemFromCart(i));
             List<Stem> stem = handlebarService
                     .findStemByArticle(handlebarService.getArticleStemFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             stems.add(stem.get(0));
+            total++;
         }
         for (int i = 0; i < handlebarService.getSizeGrips(); i++) {
             System.out.println("артиклі грипсів в корзині" + " " + handlebarService.getArticleGripsFromCart(i));
             List<Grips> gripss = handlebarService
                     .findGripsByArticle(handlebarService.getArticleGripsFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             grips.add(gripss.get(0));
+            total++;
         }
         for (int i = 0; i < handlebarService.getSizeHeadset(); i++) {
             System.out.println("артиклі рульових в корзині" + " " + handlebarService.getArticleHeadsetFromCart(i));
             List<Headset> headset = handlebarService
                     .findHeadsetByArticle(handlebarService.getArticleHeadsetFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             headsets.add(headset.get(0));
+            total++;
         }
         for (int i = 0; i < handlebarService.getSizeWinding(); i++) {
             System.out.println("артиклі обмоток в корзині" + " " + handlebarService.getArticleWindingFromCart(i));
             List<Winding> winding = handlebarService
                     .findWindingByArticle(handlebarService.getArticleWindingFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             windings.add(winding.get(0));
+            total++;
         }
         for (int i = 0; i < brakeService.getSizeBrakeDiscHydraulic(); i++) {
             System.out.println("артиклі дискових гідравлічних в корзині" + " " + brakeService.getArticleBrakeDiscHydraulicFromCart(i));
             List<BrakeDiscHydraulic> brakeDiscHydraulic = brakeService
                     .findBrakeDiscHydraulicByArticle(brakeService.getArticleBrakeDiscHydraulicFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             brakeDiscHydraulics.add(brakeDiscHydraulic.get(0));
+            total++;
         }
         for (int i = 0; i < brakeService.getSizeBrakeDiscMechanik(); i++) {
             System.out.println("артиклі вилок в корзині" + " " + brakeService.getArticleBrakeDiscMechanikFromCart(i));
             List<BrakeDiscMechanik> brakeDiscMechaniks1 = brakeService
                     .findBrakeDiscMechanikByArticle(brakeService.getArticleBrakeDiscMechanikFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             brakeDiscMechaniks.add(brakeDiscMechaniks1.get(0));
+            total++;
         }
         for (int i = 0; i < brakeService.getSizeBrakeVBrake(); i++) {
             System.out.println("артиклі ободних гальм в корзині" + " " + brakeService.getArticleBrakeVBrakeFromCart(i));
             List<BrakeVBrake> brakeVBrake = brakeService
                     .findBrakeVBrakeByArticle(brakeService.getArticleBrakeVBrakeFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             brakeVBrakes.add(brakeVBrake.get(0));
+            total++;
         }
         for (int i = 0; i < brakeService.getSizeBrakeHandle(); i++) {
             System.out.println("артиклі гальмівних ручок в корзині" + " " + brakeService.getArticleBrakeHandleFromCart(i));
             List<BrakeHandle> brakeHandle = brakeService
                     .findBrakeHandleByArticle(brakeService.getArticleBrakeHandleFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             brakeHandles.add(brakeHandle.get(0));
+            total++;
         }
         for (int i = 0; i < wheelService.getSizeBackHub(); i++) {
             System.out.println("артиклі задніх перекидок в корзині" + " " + wheelService.getArticleBackHubFromCart(i));
             List<BackHub> backHub = wheelService
                     .findBackHubByArticle(wheelService.getArticleBackHubFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             backHubs.add(backHub.get(0));
+            total++;
         }
         for (int i = 0; i < wheelService.getSizeFrontHub(); i++) {
             System.out.println("артиклі передніх перекидок в корзині" + " " + wheelService.getArticleFrontHubFromCart(i));
             List<FrontHub> frontHub = wheelService
                     .findFrontHubByArticle(wheelService.getArticleFrontHubFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             frontHubs.add(frontHub.get(0));
+            total++;
         }
         for (int i = 0; i < wheelService.getSizeRim(); i++) {
             System.out.println("артиклі ободів в корзині" + " " + wheelService.getArticleRimFromCart(i));
             List<Rim> rim = wheelService
                     .findRimByArticle(wheelService.getArticleRimFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             rims.add(rim.get(0));
+            total++;
         }
         for (int i = 0; i < wheelService.getSizeSpoke(); i++) {
             System.out.println("артиклі  спиць в корзині" + " " + wheelService.getArticleSpokeFromCart(i));
             List<Spoke> spoke = wheelService
                     .findSpokeByArticle(wheelService.getArticleSpokeFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             spokes.add(spoke.get(0));
+            total++;
         }
         for (int i = 0; i < wheelService.getSizeTire(); i++) {
             System.out.println("артиклі  покришок в корзині" + " " + wheelService.getArticleTireFromCart(i));
             List<Tire> tire = wheelService
                     .findTireByArticle(wheelService.getArticleTireFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             tires.add(tire.get(0));
+            total++;
         }
         for (int i = 0; i < wheelService.getSizeWheel(); i++) {
             System.out.println("артиклі  колес в корзині" + " " + wheelService.getArticleWheelFromCart(i));
             List<Wheel> wheel = wheelService
                     .findWheelByArticle(wheelService.getArticleWheelFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             wheels.add(wheel.get(0));
+            total++;
         }
         //For transmission
         for (int i = 0; i < transmissionService.getSizeBackDerailleur(); i++) {
@@ -580,50 +606,60 @@ public class UserController {
             List<BackDerailleur> backDerailleur  = transmissionService
                     .findBackDerailleurByArticle(transmissionService.getArticleBackDerailleurFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             backDerailleurs.add(backDerailleur.get(0));
+            total++;
         }
         for (int i = 0; i < transmissionService.getSizeBackGearKas(); i++) {
             System.out.println("артиклі касет в корзині" + " " + transmissionService.getArticleBackGearKasFromCart(i));
             List<BackGearKas> backGearKas  = transmissionService
                     .findBackGearKasByArticle(transmissionService.getArticleBackGearKasFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             backGearKass.add(backGearKas.get(0));
+            total++;
         }
         for (int i = 0; i < transmissionService.getSizeBackGearTr(); i++) {
             System.out.println("артиклі трещіток в корзині" + " " + transmissionService.getArticleBackGearTrFromCart(i));
             List<BackGearTr> backGearTr  = transmissionService
                     .findBackGearTrByArticle(transmissionService.getArticleBackGearTrFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             backGearTrs.add(backGearTr.get(0));
+            total++;
         }
         for (int i = 0; i < transmissionService.getSizeBracket(); i++) {
             System.out.println("артиклі кареток в корзині" + " " + transmissionService.getArticleBracketFromCart(i));
             List<Bracket> bracket  = transmissionService
                     .findBracketByArticle(transmissionService.getArticleBracketFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             brackets.add(bracket.get(0));
+            total++;
         }
         for (int i = 0; i < transmissionService.getSizeChain(); i++) {
             System.out.println("артиклі ланцюгів в корзині" + " " + transmissionService.getArticleChainFromCart(i));
             List<Chain> chain  = transmissionService
                     .findChainByArticle(transmissionService.getArticleBracketFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             chains.add(chain.get(0));
+            total++;
         }
         for (int i = 0; i < transmissionService.getSizeCrank(); i++) {
             System.out.println("артиклі шатунів в корзині" + " " + transmissionService.getArticleCrankFromCart(i));
             List<Crank> crank  = transmissionService
                     .findCrankByArticle(transmissionService.getArticleCrankFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             cranks.add(crank.get(0));
+            total++;
         }
         for (int i = 0; i < transmissionService.getSizeFrontDerailleur(); i++) {
             System.out.println("артиклі передніх перекидок в корзині" + " " + transmissionService.getArticleFrontDerailleurFromCart(i));
             List<FrontDerailleur> frontDerailleur  = transmissionService
                     .findFrontDerailleurByArticle(transmissionService.getArticleFrontDerailleurFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             frontDerailleurs.add(frontDerailleur.get(0));
+            total++;
         }
         for (int i = 0; i < transmissionService.getSizePedal(); i++) {
             System.out.println("артиклі педалей в корзині" + " " + transmissionService.getArticlePedalFromCart(i));
             List<Pedal> pedal  = transmissionService
                     .findPedalByArticle(transmissionService.getArticlePedalFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             pedals.add(pedal.get(0));
+            total++;
         }
 //models for cart
+        model.addAttribute("total", total);
+        model.addAttribute("totalPrice", totalPrice);
         //Forks
         model.addAttribute("forks", forks);
         //Frames
@@ -681,32 +717,48 @@ public class UserController {
         System.out.println("всього шатунів в корзині в корзині" +" = "+ cranks.size());
         System.out.println("всього передніх перекидок в корзині в корзині" +" = "+ frontDerailleurs.size());
         System.out.println("всього педалей в корзині в корзині" +" = "+ pedals.size());
+        System.out.println("всього товарів в корзині" + total);
 
             return "cart";
 
         }
-// Select Forks, test
-     @RequestMapping("/chooseFork/{bikeType.id}/{wheelsDiam.id}/{tubeDiameter.id}")
-    public String listForkForMTB(
-            @PathVariable(value = "bikeType.id") Long bike,
-            @PathVariable(value = "wheelsDiam.id") Long wheel,
-            @PathVariable(value = "tubeDiameter.id") Long tube,
+// Select Forks
+     @RequestMapping("/chooseFork/{id}")
+    public String listForkForBike(
+            @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        BikeType bikeType = forkService.findBikeType(bike);
-        WheelsDiam wheelsDiam = forkService.findWheelsDiam(wheel);
-        TubeDiameter tubeDiameter = forkService.findTubeDiameter(tube);
+        userService.addIdFrame(id);
+        Frame frame = frameService.findFrame(userService.getIdFrame());
+        BikeType bikeType = frame.getBikeType();
+        TubeDiameter tubeDiameter = frame.getTubeDiameter();
+        WheelsDiam wheelsDiam = frame.getWheelsDiam();
+        BrakesType brakesType = frame.getBrakesType();
         List<Fork> forks = forkService.
-                findByTypeAndWhDiamAndTubeDiam(bikeType,wheelsDiam,tubeDiameter,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                findByTypeAndWhDiamAndTubeDiamAndBrType(bikeType,wheelsDiam,tubeDiameter,brakesType,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
      model.addAttribute("forks", forks);
-     System.out.println("Вибрано тип " + bike);
-     System.out.println("Вибрано діаметер колес " + wheel);
-     System.out.println("Вибрано діаметер труби " + tube);
         return "forksToFrame";
     }
-
+    // Select Wheels
+    @RequestMapping("/chooseWheel/{id}")
+    public String listWheelForFork(
+            @PathVariable(value = "id") Long id,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        userService.addIdWheel(id);
+        Frame frame = frameService.findFrame(userService.getIdFrame());
+        BikeType bikeType = frame.getBikeType();
+        WheelsDiam wheelsDiam = frame.getWheelsDiam();
+        BrakesType brakesType = frame.getBrakesType();
+        List<Wheel> wheels = wheelService.
+                findByTypeAndWhDiamAndBrType(bikeType,wheelsDiam,brakesType,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("wheels", wheels);
+        return "wheelsToFork";
     }
+}
 
 

@@ -40,7 +40,7 @@ public class WheelController {
     }
 
     //for admin with all brakes components
-    @RequestMapping("/show_wheelsAdmin")
+    @RequestMapping("/admin/show_wheels")
     public String wheelsAdminVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<Wheel> wheels = wheelService
@@ -159,7 +159,7 @@ public class WheelController {
 
     //add components from browser
 
-    @RequestMapping("/wheel_add_page")
+    @RequestMapping("/admin/wheel_add_page")
     public String wheelAddPage(Model model) {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
         model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
@@ -170,13 +170,13 @@ public class WheelController {
         return "wheel_add_page";
     }
 
-    @RequestMapping("/spoke_add_page")
+    @RequestMapping("/admin/spoke_add_page")
     public String spokeAddPage(Model model) {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
         return "spoke_add_page";
     }
 
-    @RequestMapping("/rim_add_page")
+    @RequestMapping("/admin/rim_add_page")
     public String rimAddPage(Model model) {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
         model.addAttribute("bikeType", forkService.findBikeType());
@@ -191,7 +191,7 @@ public class WheelController {
         return "rim_add_page";
     }
 
-    @RequestMapping("/frontHub_add_page")
+    @RequestMapping("/admin/frontHub_add_page")
     public String frontHubAddPage(Model model) {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
         model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
@@ -204,7 +204,7 @@ public class WheelController {
         return "frontHub_add_page";
     }
 
-    @RequestMapping("/backHub_add_page")
+    @RequestMapping("/admin/backHub_add_page")
     public String backHubAddPage(Model model) {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
         model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
@@ -219,7 +219,7 @@ public class WheelController {
         return "backHub_add_page";
     }
 
-    @RequestMapping("/tire_add_page")
+    @RequestMapping("/admin/tire_add_page")
     public String tireAddPage(Model model) {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
         model.addAttribute("tireType", wheelService.findTireType());
@@ -229,7 +229,7 @@ public class WheelController {
         return "tire_add_page";
     }
 
-    @RequestMapping("/wheelMaker_add_page")
+    @RequestMapping("/admin/wheelMaker_add_page")
     public String wheelMakerAddPage() {
         return "wheelMaker_add_page";
     }
@@ -270,42 +270,42 @@ public class WheelController {
 
     //for delete components for admin
 
-    @RequestMapping(value = "/wheel/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/wheel/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> delete(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             wheelService.deleteWheel(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/spoke/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/spoke/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteOne(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             wheelService.deleteSpoke(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/rim/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/rim/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteTwo(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             wheelService.deleteRim(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/fromtHub/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/frontHub/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteThree(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             wheelService.deleteFrontHub(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/backHub/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/backHub/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteFor(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             wheelService.deleteBackHub(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/tire/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/tire/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteFive(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             wheelService.deleteTire(toDelete);
@@ -313,7 +313,7 @@ public class WheelController {
     }
 
     // Add components to database
-    @RequestMapping(value="/wheel/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/wheel/add", method = RequestMethod.POST)
     public String wheelAdd(
             @RequestParam(value = "wheelMaker") long wheelMakerId,
             @RequestParam Long article,
@@ -344,7 +344,7 @@ public class WheelController {
         return "redirect:/show_wheels";
     }
 
-    @RequestMapping(value="/spoke/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/spoke/add", method = RequestMethod.POST)
     public String spokeAdd(
             @RequestParam(value = "wheelMaker") long wheelMakerId,
             @RequestParam Long article,
@@ -365,7 +365,7 @@ public class WheelController {
         return "redirect:/show_spokes";
     }
 
-    @RequestMapping(value="/rim/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/rim/add", method = RequestMethod.POST)
     public String rimAdd(
             @RequestParam(value = "wheelMaker") long wheelMakerId,
             @RequestParam Long article,
@@ -403,7 +403,7 @@ public class WheelController {
         return "redirect:/show_rims";
     }
 
-    @RequestMapping(value="/frontHub/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/frontHub/add", method = RequestMethod.POST)
     public String frontHubAdd(
             @RequestParam(value = "wheelMaker") long wheelMakerId,
             @RequestParam Long article,
@@ -437,7 +437,7 @@ public class WheelController {
         return "redirect:/show_frontHubs";
     }
 
-    @RequestMapping(value="/backHub/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/backHub/add", method = RequestMethod.POST)
     public String backHubAdd(
             @RequestParam(value = "wheelMaker") long wheelMakerId,
             @RequestParam Long article,
@@ -475,7 +475,7 @@ public class WheelController {
         return "redirect:/show_backHubs";
     }
 
-    @RequestMapping(value="/tire/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/tire/add", method = RequestMethod.POST)
     public String tireAdd(
             @RequestParam(value = "wheelMaker") long wheelMakerId,
             @RequestParam Long article,
@@ -502,7 +502,7 @@ public class WheelController {
     }
 
     //Add Maker to database
-    @RequestMapping(value="/wheelMaker/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/wheelMaker/add", method = RequestMethod.POST)
     public String wheelMakerAdd(@RequestParam String name) {
         wheelService.addWheelMaker(new WheelMaker(name));
         return "redirect:/show_wheels";

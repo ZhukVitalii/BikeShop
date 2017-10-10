@@ -33,10 +33,15 @@ public class BrakeController {
     @Autowired
     private HandlebarService handlebarService;
 
-
+    //return page with links to pages with components
+    @RequestMapping("/show_brakesComponents")
+    public String brakesComponentsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        return "brakesComponents";
+    }
 
     //for admin with all brakes components
-    @RequestMapping("/show_brakes")
+    @RequestMapping("/admin/show_brakes")
     public String brakesVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
 
@@ -48,7 +53,6 @@ public class BrakeController {
                 .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<BrakeHandle> brakeHandles = brakeService
                 .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-
         model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
         model.addAttribute("locations", brakeService.findLocation());
         model.addAttribute("brakeLiquids", brakeService.findBrakeLiquid());
@@ -63,13 +67,11 @@ public class BrakeController {
         model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
         model.addAttribute("brakeVBrakes", brakeVBrakes);
         model.addAttribute("brakeHandles", brakeHandles);
-
         model.addAttribute("allPages", getPageCountBrakeDiscHydr());
         model.addAttribute("allPages", getPageCountBrakeDiscMech());
         model.addAttribute("allPages", getPageCountVBrake());
         model.addAttribute("allPages", getPageCountBrakeHandle());
-
-        return "brakes";
+        return "brakesAdmin";
     }
 
     // return pages with type of brakes components
@@ -118,15 +120,8 @@ public class BrakeController {
         return "brakesHandle";
     }
 
-    //return page with links to pages with components
-    @RequestMapping("/show_brakesComponents")
-    public String brakesComponentsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        return "brakesComponents";
-    }
-
     //add components from browser
-    @RequestMapping("/brakeDiscHydr_add_page")
+    @RequestMapping("/admin/brakeDiscHydr_add_page")
     public String brakeDiscHydrAddPage(Model model) {
         model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
         model.addAttribute("locations", brakeService.findLocation());
@@ -137,7 +132,7 @@ public class BrakeController {
         return "brakeDiscHydr_add_page";
     }
 
-    @RequestMapping("/brakeDiscMech_add_page")
+    @RequestMapping("/admin/brakeDiscMech_add_page")
     public String brakeDiscMechAddPage(Model model) {
         model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
         model.addAttribute("locations", brakeService.findLocation());
@@ -146,14 +141,14 @@ public class BrakeController {
         return "brakeDiscMech_add_page";
     }
 
-    @RequestMapping("/brakeVBrake_add_page")
+    @RequestMapping("/admin/brakeVBrake_add_page")
     public String brakeVBrakeAddPage(Model model) {
         model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
         model.addAttribute("locations", brakeService.findLocation());
         return "brakeVBrake_add_page";
     }
 
-    @RequestMapping("/brakeHandle_add_page")
+    @RequestMapping("/admin/brakeHandle_add_page")
     public String brakeHandleAddPage(Model model) {
         model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
         model.addAttribute("brakeHandleLocations", brakeService.findBrakeHandleLocation());
@@ -164,7 +159,7 @@ public class BrakeController {
         return "brakeHandle_add_page";
     }
 
-    @RequestMapping("/brakeMaker_add_page")
+    @RequestMapping("/admin/brakeMaker_add_page")
     public String brakeMakerAddPage() {
         return "brakeMaker_add_page";
     }
@@ -200,29 +195,29 @@ public class BrakeController {
     }
 
     //for delete components for admin
-    @RequestMapping(value = "/brakeDiscHydr/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/brakeDiscHydr/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> delete(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             brakeService.deleteBrakeDiscHydraulic(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/brakeDiscMech/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/brakeDiscMech/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteOne(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             brakeService.deleteBrakeDiscMechanik(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/brakeVBrake/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/brakeVBrake/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteTwo(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
-            brakeService.deleteRBrakeVBrake(toDelete);
+            brakeService.deleteBrakeVBrake(toDelete);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/brakeHandle/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/brakeHandle/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteThree(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             brakeService.deleteBrakeHandle(toDelete);
@@ -231,7 +226,7 @@ public class BrakeController {
     }
 
     // Add components to database
-    @RequestMapping(value="/brakeDiscHydr/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/brakeDiscHydr/add", method = RequestMethod.POST)
     public String brakeDiscHydrAdd(
             @RequestParam(value = "brakeMaker") long brakeMakerId,
             @RequestParam Long article,
@@ -264,7 +259,7 @@ public class BrakeController {
         return "redirect:/show_brakesHydro";
     }
 
-    @RequestMapping(value="/brakeDiscMech/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/brakeDiscMech/add", method = RequestMethod.POST)
     public String brakeDiscMechAdd(
             @RequestParam(value = "brakeMaker") long brakeMakerId,
             @RequestParam Long article,
@@ -291,7 +286,7 @@ public class BrakeController {
         return "redirect:/show_brakesMech";
     }
 
-    @RequestMapping(value="/brakeVBrake/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/brakeVBrake/add", method = RequestMethod.POST)
     public String brakeVBrakeAdd(
             @RequestParam(value = "brakeMaker") long brakeMakerId,
             @RequestParam Long article,
@@ -311,7 +306,7 @@ public class BrakeController {
         return "redirect:/show_brakesVBrake";
     }
 
-    @RequestMapping(value="/brakeHandle/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/brakeHandle/add", method = RequestMethod.POST)
     public String brakeHandleAdd(
             @RequestParam(value = "brakeMaker") long brakeMakerId,
             @RequestParam Long article,
@@ -341,7 +336,7 @@ public class BrakeController {
     }
 
     //Add Maker to database
-    @RequestMapping(value="/brakeMaker/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/brakeMaker/add", method = RequestMethod.POST)
     public String brakeMakerAdd(@RequestParam String name) {
         brakeService.addBrakeMaker(new BrakeMaker(name));
         return "redirect:/show_brakes";

@@ -65,7 +65,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="header">
             <div class="logo">
                 <a  href="/"><img src="resources/images/logo.png"
-                                 alt=""
+                                 alt="logo"
                                  width="110"
                                  height="112"/>
                 </a>
@@ -76,16 +76,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </label>
                 <input id="mobile_menu" type="checkbox">
                 <ul class="nav">
-                    <li class="dropdown1"><a href="bicycles.html">Зібрати велосипед</a>
+                    <li class="dropdown1"><a href="#chooseBike">Зібрати велосипед</a>
                         <ul class="dropdown2">
                             <li><a href="/chooseMTBSize">МТВ</a></li>
                             <li><a href="/chooseShosseSize">ШОССЕ</a></li>
                             <li><a href="/chooseCitySize">МІСЬКИЙ</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown1"><a href="parts.html">КОМППОНЕНТИ</a>
+                    <li class="dropdown1"><a href="#cate">КОМППОНЕНТИ</a>
                         <ul class="dropdown2">
-                            <li><a href="parts.html">Підібрати декілька компонентів</a></li>
+                            <!--
+                            <li><a href="#">Підібрати декілька компонентів</a></li>
+                            -->
                             <li><a href="/show_frames">Рами</a></li>
                             <li><a href="/show_forks">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
@@ -104,14 +106,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Троси</a></li>
                         </ul>
                     </li>
-
                     <a class="shop" href="/cart"><img src="resources/images/cart.png" alt=""/></a>
                 </ul>
             </div>
             <div class="clearfix"></div>
         </div>
     </div>
-    <div class="caption">
+    <div id="chooseBike" class="caption">
         <div class="slider">
             <div class="callbacks_container">
                 <ul class="rslides" id="slider">
@@ -221,38 +222,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"></div>
         </div>
     </div>
-
-
-
-</div>
-
-
-<!---->
-<div class="contact">
-    <div class="container">
-        <h3>CONTACT US</h3>
-        <p>Please contact us for all inquiries and purchase options.</p>
-        <form>
-            <input type="text" placeholder="NAME" required="">
-            <input type="text" placeholder="SURNAME" required="">
-            <input class="user" type="text" placeholder="USER@DOMAIN.COM" required=""><br>
-            <textarea placeholder="MESSAGE"></textarea>
-            <input type="submit" value="SEND">
-        </form>
-    </div>
 </div>
 <!---->
 <div class="footer">
     <div class="container wrap">
         <div class="logo2">
-            <a href="index.html"><img src="resources/images/logo2.png" alt=""/></a>
+            <a href="/"><img src="resources/images/logo.png"
+                             alt="logo"
+                             width="60"
+                             height="62"/>
+            </a>
         </div>
         <div class="ftr-menu">
             <ul>
-                <li><a href="bicycles.html">BICYCLES</a></li>
-                <li><a href="parts.html">PARTS</a></li>
-                <li><a href="accessories.html">ACCESSORIES</a></li>
-                <li><a href="404.html">EXTRAS</a></li>
+                <li><a href="#chooseBike">ЗІБРАТИ ВЕЛОСИПЕД</a></li>
+                <li><a href="#cate">КОМПОНЕНТИ</a></li>
+                <li><a href="#">ДОДАТКОВІ КОМПЛЕКТУЮЧІ</a></li>
             </ul>
         </div>
         <div class="clearfix"></div>

@@ -246,6 +246,12 @@ public class FrameService {
     }
 
     //find by id
+
+    @Transactional(readOnly = true)
+    public  Frame findFrame(Long id) {
+        return frameRepository.findOne(id);
+    }
+
     @Transactional(readOnly=true)
     public FrameMaker findFrameMaker(long id) {
         return frameMakerRepository.findOne(id);

@@ -34,6 +34,7 @@ public class FrameController {
         if (page < 0) page = 0;
         List<Frame> frames = frameService
                 .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("frameMakers", frameService.findFrameMakers());
         model.addAttribute("frames", frames);
         model.addAttribute("allPages", getPageCount());
         int a = frameService.getSize();
@@ -42,7 +43,7 @@ public class FrameController {
     }
 
     //Page for admin
-    @RequestMapping("/show_framesAdmin")
+    @RequestMapping("/admin/show_framesAdmin")
     public String framesAdminVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<Frame> frames = frameService
@@ -53,7 +54,7 @@ public class FrameController {
     }
 
     //add components from browser
-    @RequestMapping("/frame_add_page")
+    @RequestMapping("/admin/frame_add_page")
     public String frameAddPage(Model model) {
         model.addAttribute("frameMakers", frameService.findFrameMakers());
         model.addAttribute("frameSizes", frameService.findFrameSize());
@@ -68,7 +69,7 @@ public class FrameController {
         return "frame_add_page";
     }
 
-    @RequestMapping("/frameMaker_add_page")
+    @RequestMapping("/admin/frameMaker_add_page")
     public String frameMakerAddPage() {
         return "frameMaker_add_page";
     }
@@ -92,7 +93,7 @@ public class FrameController {
     }
 
     //for delete components for admin
-    @RequestMapping(value = "/frame/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/frame/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> delete(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
             frameService.deleteFrame(toDelete);
@@ -100,7 +101,7 @@ public class FrameController {
     }
 
     // Add fork to database
-    @RequestMapping(value="/frame/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/frame/add", method = RequestMethod.POST)
     public String frameAdd(
                             @RequestParam(value = "frameMaker") long frameMakerId,
                             @RequestParam Long article,
@@ -140,7 +141,7 @@ public class FrameController {
     }
 
     //Add Maker to database
-    @RequestMapping(value="/frameMaker/add", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/frameMaker/add", method = RequestMethod.POST)
     public String groupAdd(@RequestParam String name) {
         frameService.addFrameMaker(new FrameMaker(name));
         return "redirect:/show_frames";

@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 <head>
@@ -18,6 +19,8 @@
     <link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Bike-shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
@@ -63,16 +66,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </label>
                 <input id="mobile_menu" type="checkbox">
                 <ul class="nav">
-                    <li class="dropdown1"><a href="bicycles.html">Зібрати велосипед</a>
+                    <li class="dropdown1"><a href="#chooseBike">Зібрати велосипед</a>
                         <ul class="dropdown2">
                             <li><a href="/chooseMTBSize">МТВ</a></li>
                             <li><a href="/chooseShosseSize">ШОССЕ</a></li>
                             <li><a href="/chooseCitySize">МІСЬКИЙ</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown1"><a href="parts.html">КОМППОНЕНТИ</a>
+                    <li class="dropdown1"><a href="#cate">КОМППОНЕНТИ</a>
                         <ul class="dropdown2">
-                            <li><a href="parts.html">Підібрати декілька компонентів</a></li>
+                            <!--
+                            <li><a href="#">Підібрати декілька компонентів</a></li>
+                            -->
                             <li><a href="/show_frames">Рами</a></li>
                             <li><a href="/show_forks">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
@@ -91,7 +96,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Троси</a></li>
                         </ul>
                     </li>
-                    <a class="shop" href="cart.html"><img src="resources/images/cart.png" alt=""/></a>
+                    <a class="shop" href="/cart"><img src="resources/images/cart.png" alt=""/></a>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -117,14 +122,76 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="product-head">
         <a href="index.html">Home</a> <span>::</span>
     </div>
-
-
-    <h3>Доступні розміри</h3>
-    <div class="categorie-grids">
+    <h3>Виберіть розмір згідно таблиці</h3>
+    <br>
+    <div class="table-responsive col-md-10">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Ваш зріст</th>
+                <th>Розмір рами </th>
+                <th>Розмір рами в дюймах </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>135-150</td>
+                <td>XS</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>150-160</td>
+                <td>XS, S</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>155-165</td>
+                <td>S</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>165-175</td>
+                <td>S, M</td>
+                <td>17</td>
+            </tr>
+            <tr>
+                <td>170-180</td>
+                <td>L</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>175-185</td>
+                <td>L</td>
+                <td>19</td>
+            </tr>
+            <tr>
+                <td>180-190</td>
+                <td>XL</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>185-190</td>
+                <td>XL</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>185-195</td>
+                <td>XXL</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>190-200</td>
+                <td>XXL</td>
+                <td>23</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="clearfix"></div>
+   <div class="categorie-grids">
         <c:forEach items="${framesizes}" var="framesize">
             <div class="col-md-4 cate-grid grid26">
                 <a href="<c:url value="/framesMTB/${framesize.id}"/>">
-
                     <b><i>${framesize.size} </i></b></font>
                 </a>
             </div>
