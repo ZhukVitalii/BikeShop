@@ -1,0 +1,14 @@
+.login-page{
+    background:url(../images/login.png) no-repeat;
+    background-size: cover;
+    height: 500px;
+}
+.login {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #66afe9;
+
+}
+.error-login {
+    color: red;
+}
