@@ -118,139 +118,131 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </nav>
     <div class="product">
-        <div class="container">
-            <div class="ctnt-bar cntnt">
-                <div class="content-bar">
-                    <div class="single-page">
-                        <div class="product-head">
-                            <a href="/">Home</a> <span>::</span>
-                        </div>
-                        <c:forEach items="${cranks}" var="crank">
-                        <!--Include the Etalage files-->
-                        <link rel="stylesheet" href="resources/css/etalage.css">
-                        <script src="resources/js/jquery.etalage.min.js"></script>
-                        <script>
-                            jQuery(document).ready(function($){
-                                $('#etalage').etalage({
-                                    thumb_image_width: 400,
-                                    thumb_image_height: 400,
-                                    source_image_width: 800,
-                                    source_image_height: 1000,
-                                    show_hint: true,
-                                    click_callback: function(image_anchor, instance_id){
-                                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-                                    }
-                                });
-                            });
-                        </script>
-                        <!--//details-product-slider-->
-                        <div class="details-left-slider">
-                            <a href="<c:url value="/crank/${crank.url}"/>"
-                               title="Перейти до <c:out value="${crank.name}"/>">
-                                <img height="300" width="300" src="${crank.way}" />
-                            </a>
-                            <div class="details-left-info">
-                                <div class="link-to-one">
-                                    <a href="<c:url value="/crank/${crank.url}"/>"
-                                       title="Перейти до <c:out value="${crank.name}"/>">
-                                        <h3>${crank.name}</h3>
-                                    </a>
-                                </div>
-                                <h5> Артикул  : ${crank.article}</h5>
-                                <p class="maker"> <h3> Виробник  : ${crank.transmissionMaker.name} </h3></p>
-                                <h4></h4>
-                                <p>${crank.price}<label>грн</label><a href="#"></a></p>
-                                <div class="btn_form">
-                                    <a href="cart.html">Купити</a>
-                                    <a href="/cartAddCrank/${crank.article}">Додати до корзини</a>
-                                </div>
-                                <div class="bike-type">
-                                    <table>
-                                        <tr>
-                                            <th><h5>Тип велосипеду  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${crank.bikeType.type}</i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Сумісність з кількістю задніх зірок :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${crank.backSprocketNumber.number} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Кількість зірок :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${crank.frontSprocketNumber.number} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Набір зірок :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${crank.frontSprocketSize.size} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Найбільша зірка  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${crank.frontSprocketMax.number} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Найменша зірка  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${crank.frontSprocketMin.number} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Довжина шатуна  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${crank.crankLength.length} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Матеріаль зірок  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${crank.sprocketMaterial} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Матеріаль шатуна :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${crank.crankMaterial} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Тип каретки  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${crank.bracketType.type} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Колір  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${crank.color} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <h5>Опис ::</h5>
-                                    <p class="desc">${crank.description}</p>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+        <div class="product-head">
+            <a href="/">Home</a> <span>::</span>
+        </div>
+        <c:forEach items="${cranks}" var="crank">
+        <!--Include the Etalage files-->
+        <link rel="stylesheet" href="resources/css/etalage.css">
+        <script src="resources/js/jquery.etalage.min.js"></script>
+        <script>
+            jQuery(document).ready(function($){
+                $('#etalage').etalage({
+                    thumb_image_width: 400,
+                    thumb_image_height: 400,
+                    source_image_width: 800,
+                    source_image_height: 1000,
+                    show_hint: true,
+                    click_callback: function(image_anchor, instance_id){
+                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                    }
+                });
+            });
+        </script>
+        <!--//details-product-slider-->
+        <div class="details-left-slider">
+            <a href="<c:url value="/crank/${crank.url}"/>"
+               title="Перейти до <c:out value="${crank.name}"/>">
+                <img height="300" width="300" src="${crank.way}" />
+            </a>
+            <div class="details-left-info">
+                <div class="link-to-one">
+                    <a href="<c:url value="/crank/${crank.url}"/>"
+                       title="Перейти до <c:out value="${crank.name}"/>">
+                        <h3>${crank.name}</h3>
+                    </a>
+                </div>
+                <h5> Артикул  : ${crank.article}</h5>
+                <p class="maker"> <h3> Виробник  : ${crank.transmissionMaker.name} </h3></p>
+                <h4></h4>
+                <p>${crank.price}<label>грн</label><a href="#"></a></p>
+                <div class="btn_form">
+                    <a href="cart.html">Купити</a>
+                    <a href="/cartAddCrank/${crank.article}">Додати до корзини</a>
+                </div>
+                <div class="bike-type">
+                    <table>
+                        <tr>
+                            <th><h5>Тип велосипеду  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${crank.bikeType.type}</i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Сумісність з кількістю задніх зірок :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${crank.backSprocketNumber.number} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Кількість зірок :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${crank.frontSprocketNumber.number} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Набір зірок :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${crank.frontSprocketSize.size} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Найбільша зірка  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${crank.frontSprocketMax.number} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Найменша зірка  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${crank.frontSprocketMin.number} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Довжина шатуна  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${crank.crankLength.length} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Матеріаль зірок  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${crank.sprocketMaterial} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Матеріаль шатуна :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${crank.crankMaterial} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Тип каретки  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${crank.bracketType.type} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Колір  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${crank.color} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <h5>Опис ::</h5>
+                    <p class="desc">${crank.description}</p>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
         </c:forEach>
         <nav aria-label="Page navigation">

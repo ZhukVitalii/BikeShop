@@ -132,7 +132,7 @@ public class FrameController {
         HeadsetType headsetType = (headsetTypeId != DEFAULT_GROUP_ID) ? frameService.findHeadsetType(headsetTypeId) : null;
         TubeDiameter tubeDiameter = (tubeDiameterId != DEFAULT_GROUP_ID) ? frameService.findTubeDiameter(tubeDiameterId) : null;
         UnderSaddleTube underSaddleTube = (underSaddleTubeId != DEFAULT_GROUP_ID) ? frameService.findUnderSaddleTuber(underSaddleTubeId) : null;
-        BrakesType brakesType =  (brakesTypeId != DEFAULT_GROUP_ID) ? frameService.findBrakesType(bikeTypeId) : null;
+        BrakesType brakesType =  (brakesTypeId != DEFAULT_GROUP_ID) ? frameService.findBrakesType(brakesTypeId) : null;
         TrunkBinding trunkBinding = (trunkBindingId != DEFAULT_GROUP_ID) ? frameService.findTrunkBinding(trunkBindingId) : null;
         Frame frame = new Frame(frameMaker,article,url,name,bikeType,frameSize, wheelsDiam, material,bracketWide,headsetType,tubeDiameter,
                 underSaddleTube,brakesType,trunkBinding,weight,color,price,description,way);

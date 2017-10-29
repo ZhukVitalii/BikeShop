@@ -48,7 +48,7 @@ public interface CrankRepository extends JpaRepository<Crank, Long> {
     List<Crank> findByCrankLength(@Param("crankLength")  CrankLength crankLength, Pageable pageable);
 
     @Query("SELECT c FROM Crank c WHERE c.bracketType = :bracketType")
-    List<Crank> findByBracketType(@Param("bracketType")  BracketType bracketType, Pageable pageable);
+    List<Crank> findByBracketType(@Param("bracketType") BracketType bracketType, Pageable pageable);
 
     @Query("SELECT c FROM Crank c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<Crank> findByPattern(@Param("pattern") String pattern, Pageable pageable);

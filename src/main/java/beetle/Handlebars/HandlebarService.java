@@ -1,9 +1,9 @@
 package beetle.Handlebars;
 
-import beetle.Frames.BikeType;
-import beetle.Frames.BikeTypeRepository;
 import beetle.Forks.TubeDiameter;
 import beetle.Forks.TubeDiameterRepository;
+import beetle.Frames.BikeType;
+import beetle.Frames.BikeTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -266,6 +266,15 @@ public class HandlebarService {
     //select from database by parametrs
 
     @Transactional(readOnly=true)
+    public List<Stem> findByHandlebarDiamAndTubeDiam(HandlebarDiameter handlebarDiameter,
+                                                     TubeDiameter tubeDiameter,
+                                                     Pageable pageable) {
+        return stemRepository.findByHandlebarDiamAndTubeDiam(handlebarDiameter,
+                                                             tubeDiameter,
+                                                             pageable);
+    }
+
+    @Transactional(readOnly=true)
     public List<Handlebar> findHandlebarByArticle(Long article, Pageable pageable) {
         return handlebarRepository.findByArticle(article, pageable);
     }
@@ -369,6 +378,25 @@ public class HandlebarService {
 
 
     //find by id
+    @Transactional(readOnly = true)
+    public Handlebar findHandlebar(long id) {
+        return handlebarRepository.findOne(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Stem findStem(long id) {
+        return stemRepository.findOne(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Grips findGrips(long id) {
+        return gripsRepository.findOne(id);
+    }
+
+    @Transactional (readOnly = true)
+    public Winding findWinding(long id) {
+        return windingRepository.findOne(id);
+    }
 
     @Transactional(readOnly=true)
     public HandlebarMaker findHandlebarMaker(long id) {

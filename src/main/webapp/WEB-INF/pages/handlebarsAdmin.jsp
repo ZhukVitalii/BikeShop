@@ -522,7 +522,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             data['toDelete[]'].push($(this).val());
         });
         $.post("/admin/handlebar/delete", data, function(data, status) {
-            window.location.reload();
+            window.location.reload();;
         });
     });
     $('#delete_winding').click(function(){

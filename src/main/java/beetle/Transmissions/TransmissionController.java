@@ -469,7 +469,7 @@ public class TransmissionController {
         BracketType bracketType = (bracketTypeId != DEFAULT_GROUP_ID) ? transmissionService.findBracketType(bracketTypeId) : null;
         BearingType bearingType = (bearingTypeId != DEFAULT_GROUP_ID) ? transmissionService.findBearingType(bearingTypeId) : null;
         CarvingType carvingType = (carvingTypeId != DEFAULT_GROUP_ID) ? transmissionService.findCarvingType(carvingTypeId) : null;
-        Bracket bracket = new Bracket(transmissionMaker,article, url,name,bracketAxisLength, bracketWide,bracketType,bearingType,axisMaterial,carvingType,color,description,price,way);
+        Bracket bracket = new Bracket(transmissionMaker,article, url,name,bracketAxisLength, bracketWide, bracketType,bearingType,axisMaterial,carvingType,color,description,price,way);
         transmissionService.addBracket(bracket);
         return "redirect:/show_brackets";
     }
@@ -526,9 +526,9 @@ public class TransmissionController {
         FrontSprocketMax frontSprocketMax = (frontSprocketMaxId != DEFAULT_GROUP_ID) ? transmissionService.findFrontSprocketMax(frontSprocketMaxId) : null;
         FrontSprocketMin frontSprocketMin = (frontSprocketMinId != DEFAULT_GROUP_ID) ? transmissionService.findFrontSprocketMin(frontSprocketMinId) : null;
         CrankLength crankLength = (crankLengthId != DEFAULT_GROUP_ID) ? transmissionService.findCrankLength(crankLengthId) : null;
-        BracketType bracketType = (bracketTypeId != DEFAULT_GROUP_ID) ? transmissionService.findBracketType(bikeTypeId) : null;
+        BracketType bracketType = (bracketTypeId != DEFAULT_GROUP_ID) ? transmissionService.findBracketType(bracketTypeId) : null;
         Crank crank = new Crank(transmissionMaker,article,url,name,bikeType,backSprocketNumber,frontSprocketNumber,frontSprocketSize,frontSprocketMax,
-                frontSprocketMin,crankLength,sprocketMaterial,crankMaterial,bracketType,color,description,price,way);
+                frontSprocketMin,crankLength,sprocketMaterial,crankMaterial, bracketType,color,description,price,way);
         transmissionService.addCrank(crank);
         return "redirect:/show_cranks";
     }
@@ -598,7 +598,7 @@ public class TransmissionController {
     @RequestMapping(value="/admin/transmissionMaker/add", method = RequestMethod.POST)
     public String transmissionMakerAdd(@RequestParam String name) {
         transmissionService.addTransmissionMaker(new TransmissionMaker(name));
-        return "redirect:/show_transmissions";
+        return "redirect:/admin/show_transmissions";
     }
 
     // Select one product by url and open in separate page

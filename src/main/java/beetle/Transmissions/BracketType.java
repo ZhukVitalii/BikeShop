@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class BracketType{
+public class BracketType {
     @Id
     @GeneratedValue
     private long id;

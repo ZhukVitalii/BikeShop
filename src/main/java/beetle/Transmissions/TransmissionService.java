@@ -287,7 +287,7 @@ public class TransmissionService {
     }
 
     @Transactional
-    public void addBracketType(BracketType bracketType) {
+    public void addBracketsType(BracketType bracketType) {
         bracketTypeRepository.save(bracketType);
     }
 
@@ -578,6 +578,32 @@ public class TransmissionService {
     }
 
     //select from database by parametrs
+
+    @Transactional(readOnly=true)
+    public List<BackDerailleur> findBySprNumberAndSprMaxAndSprMin(BackSprocketNumber backSprocketNumber,
+                                                                  BackSprocketMax backSprocketMax,
+                                                                  BackSprocketMin backSprocketMin,
+                                                                  Pageable pageable) {
+        return backDerailleurRepository.findBySprNumberAndSprMaxAndSprMin(backSprocketNumber,
+                                                                          backSprocketMax,
+                                                                          backSprocketMin,
+                                                                          pageable);
+    }
+
+    @Transactional(readOnly=true)
+    public List<FrontDerailleur> findByFrSprNumberAndBackSprNumberAndFrSprMaxAndFrSprMin(
+                                                                  FrontSprocketNumber frontSprocketNumber,
+                                                                  BackSprocketNumber backSprocketNumber,
+                                                                  FrontSprocketMax frontSprocketMax,
+                                                                  FrontSprocketMin frontSprocketMin,
+                                                                  Pageable pageable) {
+        return frontDerailleurRepository.findByFrSprNumberAndBackSprNumberAndFrSprMaxAndFrSprMin(
+                                                                    frontSprocketNumber,
+                                                                    backSprocketNumber,
+                                                                    frontSprocketMax,
+                                                                    frontSprocketMin,
+                                                                    pageable);
+    }
 
     @Transactional(readOnly=true)
     public List<BackDerailleur> findByBackDerailleurMakers(TransmissionMaker transmissionMaker, Pageable pageable) {
@@ -963,6 +989,41 @@ public class TransmissionService {
 
 
     //find by id
+    @Transactional(readOnly = true)
+    public Crank findCrank(long id) {
+        return crankRepository.findOne(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Bracket findBracket(long id) {
+        return bracketRepository.findOne(id);
+    }
+
+    @Transactional(readOnly = true)
+    public BackGearKas findBackGearKas(long id) {
+        return backGearKasRepository.findOne(id);
+    }
+
+    @Transactional (readOnly = true)
+    public BackDerailleur findBackDerailleur(long id) {
+        return backDerailleurRepository.findOne(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Chain findChain(long id) {
+        return chainRepository.findOne(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Pedal findPedal(long id) {
+        return pedalRepository.findOne(id);
+    }
+
+    @Transactional (readOnly = true)
+    public FrontDerailleur findFrontDerailleur(long id) {
+        return frontDerailleurRepository.findOne(id);
+    }
+
     @Transactional(readOnly=true)
     public TransmissionMaker findTransmissionMaker(long id) {
         return transmissionMakerRepository.findOne(id);

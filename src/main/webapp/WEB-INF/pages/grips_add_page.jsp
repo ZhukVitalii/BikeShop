@@ -42,22 +42,27 @@
                type="text"
                name="name"
                placeholder="назва обмотки">
+        <br>
         <input class="form-control"
                type="text"
                name="length"
                placeholder="довжина">
+        <br>
         <input class="form-control"
                type="text"
                name="weight"
                placeholder="вага">
+        <br>
         <input class="form-control"
                type="text"
                name="material"
                placeholder="матеріал">
+        <br>
         <input class="form-control"
                type="text"
                name="color"
                placeholder="колір">
+        <br>
         <div class="numbers">
             <input class="form-control"
                    type="number"
@@ -65,14 +70,17 @@
                    placeholder="ціна">
             <div class="number-error">Доступний тільки ввід числових значень</div>
         </div>
+        <br>
         <input class="form-control"
                type="text"
                name="description"
                placeholder="опис ">
+        <br>
         <input class="form-control"
                type="text"
                name="way"
                placeholder="зображення">
+        <br>
         <input type="submit"
                class="btn btn-primary"
                value="Add">

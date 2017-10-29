@@ -1,5 +1,10 @@
 package beetle.Handlebars;
 
+import beetle.Forks.TubeDiameter;
+import beetle.Transmissions.BackDerailleur;
+import beetle.Transmissions.BackSprocketMax;
+import beetle.Transmissions.BackSprocketMin;
+import beetle.Wheels.BackSprocketNumber;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,5 +28,9 @@ public interface StemRepository extends JpaRepository<Stem, Long> {
     @Query("SELECT c FROM Stem c WHERE c.article = :article")
     List<Stem> findByArticle(@Param("article") Long article, Pageable pageable);
 
+    @Query("SELECT c FROM Stem c WHERE c.handlebarDiameter = :handlebarDiameter AND c.tubeDiameter = :tubeDiameter ")
+    List<Stem> findByHandlebarDiamAndTubeDiam(@Param("handlebarDiameter" ) HandlebarDiameter handlebarDiameter,
+                                          @Param("tubeDiameter")TubeDiameter tubeDiameter,
+                                          Pageable pageable);
 
 }

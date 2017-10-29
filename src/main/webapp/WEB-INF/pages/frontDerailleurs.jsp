@@ -118,146 +118,138 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </nav>
     <div class="product">
-        <div class="container">
-            <div class="ctnt-bar cntnt">
-                <div class="content-bar">
-                    <div class="single-page">
-                        <div class="product-head">
-                            <a href="/">Home</a> <span>::</span>
-                        </div>
-                        <c:forEach items="${frontDerailleurs}" var="frontDerailleur">
-                        <!--Include the Etalage files-->
-                        <link rel="stylesheet" href="resources/css/etalage.css">
-                        <script src="resources/js/jquery.etalage.min.js"></script>
-                        <script>
-                            jQuery(document).ready(function($){
-                                $('#etalage').etalage({
-                                    thumb_image_width: 400,
-                                    thumb_image_height: 400,
-                                    source_image_width: 800,
-                                    source_image_height: 1000,
-                                    show_hint: true,
-                                    click_callback: function(image_anchor, instance_id){
-                                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-                                    }
-                                });
-                            });
-                        </script>
-                        <!--//details-product-slider-->
-                        <div class="details-left-slider">
-                            <a href="<c:url value="/frontDerailleur/${frontDerailleur.url}"/>"
-                               title="Перейти до <c:out value="${frontDerailleur.name}"/>">
-                                <img height="300" width="300" src="${frontDerailleur.way}" />
-                            </a>
-                            <div class="details-left-info">
-                                <div class="link-to-one">
-                                    <a href="<c:url value="/frontDerailleur/${frontDerailleur.url}"/>"
-                                       title="Перейти до <c:out value="${frontDerailleur.name}"/>">
-                                        <h3>${frontDerailleur.name}</h3>
-                                    </a>
-                                </div>
-                                <h5> Артикул  : ${frontDerailleur.article}</h5>
-                                <p class="maker"> <h3> Виробник  : ${frontDerailleur.transmissionMaker.name} </h3></p>
-                                <h4></h4>
-                                <p>${frontDerailleur.price}<label>грн</label><a href="#"></a></p>
-                                <div class="btn_form">
-                                    <a href="cart.html">Купити</a>
-                                    <a href="/cartAddFrontDerailleur/${frontDerailleur.article}">Додати до корзини</a>
-                                </div>
-                                <div class="bike-type">
-                                    <table>
-                                        <tr>
-                                            <th><h5>Сумісність з кількістю передніх передач  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${frontDerailleur.frontSprocketNumber.number}</i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Сумісність з кількістю задніх зірок :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${frontDerailleur.backSprocketNumber.number} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Найбільша зірка :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${frontDerailleur.frontSprocketMax.number} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Найменша зірка :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${frontDerailleur.frontSprocketMax.number} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Ємність зубів  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${frontDerailleur.teethCapasity.number} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Лінія ланцюга  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${frontDerailleur.chainLine} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Тип кріплення  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${frontDerailleur.frontDerailleurFixType.type} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Діаметр хомута  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${frontDerailleur.collarDiam.diam} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Тип тяги :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${frontDerailleur.tractionType.type} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Матеріал  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${frontDerailleur.material} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Вага  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${frontDerailleur.weight} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Колір  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${frontDerailleur.color} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <h5>Опис ::</h5>
-                                    <p class="desc">${frontDerailleur.description}</p>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+        <div class="product-head">
+            <a href="/">Home</a> <span>::</span>
+        </div>
+        <c:forEach items="${frontDerailleurs}" var="frontDerailleur">
+        <!--Include the Etalage files-->
+        <link rel="stylesheet" href="/resources/css/etalage.css">
+        <script src="/resources/js/jquery.etalage.min.js"></script>
+        <script>
+            jQuery(document).ready(function($){
+                $('#etalage').etalage({
+                    thumb_image_width: 400,
+                    thumb_image_height: 400,
+                    source_image_width: 800,
+                    source_image_height: 1000,
+                    show_hint: true,
+                    click_callback: function(image_anchor, instance_id){
+                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                    }
+                });
+            });
+        </script>
+        <!--//details-product-slider-->
+        <div class="details-left-slider">
+            <a href="<c:url value="/frontDerailleur/${frontDerailleur.url}"/>"
+               title="Перейти до <c:out value="${frontDerailleur.name}"/>">
+                <img height="300" width="300" src="${frontDerailleur.way}" />
+            </a>
+            <div class="details-left-info">
+                <div class="link-to-one">
+                    <a href="<c:url value="/frontDerailleur/${frontDerailleur.url}"/>"
+                       title="Перейти до <c:out value="${frontDerailleur.name}"/>">
+                        <h3>${frontDerailleur.name}</h3>
+                    </a>
+                </div>
+                <h5> Артикул  : ${frontDerailleur.article}</h5>
+                <p class="maker"> <h3> Виробник  : ${frontDerailleur.transmissionMaker.name} </h3></p>
+                <h4></h4>
+                <p>${frontDerailleur.price}<label>грн</label><a href="#"></a></p>
+                <div class="btn_form">
+                    <a href="cart.html">Купити</a>
+                    <a href="/cartAddFrontDerailleur/${frontDerailleur.article}">Додати до корзини</a>
+                </div>
+                <div class="bike-type">
+                    <table>
+                        <tr>
+                            <th><h5>Сумісність з кількістю передніх передач  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frontDerailleur.frontSprocketNumber.number}</i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Сумісність з кількістю задніх зірок :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frontDerailleur.backSprocketNumber.number} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Найбільша зірка :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frontDerailleur.frontSprocketMax.number} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Найменша зірка :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frontDerailleur.frontSprocketMin.number} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Ємність зубів  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frontDerailleur.teethCapasity.number} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Лінія ланцюга  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frontDerailleur.chainLine} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Тип кріплення  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frontDerailleur.frontDerailleurFixType.type} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Діаметр хомута  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frontDerailleur.collarDiam.diam} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Тип тяги :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frontDerailleur.tractionType.type} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Матеріал  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frontDerailleur.material} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Вага  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frontDerailleur.weight} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Колір  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frontDerailleur.color} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <h5>Опис ::</h5>
+                    <p class="desc">${frontDerailleur.description}</p>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
         </c:forEach>
         <nav aria-label="Page navigation">

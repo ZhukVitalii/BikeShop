@@ -94,7 +94,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Троси</a></li>
                         </ul>
                     </li>
-                    <a class="shop" href="/cart"><img src="resources/images/cart.png" alt=""/></a>
+                    <a class="shop" href="/cart"><img src="/resources/images/cart.png" alt=""/></a>
                 </ul>
             </div>
             <div class="clearfix"></div>

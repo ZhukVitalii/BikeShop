@@ -24,10 +24,10 @@ public class UserService {
     /*
     * 0 el = frame
     * 1 el = fork
-    * 2 el = BrakeDiscHydraulic
-    * 3 el = BrakeDiscMechanik
-    * 4 el = BrakeHandle
-    * 5 el = BrakeVBrake
+    * 2 el = BrakeDiscHydraulicFront
+    * 3 el = BrakeDiscHydraulicBack
+    * 4 el = BrakeVBrakeFront
+    * 5 el = BrakeVBrakeBack
     * 6 el = Grips
     * 7 el = Handlebar
     * 8 el = Headset
@@ -47,12 +47,14 @@ public class UserService {
     * 22 el = Spoke
     * 23 el = Tire
     * 24 el = Wheel
+    * 25 el = BrakeDiscMechanikFront
+    * 26 el = BrakeDiscBechanikBack
+    * 27 el = BrakeHandle
 
     * */
     //Frame is 0 element
     public void addIdFrame (Long id) {
         idOfComponents.set(0,id);
-        System.out.println("Frame id =" + idOfComponents.get(0));
     }
     public Long getIdFrame () {
         Long id = idOfComponents.get(0);
@@ -68,38 +70,38 @@ public class UserService {
         return  id;
     }
 
-    //BrakeDiscHydraulic is 2 element
-    public void addIdBrakeDiscHydraulic (Long id) {
+    //BrakeDiscHydraulicFront is 2 element
+    public void addIdBrakeDiscHydraulicFront (Long id) {
         idOfComponents.set(2,id);
     }
-    public Long getIdBrakeDiscHydraulic () {
+    public Long getIdBrakeDiscHydraulicFront () {
         Long id = idOfComponents.get(2);
         return  id;
     }
 
-    //BrakeDiscMechanik is 3 element
-    public void addIdBrakeDiscMechanik (Long id) {
+    //BrakeDiscHydraulicBack is 3 element
+    public void addIdBrakeDiscHydraulicBack (Long id) {
         idOfComponents.set(3,id);
     }
-    public Long getIdBrakeDiscMechanik () {
+    public Long getIdBrakeDiscHydraulicBack () {
         Long id = idOfComponents.get(3);
         return  id;
     }
 
     //BrakeHandle is 4 element
-    public void addIdBrakeHandle (Long id) {
+    public void addIdBrakeVBrakeFront (Long id) {
         idOfComponents.set(4,id);
     }
-    public Long getIdBrakeHandle () {
+    public Long getIdBrakeVBrakeFront () {
         Long id = idOfComponents.get(4);
         return  id;
     }
 
     //BrakeVBrake is 5 element
-    public void addIdBrakeVBrake (Long id) {
+    public void addIdBrakeVBrakeBack (Long id) {
         idOfComponents.set(5,id);
     }
-    public long getIdBrakeVBrake () {
+    public long getIdBrakeVBrakeBack () {
         Long id = idOfComponents.get(5);
         return  id;
     }
@@ -274,6 +276,30 @@ public class UserService {
         Long id = idOfComponents.get(24);
         return  id;
     }
+    //BrakeDiscMechanik is 25 element
+    public void addIdBrakeDiscMechanikFront (Long id) {
+        idOfComponents.set(25,id);
+    }
+    public Long getIdBrakeDiscMechanikFront () {
+        Long id = idOfComponents.get(25);
+        return  id;
+    }
+    //BrakeDiscMechanik is 26 element
+    public void addIdBrakeDiscMechanikBack (Long id) {
+        idOfComponents.set(26,id);
+    }
+    public Long getIdBrakeDiscMechanikBack () {
+        Long id = idOfComponents.get(26);
+        return  id;
+    }
 
+    //BrakeHandle is 27 element
+    public void addIdBrakeHandle (Long id) {
+        idOfComponents.set(27,id);
+    }
+    public Long getIdBrakeHandle () {
+        Long id = idOfComponents.get(27);
+        return  id;
+    }
 }
 

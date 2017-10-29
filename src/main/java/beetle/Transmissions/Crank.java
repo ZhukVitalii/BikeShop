@@ -59,7 +59,8 @@ public class Crank {
     private String way;
 
     public Crank(TransmissionMaker transmissionMaker, Long article, String url, String name, BikeType bikeType, BackSprocketNumber backSprocketNumber, FrontSprocketNumber frontSprocketNumber,
-                 FrontSprocketSize frontSprocketSize,FrontSprocketMax frontSprocketMax,FrontSprocketMin frontSprocketMin,CrankLength crankLength, String sprocketMaterial, String  crankMaterial, BracketType bracketType, String color, String description,
+                 FrontSprocketSize frontSprocketSize, FrontSprocketMax frontSprocketMax, FrontSprocketMin frontSprocketMin, CrankLength crankLength, String sprocketMaterial, String  crankMaterial,
+                 BracketType bracketType, String color, String description,
                  Double price, String way) {
         this.transmissionMaker = transmissionMaker;
         this.article = article;
@@ -79,6 +80,22 @@ public class Crank {
         this.description = description;
         this.price = price;
         this.way = way;
+    }
+
+    public BackSprocketNumber getBackSprocketNumber() {
+        return backSprocketNumber;
+    }
+
+    public FrontSprocketNumber getFrontSprocketNumber() {
+        return frontSprocketNumber;
+    }
+
+    public FrontSprocketMax getFrontSprocketMax() {
+        return frontSprocketMax;
+    }
+
+    public  FrontSprocketMin getFrontSprocketMin() {
+        return frontSprocketMin;
     }
 }
 

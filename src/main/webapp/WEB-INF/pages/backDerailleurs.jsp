@@ -118,112 +118,104 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </nav>
     <div class="product">
-        <div class="container">
-            <div class="ctnt-bar cntnt">
-                <div class="content-bar">
-                    <div class="single-page">
-                        <div class="product-head">
-                            <a href="/">Home</a> <span>::</span>
-                        </div>
-                        <c:forEach items="${backDerailleurs}" var="backDerailleur">
-                        <!--Include the Etalage files-->
-                        <link rel="stylesheet" href="resources/css/etalage.css">
-                        <script src="resources/js/jquery.etalage.min.js"></script>
-                        <script>
-                            jQuery(document).ready(function($){
+        <div class="product-head">
+            <a href="/">Home</a> <span>::</span>
+        </div>
+        <c:forEach items="${backDerailleurs}" var="backDerailleur">
+        <!--Include the Etalage files-->
+        <link rel="stylesheet" href="/resources/css/etalage.css">
+        <script src="/resources/js/jquery.etalage.min.js"></script>
+        <script>
+            jQuery(document).ready(function($){
 
-                                $('#etalage').etalage({
-                                    thumb_image_width: 400,
-                                    thumb_image_height: 400,
-                                    source_image_width: 800,
-                                    source_image_height: 1000,
-                                    show_hint: true,
-                                    click_callback: function(image_anchor, instance_id){
-                                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-                                    }
-                                });
-                            });
-                        </script>
-                        <!--//details-product-slider-->
-                        <div class="details-left-slider">
-                            <a href="<c:url value="/backDerailleur/${backDerailleur.url}"/>"
-                               title="Перейти до <c:out value="${backDerailleur.name}"/>">
-                                <img height="300" width="300" src="${backDerailleur.way}" />
-                            </a>
-                            <div class="details-left-info">
-                                <div class="link-to-one">
-                                    <a href="<c:url value="/backDerailleur/${backDerailleur.url}"/>"
-                                       title="Перейти до <c:out value="${backDerailleur.name}"/>">
-                                        <h3>${backDerailleur.name}</h3>
-                                    </a>
-                                </div>
-                                <h5> Артикул  : ${backDerailleur.article}</h5>
-                                <p class="maker"> <h3> Виробник  : ${backDerailleur.transmissionMaker.name} </h3></p>
-                                <h4></h4>
-                                <p>${backDerailleur.price}<label>грн</label><a href="#"></a></p>
-                                <div class="btn_form">
-                                    <a href="cart.html">Купити</a>
-                                    <a href="/cartAddBackDerailleur/${backDerailleur.article}">Додати до корзини</a>
-                                </div>
-                                <div class="bike-type">
-                                    <table>
-                                        <tr>
-                                            <th><h5>Сумісність з кількістю передач  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backDerailleur.backSprocketNumber.number}</i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Найбільша зірка :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backDerailleur.backSprocketMax.number} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Найменша зірка :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backDerailleur.backSprocketMin.number} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Довжина лапки  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backDerailleur.pawLength.length} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Матеріал  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backDerailleur.material} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Вага  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backDerailleur.weight} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Колір  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backDerailleur.color} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <h5>Опис ::</h5>
-                                    <p class="desc">${backDerailleur.description}</p>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+                $('#etalage').etalage({
+                    thumb_image_width: 400,
+                    thumb_image_height: 400,
+                    source_image_width: 800,
+                    source_image_height: 1000,
+                    show_hint: true,
+                    click_callback: function(image_anchor, instance_id){
+                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                    }
+                });
+            });
+        </script>
+        <!--//details-product-slider-->
+        <div class="details-left-slider">
+            <a href="<c:url value="/backDerailleur/${backDerailleur.url}"/>"
+               title="Перейти до <c:out value="${backDerailleur.name}"/>">
+                <img height="300" width="300" src="${backDerailleur.way}" />
+            </a>
+            <div class="details-left-info">
+                <div class="link-to-one">
+                    <a href="<c:url value="/backDerailleur/${backDerailleur.url}"/>"
+                       title="Перейти до <c:out value="${backDerailleur.name}"/>">
+                        <h3>${backDerailleur.name}</h3>
+                    </a>
+                </div>
+                <h5> Артикул  : ${backDerailleur.article}</h5>
+                <p class="maker"> <h3> Виробник  : ${backDerailleur.transmissionMaker.name} </h3></p>
+                <h4></h4>
+                <p>${backDerailleur.price}<label>грн</label><a href="#"></a></p>
+                <div class="btn_form">
+                    <a href="cart.html">Купити</a>
+                    <a href="/cartAddBackDerailleur/${backDerailleur.article}">Додати до корзини</a>
+                </div>
+                <div class="bike-type">
+                    <table>
+                        <tr>
+                            <th><h5>Сумісність з кількістю передач  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backDerailleur.backSprocketNumber.number}</i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Найбільша зірка :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backDerailleur.backSprocketMax.number} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Найменша зірка :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backDerailleur.backSprocketMin.number} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Довжина лапки  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backDerailleur.pawLength.length} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Матеріал  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backDerailleur.material} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Вага  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backDerailleur.weight} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Колір  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backDerailleur.color} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <h5>Опис ::</h5>
+                    <p class="desc">${backDerailleur.description}</p>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
         </c:forEach>
         <nav aria-label="Page navigation">

@@ -33,7 +33,7 @@ public class WheelController {
     private ForkService forkService;
 
     //return page with links to pages with components
-    @RequestMapping("/show_wheelsComponents")
+    @RequestMapping("/show_wheelsComponent")
     public String wheelsComponentsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         return "wheelsComponent";

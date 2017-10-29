@@ -85,8 +85,6 @@ public class Frame {
         this.way = way;
     }
 
-
-
     public Double getPrice() {
         return price;
     }
@@ -105,6 +103,10 @@ public class Frame {
 
     public BrakesType getBrakesType() {
         return brakesType;
+    }
+
+    public BracketWide getBracketWide() {
+        return bracketWide;
     }
 
     public Long getArticle() {

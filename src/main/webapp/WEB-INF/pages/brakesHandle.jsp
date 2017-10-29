@@ -125,128 +125,116 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </nav>
 
     <div class="product">
-        <div class="container">
-            <div class="ctnt-bar cntnt">
-                <div class="content-bar">
-                    <div class="single-page">
-                        <div class="product-head">
-                            <a href="index.html">Home</a> <span>::</span>
-                        </div>
+        <div class="product-head">
+            <a href="index.html">Home</a> <span>::</span>
+        </div>
 
-                        <c:forEach items="${brakeHandles}" var="brakeHandle">
-                        <!--Include the Etalage files-->
-                        <link rel="stylesheet" href="resources/css/etalage.css">
-                        <script src="resources/js/jquery.etalage.min.js"></script>
-                        <script>
-                            jQuery(document).ready(function($){
+        <c:forEach items="${brakeHandles}" var="brakeHandle">
+        <!--Include the Etalage files-->
+        <link rel="stylesheet" href="resources/css/etalage.css">
+        <script src="resources/js/jquery.etalage.min.js"></script>
+        <script>
+            jQuery(document).ready(function($){
 
-                                $('#etalage').etalage({
-                                    thumb_image_width: 400,
-                                    thumb_image_height: 400,
-                                    source_image_width: 800,
-                                    source_image_height: 1000,
-                                    show_hint: true,
-                                    click_callback: function(image_anchor, instance_id){
-                                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-                                    }
-                                });
+                $('#etalage').etalage({
+                    thumb_image_width: 400,
+                    thumb_image_height: 400,
+                    source_image_width: 800,
+                    source_image_height: 1000,
+                    show_hint: true,
+                    click_callback: function(image_anchor, instance_id){
+                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                    }
+                });
 
-                            });
-                        </script>
-                        <!--//details-product-slider-->
-                        <div class="details-left-slider">
-                            <a href="<c:url value="/brakeHandle/${brakeHandle.url}"/>"
-                               title="Перейти до <c:out value="${brakeHandle.name}"/>">
-                                <img height="300" width="300" src="${brakeHandle.way}" />
-                            </a>
-                            <div class="details-left-info">
+            });
+        </script>
+        <!--//details-product-slider-->
+        <div class="details-left-slider">
+            <a href="<c:url value="/brakeHandle/${brakeHandle.url}"/>"
+               title="Перейти до <c:out value="${brakeHandle.name}"/>">
+                <img height="300" width="300" src="${brakeHandle.way}" />
+            </a>
+            <div class="details-left-info">
 
-                                <div class="link-to-one">
-                                    <a href="<c:url value="/brakeHandle/${brakeHandle.url}"/>"
-                                       title="Перейти до <c:out value="${brakeHandle.name}"/>">
-                                        <h3>${brakeHandle.name}</h3>
-                                    </a>
-                                </div>
-                                <h5> Артикул  : ${brakeHandle.article}</h5>
-                                <p class="maker"> <h5> Виробник  : ${brakeHandle.brakeMaker.name} </h5></p>
-                                <h4></h4>
-                                <p>${brakeHandle.price}<label>грн</label><a href="#"></a></p>
-                                <div class="btn_form">
-                                    <a href="cart.html">Купити</a>
-                                    <a href="/cartAddBrakeHandle/${brakeHandle.article}">Додати до корзини</a>
-                                </div>
-                                <div class="bike-type">
-
-                                    <table>
-                                        <tr>
-                                            <th><h5>Розташування  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeHandle.brakeHandleLocation.local}</i></b></font></th>
-                                        </tr>
-                                    </table>
-
-                                    <table>
-                                        <tr>
-                                            <th><h5>Сумісність з  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeHandle.brakeHandleCompatibility.comp} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Матеріал ручки :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeHandle.materialHandle} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Матеріал корпусу :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeHandle.materialCorp} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <!--
-                                    <table>
-                                        <tr>
-                                            <th><h5>Сумісність з діаметром руля  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeHandle.handlebarDiameter.diam} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    -->
-                                    <table>
-                                        <tr>
-                                            <th><h5>Ширина ручки  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeHandle.brakeHandleWide.wide} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Вага  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeHandle.weight} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Колір  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeHandle.color} </i></b></font></th>
-                                        </tr>
-                                    </table>
-
-
-                                    <h5>Опис  ::</h5>
-                                    <p class="desc">${brakeHandle.description}</p>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+                <div class="link-to-one">
+                    <a href="<c:url value="/brakeHandle/${brakeHandle.url}"/>"
+                       title="Перейти до <c:out value="${brakeHandle.name}"/>">
+                        <h3>${brakeHandle.name}</h3>
+                    </a>
+                </div>
+                <h5> Артикул  : ${brakeHandle.article}</h5>
+                <p class="maker"> <h5> Виробник  : ${brakeHandle.brakeMaker.name} </h5></p>
+                <h4></h4>
+                <p>${brakeHandle.price}<label>грн</label><a href="#"></a></p>
+                <div class="btn_form">
+                    <a href="cart.html">Купити</a>
+                    <a href="/cartAddBrakeHandle/${brakeHandle.article}">Додати до корзини</a>
+                </div>
+                <div class="bike-type">
+                    <table>
+                        <tr>
+                            <th><h5>Розташування  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeHandle.brakeHandleLocation.local}</i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Сумісність з  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeHandle.brakeHandleCompatibility.comp} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Матеріал ручки :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeHandle.materialHandle} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Матеріал корпусу :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeHandle.materialCorp} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <!--
+                    <table>
+                        <tr>
+                            <th><h5>Сумісність з діаметром руля  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeHandle.handlebarDiameter.diam} </i></b></font></th>
+                        </tr>
+                    </table>
+                    -->
+                    <table>
+                        <tr>
+                            <th><h5>Ширина ручки  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeHandle.brakeHandleWide.wide} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Вага  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeHandle.weight} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Колір  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeHandle.color} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <h5>Опис  ::</h5>
+                    <p class="desc">${brakeHandle.description}</p>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
         </c:forEach>
         <nav aria-label="Page navigation">

@@ -62,4 +62,16 @@ public class BackGearKas {
         this.price = price;
         this.way = way;
     }
+
+    public BackSprocketNumber getBackSprocketNumber() {
+        return backSprocketNumber;
+    }
+
+    public BackSprocketMax getBackSprocketMax() {
+        return backSprocketMax;
+    }
+
+    public BackSprocketMin getBackSprocketMin() {
+        return backSprocketMin;
+    }
 }

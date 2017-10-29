@@ -65,4 +65,8 @@ public class Bracket {
         this.price = price;
         this.way = way;
     }
+
+    public BracketType getBracketType() {
+        return bracketType;
+    }
 }

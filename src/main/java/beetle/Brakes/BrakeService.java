@@ -327,7 +327,7 @@ public class BrakeService {
     }
 
     @Transactional(readOnly=true)
-    public List<BrakeDiscHydraulic> findByLocationHydraulik(Location location, Pageable pageable) {
+    public List<BrakeDiscHydraulic> findByLocationHydraulic(Location location, Pageable pageable) {
         return brakeDiscHydraulicRepository.findByLocation(location, pageable);
     }
 

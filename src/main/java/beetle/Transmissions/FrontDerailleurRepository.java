@@ -49,6 +49,14 @@ public interface FrontDerailleurRepository extends JpaRepository<FrontDerailleur
     @Query("SELECT c FROM FrontDerailleur c WHERE c.tractionType = :tractionType")
     List<FrontDerailleur> findByTractionType(@Param("tractionType") TractionType tractionType, Pageable pageable);
 
+    @Query("SELECT c FROM FrontDerailleur c WHERE c.frontSprocketNumber = :frontSprocketNumber AND c.backSprocketNumber = :backSprocketNumber AND c.frontSprocketMax = :frontSprocketMax AND c.frontSprocketMin = :frontSprocketMin ")
+    List<FrontDerailleur> findByFrSprNumberAndBackSprNumberAndFrSprMaxAndFrSprMin(
+                                                @Param("frontSprocketNumber" )FrontSprocketNumber frontSprocketNumber,
+                                                @Param("backSprocketNumber" )BackSprocketNumber backSprocketNumber,
+                                                @Param("frontSprocketMax") FrontSprocketMax frontSprocketMax,
+                                                @Param("frontSprocketMin") FrontSprocketMin frontSprocketMin,
+                                                Pageable pageable);
+
     @Query("SELECT c FROM FrontDerailleur c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<FrontDerailleur> findByPattern(@Param("pattern") String pattern, Pageable pageable);
 }

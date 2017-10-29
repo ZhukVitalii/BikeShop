@@ -51,4 +51,11 @@ public class BrakesType {
     public BrakesType(String type) {
         this.type = type;
     }
+
+    public long getId() {
+        return id;
+    }
+    public String getType(){
+        return type;
+    }
 }

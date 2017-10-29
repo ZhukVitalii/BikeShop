@@ -122,149 +122,140 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
     </nav>
+       <div class="product">
+            <div class="product-head">
+                <a href="/">Home</a> <span>::</span>
+            </div>
 
-                <div class="product">
-                    <div class="container">
-                        <div class="ctnt-bar cntnt">
-                            <div class="content-bar">
-                                <div class="single-page">
-                                    <div class="product-head">
-                                        <a href="/">Home</a> <span>::</span>
-                                    </div>
+            <c:forEach items="${frames}" var="frame">
+            <!--Include the Etalage files-->
+            <link rel="stylesheet" href="resources/css/etalage.css">
+            <script src="resources/js/jquery.etalage.min.js"></script>
+            <script>
+                jQuery(document).ready(function($){
 
-                                    <c:forEach items="${frames}" var="frame">
-                                    <!--Include the Etalage files-->
-                                    <link rel="stylesheet" href="resources/css/etalage.css">
-                                    <script src="resources/js/jquery.etalage.min.js"></script>
-                                    <script>
-                                        jQuery(document).ready(function($){
+                    $('#etalage').etalage({
+                        thumb_image_width: 400,
+                        thumb_image_height: 400,
+                        source_image_width: 800,
+                        source_image_height: 1000,
+                        show_hint: true,
+                        click_callback: function(image_anchor, instance_id){
+                            alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                        }
+                    });
 
-                                            $('#etalage').etalage({
-                                                thumb_image_width: 400,
-                                                thumb_image_height: 400,
-                                                source_image_width: 800,
-                                                source_image_height: 1000,
-                                                show_hint: true,
-                                                click_callback: function(image_anchor, instance_id){
-                                                    alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-                                                }
-                                            });
+                });
+            </script>
+            <!--//details-product-slider-->
+            <div class="details-left-slider">
+                        <a href="<c:url value="/frame/${frame.url}"/>"
+                           title="Перейти до <c:out value="${frame.name}"/>">
+                            <img height="300" width="300" src="${frame.way}" />
+                        </a>
 
-                                        });
-                                    </script>
-                                    <!--//details-product-slider-->
-                                    <div class="details-left-slider">
-                                                <a href="<c:url value="/frame/${frame.url}"/>"
-                                                   title="Перейти до <c:out value="${frame.name}"/>">
-                                                    <img height="300" width="300" src="${frame.way}" />
-                                                </a>
-
-                                    <div class="details-left-info">
-                                        <div class="link-to-one">
-                                            <a href="<c:url value="/frame/${frame.url}"/>"
-                                               title="Перейти до <c:out value="${frame.name}"/>">
-                                            <h3>${frame.name}</h3>
-                                            </a>
-                                        </div>
-                                        <h5> Артикул  : ${frame.article}</h5>
-                                        <p class="maker"> <h3> Виробник  : ${frame.frameMaker.name} </h3></p>
-                                        <h4></h4>
-                                        <p>${frame.price}<label>грн</label><a href="#"></a></p>
-                                        <p class="size">Доступні розміри ::</p>
-                                        <a class="length" href="#">XS</a>
-                                        <a class="length" href="#">M</a>
-                                        <a class="length" href="#">S</a>
-                                        <div class="btn_form">
-                                            <a href="cart.html">Купити</a>
-                                            <a href="/cartAddFrame/${frame.article}">Додати до корзини</a>
-                                        </div>
-                                        <div class="bike-type">
-
-                                            <table>
-                                                <tr>
-                                                    <th><h5>Тип  :   </h5></th>
-                                                    <th><p align="center"><font size="4" color="#0080C0" >
-                                                        <b><i>   ${frame.bikeType.type}</i></b></font></th>
-                                                </tr>
-                                            </table>
-                                            <table>
-                                                <tr>
-                                                    <th><h5>Діаметр колес  :   </h5></th>
-                                                    <th><p align="center"><font size="4" color="#0080C0" >
-                                                        <b><i>   ${frame.wheelsDiam.diam}</i></b></font></th>
-                                                </tr>
-                                            </table>
-                                            <table>
-                                                <tr>
-                                                    <th><h5>Матеріал :   </h5></th>
-                                                    <th><p align="center"><font size="4" color="#0080C0" >
-                                                        <b><i>   ${frame.material} </i></b></font></th>
-                                                </tr>
-                                            </table>
-                                            <table>
-                                                <tr>
-                                                    <th><h5>Тип рульової :   </h5></th>
-                                                    <th><p align="center"><font size="4" color="#0080C0" >
-                                                        <b><i>   ${frame.bracketWide.wide} </i></b></font></th>
-                                                </tr>
-                                            </table>
-                                            <table>
-                                                <tr>
-                                                    <th><h5>Діаметр рульової :   </h5></th>
-                                                    <th><p align="center"><font size="4" color="#0080C0" >
-                                                        <b><i>   ${frame.tubeDiameter.diam} </i></b></font></th>
-                                                </tr>
-                                            </table>
-                                            <table>
-                                                <tr>
-                                                    <th><h5>Діаметр підстидільної труби  :   </h5></th>
-                                                    <th><p align="center"><font size="4" color="#0080C0" >
-                                                        <b><i>   ${frame.underSaddleTube.diam} </i></b></font></th>
-                                                </tr>
-                                            </table>
-                                            <table>
-                                                <tr>
-                                                    <th><h5>Кріплення гальм  :   </h5></th>
-                                                    <th><p align="center"><font size="4" color="#0080C0" >
-                                                        <b><i>   ${frame.brakesType.type} </i></b></font></th>
-                                                </tr>
-                                            </table>
-                                            <table>
-                                                <tr>
-                                                    <th><h5>Кріплення багажника  :   </h5></th>
-                                                    <th><p align="center"><font size="4" color="#0080C0" >
-                                                        <b><i>   ${frame.trunkBinding.trunk} </i></b></font></th>
-                                                </tr>
-                                            </table>
-                                            <table>
-                                                <tr>
-                                                    <th><h5>Вага  :   </h5></th>
-                                                    <th><p align="center"><font size="4" color="#0080C0" >
-                                                        <b><i>   ${frame.weight} </i></b></font></th>
-                                                </tr>
-                                            </table>
-                                            <table>
-                                                <tr>
-                                                    <th><h5>Колір  :   </h5></th>
-                                                    <th><p align="center"><font size="4" color="#0080C0" >
-                                                        <b><i>   ${frame.color} </i></b></font></th>
-                                                </tr>
-
-                                            </table>
-
-
-                                        <h5>Опис  ::</h5>
-                                        <p class="desc">${frame.description}</p>
-                                        </div>
-                                        </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+            <div class="details-left-info">
+                <div class="link-to-one">
+                    <a href="<c:url value="/frame/${frame.url}"/>"
+                       title="Перейти до <c:out value="${frame.name}"/>">
+                    <h3>${frame.name}</h3>
+                    </a>
                 </div>
-                </c:forEach>
+                <h5> Артикул  : ${frame.article}</h5>
+                <p class="maker"> <h3> Виробник  : ${frame.frameMaker.name} </h3></p>
+                <h4></h4>
+                <p>${frame.price}<label>грн</label><a href="#"></a></p>
+                <p class="size">Доступні розміри ::</p>
+                <a class="length" href="#">XS</a>
+                <a class="length" href="#">M</a>
+                <a class="length" href="#">S</a>
+                <div class="btn_form">
+                    <a href="cart.html">Купити</a>
+                    <a href="/cartAddFrame/${frame.article}">Додати до корзини</a>
+                </div>
+                <div class="bike-type">
+
+                    <table>
+                        <tr>
+                            <th><h5>Тип  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frame.bikeType.type}</i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Діаметр колес  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frame.wheelsDiam.diam}</i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Матеріал :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frame.material} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Тип рульової :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frame.bracketWide.wide} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Діаметр рульової :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frame.tubeDiameter.diam} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Діаметр підстидільної труби  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frame.underSaddleTube.diam} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Кріплення гальм  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frame.brakesType.type} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Кріплення багажника  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frame.trunkBinding.trunk} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Вага  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frame.weight} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Колір  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${frame.color} </i></b></font></th>
+                        </tr>
+
+                    </table>
+
+
+                <h5>Опис  ::</h5>
+                <p class="desc">${frame.description}</p>
+                </div>
+                </div>
+            <div class="clearfix"></div>
+
+        </div>
+        </c:forEach>
 
     <nav aria-label="Page navigation">
         <ul class="pagination">

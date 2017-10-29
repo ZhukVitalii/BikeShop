@@ -118,104 +118,97 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </nav>
     <div class="product">
-        <div class="container">
-            <div class="ctnt-bar cntnt">
-                <div class="content-bar">
-                    <div class="single-page">
-                        <div class="product-head">
-                            <a href="/">Home</a> <span>::</span>
-                        </div>
-                        <c:forEach items="${backGearKass}" var="backGearKas">
-                        <!--Include the Etalage files-->
-                        <link rel="stylesheet" href="resources/css/etalage.css">
-                        <script src="resources/js/jquery.etalage.min.js"></script>
-                        <script>
-                            jQuery(document).ready(function($){
-                                $('#etalage').etalage({
-                                    thumb_image_width: 400,
-                                    thumb_image_height: 400,
-                                    source_image_width: 800,
-                                    source_image_height: 1000,
-                                    show_hint: true,
-                                    click_callback: function(image_anchor, instance_id){
-                                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-                                    }
-                                });
-                            });
-                        </script>
-                        <!--//details-product-slider-->
-                        <div class="details-left-slider">
-                            <a href="<c:url value="/backGearKas/${backGearKas.url}"/>"
-                               title="Перейти до <c:out value="${backGearKas.name}"/>">
-                                <img height="300" width="300" src="${backGearKas.way}" />
-                            </a>
-                            <div class="details-left-info">
-                                <div class="link-to-one">
-                                    <a href="<c:url value="/backGearKas/${backGearKas.url}"/>"
-                                       title="Перейти до <c:out value="${backGearKas.name}"/>">
-                                        <h3>${backGearKas.name}</h3>
-                                    </a>
-                                </div>
-                                <h5> Артикул  : ${backGearKas.article}</h5>
-                                <p class="maker"> <h3> Виробник  : ${backGearKas.transmissionMaker.name} </h3></p>
-                                <h4></h4>
-                                <p>${backGearKas.price}<label>грн</label><a href="#"></a></p>
-                                <div class="btn_form">
-                                    <a href="cart.html">Купити</a>
-                                    <a href="/cartAddBackGearKas/${backGearKas.article}">Додати до корзини</a>
-                                </div>
-                                <div class="bike-type">
-                                    <table>
-                                        <tr>
-                                            <th><h5>Кількість зірок  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backGearKas.backSprocketNumber.number}</i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Найбільша зірка :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backGearKas.backSprocketMax.number} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Найменша зірка :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backGearKas.backSprocketMin.number} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Кількість зубів зірок :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backGearKas.backSprocketSize.size} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Матеріал  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backGearKas.material} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Колір  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${backGearKas.color} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <h5>Опис ::</h5>
-                                    <p class="desc">${backGearKas.description}</p>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+
+        <div class="product-head">
+            <a href="/">Home</a> <span>::</span>
+        </div>
+        <c:forEach items="${backGearKass}" var="backGearKas">
+        <!--Include the Etalage files-->
+        <link rel="stylesheet" href="resources/css/etalage.css">
+        <script src="resources/js/jquery.etalage.min.js"></script>
+        <script>
+            jQuery(document).ready(function($){
+                $('#etalage').etalage({
+                    thumb_image_width: 400,
+                    thumb_image_height: 400,
+                    source_image_width: 800,
+                    source_image_height: 1000,
+                    show_hint: true,
+                    click_callback: function(image_anchor, instance_id){
+                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                    }
+                });
+            });
+        </script>
+        <!--//details-product-slider-->
+        <div class="details-left-slider">
+            <a href="<c:url value="/backGearKas/${backGearKas.url}"/>"
+               title="Перейти до <c:out value="${backGearKas.name}"/>">
+                <img height="300" width="300" src="${backGearKas.way}" />
+            </a>
+            <div class="details-left-info">
+                <div class="link-to-one">
+                    <a href="<c:url value="/backGearKas/${backGearKas.url}"/>"
+                       title="Перейти до <c:out value="${backGearKas.name}"/>">
+                        <h3>${backGearKas.name}</h3>
+                    </a>
+                </div>
+                <h5> Артикул  : ${backGearKas.article}</h5>
+                <p class="maker"> <h3> Виробник  : ${backGearKas.transmissionMaker.name} </h3></p>
+                <h4></h4>
+                <p>${backGearKas.price}<label>грн</label><a href="#"></a></p>
+                <div class="btn_form">
+                    <a href="cart.html">Купити</a>
+                    <a href="/cartAddBackGearKas/${backGearKas.article}">Додати до корзини</a>
+                </div>
+                <div class="bike-type">
+                    <table>
+                        <tr>
+                            <th><h5>Кількість зірок  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backGearKas.backSprocketNumber.number}</i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Найбільша зірка :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backGearKas.backSprocketMax.number} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Найменша зірка :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backGearKas.backSprocketMin.number} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Кількість зубів зірок :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backGearKas.backSprocketSize.size} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Матеріал  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backGearKas.material} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Колір  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${backGearKas.color} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <h5>Опис ::</h5>
+                    <p class="desc">${backGearKas.description}</p>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
         </c:forEach>
         <nav aria-label="Page navigation">

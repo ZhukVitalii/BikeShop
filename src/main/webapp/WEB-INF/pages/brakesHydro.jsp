@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>Brakes</title>
+    <title>Brakes Disc Hydraulic</title>
     <link rel="shortcut icon"
           href="resources/images/logo_brauser.png" >
     <spring:url value="resources/css/bootstrap.css" var="bootstrap"/>
@@ -123,141 +123,131 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
     </nav>
-
     <div class="product">
-        <div class="container">
-            <div class="ctnt-bar cntnt">
-                <div class="content-bar">
-                    <div class="single-page">
-                        <div class="product-head">
-                            <a href="index.html">Home</a> <span>::</span>
-                        </div>
+        <div class="product-head">
+            <a href="index.html">Home</a> <span>::</span>
+        </div>
 
-                        <c:forEach items="${brakeDiscHydraulics}" var="brakeDiscHydraulic">
-                        <!--Include the Etalage files-->
-                        <link rel="stylesheet" href="resources/css/etalage.css">
-                        <script src="resources/js/jquery.etalage.min.js"></script>
-                        <script>
-                            jQuery(document).ready(function($){
+        <c:forEach items="${brakeDiscHydraulics}" var="brakeDiscHydraulic">
+        <!--Include the Etalage files-->
+        <link rel="stylesheet" href="resources/css/etalage.css">
+        <script src="resources/js/jquery.etalage.min.js"></script>
+        <script>
+            jQuery(document).ready(function($){
 
-                                $('#etalage').etalage({
-                                    thumb_image_width: 400,
-                                    thumb_image_height: 400,
-                                    source_image_width: 800,
-                                    source_image_height: 1000,
-                                    show_hint: true,
-                                    click_callback: function(image_anchor, instance_id){
-                                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-                                    }
-                                });
+                $('#etalage').etalage({
+                    thumb_image_width: 400,
+                    thumb_image_height: 400,
+                    source_image_width: 800,
+                    source_image_height: 1000,
+                    show_hint: true,
+                    click_callback: function(image_anchor, instance_id){
+                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                    }
+                });
 
-                            });
-                        </script>
-                        <!--//details-product-slider-->
-                        <div class="details-left-slider">
-                            <a href="<c:url value="/brakeDiscHydraulic/${brakeDiscHydraulic.url}"/>"
-                               title="Перейти до <c:out value="${brakeDiscHydraulic.name}"/>">
-                                <img height="300" width="300" src="${brakeDiscHydraulic.way}" />
-                            </a>
-                            <div class="details-left-info">
+            });
+        </script>
+        <!--//details-product-slider-->
+        <div class="details-left-slider">
+            <a href="<c:url value="/brakeDiscHydraulic/${brakeDiscHydraulic.url}"/>"
+               title="Перейти до <c:out value="${brakeDiscHydraulic.name}"/>">
+                <img height="300" width="300" src="${brakeDiscHydraulic.way}" />
+            </a>
+            <div class="details-left-info">
 
-                                <div class="link-to-one">
-                                    <a href="<c:url value="/brakeDiscHydraulic/${brakeDiscHydraulic.url}"/>"
-                                       title="Перейти до <c:out value="${brakeDiscHydraulic.name}"/>">
-                                        <h3>${brakeDiscHydraulic.name}</h3>
-                                    </a>
-                                </div>
-                                <h5> Артикул  : ${brakeDiscHydraulic.article}</h5>
-                                <p class="maker"> <h5> Виробник  : ${brakeDiscHydraulic.brakeMaker.name} </h5></p>
-                                <h4></h4>
-                                <p>${brakeDiscHydraulic.price}<label>грн</label><a href="#"></a></p>
-                                <div class="btn_form">
-                                    <a href="cart.html">Купити</a>
-                                    <a href="/cartAddBrakeDiscHydraulic/${brakeDiscHydraulic.article}">Додати до корзини</a>
-                                </div>
-                                <div class="bike-type">
-
-                                    <table>
-                                        <tr>
-                                            <th><h5>Розташування  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeDiscHydraulic.location.local}</i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Гальмівна рідина :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeDiscHydraulic.brakeLiquid.liq} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Матеріал ручок :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeDiscHydraulic.materialHandle} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Довжина гідролінії :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeDiscHydraulic.lengthHydroline.length} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Діаметр ротора  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeDiscHydraulic.rotorDiam.diam} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Вага ротора :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeDiscHydraulic.rotorWeight} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Матеріал  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeDiscHydraulic.material} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Вага гальм  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeDiscHydraulic.brakeWeight} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Кріплення ротора  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeDiscHydraulic.rotorFixType.type} </i></b></font></th>
-                                        </tr>
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th><h5>Колір  :   </h5></th>
-                                            <th><p align="center"><font size="4" color="#0080C0" >
-                                                <b><i>   ${brakeDiscHydraulic.color} </i></b></font></th>
-                                        </tr>
-                                    </table>
+                <div class="link-to-one">
+                    <a href="<c:url value="/brakeDiscHydraulic/${brakeDiscHydraulic.url}"/>"
+                       title="Перейти до <c:out value="${brakeDiscHydraulic.name}"/>">
+                        <h3>${brakeDiscHydraulic.name}</h3>
+                    </a>
+                </div>
+                <h5> Артикул  : ${brakeDiscHydraulic.article}</h5>
+                <p class="maker"> <h5> Виробник  : ${brakeDiscHydraulic.brakeMaker.name} </h5></p>
+                <h4></h4>
+                <p>${brakeDiscHydraulic.price}<label>грн</label><a href="#"></a></p>
+                <div class="btn_form">
+                    <a href="cart.html">Купити</a>
+                    <a href="/cartAddBrakeDiscHydraulic/${brakeDiscHydraulic.article}">Додати до корзини</a>
+                </div>
+                <div class="bike-type">
+                    <table>
+                        <tr>
+                            <th><h5>Розташування  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeDiscHydraulic.location.local}</i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Гальмівна рідина :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeDiscHydraulic.brakeLiquid.liq} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Матеріал ручок :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeDiscHydraulic.materialHandle} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Довжина гідролінії :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeDiscHydraulic.lengthHydroline.length} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Діаметр ротора  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeDiscHydraulic.rotorDiam.diam} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Вага ротора :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeDiscHydraulic.rotorWeight} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Матеріал  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeDiscHydraulic.material} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Вага гальм  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeDiscHydraulic.brakeWeight} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Кріплення ротора  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeDiscHydraulic.rotorFixType.type} </i></b></font></th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th><h5>Колір  :   </h5></th>
+                            <th><p align="center"><font size="4" color="#0080C0" >
+                                <b><i>   ${brakeDiscHydraulic.color} </i></b></font></th>
+                        </tr>
+                    </table>
 
 
-                                    <h5>Опис  ::</h5>
-                                    <p class="desc">${brakeDiscHydraulic.description}</p>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+                    <h5>Опис  ::</h5>
+                    <p class="desc">${brakeDiscHydraulic.description}</p>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
         </c:forEach>
         <nav aria-label="Page navigation">

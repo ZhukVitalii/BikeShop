@@ -1,5 +1,7 @@
 package beetle.Brakes;
 
+import beetle.Forks.TubeDiameter;
+import beetle.Handlebars.Stem;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -36,6 +38,7 @@ public interface BrakeHandleRepository extends JpaRepository<BrakeHandle, Long> 
 
     @Query("SELECT c FROM BrakeHandle c WHERE c.brakeHandleWide = :brakeHandleWide")
     List<BrakeHandle> findByBrakeHandleWide(@Param("brakeHandleWide")BrakeHandleWide brakeHandleWide, Pageable pageable);
+
 
     @Query("SELECT c FROM BrakeHandle c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<BrakeHandle> findByPattern(@Param("pattern") String pattern, Pageable pageable);

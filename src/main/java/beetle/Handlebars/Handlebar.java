@@ -61,4 +61,8 @@ public class Handlebar {
         this.way = way;
     }
 
+    public HandlebarDiameter getHandlebarDiameter() {
+        return handlebarDiameter;
+    }
+
 }

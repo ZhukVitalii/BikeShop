@@ -1,6 +1,8 @@
 package beetle.Transmissions;
 
 import beetle.Forks.BrakesType;
+import beetle.Forks.WheelsDiam;
+import beetle.Frames.BikeType;
 import beetle.Handlebars.Grips;
 import beetle.Wheels.*;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +40,12 @@ public interface BackDerailleurRepository extends JpaRepository<BackDerailleur, 
 
     @Query("SELECT c FROM BackDerailleur c WHERE c.pawLength = :pawLength")
     List<BackDerailleur> findByPawLength(@Param("pawLength") PawLength pawLength, Pageable pageable);
+
+    @Query("SELECT c FROM BackDerailleur c WHERE c.backSprocketNumber = :backSprocketNumber AND c.backSprocketMax = :backSprocketMax AND c.backSprocketMin = :backSprocketMin ")
+    List<BackDerailleur> findBySprNumberAndSprMaxAndSprMin(@Param("backSprocketNumber" )BackSprocketNumber backSprocketNumber,
+                                             @Param("backSprocketMax") BackSprocketMax backSprocketMax,
+                                             @Param("backSprocketMin") BackSprocketMin backSprocketMin,
+                                             Pageable pageable);
 
     @Query("SELECT c FROM BackDerailleur c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<BackDerailleur> findByPattern(@Param("pattern") String pattern, Pageable pageable);
