@@ -29,6 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="resources/js/jquery.easydropdown.js"></script>
     <link href="resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
     <script src="resources/js/scripts.js" type="text/javascript"></script>
+    <script src="resources/js/ajax.js" type="text/javascript"></script>
     <!--js-->
 
 
@@ -170,8 +171,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="length" href="#">M</a>
                 <a class="length" href="#">S</a>
                 <div class="btn_form">
-                    <a href="cart.html">Купити</a>
-                    <a href="/cartAddFrame/${frame.article}">Додати до корзини</a>
+                    <button type="button" onclick="addToCart()">Додати до корзини</button>
+                    <script>
+                        function addToCart() {
+                            var xhttp = new XMLHttpRequest();
+                            xhttp.open("POST", "/cartAddFrame/${frame.article}", true);
+                            xhttp.send(${frame.article});
+                        }
+                    </script>
                 </div>
                 <div class="bike-type">
 
@@ -273,30 +280,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </nav>
 </div>
 
-<script>
-    $('.dropdown-toggle').dropdown();
-    $('#main_page').click(function(){
-        window.location.href='/';
-    });
-
-    $('#add_frame').click(function(){
-        window.location.href='/frame_add_page';
-    });
-
-    $('#add_frameMaker').click(function(){
-        window.location.href='/frameMaker_add_page';
-    });
-
-    $('#delete_frame').click(function(){
-        var data = { 'toDelete[]' : []};
-        $(":checked").each(function() {
-            data['toDelete[]'].push($(this).val());
-        });
-        $.post("/frame/delete", data, function(data, status) {
-            window.location.reload();
-        });
-    });
-</script>
 </div>
 </body>
 </html>

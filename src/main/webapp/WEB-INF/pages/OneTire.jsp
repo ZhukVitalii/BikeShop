@@ -90,7 +90,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Троси</a></li>
                         </ul>
                     </li>
-                    <a class="shop" href="/cart"><img src="resources/images/cart.png" alt=""/></a>
+                    <a class="shop" href="/cart"><img src="/resources/images/cart.png" alt=""/></a>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -134,8 +134,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <h4></h4>
                                 <p>${tire.price}<label>грн</label><a href="#"></a></p>
                                 <div class="btn_form">
-                                    <a href="cart.html">Купити</a>
-                                    <a href="/cartAddTire/${tire.article}">Додати до корзини</a>
+                                    <button type="button" onclick="addToCart()">Додати до корзини</button>
+                                    <script>
+                                        function addToCart() {
+                                            var xhttp = new XMLHttpRequest();
+                                            xhttp.open("POST", "/cartAddTire/${tire.article}", true);
+                                            xhttp.send(${tire.article});
+                                        }
+                                    </script>
                                 </div>
                                 <div class="bike-type">
                                     <table>

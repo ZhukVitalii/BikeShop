@@ -145,7 +145,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <p>${bracket.price}<label>грн</label><a href="#"></a></p>
                 <div class="btn_form">
                     <a href="/chooseCrank/${bracket.id}">Підібрати компоненти під дану каретку</a>
-                    <a href="/cartAddBracket/${bracket.article}">Додати до корзини</a>
+                    <button type="button" onclick="addToCart()">Додати до корзини</button>
+                    <script>
+                        function addToCart() {
+                            var xhttp = new XMLHttpRequest();
+                            xhttp.open("POST", "/cartAddBracket/${bracket.article}", true);
+                            xhttp.send(${bracket.article});
+                        }
+                    </script>
                 </div>
                 <div class="bike-type">
                     <table>

@@ -1,5 +1,6 @@
 package beetle;
 
+import beetle.Secirity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,7 +34,7 @@ public class Application {
             }
         };
     }
-/*
+
     @Bean
     public CommandLineRunner secur(final UserRoleService userRoleService) {
         return new CommandLineRunner() {
@@ -55,5 +56,5 @@ public class Application {
             }
         };
     }
-*/
+
 }

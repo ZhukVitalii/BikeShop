@@ -1293,7 +1293,27 @@ margin-top:2em;
 	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
+.btn_form button {
+	border: none;
+	outline: none;
+	display: inline-block;
+	font-size: 1em;
+	padding: 10px 34px;
+	background:rgb(150, 150, 150);
+	border:1px solid rgb(150, 150, 150);
+	color: #fff;
+	text-transform: uppercase;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
 .btn_form a:hover{
+	background:transparent;
+	border:1px solid #000;
+	color:#000;
+}
+.btn_form button:hover{
 	background:transparent;
 	border:1px solid #000;
 	color:#000;

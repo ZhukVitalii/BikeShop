@@ -166,8 +166,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <h4></h4>
                                 <p>${frontHub.price}<label>грн</label><a href="#"></a></p>
                                 <div class="btn_form">
-                                    <a href="cart.html">Купити</a>
-                                    <a href="/cartAddFrontHub/${frontHub.article}">Додати до корзини</a>
+                                    <button type="button" onclick="addToCart()">Додати до корзини</button>
+                                    <script>
+                                        function addToCart() {
+                                            var xhttp = new XMLHttpRequest();
+                                            xhttp.open("POST", "/cartAddFrontHub/${frontHub.article}", true);
+                                            xhttp.send(${frontHub.article});
+                                        }
+                                    </script>
                                 </div>
                                 <div class="bike-type">
                                     <table>
