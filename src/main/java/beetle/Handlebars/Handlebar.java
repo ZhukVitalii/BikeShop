@@ -64,5 +64,8 @@ public class Handlebar {
     public HandlebarDiameter getHandlebarDiameter() {
         return handlebarDiameter;
     }
+    public Double getPrice() {
+        return price;
+    }
 
 }

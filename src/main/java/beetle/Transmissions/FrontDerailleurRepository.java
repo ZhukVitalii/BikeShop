@@ -1,5 +1,6 @@
 package beetle.Transmissions;
 
+import beetle.Frames.Frame;
 import beetle.Wheels.BackSprocketNumber;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,6 +31,9 @@ public interface FrontDerailleurRepository extends JpaRepository<FrontDerailleur
 
     @Query("SELECT c FROM FrontDerailleur c WHERE c.article = :article")
     List<FrontDerailleur> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM FrontDerailleur c WHERE c.article = :article")
+    FrontDerailleur findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM FrontDerailleur c WHERE c.frontSprocketMax = :frontSprocketMax")
     List<FrontDerailleur> findByFrontSprocketMax(@Param("frontSprocketMax") FrontSprocketMax frontSprocketMax, Pageable pageable);

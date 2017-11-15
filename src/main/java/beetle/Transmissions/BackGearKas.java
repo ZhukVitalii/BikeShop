@@ -74,4 +74,8 @@ public class BackGearKas {
     public BackSprocketMin getBackSprocketMin() {
         return backSprocketMin;
     }
+
+    public Double getPrice(){
+        return price;
+    }
 }

@@ -58,6 +58,9 @@ public class Tire {
         this.price = price;
         this.way = way;
     }
+    public Double getPrice(){
+        return price;
+    }
 
 }
 

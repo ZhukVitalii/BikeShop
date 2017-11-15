@@ -1,5 +1,6 @@
 package beetle.Transmissions;
 
+import beetle.Frames.Frame;
 import beetle.Wheels.BackSprocketNumber;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,6 +28,9 @@ public interface BackGearKasRepository extends JpaRepository<BackGearKas, Long> 
 
     @Query("SELECT c FROM BackGearKas c WHERE c.article = :article")
     List<BackGearKas> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM BackGearKas c WHERE c.article = :article")
+    BackGearKas findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM BackGearKas c WHERE c.backSprocketMax = :backSprocketMax")
     List<BackGearKas> findByBackSprocketMax(@Param("backSprocketMax") BackSprocketMax backSprocketMax, Pageable pageable);

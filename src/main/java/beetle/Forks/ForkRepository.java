@@ -1,5 +1,6 @@
 package beetle.Forks;
 
+import beetle.Brakes.BrakeVBrake;
 import beetle.Frames.BikeType;
 import beetle.Frames.Frame;
 import beetle.Frames.FrameSize;
@@ -36,6 +37,9 @@ public interface ForkRepository extends JpaRepository<Fork, Long> {
 
     @Query("SELECT c FROM Fork c WHERE c.article = :article")
     List<Fork> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Fork c WHERE c.article = :article")
+    Fork findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM Fork c WHERE c.bikeType = :bikeType AND c.wheelsDiam = :wheelsDiam AND c.tubeDiameter = :tubeDiameter AND c.brakesType = :brakesType ")
     List<Fork> findByTypeAndWhDiamAndTubeDiamAndBrType(@Param("bikeType" )BikeType bikeType,

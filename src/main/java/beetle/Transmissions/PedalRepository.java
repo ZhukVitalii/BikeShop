@@ -1,5 +1,6 @@
 package beetle.Transmissions;
 
+import beetle.Frames.Frame;
 import beetle.Wheels.BearingType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,6 +28,9 @@ public interface PedalRepository extends JpaRepository<Pedal, Long> {
 
     @Query("SELECT c FROM Pedal c WHERE c.article = :article")
     List<Pedal> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Pedal c WHERE c.article = :article")
+    Pedal findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM Pedal c WHERE c.pedalType = :pedalType")
     List<Pedal> findByPedalType(@Param("pedalType")  PedalType pedalType, Pageable pageable);

@@ -22,4 +22,7 @@ public interface HeadsetRepository extends JpaRepository<Headset, Long> {
 
     @Query("SELECT c FROM Headset c WHERE c.article = :article")
     List<Headset> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Headset c WHERE c.article = :article")
+    Headset findOneByArticle(@Param("article") Long article);
 }

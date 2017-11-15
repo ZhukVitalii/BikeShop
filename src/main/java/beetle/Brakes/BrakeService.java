@@ -1,5 +1,6 @@
 package beetle.Brakes;
 
+import beetle.Frames.Frame;
 import beetle.Handlebars.HandlebarDiameter;
 import beetle.Handlebars.HandlebarDiameterRepository;
 import beetle.Wheels.RotorFixType;
@@ -58,6 +59,23 @@ public class BrakeService {
 
     //For BrakeDiscHydraulic
 
+    //delete article BrakeDiscHydraulic
+    public void deleteArticleBrakeDiscHydraulic(long article){
+        articlesBrakeDiscHydraulic.remove(article);
+    }
+    //delete article BrakeDiscMechanik
+    public void deleteArticleBrakeDiscMechanik(long article){
+        articlesBrakeDiscMechanik.remove(article);
+    }
+    //delete article BrakeVBrake
+    public void deleteArticleBrakeVBrake(long article){
+        articlesBrakeVBrake.remove(article);
+    }
+    //delete article BrakeHandle
+    public void deleteArticleBrakeHandle(long article){
+        articlesBrakeHandle.remove(article);
+    }
+
     //add articles to List
     public void addToArticleBrakeDiscHydraulic(Long article) {
         articlesBrakeDiscHydraulic.add(article);
@@ -73,6 +91,11 @@ public class BrakeService {
         int a = articlesBrakeDiscHydraulic.size();
         return a;
     }
+    //get all articles
+    public List<Long> getArticlesBrakeDiscHydraulic(){
+        return articlesBrakeDiscHydraulic;
+    }
+
 
     //For BrakeDiscDiscMechanik
     public void addToArticleBrakeDiscMechanik(Long article) {
@@ -86,6 +109,10 @@ public class BrakeService {
     public int getSizeBrakeDiscMechanik() {
         int a = articlesBrakeDiscMechanik.size();
         return a;
+    }
+    //get all articles
+    public List<Long> getArticlesBrakeDiscMechanik(){
+        return articlesBrakeDiscMechanik;
     }
 
     //For BrakeVBrake
@@ -101,6 +128,10 @@ public class BrakeService {
         int a = articlesBrakeVBrake.size();
         return a;
     }
+    //get all articles
+    public List<Long> getArticlesBrakeVBrake(){
+        return articlesBrakeVBrake;
+    }
 
     //For BrakeHandle
     public void addToArticleBrakeHandle(Long article) {
@@ -115,7 +146,10 @@ public class BrakeService {
         int a = articlesBrakeHandle.size();
         return a;
     }
-
+    //get all articles
+    public List<Long> getArticlesBrakeHandle(){
+        return articlesBrakeHandle;
+    }
     // add
     @Transactional
     public void addBrakeDiscHydraulic(BrakeDiscHydraulic brakeDiscHydraulic) {
@@ -494,4 +528,20 @@ public class BrakeService {
     public RotorDiam  findRotorDiam(long id) {
         return rotorDiamRepository.findOne(id);
     }
+
+    @Transactional(readOnly = true)
+    public BrakeDiscHydraulic findBrakeDiscHydraulicByArticle(Long article) {return brakeDiscHydraulicRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
+    public BrakeDiscMechanik findBrakeDiscMechanikByArticle(Long article) {return brakeDiscMechanikRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
+    public BrakeVBrake findBrakeVBrakeByArticle(Long article) {return brakeVBrakeRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
+    public BrakeHandle findBrakeHandleByArticle(Long article) {return brakeHandleRepository.findOneByArticle(article);}
+
+
+
+
 }

@@ -28,6 +28,9 @@ public interface BackGearTrRepository extends JpaRepository<BackGearTr, Long> {
     @Query("SELECT c FROM BackGearTr c WHERE c.article = :article")
     List<BackGearTr> findByArticle(@Param("article") Long article, Pageable pageable);
 
+    @Query("SELECT c FROM BackGearTr c WHERE c.article = :article")
+    BackGearTr findOneByArticle(@Param("article") Long article);
+
     @Query("SELECT c FROM BackGearTr c WHERE c.backSprocketMax = :backSprocketMax")
     List<BackGearTr> findByBackSprocketMax(@Param("backSprocketMax") BackSprocketMax backSprocketMax, Pageable pageable);
 

@@ -1,6 +1,7 @@
 package beetle.Wheels;
 
 import beetle.Handlebars.Handlebar;
+import beetle.Transmissions.Pedal;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -31,6 +32,9 @@ public interface BackHubRepository extends JpaRepository<BackHub, Long>  {
 
         @Query("SELECT c FROM BackHub c WHERE c.article = :article")
         List<BackHub> findByArticle(@Param("article") Long article, Pageable pageable);
+
+        @Query("SELECT c FROM BackHub c WHERE c.article = :article")
+        BackHub findOneByArticle(@Param("article") Long article);
 
 
         @Query("SELECT c FROM BackHub c WHERE c.axisLength = :axisLength")

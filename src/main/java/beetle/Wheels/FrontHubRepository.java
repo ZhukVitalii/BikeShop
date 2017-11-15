@@ -1,5 +1,7 @@
 package beetle.Wheels;
 
+import beetle.Transmissions.FrontDerailleur;
+import beetle.Transmissions.Pedal;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -33,6 +35,9 @@ public interface FrontHubRepository extends JpaRepository<FrontHub, Long> {
 
     @Query("SELECT c FROM FrontHub c WHERE c.axisLength = :axisLength")
     List<FrontHub> findByAxisLength (@Param("axisLength") AxisLength axisLength, Pageable pageable);
+
+    @Query("SELECT c FROM FrontHub c WHERE c.article = :article")
+    FrontHub findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM FrontHub c WHERE c.axisDiam = :axisDiam")
     List<FrontHub> findByAxisDiam (@Param("axisDiam") AxisDiam axisDiam, Pageable pageable);

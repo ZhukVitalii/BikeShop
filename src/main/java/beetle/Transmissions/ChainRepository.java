@@ -1,5 +1,6 @@
 package beetle.Transmissions;
 
+import beetle.Frames.Frame;
 import beetle.Wheels.BackSprocketNumber;
 import beetle.Wheels.BearingType;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,9 @@ public interface ChainRepository extends JpaRepository<Chain, Long> {
 
     @Query("SELECT c FROM Chain c WHERE c.article = :article")
     List<Chain> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Chain c WHERE c.article = :article")
+    Chain findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM Chain c WHERE c.chainElementNumber = :chainElementNumber")
     List<Chain> findByChainElementNumber(@Param("chainElementNumber") ChainElementNumber chainElementNumber, Pageable pageable);

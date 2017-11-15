@@ -4,6 +4,7 @@ import beetle.Forks.BrakesType;
 import beetle.Forks.Fork;
 import beetle.Forks.TubeDiameter;
 import beetle.Frames.BikeType;
+import beetle.Transmissions.Pedal;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -35,6 +36,9 @@ public interface WheelRepository extends JpaRepository<Wheel, Long> {
 
     @Query("SELECT c FROM Wheel c WHERE c.article = :article")
     List<Wheel> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Wheel c WHERE c.article = :article")
+    Wheel findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM Wheel c WHERE c.bikeType = :bikeType AND c.wheelsDiam = :wheelsDiam AND c.brakesType = :brakesType ")
     List<Wheel> findByTypeAndWhDiamAndBrType(@Param("bikeType" )BikeType bikeType,

@@ -2,6 +2,7 @@ package beetle.Transmissions;
 
 import beetle.Frames.BikeType;
 import beetle.Frames.BikeTypeRepository;
+import beetle.Handlebars.Winding;
 import beetle.Wheels.BackSprocketNumber;
 import beetle.Wheels.BackSprocketNumberRepository;
 import beetle.Wheels.BearingType;
@@ -98,6 +99,71 @@ public class TransmissionService {
     public List<Long> articlesFrontDerailleur = new ArrayList<>();
     public List<Long> articlesPedal = new ArrayList<>();
 
+    //delete article BackDerailleur
+    public void deleteArticleBackDerailleur(long article){
+        articlesBackDerailleur.remove(article);
+    }
+    //delete article BackGearKas
+    public void deleteArticleBackGearKas(long article){
+        articlesBackGearKas.remove(article);
+    }
+    //delete article BackGearTr
+    public void deleteArticleBackGearTr(long article){
+        articlesBackGearTr.remove(article);
+    }
+    //delete article Bracket
+    public void deleteArticleBracket(long article){
+        articlesBracket.remove(article);
+    }
+    //delete article Chain
+    public void deleteArticleChain(long article){
+        articlesChain.remove(article);
+    }
+    //delete article Crank
+    public void deleteArticleCrank(long article){
+        articlesCrank.remove(article);
+    }
+    //delete article FrontDerailleur
+    public void deleteArticleFrontDerailleur(long article){
+        articlesFrontDerailleur.remove(article);
+    }
+    //delete article Pedal
+    public void deleteArticlePedal(long article){
+        articlesPedal.remove(article);
+    }
+
+    //get all articles
+    public List<Long> getArticlesBackDerailleur(){
+        return articlesBackDerailleur;
+    }
+    //get all articles
+    public List<Long> getArticlesBackGearKas(){
+        return articlesBackGearKas;
+    }
+    //get all articles
+    public List<Long> getArticlesBackGearTr(){
+        return articlesBackGearTr;
+    }
+    //get all articles
+    public List<Long> getArticlesBracket(){
+        return articlesBracket;
+    }
+    //get all articles
+    public List<Long> getArticlesChain(){
+        return articlesChain;
+    }
+    //get all articles
+    public List<Long> getArticlesCrank(){
+        return articlesCrank;
+    }
+    //get all articles
+    public List<Long> getArticlesFrontDerailleur(){
+        return articlesFrontDerailleur;
+    }
+    //get all articles
+    public List<Long> getArticlesPedal(){
+        return articlesPedal;
+    }
 
     //For BackDerailleur
     //add articles to List
@@ -995,14 +1061,31 @@ public class TransmissionService {
     }
 
     @Transactional(readOnly = true)
+    public Crank findCrankByArticle(Long article) {return crankRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
     public Bracket findBracket(long id) {
         return bracketRepository.findOne(id);
     }
 
     @Transactional(readOnly = true)
+    public Bracket findBracketByArticle(Long article) {return bracketRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
     public BackGearKas findBackGearKas(long id) {
         return backGearKasRepository.findOne(id);
     }
+
+    @Transactional(readOnly = true)
+    public BackGearKas findBackGearKasByArticle(Long article) {return backGearKasRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
+    public BackGearTr findBackGearTr(long id) {
+        return backGearTrRepository.findOne(id);
+    }
+
+    @Transactional(readOnly = true)
+    public BackGearTr findBackGearTrByArticle(Long article) {return backGearTrRepository.findOneByArticle(article);}
 
     @Transactional (readOnly = true)
     public BackDerailleur findBackDerailleur(long id) {
@@ -1010,19 +1093,31 @@ public class TransmissionService {
     }
 
     @Transactional(readOnly = true)
+    public BackDerailleur findBackDerailleurByArticle(Long article) {return backDerailleurRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
     public Chain findChain(long id) {
         return chainRepository.findOne(id);
     }
+
+    @Transactional(readOnly = true)
+    public Chain findChainByArticle(Long article) {return chainRepository.findOneByArticle(article);}
 
     @Transactional(readOnly = true)
     public Pedal findPedal(long id) {
         return pedalRepository.findOne(id);
     }
 
+    @Transactional(readOnly = true)
+    public Pedal findPedalByArticle(Long article) {return pedalRepository.findOneByArticle(article);}
+
     @Transactional (readOnly = true)
     public FrontDerailleur findFrontDerailleur(long id) {
         return frontDerailleurRepository.findOne(id);
     }
+
+    @Transactional(readOnly = true)
+    public FrontDerailleur findFrontDerailleurByArticle(Long article) {return frontDerailleurRepository.findOneByArticle(article);}
 
     @Transactional(readOnly=true)
     public TransmissionMaker findTransmissionMaker(long id) {

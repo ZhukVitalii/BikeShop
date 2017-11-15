@@ -31,6 +31,9 @@ public interface BrakeDiscMechanikRepository extends JpaRepository<BrakeDiscMech
     @Query("SELECT c FROM BrakeDiscMechanik c WHERE c.article = :article")
     List<BrakeDiscMechanik> findByArticle(@Param("article") Long article, Pageable pageable);
 
+    @Query("SELECT c FROM BrakeDiscMechanik c WHERE c.article = :article")
+    BrakeDiscMechanik findOneByArticle(@Param("article") Long article);
+
     @Query("SELECT c FROM BrakeDiscMechanik c WHERE c.rotorFixType = :rotorFixType")
     List<BrakeDiscMechanik> findByRotorFixType(@Param("rotorFixType") RotorFixType rotorFixType, Pageable pageable);
 

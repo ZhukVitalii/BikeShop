@@ -47,5 +47,8 @@ public class BrakeVBrake {
         this.price = price;
         this.way = way;
     }
+    public Double getPrice(){
+        return price;
+    }
 
 }

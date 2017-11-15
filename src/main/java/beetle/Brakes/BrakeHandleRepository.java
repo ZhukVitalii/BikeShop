@@ -30,6 +30,9 @@ public interface BrakeHandleRepository extends JpaRepository<BrakeHandle, Long> 
     @Query("SELECT c FROM BrakeHandle c WHERE c.article = :article")
     List<BrakeHandle> findByArticle(@Param("article") Long article, Pageable pageable);
 
+    @Query("SELECT c FROM BrakeHandle c WHERE c.article = :article")
+    BrakeHandle findOneByArticle(@Param("article") Long article);
+
     @Query("SELECT c FROM BrakeHandle c WHERE c.brakeHandleCompatibility = :brakeHandleCompatibility")
     List<BrakeHandle> findByBrakeHandleCompatibility(@Param("brakeHandleCompatibility") BrakeHandleCompatibility brakeHandleCompatibility, Pageable pageable);
 

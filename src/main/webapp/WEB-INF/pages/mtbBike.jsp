@@ -30,6 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="/resources/js/jquery.easydropdown.js"></script>
     <link href="/resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
     <script src="/resources/js/scripts.js" type="text/javascript"></script>
+    <script src="/resources/js/ajax.js" type="text/javascript"></script>
     <!--js-->
 
 
@@ -147,7 +148,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="btn_form">
                                     <a href="<c:url
                                      value="/chooseFork/${frame.id}"/>">Підібрати компоненти під дану раму</a>
-                                    <a href="/cartAddFrame/${frame.article}">Додати до корзини</a>
+                                    <button type="button" onclick="addToCart('/cartAddFrame/', ${frame.article})">Додати до корзини</button>
                                 </div>
                                 <div class="bike-type">
 

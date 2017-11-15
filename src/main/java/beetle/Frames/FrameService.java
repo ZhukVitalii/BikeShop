@@ -58,6 +58,15 @@ public class FrameService {
         int a = articles.size();
         return a;
     }
+    //get all articles
+    public List<Long> getArticles(){
+        return articles;
+    }
+
+    //delete article
+    public void deleteArticle(long article){
+        articles.remove(article);
+    }
 
     // add
     @Transactional
@@ -251,6 +260,9 @@ public class FrameService {
     public  Frame findFrame(Long id) {
         return frameRepository.findOne(id);
     }
+
+    @Transactional(readOnly = true)
+    public Frame findFrameByArticle(Long article) {return frameRepository.findOneByArticle(article);}
 
     @Transactional(readOnly=true)
     public FrameMaker findFrameMaker(long id) {

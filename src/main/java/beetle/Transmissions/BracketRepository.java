@@ -1,5 +1,6 @@
 package beetle.Transmissions;
 
+import beetle.Frames.Frame;
 import beetle.Wheels.BearingType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,6 +31,9 @@ public interface BracketRepository extends JpaRepository<Bracket, Long> {
 
     @Query("SELECT c FROM Bracket c WHERE c.article = :article")
     List<Bracket> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Bracket c WHERE c.article = :article")
+    Bracket findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM Bracket c WHERE c.bracketType = :bracketType")
     List<Bracket> findByBracketType(@Param("bracketType") BracketType bracketType, Pageable pageable);

@@ -97,5 +97,9 @@ public class Crank {
     public  FrontSprocketMin getFrontSprocketMin() {
         return frontSprocketMin;
     }
+
+    public Double getPrice(){
+        return price;
+    }
 }
 

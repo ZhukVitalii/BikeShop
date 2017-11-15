@@ -56,4 +56,8 @@ public class Chain{
         this.price = price;
         this.way = way;
     }
+
+    public Double getPrice(){
+        return price;
+    }
 }

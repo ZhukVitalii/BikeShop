@@ -29,6 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="/resources/js/jquery.easydropdown.js"></script>
     <link href="/resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
     <script src="/resources/js/scripts.js" type="text/javascript"></script>
+    <script src="/resources/js/ajax.js" type="text/javascript"></script>
     <!--js-->
 
 
@@ -143,14 +144,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <p>${grips.price}<label>грн</label><a href="#"></a></p>
                     <div class="btn_form">
                         <a href="#">Продовжити з даними гріпсами</a>
-                        <button type="button" onclick="addToCart()">Додати до корзини</button>
-                        <script>
-                            function addToCart() {
-                                var xhttp = new XMLHttpRequest();
-                                xhttp.open("POST", "/cartAddGrips/${grips.article}", true);
-                                xhttp.send(${grips.article});
-                            }
-                        </script>
+                        <button type="button" onclick="addToCart('/cartAddGrips/', ${grips.article})">Додати до корзини</button>
                     </div>
                     <div class="bike-type">
                         <table>

@@ -82,4 +82,8 @@ public class FrontDerailleur {
         this.price = price;
         this.way = way;
     }
+
+    public Double getPrice(){
+        return price;
+    }
 }

@@ -8,14 +8,14 @@
 <head>
     <title>${stem.name}/</title>
     <link rel="shortcut icon"
-          href="resources/images/logo_brauser.png" >
-    <spring:url value="${stem.url}/resources/css/bootstrap.css" var="bootstrap"/>
-    <link href="${stem.url}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
+          href="/resources/images/logo_brauser.png" >
+    <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
+    <link href="/resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (Bootstrap's JavaScript plugins) -->
-    <script src="${stem.url}/resources/js/jquery.min.js"></script>
+    <script src="/resources/js/jquery.min.js"></script>
     <!-- Custom Theme files -->
-    <link href="${stem.url}/resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${stem.url}/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,13 +26,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
     <!--webfont-->
     <!-- dropdown -->
-    <script src="${stem.url}/resources/js/jquery.easydropdown.js"></script>
-    <link href="${stem.url}/resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="${stem.url}/resources/js/scripts.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.easydropdown.js"></script>
+    <link href="/resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
+    <script src="/resources/js/scripts.js" type="text/javascript"></script>
+    <script src="/resources/js/ajax.js" type="text/javascript"></script>
     <!--js-->
 </head>
 <body>
-<script src="${stem.url}/resources/js/responsiveslides.min.js"></script>
+<script src="/resources/js/responsiveslides.min.js"></script>
 <script>
     $(function () {
         $("#slider").responsiveSlides({
@@ -48,7 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="${stem.url}/resources/images/logo.png"
+                <a href="/"><img src="/resources/images/logo.png"
                                  alt=""
                                  width="110"
                                  height="112"/>
@@ -108,8 +109,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </div>
                         <c:forEach items="${stems}" var="stem">
                         <!--Include the Etalage files-->
-                        <link rel="stylesheet" href="${stem.url}/resources/css/etalage.css">
-                        <script src="${stem.url}/resources/js/jquery.etalage.min.js"></script>
+                        <link rel="stylesheet" href="/resources/css/etalage.css">
+                        <script src="/resources/js/jquery.etalage.min.js"></script>
                         <script>
                             jQuery(document).ready(function($){
                                 $('#etalage').etalage({
@@ -134,14 +135,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <h4></h4>
                                 <p>${stem.price}<label>грн</label><a href="#"></a></p>
                                 <div class="btn_form">
-                                    <button type="button" onclick="addToCart()">Додати до корзини</button>
-                                    <script>
-                                        function addToCart() {
-                                            var xhttp = new XMLHttpRequest();
-                                            xhttp.open("POST", "/cartAddStem/${stem.article}", true);
-                                            xhttp.send(${stem.article});
-                                        }
-                                    </script>
+                                    <button type="button" onclick="addToCart('/cartAddStem/', ${stem.article})">Додати до корзини</button>
                                 </div>
                                 <div class="bike-type">
                                     <table>

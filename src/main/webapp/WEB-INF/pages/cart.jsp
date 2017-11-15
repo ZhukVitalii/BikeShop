@@ -11,6 +11,7 @@
     <link href="resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (Bootstrap's JavaScript plugins) -->
     <script src="resources/js/jquery.min.js"></script>
+    <script src="resources/js/my.js"></script>
     <!-- Custom Theme files -->
     <link href="resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
     <link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -27,6 +28,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="resources/js/jquery.easydropdown.js"></script>
     <link href="resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
     <script src="resources/js/scripts.js" type="text/javascript"></script>
+    <script src="resources/js/ajax.js" type="text/javascript"></script>
     <!--js-->
 
 </head>
@@ -106,18 +108,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         <div class="col-md-9 cart-items">
             <h2>${total} <label> товарів в корзині</label></h2>
-            <script>$(document).ready(function(c) {
-                $('.close1').on('click', function(c){
-                    $('.cart-header').fadeOut('slow', function(c){
-                        $('.cart-header').remove();
-                    });
-                });
-            });
-            </script>
+
 <!-- Frames----------------------------------------------------------------------------------- -->
 <c:forEach items="${frames}" var="frame">
             <div class="cart-header">
-                <div class="close1"> </div>
+                <div class="close1">
+                    <button type="button"
+                            class="delete-from-cart"
+                            onclick="deleteFromCart('/cartDelFrame/${frame.article}',${frame.article} )">
+                    </button>
+                </div>
                 <div class="cart-sec">
                     <div class="cart-item cyc">
                         <img src="${frame.way}"/>
@@ -131,25 +131,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </div>
                         <h4></h4>
                         <p>${frame.price}<label>грн</label><a href="#"></a></p>
-                        <p class="qty">Qty ::</p>
-                        <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                        <p class="qty">Кількість ::</p>
+                        <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                     </div>
                     <div class="clearfix"></div>
                 </div>
             </div>
-            <script>$(document).ready(function(c) {
-                $('.close2').on('click', function(c){
-                    $('.cart-header2').fadeOut('slow', function(c){
-                        $('.cart-header2').remove();
-                    });
-                });
-            });
-            </script>
     </c:forEach>
 <!-- Forks ----------------------------------------------------------------------------------- -->
             <c:forEach items="${forks}" var="fork">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelFork/${fork.article}',${fork.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${fork.way}"/>
@@ -163,25 +160,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${fork.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
 <!-- Handlebars Components ----------------------------------------------------------------------------------- -->
             <c:forEach items="${handlebars}" var="handlebar">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelHandlebar/${handlebar.article}',${handlebar.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${handlebar.way}"/>
@@ -195,24 +189,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${handlebar.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${stems}" var="stem">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelStem/${stem.article}',${stem.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${stem.way}"/>
@@ -226,24 +217,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${stem.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${grips}" var="grips">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelGrips/${grips.article}',${grips.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${grips.way}"/>
@@ -257,24 +245,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${grips.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${headsets}" var="headset">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelHeadset/${headset.article}',${headset.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${headset.way}"/>
@@ -288,24 +273,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${headset.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${windings}" var="winding">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelWinding/${winding.article}',${winding.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${winding.way}"/>
@@ -319,25 +301,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${winding.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
+                            <p class="qty">Кількість ::</p>
                             <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
 <!-- Brakes Components ----------------------------------------------------------------------------------- -->
             <c:forEach items="${brakeHandles}" var="brakeHandle">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelBrakeHandle/${brakeHandle.article}',${brakeHandle.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${brakeHandle.way}"/>
@@ -351,24 +330,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${brakeHandle.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${brakeDiscHydraulics}" var="brakeDiscHydraulic">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelBrakeDiscHydraulic/${brakeDiscHydraulic.article}',${brakeDiscHydraulic.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${brakeDiscHydraulic.way}"/>
@@ -382,24 +358,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${brakeDiscHydraulic.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${brakeDiscMechaniks}" var="brakeDiscMechanik">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelBrakeDiscMechanik/${brakeDiscMechanik.article}',${brakeDiscMechanik.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${brakeDiscMechanik.way}"/>
@@ -413,24 +386,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${brakeDiscMechanik.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${brakeVBrakes}" var="brakeVBrake">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelBrakeVBrake/${brakeVBrake.article}',${brakeVBrake.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${brakeVBrake.way}"/>
@@ -444,25 +414,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${brakeVBrake.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
 <!-- Wheels Components ----------------------------------------------------------------------------------- -->
             <c:forEach items="${wheels}" var="wheel">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelWheel/${wheel.article}',${wheel.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${wheel.way}"/>
@@ -476,24 +443,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${wheel.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${tires}" var="tire">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelTire/${tire.article}',${tire.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${tire.way}"/>
@@ -507,24 +471,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${tire.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${spokes}" var="spoke">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelSpoke/${spoke.article}',${spoke.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${spoke.way}"/>
@@ -538,24 +499,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${spoke.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${rims}" var="rim">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelRim/${rim.article}',${rim.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${rim.way}"/>
@@ -569,24 +527,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${rim.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${frontHubs}" var="frontHub">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelFrontHub/${frontHub.article}',${frontHub.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${frontHub.way}"/>
@@ -600,24 +555,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${frontHub.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${backHubs}" var="backHub">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelBackHub/${backHub.article}',${backHub.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${backHub.way}"/>
@@ -631,25 +583,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${backHub.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
 <!--Transmission ----------------------------------------------------------------------------------- -->
             <c:forEach items="${backDerailleurs}" var="backDerailleur">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelBackDerailleur/${backDerailleur.article}',${backDerailleur.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${backDerailleur.way}"/>
@@ -663,24 +612,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${backDerailleur.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${backGearKass}" var="backGearKas">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelBackGearKas/${backGearKas.article}',${backGearKas.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${backGearKas.way}"/>
@@ -694,24 +640,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${backGearKas.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${backGearTrs}" var="backGearTr">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelBackGearTr/${backGearTr.article}',${backGearTr.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${backGearTr.way}"/>
@@ -725,24 +668,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${backGearTr.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${brackets}" var="bracket">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelBracket/${bracket.article}',${bracket.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${bracket.way}"/>
@@ -756,24 +696,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${bracket.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${chains}" var="chain">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelChain/${chain.article}',${chain.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${chain.way}"/>
@@ -787,24 +724,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${chain.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${cranks}" var="crank">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelCrank/${crank.article}',${crank.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${crank.way}"/>
@@ -818,24 +752,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${crank.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${frontDerailleurs}" var="frontDerailleur">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelFrontDerailleur/${frontDerailleur.article}',${frontDerailleur.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${frontDerailleur.way}"/>
@@ -849,24 +780,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${frontDerailleur.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
             <c:forEach items="${pedals}" var="pedal">
                 <div class="cart-header">
-                    <div class="close1"> </div>
+                    <div class="close1">
+                        <button type="button"
+                                class="delete-from-cart"
+                                onclick="deleteFromCart('/cartDelPedal/${pedal.article}',${pedal.article} )">
+                        </button>
+                    </div>
                     <div class="cart-sec">
                         <div class="cart-item cyc">
                             <img src="${pedal.way}"/>
@@ -880,20 +808,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <h4></h4>
                             <p>${pedal.price}<label>грн</label><a href="#"></a></p>
-                            <p class="qty">Qty ::</p>
-                            <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                            <p class="qty">Кількість ::</p>
+                            <input min="1" type="number" name="quantity" value="1" class="form-control input-small">
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-                </script>
             </c:forEach>
         </div>
         <div class="col-md-3 cart-total">

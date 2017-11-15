@@ -57,4 +57,7 @@ public class Pedal {
         this.price = price;
         this.way = way;
     }
+    public Double getPrice(){
+        return price;
+    }
 }

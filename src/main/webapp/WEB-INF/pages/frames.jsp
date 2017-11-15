@@ -29,7 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="resources/js/jquery.easydropdown.js"></script>
     <link href="resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
     <script src="resources/js/scripts.js" type="text/javascript"></script>
-    <script src="resources/js/ajax.js" type="text/javascript"></script>
+    <script src="/resources/js/ajax.js" type="text/javascript"></script>
     <!--js-->
 
 
@@ -127,14 +127,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="product-head">
                 <a href="/">Home</a> <span>::</span>
             </div>
-
             <c:forEach items="${frames}" var="frame">
             <!--Include the Etalage files-->
             <link rel="stylesheet" href="resources/css/etalage.css">
             <script src="resources/js/jquery.etalage.min.js"></script>
             <script>
                 jQuery(document).ready(function($){
-
                     $('#etalage').etalage({
                         thumb_image_width: 400,
                         thumb_image_height: 400,
@@ -171,14 +169,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="length" href="#">M</a>
                 <a class="length" href="#">S</a>
                 <div class="btn_form">
-                    <button type="button" onclick="addToCart()">Додати до корзини</button>
-                    <script>
-                        function addToCart() {
-                            var xhttp = new XMLHttpRequest();
-                            xhttp.open("POST", "/cartAddFrame/${frame.article}", true);
-                            xhttp.send(${frame.article});
-                        }
-                    </script>
+                    <button type="button" onclick="addToCart('/cartAddFrame/',${frame.article})">Додати до корзини</button>
                 </div>
                 <div class="bike-type">
 

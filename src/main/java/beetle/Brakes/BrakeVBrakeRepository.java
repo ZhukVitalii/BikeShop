@@ -1,5 +1,6 @@
 package beetle.Brakes;
 
+import beetle.Frames.Frame;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,6 +27,9 @@ public interface BrakeVBrakeRepository extends JpaRepository<BrakeVBrake, Long> 
 
     @Query("SELECT c FROM BrakeVBrake c WHERE c.article = :article")
     List<BrakeVBrake> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM BrakeVBrake c WHERE c.article = :article")
+    BrakeVBrake findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM BrakeVBrake c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<BrakeVBrake> findByPattern(@Param("pattern") String pattern, Pageable pageable);

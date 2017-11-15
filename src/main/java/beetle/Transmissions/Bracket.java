@@ -69,4 +69,8 @@ public class Bracket {
     public BracketType getBracketType() {
         return bracketType;
     }
+
+    public Double getPrice(){
+        return price;
+    }
 }

@@ -1,5 +1,6 @@
 package beetle.Handlebars;
 
+import beetle.Forks.Fork;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +23,7 @@ public interface WindingRepository extends JpaRepository<Winding, Long> {
 
     @Query("SELECT c FROM Winding c WHERE c.article = :article")
     List<Winding> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Winding c WHERE c.article = :article")
+    Winding findOneByArticle(@Param("article") Long article);
 }

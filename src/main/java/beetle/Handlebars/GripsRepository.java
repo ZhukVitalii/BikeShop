@@ -1,5 +1,6 @@
 package beetle.Handlebars;
 
+import beetle.Forks.Fork;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,5 +23,8 @@ public interface GripsRepository extends JpaRepository<Grips, Long> {
 
     @Query("SELECT c FROM Grips c WHERE c.article = :article")
     List<Grips> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Grips c WHERE c.article = :article")
+    Grips findOneByArticle(@Param("article") Long article);
 
 }

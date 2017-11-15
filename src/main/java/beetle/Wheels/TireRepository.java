@@ -1,5 +1,6 @@
 package beetle.Wheels;
 
+import beetle.Transmissions.Pedal;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -32,6 +33,9 @@ public interface TireRepository extends JpaRepository<Tire, Long> {
 
     @Query("SELECT c FROM Tire c WHERE c.article = :article")
     List<Tire> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Tire c WHERE c.article = :article")
+    Tire findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT COUNT(c) FROM Tire c WHERE c.wheelMaker = :wheelMaker")
     long countByWheelMakers(@Param("wheelMaker")  WheelMaker wheelMaker);

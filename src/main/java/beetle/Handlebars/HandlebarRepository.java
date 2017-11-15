@@ -1,5 +1,6 @@
 package beetle.Handlebars;
 
+import beetle.Forks.Fork;
 import beetle.Frames.BikeType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,6 +26,9 @@ public interface HandlebarRepository extends JpaRepository<Handlebar, Long> {
 
     @Query("SELECT c FROM Handlebar c WHERE c.article = :article")
     List<Handlebar> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Handlebar c WHERE c.article = :article")
+    Handlebar findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM Handlebar c WHERE c.bikeType = :bikeType")
     List<Handlebar> findByBikeType(@Param("bikeType")BikeType bikeType, Pageable pageable);

@@ -3,6 +3,7 @@ package beetle.Wheels;
 import beetle.Forks.*;
 import beetle.Frames.BikeType;
 import beetle.Frames.BikeTypeRepository;
+import beetle.Transmissions.FrontDerailleur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,9 @@ import java.util.List;
  */
 @Service
 public class WheelService {
+
     //main components
+
     @Autowired
     private WheelRepository wheelRepository;
     @Autowired
@@ -31,7 +34,6 @@ public class WheelService {
     private  TireRepository tireRepository;
 
     //auxiliary components
-
 
     @Autowired
     private RimWideRepository rimWideRepository;
@@ -75,6 +77,7 @@ public class WheelService {
     private TireWideRepository tireWideRepository;
 
     //Lists with articles of components, that user added to cart
+
     public List<Long> articlesBackHub = new ArrayList<>();
     public List<Long> articlesFrontHub = new ArrayList<>();
     public List<Long> articlesRim = new ArrayList<>();
@@ -82,35 +85,62 @@ public class WheelService {
     public List<Long> articlesTire = new ArrayList<>();
     public List<Long> articlesWheel = new ArrayList<>();
 
+
     //For backHub
+
     //add articles to List
     public void addToArticleBackHub(Long article) {
         articlesBackHub.add(article);
         getSizeBackHub();
     }
+
     //get article from List
     public Long getArticleBackHubFromCart (int a) {
         Long b = articlesBackHub.get(a);
         return b;
     }
+
     //get size of List
     public int getSizeBackHub() {
         int a = articlesBackHub.size();
         return a;
     }
 
+    //get all articles
+    public List<Long> getArticlesBackHub(){
+        return articlesBackHub;
+    }
+
+    //delete article BackHub
+    public void deleteArticleBackHub(long article){
+        articlesBackHub.remove(article);
+    }
+
+
     //For FrontHub
     public void addToArticleFrontHub(Long article) {
         articlesFrontHub.add(article);
         getSizeFrontHub();;
     }
+
     public Long getArticleFrontHubFromCart (int a) {
         Long b = articlesFrontHub.get(a);
         return b;
     }
+
     public int getSizeFrontHub() {
         int a = articlesFrontHub.size();
         return a;
+    }
+
+    //get all articles
+    public List<Long> getArticlesFrontHub(){
+        return articlesFrontHub;
+    }
+
+    //delete article FrontHub
+    public void deleteArticleFrontHub(long article){
+        articlesFrontHub.remove(article);
     }
 
     //For Rim
@@ -118,55 +148,107 @@ public class WheelService {
         articlesRim.add(article);
         getSizeRim();;
     }
+
     public Long getArticleRimFromCart (int a) {
         Long b = articlesRim.get(a);
         return b;
     }
+
     public int getSizeRim() {
         int a = articlesRim.size();
         return a;
     }
+
+    //get all articles
+    public List<Long> getArticlesRim(){
+        return articlesRim;
+    }
+
+    //delete article Rim
+    public void deleteArticleRim(long article){
+        articlesRim.remove(article);
+    }
+
 
     //For Spoke
     public void addToArticleSpoke(Long article) {
         articlesSpoke.add(article);
         getSizeSpoke();
     }
+
     public Long getArticleSpokeFromCart (int a) {
         Long b = articlesSpoke.get(a);
         return b;
     }
+
     public int getSizeSpoke() {
         int a = articlesSpoke.size();
         return a;
     }
+
+    //get all articles
+    public List<Long> getArticlesSpoke(){
+        return articlesSpoke;
+    }
+
+    //delete article Spoke
+    public void deleteArticleSpoke(long article){
+        articlesSpoke.remove(article);
+    }
+
 
     //For Tire
     public void addToArticleTire(Long article) {
         articlesTire.add(article);
         getSizeTire();
     }
+
     public Long getArticleTireFromCart (int a) {
         Long b = articlesTire.get(a);
         return b;
     }
+
     public int getSizeTire() {
         int a = articlesTire.size();
         return a;
     }
+
+    //get all articles
+    public List<Long> getArticlesTire(){
+        return articlesTire;
+    }
+
+    //delete article Tire
+    public void deleteArticleTire(long article){
+        articlesTire.remove(article);
+    }
+
+
 
     //For Wheel
     public void addToArticleWheel(Long article) {
         articlesWheel.add(article);
         getSizeWheel();
     }
+
     public Long getArticleWheelFromCart (int a) {
         Long b = articlesWheel.get(a);
         return b;
     }
+
     public int getSizeWheel() {
         int a = articlesWheel.size();
         return a;
+    }
+
+    //get all articles
+    public List<Long> getArticlesWheel(){
+        return articlesWheel;
+    }
+
+    //delete article Wheel
+    public void deleteArticleWheel(long article){
+        articlesWheel.remove(article);
     }
 
     // add
@@ -802,7 +884,42 @@ public class WheelService {
         return tireRepository.count();
     }
 
-    //find by id
+    //find by id and article
+    @Transactional(readOnly = true)
+    public BackHub findBackHub(Long id) {return backHubRepository.findOne(id);}
+
+    @Transactional(readOnly = true)
+    public BackHub findBackHubByArticle(Long article) {return backHubRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
+    public FrontHub findFrontHub(Long id) {return frontHubRepository.findOne(id);}
+
+    @Transactional(readOnly = true)
+    public FrontHub findFrontHubByArticle(Long article) {return frontHubRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
+    public Rim findRim(Long id) {return rimRepository.findOne(id);}
+
+    @Transactional(readOnly = true)
+    public Rim findRimByArticle(Long article) {return rimRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
+    public Spoke findSpoke(Long id) {return spokeRepository.findOne(id);}
+
+    @Transactional(readOnly = true)
+    public Spoke findSpokeByArticle(Long article) {return spokeRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
+    public Tire findTire(Long id) {return tireRepository.findOne(id);}
+
+    @Transactional(readOnly = true)
+    public Tire findTireByArticle(Long article) {return tireRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
+    public Wheel findWheel(Long id) {return wheelRepository.findOne(id);}
+
+    @Transactional(readOnly = true)
+    public Wheel findWheelByArticle(Long article) {return wheelRepository.findOneByArticle(article);}
 
     @Transactional(readOnly=true)
     public WheelMaker findWheelMaker(long id) {

@@ -1,5 +1,6 @@
 package beetle.Handlebars;
 
+import beetle.Forks.Fork;
 import beetle.Forks.TubeDiameter;
 import beetle.Transmissions.BackDerailleur;
 import beetle.Transmissions.BackSprocketMax;
@@ -27,6 +28,9 @@ public interface StemRepository extends JpaRepository<Stem, Long> {
 
     @Query("SELECT c FROM Stem c WHERE c.article = :article")
     List<Stem> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Stem c WHERE c.article = :article")
+    Stem findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM Stem c WHERE c.handlebarDiameter = :handlebarDiameter AND c.tubeDiameter = :tubeDiameter ")
     List<Stem> findByHandlebarDiamAndTubeDiam(@Param("handlebarDiameter" ) HandlebarDiameter handlebarDiameter,

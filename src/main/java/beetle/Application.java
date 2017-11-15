@@ -34,7 +34,7 @@ public class Application {
             }
         };
     }
-
+/*
     @Bean
     public CommandLineRunner secur(final UserRoleService userRoleService) {
         return new CommandLineRunner() {
@@ -56,5 +56,5 @@ public class Application {
             }
         };
     }
-
+*/
 }

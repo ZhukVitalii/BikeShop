@@ -47,5 +47,7 @@ public class Winding {
         this.description = description;
         this.way = way;
     }
-
+    public Double getPrice() {
+        return price;
+    }
 }

@@ -71,4 +71,7 @@ public class BrakeDiscHydraulic {
         this.price = price;
         this.way = way;
     }
+    public Double getPrice(){
+        return price;
+    }
 }

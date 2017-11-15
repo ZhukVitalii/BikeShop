@@ -12,6 +12,8 @@ import beetle.Wheels.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,7 +52,6 @@ public class UserController {
         if (page < 0) page = 0;
         return "index";
     }
-
 
     //Select from database bike type MTB
     @RequestMapping("/MTB_page")
@@ -160,283 +161,417 @@ public class UserController {
 
     //Add frame to cart
     @RequestMapping("/cartAddFrame/{article}")
-    public String listArticleFrame(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model) {
-        if (page < 0) page = 0;
+    public void listArticleFrame(
+            @PathVariable(value = "article") Long article) {
+        // for checking if article exist in cart
+        if (!frameService.getArticles().contains(article)) {
         frameService.addToArticle(article);
-        return "redirect:/show_frames";
+        }
+
+    }
+    //delete frame from cart
+    @RequestMapping("/cartDelFrame/{article}")
+    public ResponseEntity<Void> listArticleFrameToDel(
+            @PathVariable(value = "article") Long article) {
+            frameService.deleteArticle(article);
+            return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //Add fork to cart
     @RequestMapping("/cartAddFork/{article}")
-    public String listArticleFork(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void  listArticleFork(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        forkService.addToArticle(article);
-        return "redirect:/show_forks";
+        // for checking if article exist in cart
+        if (!forkService.getArticles().contains(article)) {
+         forkService.addToArticle(article);
+        }
+    }
+    @RequestMapping("/cartDelFork/{article}")
+    public ResponseEntity<Void> listArticleForkToDel(
+            @PathVariable(value = "article") Long article) {
+        forkService.deleteArticle(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //Add handlebars component to cart
     @RequestMapping("/cartAddHandlebar/{article}")
-    public String listArticleHandlebar(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void  listArticleHandlebar(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
+        if (!handlebarService.getArticlesHandlebar().contains(article)) {
+            handlebarService.addToArticleHandlebar(article);
+        }
+    }
 
-        handlebarService.addToArticleHandlebar(article);
-        return "redirect:/show_handlebars";
+    @RequestMapping("/cartDelHandlebar/{article}")
+    public ResponseEntity<Void> listArticleHandlebarToDel(
+            @PathVariable(value = "article") Long article) {
+        handlebarService.deleteArticleHandlebar(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddStem/{article}")
-    public String listArticleStem(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void  listArticleStem(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        handlebarService.addToArticleStem(article);
-        return "redirect:/show_stems";
+        // for checking if article exist in cart
+        if (!handlebarService.getArticlesStem().contains(article)) {
+            handlebarService.addToArticleStem(article);
+        }
+    }
+
+    @RequestMapping("/cartDelStem/{article}")
+    public ResponseEntity<Void> listArticleStemToDel(
+            @PathVariable(value = "article") Long article) {
+        handlebarService.deleteArticleStem(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddGrips/{article}")
-    public String listArticleGrips(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleGrips(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        handlebarService.addToArticleGrips(article);
-        return "redirect:/show_grips";
+        // for checking if article exist in cart
+        if (!handlebarService.getArticlesHandlebar().contains(article)) {
+            handlebarService.addToArticleGrips(article);
+        }
+    }
+
+    @RequestMapping("/cartDelGrips/{article}")
+    public ResponseEntity<Void> listArticleGripsToDel(
+            @PathVariable(value = "article") Long article) {
+        handlebarService.deleteArticleGrips(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddHeadset/{article}")
-    public String listArticleHeadset(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleHeadset(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        handlebarService.addToArticleHeadset(article);
-        return "redirect:/show_headsets";
+        // for checking if article exist in cart
+        if (!handlebarService.getArticlesHeadset().contains(article)) {
+            handlebarService.addToArticleHeadset(article);
+        }
+    }
+
+    @RequestMapping("/cartDelHeadset/{article}")
+    public ResponseEntity<Void> listArticleHeadsetToDel(
+            @PathVariable(value = "article") Long article) {
+        handlebarService.deleteArticleHeadset(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddWinding/{article}")
-    public String listArticleWinding(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleWinding(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        handlebarService.addToArticleWinding(article);
-        return "redirect:/show_windings";
+        // for checking if article exist in cart
+        if (!handlebarService.getArticlesWinding().contains(article)) {
+            handlebarService.addToArticleWinding(article);
+        }
+    }
+
+    @RequestMapping("/cartDelWinding/{article}")
+    public ResponseEntity<Void> listArticleWindingToDel(
+            @PathVariable(value = "article") Long article) {
+        handlebarService.deleteArticleWinding(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //Add Brakes component to cart
     @RequestMapping("/cartAddBrakeDiscHydraulic/{article}")
-    public String listArticleBrakeDiscHydraulic(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleBrakeDiscHydraulic(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        brakeService.addToArticleBrakeDiscHydraulic(article);
-        return "redirect:/show_brakesHydro";
+        // for checking if article exist in cart
+        if (!brakeService.getArticlesBrakeDiscHydraulic().contains(article)) {
+            brakeService.addToArticleBrakeDiscHydraulic(article);
+        }
+    }
+
+    @RequestMapping("/cartDelBrakeDiscHydraulic/{article}")
+    public ResponseEntity<Void> listArticleBrakeDiscHydraulicToDel(
+            @PathVariable(value = "article") Long article) {
+        brakeService.deleteArticleBrakeDiscHydraulic(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddBrakeDiscMechanik/{article}")
-    public String listArticleBrakeDiscMechanik(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleBrakeDiscMechanik(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        brakeService.addToArticleBrakeDiscMechanik(article);
-        return "redirect:/show_brakesMech";
+        // for checking if article exist in cart
+        if (!brakeService.getArticlesBrakeDiscMechanik().contains(article)) {
+            brakeService.addToArticleBrakeDiscMechanik(article);
+        }
+    }
+
+    @RequestMapping("/cartDelBrakeDiscMechanik/{article}")
+    public ResponseEntity<Void> listArticleBrakeDiscMechanikToDel(
+            @PathVariable(value = "article") Long article) {
+        brakeService.deleteArticleBrakeDiscMechanik(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddBrakeVBrake/{article}")
-    public String listArticleBrakeVBrake(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleBrakeVBrake(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        brakeService.addToArticleBrakeVBrake(article);
-        return "redirect:/show_brakesVBrake";
+        // for checking if article exist in cart
+        if (!brakeService.getArticlesBrakeVBrake().contains(article)) {
+            brakeService.addToArticleBrakeVBrake(article);
+        }
+    }
+
+    @RequestMapping("/cartDelBrakeVBrake/{article}")
+    public ResponseEntity<Void> listArticleBrakeVBrakeToDel(
+            @PathVariable(value = "article") Long article) {
+        brakeService.deleteArticleBrakeVBrake(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddBrakeHandle/{article}")
-    public String listArticleBrakeHandle(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleBrakeHandle(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        brakeService.addToArticleBrakeHandle(article);
-        return "redirect:/show_brakesHandle";
+        if (!brakeService.articlesBrakeHandle.contains(article)) {
+            brakeService.addToArticleBrakeHandle(article);
+        }
     }
+
+    @RequestMapping("/cartDelBrakeHandle/{article}")
+    public ResponseEntity<Void> listArticleBrakeHandleToDel(
+            @PathVariable(value = "article") Long article) {
+        brakeService.deleteArticleBrakeHandle(article);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     //Add whells components to cart
     @RequestMapping("/cartAddWheel/{article}")
-    public String listArticleWheel(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleWheel(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        wheelService.addToArticleWheel(article);
-        return "redirect:/show_wheels";
+        if (!wheelService.getArticlesWheel().contains(article)) {
+            wheelService.addToArticleWheel(article);
+        }
+    }
+
+    @RequestMapping("/cartDelWheel/{article}")
+    public ResponseEntity<Void> listArticleWheelToDel(
+            @PathVariable(value = "article") Long article) {
+        wheelService.deleteArticleWheel(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddBackHub/{article}")
-    public String listArticleBackHub(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleBackHub(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        wheelService.addToArticleBackHub(article);
-        return "redirect:/show_backHubs";
+        if (!wheelService.getArticlesBackHub().contains(article)) {
+            wheelService.addToArticleBackHub(article);
+        }
+    }
+
+    @RequestMapping("/cartDelBackHub/{article}")
+    public ResponseEntity<Void> listArticleBackHubToDel(
+            @PathVariable(value = "article") Long article) {
+        wheelService.deleteArticleBackHub(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddFrontHub/{article}")
-    public String listArticleFrontHub(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleFrontHub(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        wheelService.addToArticleFrontHub(article);
-        return "redirect:/show_frontHubs";
+        if (!wheelService.getArticlesFrontHub().contains(article)) {
+            wheelService.addToArticleFrontHub(article);
+        }
+    }
+
+    @RequestMapping("/cartDelFrontHub/{article}")
+    public ResponseEntity<Void> listArticleFrontHubToDel(
+            @PathVariable(value = "article") Long article) {
+        wheelService.deleteArticleFrontHub(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddRim/{article}")
-    public String listArticleRim(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleRim(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        wheelService.addToArticleRim(article);
-        return "redirect:/show_rims";
+        if (!wheelService.getArticlesRim().contains(article)) {
+            wheelService.addToArticleRim(article);
+        }
+    }
+
+    @RequestMapping("/cartDelRim/{article}")
+    public ResponseEntity<Void> listArticleRimToDel(
+            @PathVariable(value = "article") Long article) {
+        wheelService.deleteArticleRim(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddSpoke/{article}")
-    public String listArticleSpoke(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleSpoke(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        wheelService.addToArticleSpoke(article);
-        return "redirect:/show_spokes";
+        if (!wheelService.getArticlesSpoke().contains(article)) {
+            wheelService.addToArticleSpoke(article);
+        }
+    }
+
+    @RequestMapping("/cartDelSpoke/{article}")
+    public ResponseEntity<Void> listArticleSpokeToDel(
+            @PathVariable(value = "article") Long article) {
+        wheelService.deleteArticleSpoke(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddTire/{article}")
-    public String listArticleTire(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleTire(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        wheelService.addToArticleTire(article);
-        return "redirect:/show_tires";
+        if (wheelService.getArticlesTire().contains(article)) {
+            wheelService.addToArticleTire(article);
+        }
+    }
+
+    @RequestMapping("/cartDelTire/{article}")
+    public ResponseEntity<Void> listArticleTireToDel(
+            @PathVariable(value = "article") Long article) {
+        wheelService.deleteArticleTire(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //For Transmission to cart
     @RequestMapping("/cartAddBackDerailleur/{article}")
-    public String listArticleBackDerailleur(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleBackDerailleur(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        transmissionService.addToArticleBackDerailleur(article);
-        return "redirect:/show_backDerailleurs";
+        if (!transmissionService.getArticlesBackDerailleur().contains(article)) {
+            transmissionService.addToArticleBackDerailleur(article);
+        }
+    }
+
+    @RequestMapping("/cartDelBackDerailleur/{article}")
+    public ResponseEntity<Void> listArticleBackDerailleurToDel(
+            @PathVariable(value = "article") Long article) {
+        transmissionService.deleteArticleBackDerailleur(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddBackGearKas/{article}")
-    public String listArticleBackGearKas(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleBackGearKas(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        transmissionService.addToArticleBackGearKas(article);
-        return "redirect:/show_backGearKass";
+        if (!transmissionService.getArticlesBackGearKas().contains(article)) {
+            transmissionService.addToArticleBackGearKas(article);
+        }
+    }
+
+    @RequestMapping("/cartDelBackGearKas/{article}")
+    public ResponseEntity<Void> listArticleBackGearKasToDel(
+            @PathVariable(value = "article") Long article) {
+        transmissionService.deleteArticleBackGearKas(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddBackGearTr/{article}")
-    public String listArticleBackGearTr(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleBackGearTr(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        transmissionService.addToArticleBackGearTr(article);
-        return "redirect:/show_backGearTrs";
+        if (!transmissionService.getArticlesBackGearTr().contains(article)) {
+            transmissionService.addToArticleBackGearTr(article);
+        }
+    }
+
+    @RequestMapping("/cartDelBackGearTr/{article}")
+    public ResponseEntity<Void> listArticleBackGearTrToDel(
+            @PathVariable(value = "article") Long article) {
+        transmissionService.deleteArticleBackGearTr(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddBracket/{article}")
-    public String listArticleBracket(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleBracket(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        transmissionService.addToArticleBracket(article);
-        return "redirect:/show_brackets";
+        if (!transmissionService.getArticlesBracket().contains(article)) {
+            transmissionService.addToArticleBracket(article);
+        }
+    }
+
+    @RequestMapping("/cartDelBracket/{article}")
+    public ResponseEntity<Void> listArticleBracketToDel(
+            @PathVariable(value = "article") Long article) {
+        transmissionService.deleteArticleBracket(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddChain/{article}")
-    public String listArticleChain(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleChain(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        transmissionService.addToArticleChain(article);
-        return "redirect:/show_chains";
+        if (!transmissionService.getArticlesChain().contains(article)) {
+            transmissionService.addToArticleChain(article);
+        }
+    }
+
+    @RequestMapping("/cartDelChain/{article}")
+    public ResponseEntity<Void> listArticleChainToDel(
+            @PathVariable(value = "article") Long article) {
+        transmissionService.deleteArticleChain(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddCrank/{article}")
-    public String listArticleCrank(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleCrank(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        transmissionService.addToArticleCrank(article);
-        return "redirect:/show_cranks";
+        if (!transmissionService.getArticlesCrank().contains(article)) {
+            transmissionService.addToArticleCrank(article);
+        }
+    }
+
+    @RequestMapping("/cartDelCrank/{article}")
+    public ResponseEntity<Void> listArticleCrankToDel(
+            @PathVariable(value = "article") Long article) {
+        transmissionService.deleteArticleCrank(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddFrontDerailleur/{article}")
-    public String listArticleFrontDerailleur(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticleFrontDerailleur(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        transmissionService.addToArticleFrontDerailleur(article);
-        return "redirect:/show_frontDerailleurs";
+        if (!transmissionService.getArticlesFrontDerailleur().contains(article)) {
+            transmissionService.addToArticleFrontDerailleur(article);
+        }
+    }
+
+    @RequestMapping("/cartDelFrontDerailleur/{article}")
+    public ResponseEntity<Void> listArticleFrontDerailleurToDel(
+            @PathVariable(value = "article") Long article) {
+        transmissionService.deleteArticleFrontDerailleur(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/cartAddPedal/{article}")
-    public String listArticlePedal(
-            @PathVariable(value = "article") Long article,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
+    public void listArticlePedal(
+            @PathVariable(value = "article") Long article)
     {
-        if (page < 0) page = 0;
-        transmissionService.addToArticlePedal(article);
-        return "redirect:/show_pedals";
+        if (!transmissionService.getArticlesPedal().contains(article)) {
+            transmissionService.addToArticlePedal(article);
+        }
+    }
+
+    @RequestMapping("/cartDelPedal/{article}")
+    public ResponseEntity<Void> listArticlePedalToDel(
+            @PathVariable(value = "article") Long article) {
+        transmissionService.deleteArticlePedal(article);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
@@ -476,185 +611,181 @@ public class UserController {
 
 //Select components from database by article, that user added to cart, and add this components to List
         for (int i = 0; i < frameService.getSize(); i++) {
-            System.out.println("артиклі рами в корзині" + " " + frameService.getArticleFromCart(i));
-            List<Frame> frame = frameService
-                    .findByArticle(frameService.getArticleFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            Frame frameToCart = frame.get(0);
-            double price = frameToCart.getPrice();
-            frames.add(frameToCart);
+            Frame frame = frameService.findFrameByArticle(frameService.getArticleFromCart(i));
+            double price = frame.getPrice();
+            frames.add(frame);
             totalPrice += price;
             total++;
         }
         for (int i = 0; i < forkService.getSize(); i++) {
-            System.out.println("артиклі вилок в корзині" + " " + forkService.getArticleFromCart(i));
-            List<Fork> fork = forkService
-                    .findByArticle(forkService.getArticleFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            Fork forkToCart = fork.get(0);
-            double price = forkToCart.getPrice();
-            forks.add(forkToCart);
+            Fork fork = forkService.findForkByArticle(forkService.getArticleFromCart(i));
+            double price = fork.getPrice();
+            forks.add(fork);
             totalPrice += price;
             total++;
         }
         for (int i = 0; i < handlebarService.getSizeHandlebar(); i++) {
-            System.out.println("артиклі рулів в корзині" + " " + handlebarService.getArticleHandlebarFromCart(i));
-            List<Handlebar> handlebar = handlebarService
-                    .findHandlebarByArticle(handlebarService.getArticleHandlebarFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            handlebars.add(handlebar.get(0));
+            Handlebar handlebar = handlebarService.findHandlebarByArticle(handlebarService.getArticleHandlebarFromCart(i));
+            double price = handlebar.getPrice();
+            handlebars.add(handlebar);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < handlebarService.getSizeStem(); i++) {
-            System.out.println("артиклі виносів в корзині" + " " + handlebarService.getArticleStemFromCart(i));
-            List<Stem> stem = handlebarService
-                    .findStemByArticle(handlebarService.getArticleStemFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            stems.add(stem.get(0));
+            Stem stem = handlebarService.findStemByArticle(handlebarService.getArticleStemFromCart(i));
+            double price = stem.getPrice();
+            stems.add(stem);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < handlebarService.getSizeGrips(); i++) {
-            System.out.println("артиклі грипсів в корзині" + " " + handlebarService.getArticleGripsFromCart(i));
-            List<Grips> gripss = handlebarService
-                    .findGripsByArticle(handlebarService.getArticleGripsFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            grips.add(gripss.get(0));
+            Grips gripss = handlebarService.findGripsByArticle(handlebarService.getArticleGripsFromCart(i));
+            double price = gripss.getPrice();
+            grips.add(gripss);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < handlebarService.getSizeHeadset(); i++) {
-            System.out.println("артиклі рульових в корзині" + " " + handlebarService.getArticleHeadsetFromCart(i));
-            List<Headset> headset = handlebarService
-                    .findHeadsetByArticle(handlebarService.getArticleHeadsetFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            headsets.add(headset.get(0));
+            Headset headset = handlebarService.findHeadsetByArticle(handlebarService.getArticleHeadsetFromCart(i));
+            double price = headset.getPrice();
+            headsets.add(headset);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < handlebarService.getSizeWinding(); i++) {
-            System.out.println("артиклі обмоток в корзині" + " " + handlebarService.getArticleWindingFromCart(i));
-            List<Winding> winding = handlebarService
-                    .findWindingByArticle(handlebarService.getArticleWindingFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            windings.add(winding.get(0));
+            Winding winding = handlebarService.findWindingByArticle(handlebarService.getArticleWindingFromCart(i));
+            double price = winding.getPrice();
+            windings.add(winding);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < brakeService.getSizeBrakeDiscHydraulic(); i++) {
-            System.out.println("артиклі дискових гідравлічних в корзині" + " " + brakeService.getArticleBrakeDiscHydraulicFromCart(i));
-            List<BrakeDiscHydraulic> brakeDiscHydraulic = brakeService
-                    .findBrakeDiscHydraulicByArticle(brakeService.getArticleBrakeDiscHydraulicFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            brakeDiscHydraulics.add(brakeDiscHydraulic.get(0));
+            BrakeDiscHydraulic brakeDiscHydraulic = brakeService.
+                    findBrakeDiscHydraulicByArticle(brakeService.getArticleBrakeDiscHydraulicFromCart(i));
+            double price = brakeDiscHydraulic.getPrice();
+            brakeDiscHydraulics.add(brakeDiscHydraulic);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < brakeService.getSizeBrakeDiscMechanik(); i++) {
-            System.out.println("артиклі вилок в корзині" + " " + brakeService.getArticleBrakeDiscMechanikFromCart(i));
-            List<BrakeDiscMechanik> brakeDiscMechaniks1 = brakeService
-                    .findBrakeDiscMechanikByArticle(brakeService.getArticleBrakeDiscMechanikFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            brakeDiscMechaniks.add(brakeDiscMechaniks1.get(0));
+            BrakeDiscMechanik brakeDiscMechanik = brakeService.
+                    findBrakeDiscMechanikByArticle(brakeService.getArticleBrakeDiscMechanikFromCart(i));
+            double price = brakeDiscMechanik.getPrice();
+            brakeDiscMechaniks.add(brakeDiscMechanik);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < brakeService.getSizeBrakeVBrake(); i++) {
-            System.out.println("артиклі ободних гальм в корзині" + " " + brakeService.getArticleBrakeVBrakeFromCart(i));
-            List<BrakeVBrake> brakeVBrake = brakeService
-                    .findBrakeVBrakeByArticle(brakeService.getArticleBrakeVBrakeFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            brakeVBrakes.add(brakeVBrake.get(0));
+            BrakeVBrake brakeVBrake = brakeService.findBrakeVBrakeByArticle(brakeService.getArticleBrakeVBrakeFromCart(i));
+            double price = brakeVBrake.getPrice();
+            brakeVBrakes.add(brakeVBrake);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < brakeService.getSizeBrakeHandle(); i++) {
-            System.out.println("артиклі гальмівних ручок в корзині" + " " + brakeService.getArticleBrakeHandleFromCart(i));
-            List<BrakeHandle> brakeHandle = brakeService
-                    .findBrakeHandleByArticle(brakeService.getArticleBrakeHandleFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            brakeHandles.add(brakeHandle.get(0));
+            BrakeHandle brakeHandle = brakeService.findBrakeHandleByArticle(brakeService.getArticleBrakeHandleFromCart(i));
+            double price = brakeHandle.getPrice();
+            brakeHandles.add(brakeHandle);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < wheelService.getSizeBackHub(); i++) {
-            System.out.println("артиклі задніх перекидок в корзині" + " " + wheelService.getArticleBackHubFromCart(i));
-            List<BackHub> backHub = wheelService
-                    .findBackHubByArticle(wheelService.getArticleBackHubFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            backHubs.add(backHub.get(0));
+            BackHub backHub = wheelService.findBackHubByArticle(wheelService.getArticleBackHubFromCart(i));
+            double price = backHub.getPrice();
+            backHubs.add(backHub);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < wheelService.getSizeFrontHub(); i++) {
-            System.out.println("артиклі передніх перекидок в корзині" + " " + wheelService.getArticleFrontHubFromCart(i));
-            List<FrontHub> frontHub = wheelService
-                    .findFrontHubByArticle(wheelService.getArticleFrontHubFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            frontHubs.add(frontHub.get(0));
+            FrontHub frontHub = wheelService.findFrontHubByArticle(wheelService.getArticleFrontHubFromCart(i));
+            double price = frontHub.getPrice();
+            frontHubs.add(frontHub);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < wheelService.getSizeRim(); i++) {
-            System.out.println("артиклі ободів в корзині" + " " + wheelService.getArticleRimFromCart(i));
-            List<Rim> rim = wheelService
-                    .findRimByArticle(wheelService.getArticleRimFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            rims.add(rim.get(0));
+            Rim rim = wheelService.findRimByArticle(wheelService.getArticleRimFromCart(i));
+            double price = rim.getPrice();
+            rims.add(rim);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < wheelService.getSizeSpoke(); i++) {
-            System.out.println("артиклі  спиць в корзині" + " " + wheelService.getArticleSpokeFromCart(i));
-            List<Spoke> spoke = wheelService
-                    .findSpokeByArticle(wheelService.getArticleSpokeFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            spokes.add(spoke.get(0));
+            Spoke spoke = wheelService.findSpokeByArticle(wheelService.getArticleSpokeFromCart(i));
+            double price = spoke.getPrice();
+            spokes.add(spoke);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < wheelService.getSizeTire(); i++) {
-            System.out.println("артиклі  покришок в корзині" + " " + wheelService.getArticleTireFromCart(i));
-            List<Tire> tire = wheelService
-                    .findTireByArticle(wheelService.getArticleTireFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            tires.add(tire.get(0));
+            Tire tire = wheelService.findTireByArticle(wheelService.getArticleTireFromCart(i));
+            double price = tire.getPrice();
+            tires.add(tire);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < wheelService.getSizeWheel(); i++) {
-            System.out.println("артиклі  колес в корзині" + " " + wheelService.getArticleWheelFromCart(i));
-            List<Wheel> wheel = wheelService
-                    .findWheelByArticle(wheelService.getArticleWheelFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            wheels.add(wheel.get(0));
+            Wheel wheel = wheelService.findWheelByArticle(wheelService.getArticleWheelFromCart(i));
+            double price = wheel.getPrice();
+            wheels.add(wheel);
+            totalPrice += price;
             total++;
         }
         //For transmission
         for (int i = 0; i < transmissionService.getSizeBackDerailleur(); i++) {
-            System.out.println("артиклі задніх перекидок в корзині" + " " + transmissionService.getArticleBackDerailleurFromCart(i));
-            List<BackDerailleur> backDerailleur  = transmissionService
-                    .findBackDerailleurByArticle(transmissionService.getArticleBackDerailleurFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            backDerailleurs.add(backDerailleur.get(0));
+            BackDerailleur backDerailleur = transmissionService.findBackDerailleurByArticle(transmissionService.getArticleBackDerailleurFromCart(i));
+            double price = backDerailleur.getPrice();
+            backDerailleurs.add(backDerailleur);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < transmissionService.getSizeBackGearKas(); i++) {
-            System.out.println("артиклі касет в корзині" + " " + transmissionService.getArticleBackGearKasFromCart(i));
-            List<BackGearKas> backGearKas  = transmissionService
-                    .findBackGearKasByArticle(transmissionService.getArticleBackGearKasFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            backGearKass.add(backGearKas.get(0));
+            BackGearKas backGearKas = transmissionService.findBackGearKasByArticle(transmissionService.getArticleBackGearKasFromCart(i));
+            double price = backGearKas.getPrice();
+            backGearKass.add(backGearKas);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < transmissionService.getSizeBackGearTr(); i++) {
-            System.out.println("артиклі трещіток в корзині" + " " + transmissionService.getArticleBackGearTrFromCart(i));
-            List<BackGearTr> backGearTr  = transmissionService
-                    .findBackGearTrByArticle(transmissionService.getArticleBackGearTrFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            backGearTrs.add(backGearTr.get(0));
+            BackGearTr backGearTr = transmissionService.findBackGearTrByArticle(transmissionService.getArticleBackGearTrFromCart(i));
+            double price = backGearTr.getPrice();
+            backGearTrs.add(backGearTr);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < transmissionService.getSizeBracket(); i++) {
-            System.out.println("артиклі кареток в корзині" + " " + transmissionService.getArticleBracketFromCart(i));
-            List<Bracket> bracket  = transmissionService
-                    .findBracketByArticle(transmissionService.getArticleBracketFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            brackets.add(bracket.get(0));
+            Bracket bracket = transmissionService.findBracketByArticle(transmissionService.getArticleBracketFromCart(i));
+            double price = bracket.getPrice();
+            brackets.add(bracket);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < transmissionService.getSizeChain(); i++) {
-            System.out.println("артиклі ланцюгів в корзині" + " " + transmissionService.getArticleChainFromCart(i));
-            List<Chain> chain  = transmissionService
-                    .findChainByArticle(transmissionService.getArticleBracketFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            chains.add(chain.get(0));
+            Chain chain = transmissionService.findChainByArticle(transmissionService.getArticleChainFromCart(i));
+            double price = chain.getPrice();
+            chains.add(chain);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < transmissionService.getSizeCrank(); i++) {
-            System.out.println("артиклі шатунів в корзині" + " " + transmissionService.getArticleCrankFromCart(i));
-            List<Crank> crank  = transmissionService
-                    .findCrankByArticle(transmissionService.getArticleCrankFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            cranks.add(crank.get(0));
+            Crank crank = transmissionService.findCrankByArticle(transmissionService.getArticleCrankFromCart(i));
+            double price = crank.getPrice();
+            cranks.add(crank);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < transmissionService.getSizeFrontDerailleur(); i++) {
-            System.out.println("артиклі передніх перекидок в корзині" + " " + transmissionService.getArticleFrontDerailleurFromCart(i));
-            List<FrontDerailleur> frontDerailleur  = transmissionService
-                    .findFrontDerailleurByArticle(transmissionService.getArticleFrontDerailleurFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            frontDerailleurs.add(frontDerailleur.get(0));
+            FrontDerailleur frontDerailleur = transmissionService.findFrontDerailleur(transmissionService.getArticleFrontDerailleurFromCart(i));
+            double price = frontDerailleur.getPrice();
+            frontDerailleurs.add(frontDerailleur);
+            totalPrice += price;
             total++;
         }
         for (int i = 0; i < transmissionService.getSizePedal(); i++) {
-            System.out.println("артиклі педалей в корзині" + " " + transmissionService.getArticlePedalFromCart(i));
-            List<Pedal> pedal  = transmissionService
-                    .findPedalByArticle(transmissionService.getArticlePedalFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            pedals.add(pedal.get(0));
+            Pedal pedal = transmissionService.findPedalByArticle(transmissionService.getArticlePedalFromCart(i));
+            double price = pedal.getPrice();
+            pedals.add(pedal);
+            totalPrice += price;
             total++;
         }
 //models for cart
@@ -691,37 +822,10 @@ public class UserController {
         model.addAttribute("cranks", cranks);
         model.addAttribute("frontDerailleurs", frontDerailleurs);
         model.addAttribute("pedals", pedals);
-        //for checking myself in console
-        System.out.println("всього рам в корзині в корзині" +" = "+ frames.size());
-        System.out.println("всього вилок в корзині в корзині"+" = " + forks.size());
-        System.out.println("всього рулів в корзині в корзині" +" = "+ handlebars.size());
-        System.out.println("всього виносів в корзині в корзині" +" = "+ stems.size());
-        System.out.println("всього грипсів в корзині в корзині" +" = "+ grips.size());
-        System.out.println("всього рульових в корзині в корзині" +" = "+ headsets.size());
-        System.out.println("всього обмоток в корзині в корзині" +" = "+ windings.size());
-        System.out.println("всього гідравлічних дискових в корзині в корзині" +" = "+ brakeDiscHydraulics.size());
-        System.out.println("всього механічних дискових в корзині в корзині" +" = "+ brakeDiscMechaniks.size());
-        System.out.println("всього ободних гальм в корзині в корзині" +" = "+ brakeVBrakes.size());
-        System.out.println("всього гальмівних ручок в корзині в корзині" +" = "+ brakeHandles.size());
-        System.out.println("всього задніх перекидок в корзині в корзині" +" = "+ backHubs.size());
-        System.out.println("всього передніх перекидок в корзині в корзині" +" = "+ frontHubs.size());
-        System.out.println("всього ободів в корзині в корзині" +" = "+ rims.size());
-        System.out.println("всього спиць ручок в корзині в корзині" +" = "+ spokes.size());
-        System.out.println("всього покришок в корзині в корзині" +" = "+ tires.size());
-        System.out.println("всього колес в корзині в корзині" +" = "+ wheels.size());
-        System.out.println("всього передніх перекидок в корзині в корзині" +" = "+ backDerailleurs.size());
-        System.out.println("всього касет в корзині в корзині" +" = "+ backGearKass.size());
-        System.out.println("всього трещіток в корзині в корзині" +" = "+ backGearTrs.size());
-        System.out.println("всього кареток в корзині в корзині" +" = "+ brackets.size());
-        System.out.println("всього ланцюгів в корзині в корзині" +" = "+ chains.size());
-        System.out.println("всього шатунів в корзині в корзині" +" = "+ cranks.size());
-        System.out.println("всього передніх перекидок в корзині в корзині" +" = "+ frontDerailleurs.size());
-        System.out.println("всього педалей в корзині в корзині" +" = "+ pedals.size());
-        System.out.println("всього товарів в корзині" + total);
-
             return "cart";
 
         }
+
 // Select Forks
      @RequestMapping("/chooseFork/{id}")
     public String listForkForBike(
@@ -741,6 +845,7 @@ public class UserController {
      model.addAttribute("forks", forks);
         return "forksToFrame";
     }
+
     // Select Wheels
     @RequestMapping("/chooseWheel/{id}")
     public String listWheelForFork(
@@ -759,6 +864,7 @@ public class UserController {
         model.addAttribute("wheels", wheels);
         return "wheelsToFork";
     }
+
     // Select Brackets
     @RequestMapping("/chooseBracket/{id}")
     public String listBracketForBike(
@@ -775,6 +881,7 @@ public class UserController {
         model.addAttribute("brackets", brackets);
         return "bracketsToFork";
     }
+
     // Select Cranks
     @RequestMapping("/chooseCrank/{id}")
     public String listCrankForBracket(
@@ -791,6 +898,7 @@ public class UserController {
         model.addAttribute("cranks", cranks);
         return "cranksToBracket";
     }
+
     @RequestMapping("/chooseBackGearKas/{id}")
     public String listBackSprocketKasForCrank(
             @PathVariable(value = "id") Long id,
@@ -806,6 +914,7 @@ public class UserController {
         model.addAttribute("backGearKass", backGearKass);
         return "backGearKassToCrank";
     }
+
     @RequestMapping("/chooseBackDerailleur/{id}")
     public String listBackDeraileurForKas(
             @PathVariable(value = "id") Long id,
@@ -824,6 +933,7 @@ public class UserController {
         model.addAttribute("backDerailleurs", backDerailleurs);
         return "backDerailleursToBackGear";
     }
+
     @RequestMapping("/chooseFrontDerailleur/{id}")
     public String listFrontDeraileurForCrank(
             @PathVariable(value = "id") Long id,
@@ -849,6 +959,7 @@ public class UserController {
         model.addAttribute("frontDerailleurs", frontDerailleurs);
         return "frontDerailleursToCrank";
     }
+
     @RequestMapping("/chooseChain/{id}")
     public String listChainForKas(
             @PathVariable(value = "id") Long id,
@@ -878,6 +989,7 @@ public class UserController {
         model.addAttribute("pedals", pedals);
         return "pedalToBike";
     }
+
     @RequestMapping("/chooseBrakes/{id}")
     public String listBrakesForBike(
             @PathVariable(value = "id") Long id,
@@ -899,6 +1011,7 @@ public class UserController {
             return "brakesSelectType";
         }
     }
+
     @RequestMapping("/chooseDiscHydraulic")
     public String listDiscHydraulicFront(
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -910,6 +1023,7 @@ public class UserController {
         model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
         return "brakesHydraulicFrontToBike";
     }
+
     @RequestMapping("/chooseDiscHydraulicBack/{id}")
     public String listDiscHydraulicBack(
             @PathVariable(value = "id") Long id,
@@ -925,6 +1039,7 @@ public class UserController {
 
         return "brakesHydraulicBackToBike";
     }
+
     @RequestMapping("/chooseDiscMechanik")
     public String listDiscMechanik(
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -950,6 +1065,7 @@ public class UserController {
         model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
         return "brakesMechanikBackToBike";
     }
+
     @RequestMapping("/chooseVBrakeFront")
     public String listVBrakeFront(
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -975,6 +1091,7 @@ public class UserController {
         model.addAttribute("brakeVBrakes", brakeVBrakes);
         return "brakesVBrakeBackToBike";
     }
+
     @RequestMapping("/chooseHandlebar/{type}/{id}")
     public String listHandlebarForBike(
             @PathVariable(value = "id") Long id,
@@ -1002,6 +1119,7 @@ public class UserController {
         model.addAttribute("handlebars", handlebars);
         return "handlebarsToBike";
     }
+
     @RequestMapping("/chooseStem/{id}")
     public String listStemForHandlebar(
             @PathVariable(value = "id") Long id,
@@ -1019,6 +1137,7 @@ public class UserController {
         model.addAttribute("stems", stems);
         return "stemsToHandlebar";
     }
+
     @RequestMapping("/chooseBrakeHandle/{id}")
     public String listBrakeHandleForHandlebar(
             @PathVariable(value = "id") Long id,
@@ -1051,6 +1170,7 @@ public class UserController {
             return "brakesHandleToHandlebar";
         }
     }
+
     @RequestMapping("/chooseGrips/{id}")
     public String listGripsForHandlebar(
             @PathVariable(value = "id") Long id,

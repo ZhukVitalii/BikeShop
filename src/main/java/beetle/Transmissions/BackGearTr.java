@@ -62,4 +62,8 @@ public class BackGearTr {
         this.price = price;
         this.way = way;
     }
+
+    public Double getPrice(){
+        return price;
+    }
 }

@@ -1,6 +1,7 @@
 package beetle.Transmissions;
 
 import beetle.Frames.BikeType;
+import beetle.Frames.Frame;
 import beetle.Wheels.BackSprocketNumber;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,6 +29,9 @@ public interface CrankRepository extends JpaRepository<Crank, Long> {
 
     @Query("SELECT c FROM Crank c WHERE c.article = :article")
     List<Crank> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Crank c WHERE c.article = :article")
+    Crank findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM Crank c WHERE c.backSprocketNumber = :backSprocketNumber")
     List<Crank> findByBackSprocketNumber(@Param("backSprocketNumber")BackSprocketNumber backSprocketNumber, Pageable pageable);

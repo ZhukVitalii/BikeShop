@@ -8,14 +8,14 @@
 <head>
     <title>${brakeDiscMechanik.name}/</title>
     <link rel="shortcut icon"
-          href="resources/images/logo_brauser.png" >
-    <spring:url value="${brakeDiscMechanik.url}/resources/css/bootstrap.css" var="bootstrap"/>
-    <link href="${brakeDiscMechanik.url}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
+          href="/resources/images/logo_brauser.png" >
+    <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
+    <link href="/resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (Bootstrap's JavaScript plugins) -->
-    <script src="${brakeDiscMechanik.url}/resources/js/jquery.min.js"></script>
+    <script src="/resources/js/jquery.min.js"></script>
     <!-- Custom Theme files -->
-    <link href="${brakeDiscMechanik.url}/resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${brakeDiscMechanik.url}/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,13 +26,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
     <!--webfont-->
     <!-- dropdown -->
-    <script src="${brakeDiscMechanik.url}/resources/js/jquery.easydropdown.js"></script>
-    <link href="${brakeDiscMechanik.url}/resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="${brakeDiscMechanik.url}/resources/js/scripts.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.easydropdown.js"></script>
+    <link href="/resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
+    <script src="/resources/js/scripts.js" type="text/javascript"></script>
+    <script src="/resources/js/ajax.js" type="text/javascript"></script>
     <!--js-->
 </head>
 <body>
-<script src="${brakeDiscMechanik.url}/resources/js/responsiveslides.min.js"></script>
+<script src="/resources/js/responsiveslides.min.js"></script>
 <script>
     $(function () {
         $("#slider").responsiveSlides({
@@ -48,7 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="${brakeDiscMechanik.url}/resources/images/logo.png"
+                <a href="/"><img src="/resources/images/logo.png"
                                  alt=""
                                  width="110"
                                  height="112"/>
@@ -90,7 +91,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Троси</a></li>
                         </ul>
                     </li>
-                    <a class="shop" href="/cart"><img src="resources/images/cart.png" alt=""/></a>
+                    <a class="shop" href="/cart"><img src="/resources/images/cart.png" alt=""/></a>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -108,8 +109,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </div>
                         <c:forEach items="${brakeDiscMechaniks}" var="brakeDiscMechanik">
                         <!--Include the Etalage files-->
-                        <link rel="stylesheet" href="${brakeDiscMechanik.url}/resources/css/etalage.css">
-                        <script src="${brakeDiscMechanik.url}/resources/js/jquery.etalage.min.js"></script>
+                        <link rel="stylesheet" href="/resources/css/etalage.css">
+                        <script src="/resources/js/jquery.etalage.min.js"></script>
                         <script>
                             jQuery(document).ready(function($){
                                 $('#etalage').etalage({
@@ -134,14 +135,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <h4></h4>
                                 <p>${brakeDiscMechanik.price}<label>грн</label><a href="#"></a></p>
                                 <div class="btn_form">
-                                    <button type="button" onclick="addToCart()">Додати до корзини</button>
-                                    <script>
-                                        function addToCart() {
-                                            var xhttp = new XMLHttpRequest();
-                                            xhttp.open("POST", "/cartAddBrakeDiscMechanik/${brakeDiscMechanik.article}", true);
-                                            xhttp.send(${brakeDiscMechanik.article});
-                                        }
-                                    </script>
+                                    <button type="button" onclick="addToCart('/cartAddBrakeDiscMechanik/', ${brakeDiscMechanik.article})">Додати до корзини</button>
                                 </div>
                                 <div class="bike-type">
 

@@ -2,6 +2,7 @@ package beetle.Forks;
 
 import beetle.Frames.BikeType;
 import beetle.Frames.BikeTypeRepository;
+import beetle.Frames.Frame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,15 @@ public class ForkService {
     public int getSize() {
         int a = articles.size();
         return a;
+    }
+    //get all articles
+    public List<Long> getArticles(){
+        return articles;
+    }
+
+    //delete article
+    public void deleteArticle(long article){
+        articles.remove(article);
     }
 
 
@@ -206,6 +216,9 @@ public class ForkService {
     public Fork findFork(Long id) {
         return forkRepository.findOne(id);
     }
+
+    @Transactional(readOnly = true)
+    public Fork findForkByArticle(Long article) {return forkRepository.findOneByArticle(article);}
 
     @Transactional(readOnly=true)
     public ForkMaker findForkMaker(long id) {

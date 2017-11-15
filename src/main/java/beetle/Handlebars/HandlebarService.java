@@ -4,6 +4,7 @@ import beetle.Forks.TubeDiameter;
 import beetle.Forks.TubeDiameterRepository;
 import beetle.Frames.BikeType;
 import beetle.Frames.BikeTypeRepository;
+import beetle.Frames.Frame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,10 @@ public class HandlebarService {
     public List<Long> articlesHeadset = new ArrayList<>();
     public List<Long> articlesWinding = new ArrayList<>();
 
+
+
+
+
     //For handlebar
     //add articles to List
     public void addToArticleHandlebar(Long article) {
@@ -62,8 +67,17 @@ public class HandlebarService {
         int a = articlesHandlebar.size();
         return a;
     }
+    //get all articles
+    public List<Long> getArticlesHandlebar(){
+        return articlesHandlebar;
+    }
+    //delete articles Handlebar from cart
+    public void deleteArticleHandlebar(long article){
+        articlesHandlebar.remove(article);
+    }
 
     //For stem
+
     //add articles to List
     public void addToArticleStem(Long article) {
         articlesStem.add(article);
@@ -78,6 +92,14 @@ public class HandlebarService {
     public int getSizeStem() {
         int a = articlesStem.size();
         return a;
+    }
+    //get all articles
+    public List<Long> getArticlesStem(){
+        return articlesStem;
+    }
+    //delete articles Stem from cart
+    public void deleteArticleStem(long article){
+        articlesStem.remove(article);
     }
 
     //For grips
@@ -96,6 +118,15 @@ public class HandlebarService {
         int a = articlesGrips.size();
         return a;
     }
+    //get all articles
+    public List<Long> getArticlesGrips(){
+        return articlesGrips;
+    }
+    //delete articles Grips from cart
+    public void deleteArticleGrips(long article){
+        articlesGrips.remove(article);
+    }
+
 
     //For headset
     //add articles to List
@@ -112,6 +143,15 @@ public class HandlebarService {
     public int getSizeHeadset() {
         int a = articlesHeadset.size();
         return a;
+    }
+    //get all articles
+    public List<Long> getArticlesHeadset(){
+        return articlesHeadset;
+    }
+
+    //delete articles Headset from cart
+    public void deleteArticleHeadset(long article){
+        articlesHeadset.remove(article);
     }
 
     //For winding
@@ -130,7 +170,14 @@ public class HandlebarService {
         int a = articlesWinding.size();
         return a;
     }
-
+    //get all articles
+    public List<Long> getArticlesWinding(){
+        return articlesWinding;
+    }
+    //delete articles Winding from cart
+    public void deleteArticleWinding(long article){
+        articlesWinding.remove(article);
+    }
     //  add
 
     @Transactional
@@ -384,19 +431,43 @@ public class HandlebarService {
     }
 
     @Transactional(readOnly = true)
+    public Handlebar findHandlebarByArticle(Long article) {return handlebarRepository.findOneByArticle(article);}
+
+
+    @Transactional(readOnly = true)
     public Stem findStem(long id) {
         return stemRepository.findOne(id);
     }
+
+    @Transactional(readOnly = true)
+    public Stem findStemByArticle(Long article) {return stemRepository.findOneByArticle(article);}
+
 
     @Transactional(readOnly = true)
     public Grips findGrips(long id) {
         return gripsRepository.findOne(id);
     }
 
+    @Transactional(readOnly = true)
+    public Grips findGripsByArticle(Long article) {return gripsRepository.findOneByArticle(article);}
+
+    @Transactional(readOnly = true)
+    public Headset findHeadset(long id) {
+        return headsetRepository.findOne(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Headset findHeadsetByArticle(Long article) {return headsetRepository.findOneByArticle(article);}
+
+
     @Transactional (readOnly = true)
     public Winding findWinding(long id) {
         return windingRepository.findOne(id);
     }
+
+    @Transactional(readOnly = true)
+    public Winding findWindingByArticle(Long article) {return windingRepository.findOneByArticle(article);}
+
 
     @Transactional(readOnly=true)
     public HandlebarMaker findHandlebarMaker(long id) {

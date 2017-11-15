@@ -1,6 +1,7 @@
 package beetle.Wheels;
 
 import beetle.Frames.BikeType;
+import beetle.Transmissions.Pedal;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,6 +26,9 @@ public interface RimRepository extends JpaRepository<Rim, Long> {
 
     @Query("SELECT c FROM Rim c WHERE c.article = :article")
     List<Rim> findByArticle(@Param("article") Long article, Pageable pageable);
+
+    @Query("SELECT c FROM Rim c WHERE c.article = :article")
+    Rim findOneByArticle(@Param("article") Long article);
 
     @Query("SELECT c FROM Rim c WHERE c.bikeType = :bikeType")
     List<Rim> findByBikeType (@Param("bikeType")BikeType bikeType, Pageable pageable);

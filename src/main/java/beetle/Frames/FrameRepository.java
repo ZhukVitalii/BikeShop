@@ -24,6 +24,9 @@ public interface FrameRepository extends JpaRepository<Frame, Long> {
     @Query("SELECT c FROM Frame c WHERE c.article = :article")
     List<Frame> findByArticle(@Param("article") Long article, Pageable pageable);
 
+    @Query("SELECT c FROM Frame c WHERE c.article = :article")
+    Frame findOneByArticle(@Param("article") Long article);
+
     @Query("SELECT c FROM Frame c WHERE c.bikeType = :bikeType AND c.frameSize = :frameSize")
     List<Frame> findByTypeAndSize(@Param("bikeType" )BikeType bikeType,
                                   @Param("frameSize") FrameSize frameSize,Pageable pageable);
