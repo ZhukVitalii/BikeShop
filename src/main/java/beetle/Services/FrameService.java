@@ -24,8 +24,6 @@ import java.util.List;
 public class FrameService {
     @Autowired
     private FrameRepository frameRepository;
-
-
     @Autowired
     private FrameMakerRepository frameMakerRepository;
     @Autowired

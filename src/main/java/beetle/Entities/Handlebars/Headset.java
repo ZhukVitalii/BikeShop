@@ -22,7 +22,7 @@ public class Headset {
     private long id;
     @ManyToOne
     @JoinColumn(name="maker_id")
-    private HandlebarMaker handlebarMaker;
+    private HandlebarMaker maker;
     private Long article;
     private String url;
     private String name;
@@ -40,9 +40,9 @@ public class Headset {
     private String description;
     private String way;
 
-    public Headset(HandlebarMaker handlebarMaker,Long article, String url, String name, HeadsetType headsetType,TubeDiameter tubeDiameter, String material,
+    public Headset(HandlebarMaker maker,Long article, String url, String name, HeadsetType headsetType,TubeDiameter tubeDiameter, String material,
                    String size, String color, Double price, String description, String way) {
-        this.handlebarMaker = handlebarMaker;
+        this.maker = maker;
         this.article = article;
         this.url = url;
         this.name = name;
@@ -57,5 +57,9 @@ public class Headset {
     }
     public Double getPrice() {
         return price;
+    }
+
+    public HandlebarMaker getMaker() {
+        return maker;
     }
 }

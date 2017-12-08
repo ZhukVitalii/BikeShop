@@ -15,11 +15,11 @@ import java.util.List;
  */
 public interface BrakeVBrakeRepository extends JpaRepository<BrakeVBrake, Long> {
 
-    @Query("SELECT c FROM BrakeVBrake c WHERE c.brakeMaker = :brakeMaker")
-    List<BrakeVBrake> findByBrakeMakers(@Param("brakeMaker") BrakeMaker brakeMaker, Pageable pageable);
+    @Query("SELECT c FROM BrakeVBrake c WHERE c.maker = :maker")
+    List<BrakeVBrake> findByBrakeMakers(@Param("maker") BrakeMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM BrakeVBrake c WHERE c.brakeMaker = :brakeMaker")
-    long countByBrakeMakers(@Param("brakeMaker")  BrakeMaker brakeMaker);
+    @Query("SELECT COUNT(c) FROM BrakeVBrake c WHERE c.maker = :maker")
+    long countByBrakeMakers(@Param("maker")  BrakeMaker maker);
 
     @Query("SELECT c FROM BrakeVBrake c WHERE c.location = :location")
     List<BrakeVBrake> findByLocation(@Param("location") Location location, Pageable pageable);

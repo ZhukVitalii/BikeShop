@@ -267,27 +267,27 @@ public class HandlebarService {
     //find all components from database
 
     @Transactional(readOnly=true)
-    public List<Handlebar> findAll(Pageable pageable) {
+    public List<Handlebar> findAllHandlebars(Pageable pageable) {
         return handlebarRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<Winding> findAllTwo(Pageable pageable) {
+    public List<Winding> findAllWindings(Pageable pageable) {
         return windingRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<Grips> findAllThree(Pageable pageable) {
+    public List<Grips> findAllGrips(Pageable pageable) {
         return gripsRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<Headset> findAllFor(Pageable pageable) {
+    public List<Headset> findAllHeadset(Pageable pageable) {
         return headsetRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<Stem> findAllFive(Pageable pageable) {
+    public List<Stem> findAllStems(Pageable pageable) {
         return stemRepository.findAll(pageable).getContent();
     }
 
@@ -373,12 +373,12 @@ public class HandlebarService {
     }
 
     @Transactional(readOnly=true)
-    public List<Handlebar> findByHandlebarMakers(HandlebarMaker handlebarMaker, Pageable pageable) {
+    public List<Handlebar> findByHandlebarMakerHandlebar(HandlebarMaker handlebarMaker, Pageable pageable) {
         return handlebarRepository.findByHandlebarMakers(handlebarMaker, pageable);
     }
 
     @Transactional(readOnly=true)
-    public List<Winding> findByHandlebarMaker(HandlebarMaker handlebarMaker, Pageable pageable) {
+    public List<Winding> findByHandlebarMakerWinding(HandlebarMaker handlebarMaker, Pageable pageable) {
         return windingRepository.findByHandlebarMakers(handlebarMaker, pageable);
     }
 
@@ -393,7 +393,7 @@ public class HandlebarService {
     }
 
     @Transactional(readOnly=true)
-    public List<Stem> findByHandlebarStem(HandlebarMaker handlebarMaker, Pageable pageable) {
+    public List<Stem> findByHandlebarMakerStem(HandlebarMaker handlebarMaker, Pageable pageable) {
         return stemRepository.findByHandlebarMakers(handlebarMaker, pageable);
     }
 
@@ -415,13 +415,45 @@ public class HandlebarService {
     // count by
 
     @Transactional(readOnly = true)
-    public long countByHandlebarMaker(HandlebarMaker handlebarMaker) {
+    public long countByHandlebarMakerHandlebar(HandlebarMaker handlebarMaker) {
         return handlebarRepository.countByHandlebarMaker(handlebarMaker);
+    }
+    @Transactional(readOnly = true)
+    public long countByHandlebarMakerGrips(HandlebarMaker handlebarMaker) {
+        return gripsRepository.countByHandlebarMaker(handlebarMaker);
+    }
+    @Transactional(readOnly = true)
+    public long countByHandlebarMakerHeadset(HandlebarMaker handlebarMaker) {
+        return headsetRepository.countByHandlebarMaker(handlebarMaker);
+    }
+    @Transactional(readOnly = true)
+    public long countByHandlebarMakerStem(HandlebarMaker handlebarMaker) {
+        return stemRepository.countByHandlebarMaker(handlebarMaker);
+    }
+    @Transactional(readOnly = true)
+    public long countByHandlebarMakerWinding(HandlebarMaker handlebarMaker) {
+        return windingRepository.countByHandlebarMaker(handlebarMaker);
     }
 
     @Transactional(readOnly = true)
-    public long count() {
+    public long countHadlebar() {
         return handlebarRepository.count();
+    }
+    @Transactional(readOnly = true)
+    public long countGrips() {
+        return gripsRepository.count();
+    }
+    @Transactional(readOnly = true)
+    public long countHeadset() {
+        return headsetRepository.count();
+    }
+    @Transactional(readOnly = true)
+    public long countStem() {
+        return stemRepository.count();
+    }
+    @Transactional(readOnly = true)
+    public long countWinding() {
+        return windingRepository.count();
     }
 
 

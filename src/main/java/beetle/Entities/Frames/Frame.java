@@ -22,7 +22,7 @@ public class Frame {
     private long id;
     @ManyToOne
     @JoinColumn(name="maker_id")
-    private FrameMaker frameMaker;
+    private FrameMaker maker;
     private Long article;
     private String url;
     private String name;
@@ -61,10 +61,10 @@ public class Frame {
     private String description;
     private String way;
 
-    public Frame(FrameMaker frameMaker,Long article,String url, String name, BikeType bikeType, FrameSize frameSize,WheelsDiam wheelsDiam, String material, BracketWide bracketWide,
+    public Frame(FrameMaker maker,Long article,String url, String name, BikeType bikeType, FrameSize frameSize,WheelsDiam wheelsDiam, String material, BracketWide bracketWide,
                  HeadsetType headsetType, TubeDiameter tubeDiameter, UnderSaddleTube underSaddleTube, BrakesType brakesType,
                  TrunkBinding trunkBinding, String weight, String color, Double price,String description, String way) {
-        this.frameMaker = frameMaker;
+        this.maker = maker;
         this.article = article;
         this.url = url;
         this.name = name;
@@ -115,5 +115,9 @@ public class Frame {
 
     public String getName() {
         return name;
+    }
+
+    public FrameMaker getMaker() {
+        return maker;
     }
 }

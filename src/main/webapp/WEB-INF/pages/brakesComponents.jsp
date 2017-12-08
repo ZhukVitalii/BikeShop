@@ -76,8 +76,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!--
                             <li><a href="#">Підібрати декілька компонентів</a></li>
                             -->
-                            <li><a href="/show_frames">Рами</a></li>
-                            <li><a href="/show_forks">Вилки</a></li>
+                            <li><a href="/show_Frame">Рами</a></li>
+                            <li><a href="/show_Fork">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
@@ -106,21 +106,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <h3>Категорії</h3>
         <div class="categorie-grids">
-            <a href="/show_brakesHydro"><div class="col-md-4 cate-grid grid1">
+            <a href="/show_BrakeDiscHydraulic"><div class="col-md-4 cate-grid grid1">
                 <h4>Дискові гальма гідравлічні</h4>
-                <a class="store" href="/show_brakesHydro">Вибрати</a>
+                <a class="store" href="/show_BrakeDiscHydraulic">Вибрати</a>
             </div></a>
-            <a href="/show_brakesMech"><div class="col-md-4 cate-grid grid2">
+            <a href="/show_BrakeDiscMechanik"><div class="col-md-4 cate-grid grid2">
                 <h4>Дискові гальма механічні</h4>
-                <a class="store" href="/show_brakesMech">Вибрати</a>
+                <a class="store" href="/show_BrakeDiscMechanik">Вибрати</a>
             </div></a>
-            <a href="/show_brakesVBrake"><div class="col-md-4 cate-grid grid3">
+            <a href="/show_BrakeVBrake"><div class="col-md-4 cate-grid grid3">
                 <h4>Ободні гальма (V-brake)</h4>
-                <a class="store" href="/show_brakesVBrake">Вибрати</a>
+                <a class="store" href="/show_BrakeVBrake">Вибрати</a>
             </div></a>
-            <a href="/show_brakesHandle"><div class="col-md-4 cate-grid grid4">
+            <a href="/show_BrakeHandle"><div class="col-md-4 cate-grid grid4">
                 <h4>Гальмівні ручки</h4>
-                <a class="store" href="/show_brakesHandle">Вибрати</a>
+                <a class="store" href="/show_BrakeHandle">Вибрати</a>
             </div></a>
             <div class="clearfix"></div>
         </div>

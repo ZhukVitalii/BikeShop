@@ -14,11 +14,11 @@ import java.util.List;
  */
 public interface FrontHubRepository extends JpaRepository<FrontHub, Long> {
 
-    @Query("SELECT c FROM FrontHub c WHERE c.wheelMaker = :wheelMaker")
-    List<FrontHub> findByWheelMakers(@Param("wheelMaker") WheelMaker wheelMaker, Pageable pageable);
+    @Query("SELECT c FROM FrontHub c WHERE c.maker = :maker")
+    List<FrontHub> findByWheelMakers(@Param("maker") WheelMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM FrontHub c WHERE c.wheelMaker = :wheelMaker")
-    long countByWheelMakers(@Param("wheelMaker")  WheelMaker wheelMaker);
+    @Query("SELECT COUNT(c) FROM FrontHub c WHERE c.maker = :maker")
+    long countByWheelMakers(@Param("maker")  WheelMaker maker);
 
     @Query("SELECT c FROM FrontHub c WHERE c.hubFixType = :hubFixType")
     List<FrontHub> findByHubFixType(@Param("hubFixType") HubFixType hubFixType, Pageable pageable);

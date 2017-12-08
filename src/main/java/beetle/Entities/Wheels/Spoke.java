@@ -20,7 +20,7 @@ public class Spoke {
     private long id;
     @ManyToOne
     @JoinColumn(name="maker_id")
-    private WheelMaker wheelMaker;
+    private WheelMaker maker;
     private Long article;
     private String url;
     private String name;
@@ -33,9 +33,9 @@ public class Spoke {
     private Double price;
     private String way;
 
-    public Spoke (WheelMaker wheelMaker,Long article, String url, String name, String length, String diameter, String material,
+    public Spoke (WheelMaker maker,Long article, String url, String name, String length, String diameter, String material,
                   String color,String description, Double price,  String way) {
-        this.wheelMaker = wheelMaker;
+        this.maker = maker;
         this.article = article;
         this.url = url;
         this.name = name;

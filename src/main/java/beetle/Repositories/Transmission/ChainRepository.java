@@ -16,11 +16,11 @@ import java.util.List;
  */
 public interface ChainRepository extends JpaRepository<Chain, Long> {
 
-    @Query("SELECT c FROM Chain c WHERE c.transmissionMaker = :transmissionMaker")
-    List<Chain> findByTransmissionMakers(@Param("transmissionMaker") TransmissionMaker transmissionMaker, Pageable pageable);
+    @Query("SELECT c FROM Chain c WHERE c.maker = :maker")
+    List<Chain> findByTransmissionMakers(@Param("maker") TransmissionMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM Chain c WHERE c.transmissionMaker = :transmissionMaker")
-    long countByTransmissionMakers(@Param("transmissionMaker")  TransmissionMaker transmissionMaker);
+    @Query("SELECT COUNT(c) FROM Chain c WHERE c.maker = :maker")
+    long countByTransmissionMakers(@Param("maker")  TransmissionMaker maker);
 
     @Query("SELECT c FROM Chain c WHERE c.backSprocketNumber = :backSprocketNumber")
     List<Chain> findByBackSprocketNumber(@Param("backSprocketNumber") BackSprocketNumber backSprocketNumber, Pageable pageable);

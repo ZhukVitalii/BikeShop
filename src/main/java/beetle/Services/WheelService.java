@@ -829,7 +829,7 @@ public class WheelService {
     // count by
 
     @Transactional(readOnly = true)
-    public long countByWheelMaker(WheelMaker wheelMaker) {
+    public long countByWheelMakerWheel(WheelMaker wheelMaker) {
         return wheelRepository.countByWheelMakers(wheelMaker);
     }
 
@@ -859,9 +859,10 @@ public class WheelService {
     }
 
     @Transactional(readOnly = true)
-    public long count() {
+    public long countWheel() {
         return wheelRepository.count();
     }
+
 
     @Transactional(readOnly = true)
     public long countSpoke() {

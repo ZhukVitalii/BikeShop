@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by VitaliiZhuk on 20.05.2017.
@@ -28,17 +31,21 @@ public class ForkController {
     @Autowired
     private ForkService forkService;
 
+    private Set<ForkMaker> forkMakers = new HashSet<>();
+
     //show all forks
-    @RequestMapping("/show_forks")
+    @RequestMapping("/show_Fork")
     public String forksVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
-
         List<Fork> forks = forkService
                 .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("forkMakers", forkService.findForkMakers());
-        model.addAttribute("forks", forks);
+        for (Fork fork : forks) {
+            forkMakers.add(fork.getMaker());
+        }
+        model.addAttribute("productMakers", forkMakers);
+        model.addAttribute("products", forks);
         model.addAttribute("allPages", getPageCount());
-        return "forks";
+        return "product";
     }
     @RequestMapping("/admin/show_forks")
     public String forksAdminVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
@@ -69,7 +76,7 @@ public class ForkController {
     }
 
     // for filter by Maker
-    @RequestMapping("/forkMaker/{id}")
+    @RequestMapping("/ForkMaker/Fork/{id}")
     public String listForkMaker(
             @PathVariable(value = "id") long forkMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -79,11 +86,11 @@ public class ForkController {
         if (page < 0) page = 0;
         List<Fork> forks = forkService
                 .findByForkMakers(forkMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("forkMakers", forkService.findForkMakers());
-        model.addAttribute("forks", forks);
-        model.addAttribute("byForkMakerPages", getPageCount(forkMaker));
+        model.addAttribute("productMakers", forkMakers);
+        model.addAttribute("products", forks);
+        model.addAttribute("byGroupPages", getPageCount(forkMaker));
         model.addAttribute("groupId", forkMakerId);
-        return "index";
+        return "product";
     }
 
     //for delete components for admin
@@ -122,7 +129,7 @@ public class ForkController {
         Fork fork = new Fork(forkMaker,article,url,  name, bikeType,  wheelsDiam,  tubeDiameter, stTubeLength, brakesType,  forkMaterial ,
                 weight, color, move, price, description, way);
         forkService.addFork(fork);
-        return "redirect:/show_forks";
+        return "redirect:/show_Fork";
     }
 
     //Add Maker to database
@@ -133,7 +140,7 @@ public class ForkController {
     }
 
     // Select one product by url and open in separate page
-    @RequestMapping("/fork/{url}")
+    @RequestMapping("/Fork/{url}")
     public String listForkUrl(
             @PathVariable(value = "url") String url,
             @RequestParam(required = false, defaultValue = "0") Integer page,

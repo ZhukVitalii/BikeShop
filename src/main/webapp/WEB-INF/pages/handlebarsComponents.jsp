@@ -75,8 +75,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!--
                             <li><a href="#">Підібрати декілька компонентів</a></li>
                             -->
-                            <li><a href="/show_frames">Рами</a></li>
-                            <li><a href="/show_forks">Вилки</a></li>
+                            <li><a href="/show_Frame">Рами</a></li>
+                            <li><a href="/show_Fork">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
@@ -105,25 +105,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <h3>Категорії</h3>
         <div class="categorie-grids">
-            <a href="/show_handlebars"><div class="col-md-4 cate-grid grid12">
+            <a href="/show_Handlebar"><div class="col-md-4 cate-grid grid12">
                 <h4>Рулі</h4>
-                <a class="store" href="/show_handlebars">Вибрати</a>
+                <a class="store" href="/show_Handlebar">Вибрати</a>
             </div></a>
-            <a href="/show_stems"><div class="col-md-4 cate-grid grid15">
+            <a href="/show_Stem"><div class="col-md-4 cate-grid grid15">
                 <h4>Виноси</h4>
-                <a class="store" href="/show_stems">Вибрати</a>
+                <a class="store" href="/show_Stem">Вибрати</a>
             </div></a>
-            <a href="/show_windings"><div class="col-md-4 cate-grid grid13">
+            <a href="/show_Winding"><div class="col-md-4 cate-grid grid13">
                 <h4>Обмотки руля</h4>
-                <a class="store" href="/show_windings">Вибрати</a>
+                <a class="store" href="/show_Winding">Вибрати</a>
             </div></a>
-            <a href="/show_headsets"><div class="col-md-4 cate-grid grid14">
+            <a href="/show_Headset"><div class="col-md-4 cate-grid grid14">
                 <h4>Рульові колонки</h4>
-                <a class="store" href="/show_headsets">Вибрати</a>
+                <a class="store" href="/show_Headset">Вибрати</a>
             </div></a>
-            <a href="/show_grips"><div class="col-md-4 cate-grid grid16">
+            <a href="/show_Grips"><div class="col-md-4 cate-grid grid16">
                 <h4>Гріпси</h4>
-                <a class="store" href="/show_grips">Вибрати</a>
+                <a class="store" href="/show_Grips">Вибрати</a>
             </div></a>
             <div class="clearfix"></div>
         </div>

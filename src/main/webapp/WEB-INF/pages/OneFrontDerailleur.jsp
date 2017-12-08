@@ -131,7 +131,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="details-left-info">
                                 <h3>${frontDerailleur.name}</h3>
                                 <h5> Артикул  : ${frontDerailleur.article}</h5>
-                                <p class="maker"> <h3> Виробник  : ${frontDerailleur.transmissionMaker.name} </h3></p>
+                                <p class="maker"> <h3> Виробник  : ${frontDerailleur.maker.name} </h3></p>
                                 <h4></h4>
                                 <p>${frontDerailleur.price}<label>грн</label><a href="#"></a></p>
                                 <div class="btn_form">

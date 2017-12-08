@@ -15,11 +15,11 @@ import java.util.List;
  * Created by VitaliiZhuk on 14.06.2017.
  */
 public interface RimRepository extends JpaRepository<Rim, Long> {
-    @Query("SELECT c FROM Rim c WHERE c.wheelMaker = :wheelMaker")
-    List<Rim> findByWheelMakers(@Param("wheelMaker") WheelMaker wheelMaker, Pageable pageable);
+    @Query("SELECT c FROM Rim c WHERE c.maker = :maker")
+    List<Rim> findByWheelMakers(@Param("maker") WheelMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM Rim c WHERE c.wheelMaker = :wheelMaker")
-    long countByWheelMakers(@Param("wheelMaker")  WheelMaker wheelMaker);
+    @Query("SELECT COUNT(c) FROM Rim c WHERE c.maker = :maker")
+    long countByWheelMakers(@Param("maker")  WheelMaker maker);
 
     @Query("SELECT c FROM Rim c WHERE c.url = :url")
     List<Rim> findByUrl(@Param("url") String url, Pageable pageable);

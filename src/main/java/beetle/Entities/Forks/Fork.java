@@ -24,7 +24,7 @@ public class Fork {
     private long id;
     @ManyToOne
     @JoinColumn(name="group_id")
-    private ForkMaker forkMaker;
+    private ForkMaker maker;
     private Long article;
     private String url;
     private String name;
@@ -50,10 +50,10 @@ public class Fork {
     private String description;
     private String way;
 
-    public Fork(ForkMaker forkMaker,Long article,String url, String name, BikeType bikeType, WheelsDiam wheelsDiam, TubeDiameter tubeDiameter,
+    public Fork(ForkMaker maker,Long article,String url, String name, BikeType bikeType, WheelsDiam wheelsDiam, TubeDiameter tubeDiameter,
                 String stTubeLength, BrakesType brakesType, String forkMaterial,
                 String weight, String color, String move, Double price, String description, String way) {
-        this.forkMaker = forkMaker;
+        this.maker = maker;
         this.article = article;
         this.url = url;
         this.name = name;
@@ -98,4 +98,7 @@ public class Fork {
         return name;
     }
 
+    public ForkMaker getMaker() {
+        return maker;
+    }
 }

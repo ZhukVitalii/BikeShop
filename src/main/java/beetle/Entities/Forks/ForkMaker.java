@@ -23,12 +23,11 @@ public class ForkMaker {
     private long id;
     private String name;
 
-    @OneToMany(mappedBy="forkMaker", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="maker", cascade=CascadeType.ALL)
     private List<Fork> forks = new ArrayList<Fork>();
 
-    @OneToMany(mappedBy="forkMaker", cascade= CascadeType.ALL)
-    private List<ForkMaker> forkMaker = new ArrayList<ForkMaker>();
-
+    @OneToMany(mappedBy="maker", cascade= CascadeType.ALL)
+    private List<ForkMaker> maker = new ArrayList<ForkMaker>();
 
     public ForkMaker(String name) {
         this.name = name;

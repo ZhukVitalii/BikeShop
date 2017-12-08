@@ -13,11 +13,11 @@ import java.util.List;
  * Created by VitaliiZhuk on 05.06.2017.
  */
 public interface HeadsetRepository extends JpaRepository<Headset, Long> {
-    @Query("SELECT c FROM Headset c WHERE c.handlebarMaker = :handlebarMaker")
-    List<Headset> findByHandlebarMakers(@Param("handlebarMaker") HandlebarMaker handlebarMaker, Pageable pageable);
+    @Query("SELECT c FROM Headset c WHERE c.maker = :maker")
+    List<Headset> findByHandlebarMakers(@Param("maker") HandlebarMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM Headset c WHERE c.handlebarMaker = :handlebarMaker")
-    long countByHandlebarMaker(@Param("handlebarMaker") HandlebarMaker handlebarMaker);
+    @Query("SELECT COUNT(c) FROM Headset c WHERE c.maker = :maker")
+    long countByHandlebarMaker(@Param("maker") HandlebarMaker maker);
 
     @Query("SELECT c FROM Headset c WHERE c.url = :url")
     List<Headset> findByUrl(@Param("url") String url, Pageable pageable);

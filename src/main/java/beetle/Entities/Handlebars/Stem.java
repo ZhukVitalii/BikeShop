@@ -21,7 +21,7 @@ public class Stem {
     private long id;
     @ManyToOne
     @JoinColumn(name="maker_id")
-    private HandlebarMaker handlebarMaker;
+    private HandlebarMaker maker;
     private Long article;
     private String url;
     private String name;
@@ -40,9 +40,9 @@ public class Stem {
     private String description;
     private String way;
 
-    public Stem(HandlebarMaker handlebarMaker,Long article, String url, String name,String angle,HandlebarDiameter handlebarDiameter, TubeDiameter tubeDiameter,String material,String length,
+    public Stem(HandlebarMaker maker,Long article, String url, String name,String angle,HandlebarDiameter handlebarDiameter, TubeDiameter tubeDiameter,String material,String length,
                    String color, Double price, String description, String way) {
-        this.handlebarMaker = handlebarMaker;
+        this.maker = maker;
         this.article = article;
         this.url = url;
         this.name = name;
@@ -58,5 +58,9 @@ public class Stem {
     }
     public Double getPrice() {
         return price;
+    }
+
+    public HandlebarMaker getMaker() {
+        return maker;
     }
 }

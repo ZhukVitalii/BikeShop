@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.SecondaryTable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by VitaliiZhuk on 03.06.2017.
@@ -36,6 +40,8 @@ public class HandlebarController {
     @Autowired
     private FrameService frameService;
 
+
+
     //return page with links to pages with components
     @RequestMapping("/show_handlebarsComponents")
     public String brakesComponentsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
@@ -48,15 +54,15 @@ public class HandlebarController {
     public String handlebarsAdminVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<Handlebar> handlebars = handlebarService
-                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllHandlebars(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<Winding> windings = handlebarService
-                .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllWindings(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<Grips> grips = handlebarService
-                .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllGrips(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<Headset> headsets = handlebarService
-                .findAllFor(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+                .findAllHeadset(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
         List<Stem> stems = handlebarService
-                .findAllFive(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+                .findAllStems(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
         model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
         model.addAttribute("bikeType", handlebarService.findBikeType());
         model.addAttribute("handlebarDiameter", handlebarService.findHandlebarDiameter());
@@ -67,64 +73,83 @@ public class HandlebarController {
         model.addAttribute("grips", grips);
         model.addAttribute("headsets", headsets);
         model.addAttribute("stems", stems);
-        model.addAttribute("allPages", getPageCount());
         return "handlebarsAdmin";
     }
 
     // return pages with type of handlebars components
-    @RequestMapping("/show_handlebars")
+    @RequestMapping("/show_Handlebar")
     public String handlebarsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<Handlebar> handlebars = handlebarService
-                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
-        model.addAttribute("handlebars", handlebars);
-        model.addAttribute("allPages", getPageCount());
-        return "handlebars";
+                .findAllHandlebars(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<HandlebarMaker> handlebarMakers = new HashSet<>();
+        for (Handlebar handlebar : handlebars) {
+            handlebarMakers.add(handlebar.getMaker());
+        }
+        model.addAttribute("productMakers", handlebarMakers);
+        model.addAttribute("products", handlebars);
+        model.addAttribute("allPages", getPageCountHandlebar());
+        return "product";
     }
 
-    @RequestMapping("/show_stems")
+    @RequestMapping("/show_Stem")
     public String stemsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
-        List<Stem> stems = handlebarService
-                .findAllFive(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
-        model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
-        model.addAttribute("stems", stems);
-        model.addAttribute("allPages", getPageCount());
-        return "stems";
+        List<Stem> stemsAll = handlebarService
+                .findAllStems(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        Set<HandlebarMaker> handlebarMakers = new HashSet<>();
+        for (Stem stem : stemsAll) {
+            handlebarMakers.add(stem.getMaker());
+        }
+        model.addAttribute("productMakers", handlebarMakers);
+        model.addAttribute("products", stemsAll);
+        model.addAttribute("allPages", getPageCountStem());
+        return "product";
     }
 
-    @RequestMapping("/show_windings")
+    @RequestMapping("/show_Winding")
     public String windingsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<Winding> windings = handlebarService
-                .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
-        model.addAttribute("windings", windings);
-        model.addAttribute("allPages", getPageCount());
-        return "windings";
+                .findAllWindings(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<HandlebarMaker> handlebarMakers = new HashSet<>();
+        for (Winding winding : windings) {
+            handlebarMakers.add(winding.getMaker());
+        }
+        model.addAttribute("productMakers",handlebarMakers);
+        model.addAttribute("products", windings);
+        model.addAttribute("allPages", getPageCountWinding());
+        return "product";
     }
 
-    @RequestMapping("/show_headsets")
+    @RequestMapping("/show_Headset")
     public String headsetsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<Headset> headsets = handlebarService
-                .findAllFor(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
-        model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
-        model.addAttribute("headsets", headsets);
-        model.addAttribute("allPages", getPageCount());
-        return "headsets";
+                .findAllHeadset(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        Set<HandlebarMaker> handlebarMakers = new HashSet<>();
+        for (Headset headset : headsets) {
+            handlebarMakers.add(headset.getMaker());
+        }
+        model.addAttribute("productMakers",handlebarMakers);
+        model.addAttribute("products", headsets);
+        model.addAttribute("allPages", getPageCountHeadset());
+        return "product";
     }
 
-    @RequestMapping("/show_grips")
+    @RequestMapping("/show_Grips")
     public String gripsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<Grips> grips = handlebarService
-                .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
-        model.addAttribute("grips", grips);
-        model.addAttribute("allPages", getPageCount());
-        return "grips";
+                .findAllGrips(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<HandlebarMaker> handlebarMakers = new HashSet<>();
+        for (Grips gripss : grips) {
+            handlebarMakers.add(gripss.getMaker());
+        }
+        model.addAttribute("productMakers",handlebarMakers);
+        model.addAttribute("products", grips);
+        model.addAttribute("allPages", getPageCountGrips());
+        return "product";
     }
 
     //add components from browser
@@ -173,7 +198,7 @@ public class HandlebarController {
 
     // for filter by Maker
     @RequestMapping("/handlebarMaker/{id}")
-    public String listHandlebarMaker(
+    public String listHandlebarMakerAdmin(
             @PathVariable(value = "id") long handlebarMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
@@ -181,13 +206,117 @@ public class HandlebarController {
         HandlebarMaker handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
         if (page < 0) page = 0;
         List<Handlebar> handlebars = handlebarService
-                .findByHandlebarMakers(handlebarMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findByHandlebarMakerHandlebar(handlebarMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
         model.addAttribute("handlebars", handlebars);
-        model.addAttribute("byHandlebarMakerPages", getPageCount(handlebarMaker));
         model.addAttribute("groupId", handlebarMakerId);
-
         return "handlebars";
+    }
+    @RequestMapping("/HandlebarMaker/Handlebar/{id}")
+    public String listHandlebarMakerHandlebar(
+            @PathVariable(value = "id") long handlebarMakerId,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        HandlebarMaker handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
+        if (page < 0) page = 0;
+        List<Handlebar> handlebarsAll = handlebarService.findAllHandlebars(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        Set<HandlebarMaker> handlebarMakers = new HashSet<>();
+        for (Handlebar handlebar : handlebarsAll) {
+            handlebarMakers.add(handlebar.getMaker());
+        }
+        List<Handlebar> handlebars = handlebarService
+                .findByHandlebarMakerHandlebar(handlebarMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("productMakers", handlebarMakers);
+        model.addAttribute("products", handlebars);
+        model.addAttribute("byGroupPages", getPageCountHandlebar(handlebarMaker));
+        model.addAttribute("groupId", handlebarMakerId);
+        return "product";
+    }
+    @RequestMapping("/HandlebarMaker/Grips/{id}")
+    public String listHandlebarMakerGrips(
+            @PathVariable(value = "id") long handlebarMakerId,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        HandlebarMaker handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
+        if (page < 0) page = 0;
+        List<Grips> gripsAll = handlebarService.findAllGrips(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        Set<HandlebarMaker> handlebarMakers = new HashSet<>();
+        for (Grips grips : gripsAll) {
+            handlebarMakers.add(grips.getMaker());
+        }
+        List<Grips> grips = handlebarService
+                .findByHandlebarMakerGrips(handlebarMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("productMakers", handlebarMakers);
+        model.addAttribute("products", grips);
+        model.addAttribute("byGroupPages", getPageCountGrips(handlebarMaker));
+        model.addAttribute("groupId", handlebarMakerId);
+        return "product";
+    }
+    @RequestMapping("/HandlebarMaker/Headset/{id}")
+    public String listHandlebarMakerHedset(
+            @PathVariable(value = "id") long handlebarMakerId,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        HandlebarMaker handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
+        if (page < 0) page = 0;
+        List<Headset> headsetsAll = handlebarService.findAllHeadset(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        Set<HandlebarMaker> handlebarMakers = new HashSet<>();
+        for (Headset headset : headsetsAll) {
+            handlebarMakers.add(headset.getMaker());
+        }
+        List<Headset> headsets = handlebarService
+                .findByHandlebarMakerHeadset(handlebarMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("productMakers", handlebarMakers);
+        model.addAttribute("products", headsets);
+        model.addAttribute("byGroupPages", getPageCountHeadset(handlebarMaker));
+        model.addAttribute("groupId", handlebarMakerId);
+        return "product";
+    }
+    @RequestMapping("/HandlebarMaker/Stem/{id}")
+    public String listHandlebarMakerStem (
+            @PathVariable(value = "id") long handlebarMakerId,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        HandlebarMaker handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
+        if (page < 0) page = 0;
+        List<Stem> stemsAll = handlebarService
+                .findAllStems(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        List<Stem> stems = handlebarService
+                .findByHandlebarMakerStem(handlebarMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<HandlebarMaker> handlebarMakers = new HashSet<>();
+        for (Stem stem : stemsAll) {
+            handlebarMakers.add(stem.getMaker());
+        }
+            model.addAttribute("productMakers",handlebarMakers);
+            model.addAttribute("products", stems);
+            model.addAttribute("byGroupPages", getPageCountStem(handlebarMaker));
+            model.addAttribute("groupId", handlebarMakerId);
+            return "product";
+    }
+    @RequestMapping("/HandlebarMaker/Winding/{id}")
+    public String listHandlebarMakerWinding(
+            @PathVariable(value = "id") long handlebarMakerId,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        HandlebarMaker handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
+        if (page < 0) page = 0;
+        List<Winding> windingsAll = handlebarService.findAllWindings(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        Set<HandlebarMaker> handlebarMakers = new HashSet<>();
+        for (Winding winding : windingsAll) {
+            handlebarMakers.add(winding.getMaker());
+        }
+        List<Winding> windings = handlebarService
+                .findByHandlebarMakerWinding(handlebarMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("productMakers", handlebarMakers);
+        model.addAttribute("products", windings);
+        model.addAttribute("byGroupPages", getPageCountWinding(handlebarMaker));
+        model.addAttribute("groupId", handlebarMakerId);
+        return "product";
     }
 
     //for delete components for admin
@@ -251,7 +380,7 @@ public class HandlebarController {
         Handlebar handlebar = new Handlebar(handlebarMaker,article, url,  name, bikeType, handlebarWide, handlebarDiameter, handlebarHeight,material,weight, color ,
                  price, description, way);
         handlebarService.addHandlebar(handlebar);
-        return "redirect:/show_handlebars";
+        return "redirect:/show_Handlebar";
     }
 
     @RequestMapping(value="/admin/winding/add", method = RequestMethod.POST)
@@ -272,7 +401,7 @@ public class HandlebarController {
         Winding winding = new Winding(handlebarMaker,article,url,  name, length, wide, material, color ,
                 price, description, way);
         handlebarService.addWinding(winding);
-        return "redirect:/show_windings";
+        return "redirect:/show_Winding";
     }
 
     @RequestMapping(value="/admin/headset/add", method = RequestMethod.POST)
@@ -296,7 +425,7 @@ public class HandlebarController {
         Headset headset = new Headset(handlebarMaker,article,url,  name, headsetType, tubeDiameter, material,size, color ,
                 price, description, way);
         handlebarService.addHeadset(headset);
-        return "redirect:/show_headsets";
+        return "redirect:/show_Headset";
     }
 
     @RequestMapping(value="/admin/stem/add", method = RequestMethod.POST)
@@ -321,7 +450,7 @@ public class HandlebarController {
         Stem stem = new Stem(handlebarMaker, article, url, name, angle, handlebarDiameter, tubeDiameter, material,length, color ,
                 price, description, way);
         handlebarService.addStem(stem);
-        return "redirect:/show_stems";
+        return "redirect:/show_Stem";
     }
 
     @RequestMapping(value="/admin/grips/add", method = RequestMethod.POST)
@@ -342,7 +471,7 @@ public class HandlebarController {
         Grips grips = new Grips(handlebarMaker,article,url, name, length, weight, material, color ,
                 price, description, way);
         handlebarService.addGrips(grips);
-        return "redirect:/show_grips";
+        return "redirect:/show_Grips";
     }
 
     @RequestMapping(value="/admin/handlebarMaker/add", method = RequestMethod.POST)
@@ -353,7 +482,7 @@ public class HandlebarController {
 
     // Select one product by url and open in separate page
 
-    @RequestMapping("/handlebar/{url}")
+    @RequestMapping("/Handlebar/{url}")
     public String listHandlebarUrl(
             @PathVariable(value = "url") String url,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -366,7 +495,7 @@ public class HandlebarController {
         return "OneHandlebar";
     }
 
-    @RequestMapping("/stem/{url}")
+    @RequestMapping("/Stem/{url}")
     public String listStemUrl(
             @PathVariable(value = "url") String url,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -379,7 +508,7 @@ public class HandlebarController {
         return "OneStem";
     }
 
-    @RequestMapping("/grips/{url}")
+    @RequestMapping("/Grips/{url}")
     public String listGripsUrl(
             @PathVariable(value = "url") String url,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -392,7 +521,7 @@ public class HandlebarController {
         return "OneGrips";
     }
 
-    @RequestMapping("/headset/{url}")
+    @RequestMapping("/Headset/{url}")
     public String listHeadsetUrl(
             @PathVariable(value = "url") String url,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -405,7 +534,7 @@ public class HandlebarController {
         return "OneHeadset";
     }
 
-    @RequestMapping("/winding/{url}")
+    @RequestMapping("/Winding/{url}")
     public String listWindingUrl(
             @PathVariable(value = "url") String url,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -418,15 +547,45 @@ public class HandlebarController {
         return "OneWinding";
     }
 
-    private long getPageCount() {
-        long totalCount = handlebarService.count();
+    private long getPageCountHandlebar() {
+        long totalCount = handlebarService.countHadlebar();
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
-    private long getPageCount(HandlebarMaker handlebarMaker) {
-        long totalCount = handlebarService.countByHandlebarMaker(handlebarMaker);
+    private long getPageCountHandlebar(HandlebarMaker handlebarMaker) {
+        long totalCount = handlebarService.countByHandlebarMakerHandlebar(handlebarMaker);
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
 
-
-
+    private long getPageCountGrips() {
+        long totalCount = handlebarService.countGrips();
+        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
+    }
+    private long getPageCountGrips(HandlebarMaker handlebarMaker) {
+        long totalCount = handlebarService.countByHandlebarMakerGrips(handlebarMaker);
+        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
+    }
+    private long getPageCountHeadset() {
+        long totalCount = handlebarService.countHeadset();
+        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
+    }
+    private long getPageCountHeadset(HandlebarMaker handlebarMaker) {
+        long totalCount = handlebarService.countByHandlebarMakerHeadset(handlebarMaker);
+        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
+    }
+    private long getPageCountStem() {
+        long totalCount = handlebarService.countStem();
+        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
+    }
+    private long getPageCountStem(HandlebarMaker handlebarMaker) {
+        long totalCount = handlebarService.countByHandlebarMakerStem(handlebarMaker);
+        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
+    }
+    private long getPageCountWinding() {
+        long totalCount = handlebarService.countWinding();
+        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
+    }
+    private long getPageCountWinding(HandlebarMaker handlebarMaker) {
+        long totalCount = handlebarService.countByHandlebarMakerWinding(handlebarMaker);
+        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
+    }
 }

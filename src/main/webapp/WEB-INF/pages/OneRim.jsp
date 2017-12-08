@@ -131,7 +131,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="details-left-info">
                                 <h3>${rim.name}</h3>
                                 <h5> Артикул  : ${rim.article}</h5>
-                                <p class="maker"> <h3> Виробник  : ${rim.wheelMaker.name} </h3></p>
+                                <p class="maker"> <h3> Виробник  : ${rim.maker.name} </h3></p>
                                 <h4></h4>
                                 <p>${rim.price}<label>грн</label><a href="#"></a></p>
                                 <div class="btn_form">

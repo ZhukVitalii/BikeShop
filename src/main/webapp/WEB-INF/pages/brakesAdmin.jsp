@@ -72,8 +72,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!--
                             <li><a href="#">Підібрати декілька компонентів</a></li>
                             -->
-                            <li><a href="/show_frames">Рами</a></li>
-                            <li><a href="/show_forks">Вилки</a></li>
+                            <li><a href="/show_Frame">Рами</a></li>
+                            <li><a href="/show_Fork">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
@@ -112,7 +112,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul class="dropdown-menu">
                             <li><a href="/">Default</a></li>
                             <c:forEach items="${brakeMakers}" var="brakeMaker">
-                                <li><a href="/wheelMaker/${brakeMaker.id}">${brakeMaker.name}</a></li>
+                                <li><a href="/brakeMakerAdmin/${brakeMaker.id}">${brakeMaker.name}</a></li>
                             </c:forEach>
                         </ul>
                     </li>
@@ -204,8 +204,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${brakeDiscHydraulic.price}</td>
 
                 <c:choose>
-                    <c:when test="${brakeDiscHydraulic.brakeMaker ne null}">
-                        <td>${brakeDiscHydraulic.brakeMaker.name}</td>
+                    <c:when test="${brakeDiscHydraulic.maker ne null}">
+                        <td>${brakeDiscHydraulic.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -231,7 +231,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul class="dropdown-menu">
                             <li><a href="/">Default</a></li>
                             <c:forEach items="${brakeMakers}" var="brakeMaker">
-                                <li><a href="/wheelMaker/${brakeMaker.id}">${brakeMaker.name}</a></li>
+                                <li><a href="/brakeMakerAdmin/${brakeMaker.id}">${brakeMaker.name}</a></li>
                             </c:forEach>
                         </ul>
                     </li>
@@ -301,8 +301,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${brakeDiscMechanik.price}</td>
 
                 <c:choose>
-                    <c:when test="${brakeDiscMechanik.brakeMaker ne null}">
-                        <td>${brakeDiscMechanik.brakeMaker.name}</td>
+                    <c:when test="${brakeDiscMechanik.maker ne null}">
+                        <td>${brakeDiscMechanik.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -329,7 +329,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul class="dropdown-menu">
                             <li><a href="/">Default</a></li>
                             <c:forEach items="${brakeMakers}" var="brakeMaker">
-                                <li><a href="/wheelMaker/${brakeMaker.id}">${brakeMaker.name}</a></li>
+                                <li><a href="/braleMakerAdmin/${brakeMaker.id}">${brakeMaker.name}</a></li>
                             </c:forEach>
                         </ul>
                     </li>
@@ -372,8 +372,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${brakeVBrake.price}</td>
 
                 <c:choose>
-                    <c:when test="${brakeVBrake.brakeMaker ne null}">
-                        <td>${brakeVBrake.brakeMaker.name}</td>
+                    <c:when test="${brakeVBrake.maker ne null}">
+                        <td>${brakeVBrake.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -399,7 +399,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul class="dropdown-menu">
                             <li><a href="/">Default</a></li>
                             <c:forEach items="${brakeMakers}" var="brakeMaker">
-                                <li><a href="/wheelMaker/${brakeMaker.id}">${brakeMaker.name}</a></li>
+                                <li><a href="/brakeMakerAdmin/${brakeMaker.id}">${brakeMaker.name}</a></li>
                             </c:forEach>
                         </ul>
                     </li>
@@ -478,8 +478,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${brakeHandle.price}</td>
 
                 <c:choose>
-                    <c:when test="${brakeHandle.brakeMaker ne null}">
-                        <td>${brakeHandle.brakeMaker.name}</td>
+                    <c:when test="${brakeHandle.maker ne null}">
+                        <td>${brakeHandle.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -500,7 +500,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </c:if>
             <c:if test="${byGroupPages ne null}">
                 <c:forEach var="i" begin="1" end="${byGroupPages}">
-                    <li><a href="/brakeMaker/${brakeMakerId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
+                    <li><a href="/brakeMakerAdmin/${brakeMakerId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
                 </c:forEach>
             </c:if>
         </ul>

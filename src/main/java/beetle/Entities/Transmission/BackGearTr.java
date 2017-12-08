@@ -22,7 +22,7 @@ public class BackGearTr {
     private long id;
     @ManyToOne
     @JoinColumn(name="maker_id")
-    private TransmissionMaker transmissionMaker;
+    private TransmissionMaker maker;
     private Long article;
     private String url;
     private String name;
@@ -45,10 +45,10 @@ public class BackGearTr {
     private Double price;
     private String way;
 
-    public BackGearTr (TransmissionMaker transmissionMaker,Long article,String url, String name,BackSprocketNumber backSprocketNumber,BackSprocketMax backSprocketMax,
+    public BackGearTr (TransmissionMaker maker,Long article,String url, String name,BackSprocketNumber backSprocketNumber,BackSprocketMax backSprocketMax,
                        BackSprocketMin backSprocketMin,BackSprocketSize backSprocketSize,String material, String color, String description, Double price,
                        String way) {
-        this.transmissionMaker = transmissionMaker;
+        this.maker = maker;
         this.article = article;
         this.url=url;
         this.name = name;

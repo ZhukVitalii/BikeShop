@@ -76,8 +76,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!--
                             <li><a href="#">Підібрати декілька компонентів</a></li>
                             -->
-                            <li><a href="/show_frames">Рами</a></li>
-                            <li><a href="/show_forks">Вилки</a></li>
+                            <li><a href="/show_Frame">Рами</a></li>
+                            <li><a href="/show_Fork">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
@@ -139,7 +139,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                                 <h3>${fork.name}</h3>
                                 <h5> Артикул  : ${fork.article}</h5>
-                                <p class="maker"> <h5> Виробник  : ${fork.forkMaker.name} </h5></p>
+                                <p class="maker"> <h5> Виробник  : ${fork.maker.name} </h5></p>
                                 <h4></h4>
                                 <p>${fork.price}<label>грн</label><a href="#"></a></p>
                                 <div class="btn_form">

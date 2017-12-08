@@ -14,10 +14,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface FrameRepository extends JpaRepository<Frame, Long> {
-    @Query("SELECT c FROM Frame c WHERE c.frameMaker = :frameMaker")
-    List<Frame> findByFrameMaker(@Param("frameMaker") FrameMaker frameMaker, Pageable pageable);
-    @Query("SELECT COUNT(c) FROM Frame c WHERE c.frameMaker = :frameMaker")
-    long countByFrameMaker(@Param("frameMaker") FrameMaker frameMaker);
+    @Query("SELECT c FROM Frame c WHERE c.maker = :maker")
+    List<Frame> findByFrameMaker(@Param("maker") FrameMaker maker, Pageable pageable);
+    @Query("SELECT COUNT(c) FROM Frame c WHERE c.maker = :maker")
+    long countByFrameMaker(@Param("maker") FrameMaker maker);
 
     @Query("SELECT c FROM Frame c WHERE c.url = :url")
     List<Frame> findByUrl(@Param("url") String url, Pageable pageable);

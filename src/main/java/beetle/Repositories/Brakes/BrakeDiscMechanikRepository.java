@@ -17,11 +17,11 @@ import java.util.List;
  */
 public interface BrakeDiscMechanikRepository extends JpaRepository<BrakeDiscMechanik, Long> {
 
-    @Query("SELECT c FROM BrakeDiscMechanik c WHERE c.brakeMaker = :brakeMaker")
-    List<BrakeDiscMechanik> findByBrakeMakers(@Param("brakeMaker") BrakeMaker brakeMaker, Pageable pageable);
+    @Query("SELECT c FROM BrakeDiscMechanik c WHERE c.maker = :maker")
+    List<BrakeDiscMechanik> findByBrakeMakers(@Param("maker") BrakeMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM BrakeDiscMechanik c WHERE c.brakeMaker = :brakeMaker")
-    long countByBrakeMakers(@Param("brakeMaker")  BrakeMaker brakeMaker);
+    @Query("SELECT COUNT(c) FROM BrakeDiscMechanik c WHERE c.maker = :maker")
+    long countByBrakeMakers(@Param("maker")  BrakeMaker maker);
 
     @Query("SELECT c FROM BrakeDiscMechanik c WHERE c.location = :location")
     List<BrakeDiscMechanik> findByLocation(@Param("location") Location location, Pageable pageable);

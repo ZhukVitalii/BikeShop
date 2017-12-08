@@ -23,7 +23,7 @@ public class Wheel {
     private long id;
     @ManyToOne
     @JoinColumn(name="maker_id")
-    private WheelMaker wheelMaker;
+    private WheelMaker maker;
     private Long article;
     private String url;
     private String name;
@@ -53,10 +53,10 @@ public class Wheel {
     private Double price;
     private String way;
 
-    public Wheel(WheelMaker wheelMaker,Long article, String url, String name, WheelsDiam wheelsDiam,BikeType bikeType, BrakesType brakesType,
+    public Wheel(WheelMaker maker,Long article, String url, String name, WheelsDiam wheelsDiam,BikeType bikeType, BrakesType brakesType,
                    SpokeNumber spokeNumber, String rimName,RimWide rimWide,String rimDescription,String hubName,
                  String hubDescription, String description, Double price,  String way) {
-        this.wheelMaker = wheelMaker;
+        this.maker = maker;
         this.article = article;
         this.url = url;
         this.name = name;

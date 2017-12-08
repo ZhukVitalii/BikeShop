@@ -13,8 +13,8 @@ import java.util.List;
  * Created by VitaliiZhuk on 20.05.2017.
  */
 public interface ForkRepository extends JpaRepository<Fork, Long> {
-    @Query("SELECT c FROM Fork c WHERE c.forkMaker = :forkMaker")
-    List<Fork> findByForkMakers(@Param("forkMaker") ForkMaker forkMaker, Pageable pageable);
+    @Query("SELECT c FROM Fork c WHERE c.maker = :maker")
+    List<Fork> findByForkMakers(@Param("maker") ForkMaker maker, Pageable pageable);
 
 
     @Query("SELECT c FROM Fork c WHERE c.tubeDiameter = :tubeDiameter")
@@ -46,8 +46,8 @@ public interface ForkRepository extends JpaRepository<Fork, Long> {
                                               @Param("brakesType") BrakesType brakesType,
                                                Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM Fork c WHERE c.forkMaker = :forkMaker")
-    long countByForkMaker(@Param("forkMaker") ForkMaker forkMaker);
+    @Query("SELECT COUNT(c) FROM Fork c WHERE c.maker = :maker")
+    long countByForkMaker(@Param("maker") ForkMaker maker);
 
     @Query("SELECT COUNT(c) FROM Fork c WHERE c.bikeType = :bikeType")
     long countByBikeType(@Param("bikeType") BikeType bikeType);

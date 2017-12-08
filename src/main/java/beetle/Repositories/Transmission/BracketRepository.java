@@ -14,11 +14,11 @@ import java.util.List;
  */
 public interface BracketRepository extends JpaRepository<Bracket, Long> {
 
-    @Query("SELECT c FROM Bracket c WHERE c.transmissionMaker = :transmissionMaker")
-    List<Bracket> findByTransmissionMakers(@Param("transmissionMaker") TransmissionMaker transmissionMaker, Pageable pageable);
+    @Query("SELECT c FROM Bracket c WHERE c.maker = :maker")
+    List<Bracket> findByTransmissionMakers(@Param("maker") TransmissionMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM Bracket c WHERE c.transmissionMaker = :transmissionMaker")
-    long countByTransmissionMakers(@Param("transmissionMaker")  TransmissionMaker transmissionMaker);
+    @Query("SELECT COUNT(c) FROM Bracket c WHERE c.maker = :maker")
+    long countByTransmissionMakers(@Param("maker")  TransmissionMaker maker);
 
     @Query("SELECT c FROM Bracket c WHERE c.bracketAxisLength = :bracketAxisLength")
     List<Bracket> findByBracketAxisLength(@Param("bracketAxisLength") BracketAxisLength bracketAxisLength, Pageable pageable);

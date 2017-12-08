@@ -6,16 +6,16 @@
 
 <html>
 <head>
-    <title>Grips</title>
+    <title> </title>
     <link rel="shortcut icon"
-          href="resources/images/logo_brauser.png" >
-    <spring:url value="resources/css/bootstrap.css" var="bootstrap"/>
-    <link href="resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
+          href="/resources/images/logo_brauser.png" >
+    <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
+    <link href="/resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (Bootstrap's JavaScript plugins) -->
-    <script src="resources/js/jquery.min.js"></script>
+    <script src="/resources/js/jquery.min.js"></script>
     <!-- Custom Theme files -->
-    <link href="resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,16 +26,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
     <!--webfont-->
     <!-- dropdown -->
-    <script src="resources/js/jquery.easydropdown.js"></script>
-    <link href="resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="resources/js/scripts.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.easydropdown.js"></script>
+    <link href="/resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
+    <script src="/resources/js/scripts.js" type="text/javascript"></script>
     <script src="/resources/js/ajax.js" type="text/javascript"></script>
     <!--js-->
 
 
 </head>
+
 <body>
-<script src="resources/js/responsiveslides.min.js"></script>
+<script src="/resources/js/responsiveslides.min.js"></script>
 <script>
     $(function () {
         $("#slider").responsiveSlides({
@@ -51,10 +52,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="resources/images/logo.png"
-                                 alt=""
-                                 width="110"
-                                 height="112"/>
+                <a  href="/"><img  src="/resources/images/logo.png"
+                                   width="110"
+                                   height="112"
+                                   alt=""/>
                 </a>
             </div>
             <div class="top-nav">
@@ -75,8 +76,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!--
                             <li><a href="#">Підібрати декілька компонентів</a></li>
                             -->
-                            <li><a href="/show_frames">Рами</a></li>
-                            <li><a href="/show_forks">Вилки</a></li>
+                            <li><a href="/show_Frame">Рами</a></li>
+                            <li><a href="/show_Fork">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
@@ -93,7 +94,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Троси</a></li>
                         </ul>
                     </li>
-                    <a class="shop" href="/cart"><img src="resources/images/cart.png" alt=""/></a>
+                    <a class="shop" href="/cart"><img src="/resources/images/cart.png" alt=""/></a>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -102,7 +103,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 
 <div class="container">
-
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -112,9 +112,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Виробник <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/">Default</a></li>
-                            <c:forEach items="${handlebarMakers}" var="handlebarMaker">
-                                <li><a href="/handlebarMaker/${handlebarMaker.id}">${handlebarMaker.name}</a></li>
+                            <li><a href="#">Default</a></li>
+                            <c:forEach items="${productMakers}" var="productMaker">
+                                <li><a href="/${productMaker.getClass().getSimpleName()}/${products.get(0).getClass().getSimpleName()}/${productMaker.id}">${productMaker.name}</a></li>
                             </c:forEach>
                         </ul>
                     </li>
@@ -126,91 +126,46 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="product-head">
             <a href="/">Home</a> <span>::</span>
         </div>
-
-        <c:forEach items="${grips}" var="grips">
-        <!--Include the Etalage files-->
-        <link rel="stylesheet" href="resources/css/etalage.css">
-        <script src="resources/js/jquery.etalage.min.js"></script>
-        <script>
-            jQuery(document).ready(function($){
-                $('#etalage').etalage({
-                    thumb_image_width: 400,
-                    thumb_image_height: 400,
-                    source_image_width: 800,
-                    source_image_height: 1000,
-                    show_hint: true,
-                    click_callback: function(image_anchor, instance_id){
-                        alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-                    }
-                });
-            });
-        </script>
-        <!--//details-product-slider-->
-        <div class="details-left-slider">
-            <a href="<c:url value="/grips/${grips.url}"/>"
-               title="Перейти до <c:out value="${grips.name}"/>">
-                <img height="300" width="300" src="${grips.way}" />
-            </a>
-            <div class="details-left-info">
-                <div class="link-to-one">
-                    <a href="<c:url value="/grips/${grips.url}"/>"
-                       title="Перейти до <c:out value="${grips.name}"/>">
-                        <h3>${grips.name}</h3>
-                    </a>
+            <c:forEach items="${products}" var="product">
+            <link rel="stylesheet" href="/resources/css/etalage.css">
+            <script src="/resources/js/jquery.etalage.min.js"></script>
+            <div class="details-left-slider">
+                <a href="<c:url value="/${product.getClass().getSimpleName()}/${product.url}"/>"
+                   title="Перейти до <c:out value="${product.name}"/>">
+                    <img height="300" width="300" src="${product.way}" />
+                </a>
+                <div class="details-left-info">
+                    <div class="link-to-one">
+                        <a href="<c:url value="/${product.getClass().getSimpleName()}/${product.url}"/>"
+                           title="Перейти до <c:out value="${product.name}"/>">
+                            <h3>${product.name}</h3>
+                        </a>
+                    </div>
+                    <h5> Артикул  : ${product.article}</h5>
+                    <p class="maker"> <h3> Виробник  : ${product.maker.name} </h3></p>
+                    <h4></h4>
+                    <p>${product.price}<label>грн</label><a href="#"></a></p>
+                    <div class="btn_form">
+                        <button type="button" onclick="addToCart('${product.getClass().getSimpleName()}',${product.article})">Додати до корзини</button>
+                    </div>
+                    <div class="bike-type">
+                        <h5>Опис  ::</h5>
+                        <p class="desc">${product.description}</p>
+                    </div>
                 </div>
-                <h5> Артикул  : ${grips.article}</h5>
-                <p class="maker"> <h3> Виробник  : ${handlebar.handlebarMaker.name} </h3></p>
-                <h4></h4>
-                <p>${grips.price}<label>грн</label><a href="#"></a></p>
-                <div class="btn_form">
-                    <button type="button" onclick="addToCart('/cartAddGrips/', ${grips.article})">Додати до корзини</button>
-                </div>
-                <div class="bike-type">
-                    <table>
-                        <tr>
-                            <th><h5>Довжина  :   </h5></th>
-                            <th><p align="center"><font size="4" color="#0080C0" >
-                                <b><i>   ${grips.length}</i></b></font></th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <th><h5>Вага  :   </h5></th>
-                            <th><p align="center"><font size="4" color="#0080C0" >
-                                <b><i>   ${grips.weight}</i></b></font></th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <th><h5>Матеріал :   </h5></th>
-                            <th><p align="center"><font size="4" color="#0080C0" >
-                                <b><i>   ${grips.material} </i></b></font></th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <th><h5>Колір :   </h5></th>
-                            <th><p align="center"><font size="4" color="#0080C0" >
-                                <b><i>   ${grips.color} </i></b></font></th>
-                        </tr>
-                    </table>
-                    <h5>Опис  ::</h5>
-                    <p class="desc">${grips.description}</p>
-                </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="clearfix"></div>
-        </div>
         </c:forEach>
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <c:if test="${allPages ne null}">
                     <c:forEach var="i" begin="1" end="${allPages}">
-                        <li><a href="/show_grips?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
+                        <li><a href="/show_${product.getClass().getSimpleName()}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
                     </c:forEach>
                 </c:if>
                 <c:if test="${byGroupPages ne null}">
                     <c:forEach var="i" begin="1" end="${byGroupPages}">
-                        <li><a href="/handlebarMaker/${groupId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
+                        <li><a href="/${product.getClass().getSimpleName()}Maker/${groupId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
                     </c:forEach>
                 </c:if>
             </ul>

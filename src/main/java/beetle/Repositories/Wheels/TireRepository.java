@@ -13,8 +13,8 @@ import java.util.List;
  * Created by VitaliiZhuk on 25.06.2017.
  */
 public interface TireRepository extends JpaRepository<Tire, Long> {
-    @Query("SELECT c FROM Tire c WHERE c.wheelMaker = :wheelMaker")
-    List<Tire> findByWheelMakers(@Param("wheelMaker") WheelMaker wheelMaker, Pageable pageable);
+    @Query("SELECT c FROM Tire c WHERE c.maker = :maker")
+    List<Tire> findByWheelMakers(@Param("maker") WheelMaker maker, Pageable pageable);
 
     @Query("SELECT c FROM Tire c WHERE c.wheelsDiam = :wheelsDiam")
     List<Tire> findByWheelsDiam(@Param("wheelsDiam")WheelsDiam wheelsDiam, Pageable pageable);
@@ -37,8 +37,8 @@ public interface TireRepository extends JpaRepository<Tire, Long> {
     @Query("SELECT c FROM Tire c WHERE c.article = :article")
     Tire findOneByArticle(@Param("article") Long article);
 
-    @Query("SELECT COUNT(c) FROM Tire c WHERE c.wheelMaker = :wheelMaker")
-    long countByWheelMakers(@Param("wheelMaker")  WheelMaker wheelMaker);
+    @Query("SELECT COUNT(c) FROM Tire c WHERE c.maker = :maker")
+    long countByWheelMakers(@Param("maker")  WheelMaker maker);
 
     @Query("SELECT c FROM Tire c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<Tire> findByPattern(@Param("pattern") String pattern, Pageable pageable);

@@ -72,8 +72,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!--
                             <li><a href="#">Підібрати декілька компонентів</a></li>
                             -->
-                            <li><a href="/show_frames">Рами</a></li>
-                            <li><a href="/show_forks">Вилки</a></li>
+                            <li><a href="/show_Frame">Рами</a></li>
+                            <li><a href="/show_Fork">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
@@ -199,8 +199,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${wheel.price}</td>
 
                 <c:choose>
-                    <c:when test="${wheel.wheelMaker ne null}">
-                        <td>${wheel.wheelMaker.name}</td>
+                    <c:when test="${wheel.maker ne null}">
+                        <td>${wheel.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -342,8 +342,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${rim.price}</td>
 
                 <c:choose>
-                    <c:when test="${rim.wheelMaker ne null}">
-                        <td>${rim.wheelMaker.name}</td>
+                    <c:when test="${rim.maker ne null}">
+                        <td>${rim.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -467,8 +467,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${frontHub.price}</td>
 
                 <c:choose>
-                    <c:when test="${frontHub.wheelMaker ne null}">
-                        <td>${frontHub.wheelMaker.name}</td>
+                    <c:when test="${frontHub.maker ne null}">
+                        <td>${frontHub.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -612,8 +612,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${backHub.price}</td>
 
                 <c:choose>
-                    <c:when test="${backHub.wheelMaker ne null}">
-                        <td>${backHub.wheelMaker.name}</td>
+                    <c:when test="${backHub.maker ne null}">
+                        <td>${backHub.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -761,8 +761,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${tire.price}</td>
 
                 <c:choose>
-                    <c:when test="${tire.wheelMaker ne null}">
-                        <td>${tire.wheelMaker.name}</td>
+                    <c:when test="${tire.maker ne null}">
+                        <td>${tire.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>

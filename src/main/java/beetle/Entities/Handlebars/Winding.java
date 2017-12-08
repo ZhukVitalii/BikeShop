@@ -20,7 +20,7 @@ public class Winding {
     private long id;
     @ManyToOne
     @JoinColumn(name="maker_id")
-    private HandlebarMaker handlebarMaker;
+    private HandlebarMaker maker;
     private Long article;
     private String url;
     private String name;
@@ -33,9 +33,9 @@ public class Winding {
     private String description;
     private String way;
 
-    public Winding(HandlebarMaker handlebarMaker,Long article, String url, String name, String length, String wide, String material,
+    public Winding(HandlebarMaker maker,Long article, String url, String name, String length, String wide, String material,
                      String color, Double price, String description, String way) {
-        this.handlebarMaker = handlebarMaker;
+        this.maker = maker;
         this.article = article;
         this.url = url;
         this.name = name;
@@ -49,5 +49,9 @@ public class Winding {
     }
     public Double getPrice() {
         return price;
+    }
+
+    public HandlebarMaker getMaker() {
+        return maker;
     }
 }

@@ -18,8 +18,8 @@ import java.util.List;
  * Created by VitaliiZhuk on 11.06.2017.
  */
 public interface WheelRepository extends JpaRepository<Wheel, Long> {
-    @Query("SELECT c FROM Wheel c WHERE c.wheelMaker = :wheelMaker")
-    List<Wheel> findByWheelMakers(@Param("wheelMaker") WheelMaker wheelMaker, Pageable pageable);
+    @Query("SELECT c FROM Wheel c WHERE c.maker = :maker")
+    List<Wheel> findByWheelMakers(@Param("maker") WheelMaker maker, Pageable pageable);
 
     @Query("SELECT c FROM Wheel c WHERE c.spokeNumber = :spokeNumber")
     List<Wheel> findBySpokeNumber(@Param("spokeNumber") SpokeNumber spokeNumber, Pageable pageable);
@@ -46,8 +46,8 @@ public interface WheelRepository extends JpaRepository<Wheel, Long> {
                                                        Pageable pageable);
 
 
-    @Query("SELECT COUNT(c) FROM Wheel c WHERE c.wheelMaker = :wheelMaker")
-    long countByWheelMakers(@Param("wheelMaker")  WheelMaker wheelMaker);
+    @Query("SELECT COUNT(c) FROM Wheel c WHERE c.maker = :maker")
+    long countByWheelMakers(@Param("maker")  WheelMaker maker);
 
     @Query("SELECT c FROM Wheel c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<Wheel> findByPattern(@Param("pattern") String pattern, Pageable pageable);

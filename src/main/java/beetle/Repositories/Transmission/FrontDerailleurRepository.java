@@ -14,11 +14,11 @@ import java.util.List;
  */
 public interface FrontDerailleurRepository extends JpaRepository<FrontDerailleur, Long> {
 
-    @Query("SELECT c FROM FrontDerailleur c WHERE c.transmissionMaker = :transmissionMaker")
-    List<FrontDerailleur> findByTransmissionMakers(@Param("transmissionMaker") TransmissionMaker transmissionMaker, Pageable pageable);
+    @Query("SELECT c FROM FrontDerailleur c WHERE c.maker = :maker")
+    List<FrontDerailleur> findByTransmissionMakers(@Param("maker") TransmissionMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM FrontDerailleur c WHERE c.transmissionMaker = :transmissionMaker")
-    long countByTransmissionMakers(@Param("transmissionMaker")  TransmissionMaker transmissionMaker);
+    @Query("SELECT COUNT(c) FROM FrontDerailleur c WHERE c.maker = :maker")
+    long countByTransmissionMakers(@Param("maker")  TransmissionMaker maker);
 
     @Query("SELECT c FROM FrontDerailleur c WHERE c.frontSprocketNumber = :frontSprocketNumber")
     List<FrontDerailleur> findByFrontSprocketNumber(@Param("frontSprocketNumber") FrontSprocketNumber frontSprocketNumber, Pageable pageable);

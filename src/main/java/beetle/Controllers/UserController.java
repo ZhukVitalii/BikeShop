@@ -23,8 +23,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Created by VitaliiZhuk on 07.07.2017.
@@ -49,6 +52,30 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    Map<Long, Integer> productsNumber = new HashMap<Long, Integer>();
+    double totalPrice = 0; // total Price in cart
+    int total = 0; // number of product in cart
+
+
+    @RequestMapping("/upNumber/{article}")
+    public String upNumber(Model model,
+            @PathVariable(value = "article") Long article) {
+            int number = productsNumber.get(article);
+            productsNumber.put(article, number +1);
+            int count = productsNumber.get(article);
+            model.addAttribute("count",count);
+            return "counting";
+    }
+    @RequestMapping("/downNumber/{article}")
+    public String downNumber(Model model,
+            @PathVariable(value = "article") Long article) {
+        int number = productsNumber.get(article);
+        if (number > 1) {
+            productsNumber.put(article, number - 1);
+        }
+        int count = productsNumber.get(article);
+        model.addAttribute("count",count);
+        return "counting";        }
     //Return HOME-PAGE
     @RequestMapping("/")
     public String index(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
@@ -142,11 +169,9 @@ public class UserController {
         FrameSize frameSize = frameService.findFrameSize(id);
         List<Frame> frames = frameService
                 .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        ;
         model.addAttribute("frames", frames);
         return "shosseBike";
     }
-
     // Select Bike By Type and Size
     @RequestMapping("/framesCity/{id}")
     public String listFrameCitySize(
@@ -162,428 +187,459 @@ public class UserController {
         return "cityBike";
     }
 
-    //Add frame to cart
-    @RequestMapping("/cartAddFrame/{article}")
-    public void listArticleFrame(
-            @PathVariable(value = "article") Long article) {
-        // for checking if article exist in cart
-        if (!frameService.getArticles().contains(article)) {
-        frameService.addToArticle(article);
+    @RequestMapping("/cartDel/{name}/{article}/{quantity}")
+    public ResponseEntity<Void> delete(
+            @PathVariable(value = "name") String name,
+            @PathVariable(value = "article") Long article,
+            @PathVariable(value = "quantity") int quantity) {
+        switch (name) {
+            case "Frame" :
+                frameService.deleteArticle(article);
+                Frame frame = frameService.findFrameByArticle(article);
+                totalPrice -= frame.getPrice()*quantity;
+                break;
+            case "Fork" :
+                forkService.deleteArticle(article);
+                Fork fork = forkService.findForkByArticle(article);
+                totalPrice -= fork.getPrice()*quantity;
+                break;
+            case "Handlebar" :
+                handlebarService.deleteArticleHandlebar(article);
+                Handlebar handlebar = handlebarService.findHandlebarByArticle(article);
+                totalPrice -= handlebar.getPrice()*quantity;
+                break;
+            case "Winding" :
+                handlebarService.deleteArticleWinding(article);
+                Winding winding = handlebarService.findWindingByArticle(article);
+                totalPrice -= winding.getPrice()*quantity;
+                break;
+            case "Headset" :
+                handlebarService.deleteArticleHeadset(article);
+                Headset headset = handlebarService.findHeadsetByArticle(article);
+                totalPrice -= headset.getPrice()*quantity;
+                break;
+            case "Grips" :
+                handlebarService.deleteArticleGrips(article);
+                Grips grips = handlebarService.findGripsByArticle(article);
+                totalPrice -= grips.getPrice()*quantity;
+                break;
+            case "Stem" :
+                handlebarService.deleteArticleStem(article);
+                Stem stem = handlebarService.findStemByArticle(article);
+                totalPrice -= stem.getPrice()*quantity;
+                break;
+            case "Wheel" :
+                wheelService.deleteArticleWheel(article);
+                Wheel wheel= wheelService.findWheelByArticle(article);
+                totalPrice -= wheel.getPrice()*quantity;
+                break;
+            case "Tire" :
+                wheelService.deleteArticleTire(article);
+                Tire tire = wheelService.findTireByArticle(article);
+                totalPrice -= tire.getPrice()*quantity;
+                break;
+            case "Spoke" :
+                wheelService.deleteArticleSpoke(article);
+                Spoke spoke= wheelService.findSpokeByArticle(article);
+                totalPrice -= spoke.getPrice()*quantity;
+                break;
+            case "Rim" :
+                wheelService.deleteArticleRim(article);
+                Rim rim= wheelService.findRimByArticle(article);
+                totalPrice -= rim.getPrice()*quantity;
+                break;
+            case "FrontHub" :
+                wheelService.deleteArticleFrontHub(article);
+                FrontHub frontHub= wheelService.findFrontHubByArticle(article);
+                totalPrice -= frontHub.getPrice()*quantity;
+                break;
+            case "BackHub" :
+                wheelService.deleteArticleBackHub(article);
+                BackHub backHub= wheelService.findBackHubByArticle(article);
+                totalPrice -= backHub.getPrice()*quantity;
+                break;
+            case "BrakeHandle" :
+                brakeService.deleteArticleBrakeHandle(article);
+                BrakeHandle brakeHandle= brakeService.findBrakeHandleByArticle(article);
+                totalPrice -= brakeHandle.getPrice()*quantity;
+                break;
+            case "BrakeVBrake" :
+                brakeService.deleteArticleBrakeVBrake(article);
+                BrakeVBrake brakeVBrake= brakeService.findBrakeVBrakeByArticle(article);
+                totalPrice -= brakeVBrake.getPrice()*quantity;
+                break;
+            case "BrakeDiscMechanik" :
+                brakeService.deleteArticleBrakeDiscMechanik(article);
+                BrakeDiscMechanik brakeDiscMechanik= brakeService.findBrakeDiscMechanikByArticle(article);
+                totalPrice -= brakeDiscMechanik.getPrice()*quantity;
+                break;
+            case "BrakeDiscHydraulic" :
+                brakeService.deleteArticleBrakeDiscHydraulic(article);
+                BrakeDiscHydraulic brakeDiscHydraulic= brakeService.findBrakeDiscHydraulicByArticle(article);
+                totalPrice -= brakeDiscHydraulic.getPrice()*quantity;
+                break;
+            case "Pedal" :
+                transmissionService.deleteArticlePedal(article);
+                Pedal pedal= transmissionService.findPedalByArticle(article);
+                totalPrice -= pedal.getPrice()*quantity;
+                break;
+            case "FrontDerailleur" :
+                transmissionService.deleteArticleFrontDerailleur(article);
+                FrontDerailleur frontDerailleur = transmissionService.findFrontDerailleurByArticle(article);
+                totalPrice -= frontDerailleur.getPrice()*quantity;
+                break;
+            case "Crank" :
+                transmissionService.deleteArticleCrank(article);
+                Crank crank = transmissionService.findCrankByArticle(article);
+                totalPrice -= crank.getPrice()*quantity;
+                break;
+            case "Chain" :
+                transmissionService.deleteArticleChain(article);
+                Chain chain= transmissionService.findChainByArticle(article);
+                totalPrice -= chain.getPrice()*quantity;
+                break;
+            case "Bracket" :
+                transmissionService.deleteArticleBracket(article);
+                Bracket bracket= transmissionService.findBracketByArticle(article);
+                totalPrice -= bracket.getPrice()*quantity;
+                break;
+            case "BackGearTr" :
+                transmissionService.deleteArticleBackGearTr(article);
+                BackGearTr backGearTr= transmissionService.findBackGearTrByArticle(article);
+                totalPrice -= backGearTr.getPrice()*quantity;
+                break;
+            case "BackGearKas" :
+                transmissionService.deleteArticleBackGearKas(article);
+                BackGearKas backGearKas = transmissionService.findBackGearKasByArticle(article);
+                totalPrice -= backGearKas.getPrice()*quantity;
+                break;
+            case "BackDerailleur" :
+                transmissionService.deleteArticleBackDerailleur(article);
+                BackDerailleur backDerailleur = transmissionService.findBackDerailleurByArticle(article);
+                totalPrice -= backDerailleur.getPrice()*quantity;
+                break;
         }
-
-    }
-    //delete frame from cart
-    @RequestMapping("/cartDelFrame/{article}")
-    public ResponseEntity<Void> listArticleFrameToDel(
-            @PathVariable(value = "article") Long article) {
-            frameService.deleteArticle(article);
-            return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    //Add fork to cart
-    @RequestMapping("/cartAddFork/{article}")
-    public void  listArticleFork(
-            @PathVariable(value = "article") Long article)
-    {
-        // for checking if article exist in cart
-        if (!forkService.getArticles().contains(article)) {
-         forkService.addToArticle(article);
-        }
-    }
-    @RequestMapping("/cartDelFork/{article}")
-    public ResponseEntity<Void> listArticleForkToDel(
-            @PathVariable(value = "article") Long article) {
-        forkService.deleteArticle(article);
+        productsNumber.remove(article);
+        total -= quantity;
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //Add handlebars component to cart
-    @RequestMapping("/cartAddHandlebar/{article}")
-    public void  listArticleHandlebar(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!handlebarService.getArticlesHandlebar().contains(article)) {
-            handlebarService.addToArticleHandlebar(article);
-        }
-    }
-
-    @RequestMapping("/cartDelHandlebar/{article}")
-    public ResponseEntity<Void> listArticleHandlebarToDel(
+    @RequestMapping("/cartAdd/{name}/{article}")
+    public ResponseEntity<Void> addToCart(
+            @PathVariable(value = "name") String name,
             @PathVariable(value = "article") Long article) {
-        handlebarService.deleteArticleHandlebar(article);
+        switch (name) {
+            case "Frame" :
+                if (frameService.getArticles().stream().noneMatch(article::equals)) {
+                    frameService.addToArticle(article);
+                    productsNumber.put(article, 1);
+                    Frame frame = frameService.findFrameByArticle(article);
+                    totalPrice += frame.getPrice();
+                    total++;
+                }
+                break;
+            case "Fork" :
+                if (forkService.getArticles().stream().noneMatch(article::equals)) {
+                    forkService.addToArticle(article);
+                    productsNumber.put(article, 1);
+                    Fork fork = forkService.findForkByArticle(article);
+                    totalPrice += fork.getPrice();
+                    total++;
+                }
+                break;
+            case "Handlebar" :
+                if (handlebarService.getArticlesHandlebar().stream().noneMatch(article::equals)) {
+                    handlebarService.addToArticleHandlebar(article);
+                    productsNumber.put(article, 1);
+                    Handlebar handlebar = handlebarService.findHandlebarByArticle(article);
+                    double price = handlebar.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+            case "Winding" :
+                if (handlebarService.getArticlesWinding().stream().noneMatch(article::equals)) {
+                    handlebarService.addToArticleWinding(article);
+                    productsNumber.put(article, 1);
+                    Winding winding = handlebarService.findWindingByArticle(article);
+                    double price = winding.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+            case "Headset" :
+                if (handlebarService.getArticlesHeadset().stream().noneMatch(article::equals)) {
+                    handlebarService.addToArticleHeadset(article);
+                    productsNumber.put(article, 1);
+                    Headset headset = handlebarService.findHeadsetByArticle(article);
+                    double price = headset.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+            case "Grips" :
+                if (handlebarService.getArticlesGrips().stream().noneMatch(article::equals)) {
+                    handlebarService.addToArticleGrips(article);
+                    productsNumber.put(article, 1);
+                    Grips grips = handlebarService.findGripsByArticle(article);
+                    double price = grips.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+            case "Stem" :
+                if (handlebarService.getArticlesStem().stream().noneMatch(article::equals)) {
+                    handlebarService.addToArticleStem(article);
+                    productsNumber.put(article, 1);
+                    Stem stem = handlebarService.findStemByArticle(article);
+                    double price = stem.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+            case "Wheel" :
+                if (!wheelService.getArticlesWheel().contains(article)) {
+                    wheelService.addToArticleWheel(article);
+                    productsNumber.put(article, 1);
+                    Wheel wheel= wheelService.findWheelByArticle(article);
+                    double price = wheel.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+
+                break;
+            case "Tire" :
+                if (wheelService.getArticlesTire().contains(article)) {
+                    wheelService.addToArticleTire(article);
+                    productsNumber.put(article, 1);
+                    Tire tire = wheelService.findTireByArticle(article);
+                    double price = tire.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+
+                break;
+            case "Spoke" :
+                if (!wheelService.getArticlesSpoke().contains(article)) {
+                    wheelService.addToArticleSpoke(article);
+                    productsNumber.put(article, 1);
+                    Spoke spoke= wheelService.findSpokeByArticle(article);
+                    double price = spoke.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+            case "Rim" :
+                if (!wheelService.getArticlesRim().contains(article)) {
+                    wheelService.addToArticleRim(article);
+                    productsNumber.put(article, 1);
+                    Rim rim= wheelService.findRimByArticle(article);
+                    double price = rim.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+
+                break;
+            case "FrontHub" :
+                if (!wheelService.getArticlesFrontHub().contains(article)) {
+                    wheelService.addToArticleFrontHub(article);
+                    productsNumber.put(article, 1);
+                    FrontHub frontHub= wheelService.findFrontHubByArticle(article);
+                    double price = frontHub.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+            case "BackHub" :
+                if (!wheelService.getArticlesBackHub().contains(article)) {
+                    wheelService.addToArticleBackHub(article);
+                    productsNumber.put(article, 1);
+                    BackHub backHub= wheelService.findBackHubByArticle(article);
+                    double price = backHub.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+
+                break;
+            case "BrakeHandle" :
+                if (!brakeService.articlesBrakeHandle.contains(article)) {
+                    brakeService.addToArticleBrakeHandle(article);
+                    productsNumber.put(article, 1);
+                    BrakeHandle brakeHandle = brakeService.findBrakeHandleByArticle(article);
+                    double price = brakeHandle.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+
+                break;
+            case "BrakeVBrake" :
+                if (!brakeService.getArticlesBrakeVBrake().contains(article)) {
+                    brakeService.addToArticleBrakeVBrake(article);
+                    productsNumber.put(article, 1);
+                    BrakeVBrake brakeVBrake= brakeService.findBrakeVBrakeByArticle(article);
+                    double price = brakeVBrake.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+            case "BrakeDiscMechanik" :
+                if (!brakeService.getArticlesBrakeDiscMechanik().contains(article)) {
+                    brakeService.addToArticleBrakeDiscMechanik(article);
+                    productsNumber.put(article, 1);
+                    BrakeDiscMechanik brakeDiscMechanik = brakeService.findBrakeDiscMechanikByArticle(article);
+                    double price = brakeDiscMechanik.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+            case "BrakeDiscHydraulic" :
+                if (brakeService.getArticlesBrakeDiscHydraulic().stream().noneMatch(article::equals)) {
+                    brakeService.addToArticleBrakeDiscHydraulic(article);
+                    productsNumber.put(article, 1);
+                    BrakeDiscHydraulic brakeDiscHydraulic = brakeService.findBrakeDiscHydraulicByArticle(article);
+                    double price = brakeDiscHydraulic.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+            case "Pedal" :
+                if (!transmissionService.getArticlesPedal().contains(article)) {
+                    transmissionService.addToArticlePedal(article);
+                    productsNumber.put(article, 1);
+                    Pedal pedal= transmissionService.findPedalByArticle(article);
+                    double price = pedal.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+
+                break;
+            case "FrontDerailleur" :
+                if (!transmissionService.getArticlesFrontDerailleur().contains(article)) {
+                    transmissionService.addToArticleFrontDerailleur(article);
+                    productsNumber.put(article, 1);
+                    FrontDerailleur frontDerailleur = transmissionService.findFrontDerailleurByArticle(article);
+                    double price = frontDerailleur.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+
+                break;
+            case "Crank" :
+                if (!transmissionService.getArticlesCrank().contains(article)) {
+                    transmissionService.addToArticleCrank(article);
+                    productsNumber.put(article, 1);
+                    Crank crank = transmissionService.findCrankByArticle(article);
+                    double price = crank.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+
+                break;
+            case "Chain" :
+                if (!transmissionService.getArticlesChain().contains(article)) {
+                    transmissionService.addToArticleChain(article);
+                    productsNumber.put(article, 1);
+                    Chain chain= transmissionService.findChainByArticle(article);
+                    double price = chain.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+
+                break;
+            case "Bracket" :
+                if (!transmissionService.getArticlesBracket().contains(article)) {
+                    transmissionService.addToArticleBracket(article);
+                    productsNumber.put(article, 1);
+                    Bracket bracket= transmissionService.findBracketByArticle(article);
+                    double price = bracket.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+
+                break;
+            case "BackGearTr" :
+                if (!transmissionService.getArticlesBackGearTr().contains(article)) {
+                    transmissionService.addToArticleBackGearTr(article);
+                    productsNumber.put(article, 1);
+                    BackGearTr backGearTr= transmissionService.findBackGearTrByArticle(article);
+                    double price = backGearTr.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+            case "BackGearKas" :
+                if (!transmissionService.getArticlesBackGearKas().contains(article)) {
+                    transmissionService.addToArticleBackGearKas(article);
+                    productsNumber.put(article, 1);
+                    BackGearKas backGearKas = transmissionService.findBackGearKasByArticle(article);
+                    double price = backGearKas.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+            case "BackDerailleur" :
+                if (!transmissionService.getArticlesBackDerailleur().contains(article)) {
+                    transmissionService.addToArticleBackDerailleur(article);
+                    productsNumber.put(article, 1);
+                    BackDerailleur backDerailleur = transmissionService.findBackDerailleurByArticle(article);
+                    double price = backDerailleur.getPrice();
+                    totalPrice += price;
+                    total++;
+                }
+                break;
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping("/cartAddStem/{article}")
-    public void  listArticleStem(
-            @PathVariable(value = "article") Long article)
-    {
-        // for checking if article exist in cart
-        if (!handlebarService.getArticlesStem().contains(article)) {
-            handlebarService.addToArticleStem(article);
-        }
-    }
-
-    @RequestMapping("/cartDelStem/{article}")
-    public ResponseEntity<Void> listArticleStemToDel(
-            @PathVariable(value = "article") Long article) {
-        handlebarService.deleteArticleStem(article);
+    @RequestMapping("/upPrice/{price}")
+    public ResponseEntity<Void> upPrice(
+                            @PathVariable(value = "price") Double price) {
+        totalPrice += price;
+        total ++;
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping("/cartAddGrips/{article}")
-    public void listArticleGrips(
-            @PathVariable(value = "article") Long article)
-    {
-        // for checking if article exist in cart
-        if (!handlebarService.getArticlesHandlebar().contains(article)) {
-            handlebarService.addToArticleGrips(article);
+    @RequestMapping("/downPrice/{price}")
+    public ResponseEntity<Void> downPrice(
+            @PathVariable(value = "price") Double price) {
+        if (total>=1) {
+            totalPrice -= price;
+            total--;
         }
-    }
-
-    @RequestMapping("/cartDelGrips/{article}")
-    public ResponseEntity<Void> listArticleGripsToDel(
-            @PathVariable(value = "article") Long article) {
-        handlebarService.deleteArticleGrips(article);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping("/cartAddHeadset/{article}")
-    public void listArticleHeadset(
-            @PathVariable(value = "article") Long article)
-    {
-        // for checking if article exist in cart
-        if (!handlebarService.getArticlesHeadset().contains(article)) {
-            handlebarService.addToArticleHeadset(article);
-        }
+    @RequestMapping("/price")
+    public String price(Model model) {
+        String pattern = "##0.00";
+        DecimalFormat decimalFormat = new DecimalFormat(pattern);
+        String price = decimalFormat.format(totalPrice);
+        model.addAttribute("totalPrice", price);
+        return "price";
     }
 
-    @RequestMapping("/cartDelHeadset/{article}")
-    public ResponseEntity<Void> listArticleHeadsetToDel(
-            @PathVariable(value = "article") Long article) {
-        handlebarService.deleteArticleHeadset(article);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @RequestMapping("/counting/{article}")
+    public String counting(Model model,
+                           @PathVariable(value = "article") Long article) {
+        int count = productsNumber.get(article);
+        model.addAttribute("count",count);
+        return "counting";
     }
 
-    @RequestMapping("/cartAddWinding/{article}")
-    public void listArticleWinding(
-            @PathVariable(value = "article") Long article)
-    {
-        // for checking if article exist in cart
-        if (!handlebarService.getArticlesWinding().contains(article)) {
-            handlebarService.addToArticleWinding(article);
-        }
-    }
-
-    @RequestMapping("/cartDelWinding/{article}")
-    public ResponseEntity<Void> listArticleWindingToDel(
-            @PathVariable(value = "article") Long article) {
-        handlebarService.deleteArticleWinding(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    //Add Brakes component to cart
-    @RequestMapping("/cartAddBrakeDiscHydraulic/{article}")
-    public void listArticleBrakeDiscHydraulic(
-            @PathVariable(value = "article") Long article)
-    {
-        // for checking if article exist in cart
-        if (!brakeService.getArticlesBrakeDiscHydraulic().contains(article)) {
-            brakeService.addToArticleBrakeDiscHydraulic(article);
-        }
-    }
-
-    @RequestMapping("/cartDelBrakeDiscHydraulic/{article}")
-    public ResponseEntity<Void> listArticleBrakeDiscHydraulicToDel(
-            @PathVariable(value = "article") Long article) {
-        brakeService.deleteArticleBrakeDiscHydraulic(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddBrakeDiscMechanik/{article}")
-    public void listArticleBrakeDiscMechanik(
-            @PathVariable(value = "article") Long article)
-    {
-        // for checking if article exist in cart
-        if (!brakeService.getArticlesBrakeDiscMechanik().contains(article)) {
-            brakeService.addToArticleBrakeDiscMechanik(article);
-        }
-    }
-
-    @RequestMapping("/cartDelBrakeDiscMechanik/{article}")
-    public ResponseEntity<Void> listArticleBrakeDiscMechanikToDel(
-            @PathVariable(value = "article") Long article) {
-        brakeService.deleteArticleBrakeDiscMechanik(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddBrakeVBrake/{article}")
-    public void listArticleBrakeVBrake(
-            @PathVariable(value = "article") Long article)
-    {
-        // for checking if article exist in cart
-        if (!brakeService.getArticlesBrakeVBrake().contains(article)) {
-            brakeService.addToArticleBrakeVBrake(article);
-        }
-    }
-
-    @RequestMapping("/cartDelBrakeVBrake/{article}")
-    public ResponseEntity<Void> listArticleBrakeVBrakeToDel(
-            @PathVariable(value = "article") Long article) {
-        brakeService.deleteArticleBrakeVBrake(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddBrakeHandle/{article}")
-    public void listArticleBrakeHandle(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!brakeService.articlesBrakeHandle.contains(article)) {
-            brakeService.addToArticleBrakeHandle(article);
-        }
-    }
-
-    @RequestMapping("/cartDelBrakeHandle/{article}")
-    public ResponseEntity<Void> listArticleBrakeHandleToDel(
-            @PathVariable(value = "article") Long article) {
-        brakeService.deleteArticleBrakeHandle(article);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @RequestMapping("/totalNumber")
+    public String totalNumber(Model model) {
+        model.addAttribute("total", total);
+        return "totalNumber";
     }
 
 
-    //Add whells components to cart
-    @RequestMapping("/cartAddWheel/{article}")
-    public void listArticleWheel(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!wheelService.getArticlesWheel().contains(article)) {
-            wheelService.addToArticleWheel(article);
-        }
-    }
-
-    @RequestMapping("/cartDelWheel/{article}")
-    public ResponseEntity<Void> listArticleWheelToDel(
-            @PathVariable(value = "article") Long article) {
-        wheelService.deleteArticleWheel(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddBackHub/{article}")
-    public void listArticleBackHub(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!wheelService.getArticlesBackHub().contains(article)) {
-            wheelService.addToArticleBackHub(article);
-        }
-    }
-
-    @RequestMapping("/cartDelBackHub/{article}")
-    public ResponseEntity<Void> listArticleBackHubToDel(
-            @PathVariable(value = "article") Long article) {
-        wheelService.deleteArticleBackHub(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddFrontHub/{article}")
-    public void listArticleFrontHub(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!wheelService.getArticlesFrontHub().contains(article)) {
-            wheelService.addToArticleFrontHub(article);
-        }
-    }
-
-    @RequestMapping("/cartDelFrontHub/{article}")
-    public ResponseEntity<Void> listArticleFrontHubToDel(
-            @PathVariable(value = "article") Long article) {
-        wheelService.deleteArticleFrontHub(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddRim/{article}")
-    public void listArticleRim(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!wheelService.getArticlesRim().contains(article)) {
-            wheelService.addToArticleRim(article);
-        }
-    }
-
-    @RequestMapping("/cartDelRim/{article}")
-    public ResponseEntity<Void> listArticleRimToDel(
-            @PathVariable(value = "article") Long article) {
-        wheelService.deleteArticleRim(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddSpoke/{article}")
-    public void listArticleSpoke(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!wheelService.getArticlesSpoke().contains(article)) {
-            wheelService.addToArticleSpoke(article);
-        }
-    }
-
-    @RequestMapping("/cartDelSpoke/{article}")
-    public ResponseEntity<Void> listArticleSpokeToDel(
-            @PathVariable(value = "article") Long article) {
-        wheelService.deleteArticleSpoke(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddTire/{article}")
-    public void listArticleTire(
-            @PathVariable(value = "article") Long article)
-    {
-        if (wheelService.getArticlesTire().contains(article)) {
-            wheelService.addToArticleTire(article);
-        }
-    }
-
-    @RequestMapping("/cartDelTire/{article}")
-    public ResponseEntity<Void> listArticleTireToDel(
-            @PathVariable(value = "article") Long article) {
-        wheelService.deleteArticleTire(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    //For Transmission to cart
-    @RequestMapping("/cartAddBackDerailleur/{article}")
-    public void listArticleBackDerailleur(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!transmissionService.getArticlesBackDerailleur().contains(article)) {
-            transmissionService.addToArticleBackDerailleur(article);
-        }
-    }
-
-    @RequestMapping("/cartDelBackDerailleur/{article}")
-    public ResponseEntity<Void> listArticleBackDerailleurToDel(
-            @PathVariable(value = "article") Long article) {
-        transmissionService.deleteArticleBackDerailleur(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddBackGearKas/{article}")
-    public void listArticleBackGearKas(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!transmissionService.getArticlesBackGearKas().contains(article)) {
-            transmissionService.addToArticleBackGearKas(article);
-        }
-    }
-
-    @RequestMapping("/cartDelBackGearKas/{article}")
-    public ResponseEntity<Void> listArticleBackGearKasToDel(
-            @PathVariable(value = "article") Long article) {
-        transmissionService.deleteArticleBackGearKas(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddBackGearTr/{article}")
-    public void listArticleBackGearTr(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!transmissionService.getArticlesBackGearTr().contains(article)) {
-            transmissionService.addToArticleBackGearTr(article);
-        }
-    }
-
-    @RequestMapping("/cartDelBackGearTr/{article}")
-    public ResponseEntity<Void> listArticleBackGearTrToDel(
-            @PathVariable(value = "article") Long article) {
-        transmissionService.deleteArticleBackGearTr(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddBracket/{article}")
-    public void listArticleBracket(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!transmissionService.getArticlesBracket().contains(article)) {
-            transmissionService.addToArticleBracket(article);
-        }
-    }
-
-    @RequestMapping("/cartDelBracket/{article}")
-    public ResponseEntity<Void> listArticleBracketToDel(
-            @PathVariable(value = "article") Long article) {
-        transmissionService.deleteArticleBracket(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddChain/{article}")
-    public void listArticleChain(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!transmissionService.getArticlesChain().contains(article)) {
-            transmissionService.addToArticleChain(article);
-        }
-    }
-
-    @RequestMapping("/cartDelChain/{article}")
-    public ResponseEntity<Void> listArticleChainToDel(
-            @PathVariable(value = "article") Long article) {
-        transmissionService.deleteArticleChain(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddCrank/{article}")
-    public void listArticleCrank(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!transmissionService.getArticlesCrank().contains(article)) {
-            transmissionService.addToArticleCrank(article);
-        }
-    }
-
-    @RequestMapping("/cartDelCrank/{article}")
-    public ResponseEntity<Void> listArticleCrankToDel(
-            @PathVariable(value = "article") Long article) {
-        transmissionService.deleteArticleCrank(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddFrontDerailleur/{article}")
-    public void listArticleFrontDerailleur(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!transmissionService.getArticlesFrontDerailleur().contains(article)) {
-            transmissionService.addToArticleFrontDerailleur(article);
-        }
-    }
-
-    @RequestMapping("/cartDelFrontDerailleur/{article}")
-    public ResponseEntity<Void> listArticleFrontDerailleurToDel(
-            @PathVariable(value = "article") Long article) {
-        transmissionService.deleteArticleFrontDerailleur(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping("/cartAddPedal/{article}")
-    public void listArticlePedal(
-            @PathVariable(value = "article") Long article)
-    {
-        if (!transmissionService.getArticlesPedal().contains(article)) {
-            transmissionService.addToArticlePedal(article);
-        }
-    }
-
-    @RequestMapping("/cartDelPedal/{article}")
-    public ResponseEntity<Void> listArticlePedalToDel(
-            @PathVariable(value = "article") Long article) {
-        transmissionService.deleteArticlePedal(article);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
-// Cart
+    // Cart
     @RequestMapping("/cart")
     public String cartVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        List<Object> objects = new ArrayList<>();
         //Lists with components, that user added to cart
-        List<Frame> frames = new ArrayList<Frame>();
+        List<Frame> frames = new ArrayList<>();
         List<Fork> forks = new ArrayList<Fork>();
         List<Handlebar> handlebars = new ArrayList<Handlebar>();
         List<Stem> stems = new ArrayList<Stem>();
@@ -609,224 +665,146 @@ public class UserController {
         List<FrontDerailleur> frontDerailleurs = new ArrayList<>();
         List<Pedal> pedals = new ArrayList<>();
 
-        double totalPrice = 0; //Total price in cart
-        int total = 0; // number of product in cart
-
 //Select components from database by article, that user added to cart, and add this components to List
-        for (int i = 0; i < frameService.getSize(); i++) {
+
+        for (int i = 0; i < frameService.getSize(); i++){
             Frame frame = frameService.findFrameByArticle(frameService.getArticleFromCart(i));
-            double price = frame.getPrice();
             frames.add(frame);
-            totalPrice += price;
-            total++;
         }
-        for (int i = 0; i < forkService.getSize(); i++) {
+        for (int i = 0; i < forkService.getSize(); i++){
             Fork fork = forkService.findForkByArticle(forkService.getArticleFromCart(i));
-            double price = fork.getPrice();
             forks.add(fork);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < handlebarService.getSizeHandlebar(); i++) {
             Handlebar handlebar = handlebarService.findHandlebarByArticle(handlebarService.getArticleHandlebarFromCart(i));
-            double price = handlebar.getPrice();
             handlebars.add(handlebar);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < handlebarService.getSizeStem(); i++) {
             Stem stem = handlebarService.findStemByArticle(handlebarService.getArticleStemFromCart(i));
-            double price = stem.getPrice();
             stems.add(stem);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < handlebarService.getSizeGrips(); i++) {
             Grips gripss = handlebarService.findGripsByArticle(handlebarService.getArticleGripsFromCart(i));
-            double price = gripss.getPrice();
             grips.add(gripss);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < handlebarService.getSizeHeadset(); i++) {
             Headset headset = handlebarService.findHeadsetByArticle(handlebarService.getArticleHeadsetFromCart(i));
-            double price = headset.getPrice();
             headsets.add(headset);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < handlebarService.getSizeWinding(); i++) {
             Winding winding = handlebarService.findWindingByArticle(handlebarService.getArticleWindingFromCart(i));
-            double price = winding.getPrice();
             windings.add(winding);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < brakeService.getSizeBrakeDiscHydraulic(); i++) {
             BrakeDiscHydraulic brakeDiscHydraulic = brakeService.
                     findBrakeDiscHydraulicByArticle(brakeService.getArticleBrakeDiscHydraulicFromCart(i));
-            double price = brakeDiscHydraulic.getPrice();
             brakeDiscHydraulics.add(brakeDiscHydraulic);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < brakeService.getSizeBrakeDiscMechanik(); i++) {
             BrakeDiscMechanik brakeDiscMechanik = brakeService.
                     findBrakeDiscMechanikByArticle(brakeService.getArticleBrakeDiscMechanikFromCart(i));
-            double price = brakeDiscMechanik.getPrice();
             brakeDiscMechaniks.add(brakeDiscMechanik);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < brakeService.getSizeBrakeVBrake(); i++) {
             BrakeVBrake brakeVBrake = brakeService.findBrakeVBrakeByArticle(brakeService.getArticleBrakeVBrakeFromCart(i));
-            double price = brakeVBrake.getPrice();
             brakeVBrakes.add(brakeVBrake);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < brakeService.getSizeBrakeHandle(); i++) {
             BrakeHandle brakeHandle = brakeService.findBrakeHandleByArticle(brakeService.getArticleBrakeHandleFromCart(i));
-            double price = brakeHandle.getPrice();
             brakeHandles.add(brakeHandle);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < wheelService.getSizeBackHub(); i++) {
             BackHub backHub = wheelService.findBackHubByArticle(wheelService.getArticleBackHubFromCart(i));
-            double price = backHub.getPrice();
             backHubs.add(backHub);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < wheelService.getSizeFrontHub(); i++) {
             FrontHub frontHub = wheelService.findFrontHubByArticle(wheelService.getArticleFrontHubFromCart(i));
-            double price = frontHub.getPrice();
-            frontHubs.add(frontHub);
-            totalPrice += price;
-            total++;
+            frontHubs.add(frontHub);;
         }
         for (int i = 0; i < wheelService.getSizeRim(); i++) {
             Rim rim = wheelService.findRimByArticle(wheelService.getArticleRimFromCart(i));
-            double price = rim.getPrice();
             rims.add(rim);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < wheelService.getSizeSpoke(); i++) {
             Spoke spoke = wheelService.findSpokeByArticle(wheelService.getArticleSpokeFromCart(i));
-            double price = spoke.getPrice();
-            spokes.add(spoke);
-            totalPrice += price;
-            total++;
+            spokes.add(spoke);;
         }
         for (int i = 0; i < wheelService.getSizeTire(); i++) {
             Tire tire = wheelService.findTireByArticle(wheelService.getArticleTireFromCart(i));
-            double price = tire.getPrice();
             tires.add(tire);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < wheelService.getSizeWheel(); i++) {
             Wheel wheel = wheelService.findWheelByArticle(wheelService.getArticleWheelFromCart(i));
-            double price = wheel.getPrice();
             wheels.add(wheel);
-            totalPrice += price;
-            total++;
         }
-        //For transmission
         for (int i = 0; i < transmissionService.getSizeBackDerailleur(); i++) {
             BackDerailleur backDerailleur = transmissionService.findBackDerailleurByArticle(transmissionService.getArticleBackDerailleurFromCart(i));
-            double price = backDerailleur.getPrice();
             backDerailleurs.add(backDerailleur);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < transmissionService.getSizeBackGearKas(); i++) {
             BackGearKas backGearKas = transmissionService.findBackGearKasByArticle(transmissionService.getArticleBackGearKasFromCart(i));
-            double price = backGearKas.getPrice();
             backGearKass.add(backGearKas);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < transmissionService.getSizeBackGearTr(); i++) {
             BackGearTr backGearTr = transmissionService.findBackGearTrByArticle(transmissionService.getArticleBackGearTrFromCart(i));
-            double price = backGearTr.getPrice();
             backGearTrs.add(backGearTr);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < transmissionService.getSizeBracket(); i++) {
             Bracket bracket = transmissionService.findBracketByArticle(transmissionService.getArticleBracketFromCart(i));
-            double price = bracket.getPrice();
             brackets.add(bracket);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < transmissionService.getSizeChain(); i++) {
             Chain chain = transmissionService.findChainByArticle(transmissionService.getArticleChainFromCart(i));
-            double price = chain.getPrice();
             chains.add(chain);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < transmissionService.getSizeCrank(); i++) {
             Crank crank = transmissionService.findCrankByArticle(transmissionService.getArticleCrankFromCart(i));
-            double price = crank.getPrice();
             cranks.add(crank);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < transmissionService.getSizeFrontDerailleur(); i++) {
             FrontDerailleur frontDerailleur = transmissionService.findFrontDerailleur(transmissionService.getArticleFrontDerailleurFromCart(i));
-            double price = frontDerailleur.getPrice();
             frontDerailleurs.add(frontDerailleur);
-            totalPrice += price;
-            total++;
         }
         for (int i = 0; i < transmissionService.getSizePedal(); i++) {
             Pedal pedal = transmissionService.findPedalByArticle(transmissionService.getArticlePedalFromCart(i));
-            double price = pedal.getPrice();
             pedals.add(pedal);
-            totalPrice += price;
-            total++;
         }
-//models for cart
-        model.addAttribute("total", total);
-        model.addAttribute("totalPrice", totalPrice);
-        //Forks
-        model.addAttribute("forks", forks);
-        //Frames
-        model.addAttribute("frames", frames);
-        // Handlebar Components
-        model.addAttribute("handlebars", handlebars);
-        model.addAttribute("stems", stems);
-        model.addAttribute("grips", grips);
-        model.addAttribute("headsets", headsets);
-        model.addAttribute("windings", windings);
-        //Brakes Components
-        model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
-        model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
-        model.addAttribute("brakeVBrakes", brakeVBrakes);
-        model.addAttribute("brakeHandles", brakeHandles);
-        //Wheels Components
-        model.addAttribute("backHubs", backHubs);
-        model.addAttribute("frontHubs", frontHubs);
-        model.addAttribute("rims", rims);
-        model.addAttribute("spokes", spokes);
-        model.addAttribute("tires", tires);
-        model.addAttribute("wheels", wheels);
-        //Transmission Components
-        model.addAttribute("backDerailleurs", backDerailleurs);
-        model.addAttribute("backGearKass", backGearKass);
-        model.addAttribute("backGearTrs", backGearTrs);
-        model.addAttribute("brackets", brackets);
-        model.addAttribute("chains", chains);
-        model.addAttribute("cranks", cranks);
-        model.addAttribute("frontDerailleurs", frontDerailleurs);
-        model.addAttribute("pedals", pedals);
-            return "cart";
 
+        objects.add(frames);
+        objects.add(forks);
+        objects.add(handlebars);
+        objects.add(stems);
+        objects.add(grips);
+        objects.add(headsets);
+        objects.add(windings);
+        objects.add(brakeDiscHydraulics);
+        objects.add(brakeDiscMechaniks);
+        objects.add(brakeVBrakes);
+        objects.add(brakeHandles);
+        objects.add(backHubs);
+        objects.add(frontHubs);
+        objects.add(rims);
+        objects.add(spokes);
+        objects.add(tires);
+        objects.add(wheels);
+        objects.add(backDerailleurs);
+        objects.add(backGearKass);
+        objects.add(backGearTrs);
+        objects.add(brackets);
+        objects.add(chains);
+        objects.add(cranks);
+        objects.add(frontDerailleurs);
+        objects.add(pedals);
+        String pattern = "##0.00";
+        DecimalFormat decimalFormat = new DecimalFormat(pattern);
+        String price = decimalFormat.format(totalPrice);
+        //models for cart
+        model.addAttribute("total", total);
+        model.addAttribute("totalPrice", price );
+        model.addAttribute("objects", objects);
+        model.addAttribute("productsNumber",productsNumber);
+
+            return "cart";
         }
 
 // Select Forks
@@ -845,7 +823,7 @@ public class UserController {
         BrakesType brakesType = frame.getBrakesType();
         List<Fork> forks = forkService.
                 findByTypeAndWhDiamAndTubeDiamAndBrType(bikeType,wheelsDiam,tubeDiameter,brakesType,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-     model.addAttribute("forks", forks);
+        model.addAttribute("forks", forks);
         return "forksToFrame";
     }
 
@@ -1152,7 +1130,7 @@ public class UserController {
         // If user chose Hydraulic Brakes - brake Handle are in the brakes kit
         if(userService.getIdBrakeDiscHydraulicFront()!= 0) {
             List<Grips> gripss = handlebarService.
-                    findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                    findAllGrips(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             model.addAttribute("gripss", gripss);
             return "gripsToHandlebar";
         } else if (userService.getIdBrakeDiscMechanikFront() != 0) {
@@ -1183,7 +1161,7 @@ public class UserController {
         if (page < 0) page = 0;
         userService.addIdBrakeHandle(id);
         List<Grips> gripss = handlebarService.
-                findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                findAllGrips(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("gripss", gripss);
         return "gripsToHandlebar";
     }

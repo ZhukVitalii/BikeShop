@@ -72,8 +72,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!--
                             <li><a href="#">Підібрати декілька компонентів</a></li>
                             -->
-                            <li><a href="/show_frames">Рами</a></li>
-                            <li><a href="/show_forks">Вилки</a></li>
+                            <li><a href="/show_Frame">Рами</a></li>
+                            <li><a href="/show_Fork">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
@@ -108,7 +108,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li><button type="button" id="delete_handlebar" class="btn btn-default navbar-btn">Видалити кермо</button></li>
                     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groups <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Виробник<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/">Default</a></li>
                             <c:forEach items="${handlebarMakers}" var="handlebarMaker">
@@ -171,8 +171,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${handlebar.price}</td>
                 <td>${handlebar.description}</td>
                 <c:choose>
-                    <c:when test="${handlebar.handlebarMaker ne null}">
-                        <td>${handlebar.handlebarMaker.name}</td>
+                    <c:when test="${handlebar.maker ne null}">
+                        <td>${handlebar.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -235,8 +235,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${winding.price}</td>
                 <td>${winding.description}</td>
                 <c:choose>
-                    <c:when test="${winding.handlebarMaker ne null}">
-                        <td>${winding.handlebarMaker.name}</td>
+                    <c:when test="${winding.maker ne null}">
+                        <td>${winding.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -314,8 +314,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${headset.price}</td>
                 <td>${headset.description}</td>
                 <c:choose>
-                    <c:when test="${headset.handlebarMaker ne null}">
-                        <td>${headset.handlebarMaker.name}</td>
+                    <c:when test="${headset.maker ne null}">
+                        <td>${headset.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -398,8 +398,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${stem.price}</td>
                 <td>${stem.description}</td>
                 <c:choose>
-                    <c:when test="${stem.handlebarMaker ne null}">
-                        <td>${stem.handlebarMaker.name}</td>
+                    <c:when test="${stem.maker ne null}">
+                        <td>${stem.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -463,8 +463,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${grips.price}</td>
                 <td>${grips.description}</td>
                 <c:choose>
-                    <c:when test="${grips.handlebarMaker ne null}">
-                        <td>${grips.handlebarMaker.name}</td>
+                    <c:when test="${grips.maker ne null}">
+                        <td>${grips.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>

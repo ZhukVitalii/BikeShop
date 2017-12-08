@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class FrameController {
@@ -30,20 +33,21 @@ public class FrameController {
     @Autowired
     private FrameService frameService;
 
-    //show all frames
-    @RequestMapping("/show_frames")
+    private Set<FrameMaker> frameMakers = new HashSet<>();
+
+    @RequestMapping("/show_Frame")
     public String framesVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<Frame> frames = frameService
                 .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frameMakers", frameService.findFrameMakers());
-        model.addAttribute("frames", frames);
+        for (Frame frame : frames) {
+            frameMakers.add(frame.getMaker());
+        }
+        model.addAttribute("productMakers", frameMakers);
+        model.addAttribute("products", frames);
         model.addAttribute("allPages", getPageCount());
-        int a = frameService.getSize();
-        System.out.println(a);
-        return "frames";
+        return "product";
     }
-
     //Page for admin
     @RequestMapping("/admin/show_framesAdmin")
     public String framesAdminVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
@@ -77,7 +81,7 @@ public class FrameController {
     }
 
     // for filter by Maker
-    @RequestMapping("/frameMaker/{id}")
+    @RequestMapping("/FrameMaker/Frame/{id}")
     public String listFrameMaker(
             @PathVariable(value = "id") long groupId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -87,11 +91,12 @@ public class FrameController {
         if (page < 0) page = 0;
         List<Frame> frames = frameService
                 .findByFrameMaker(frameMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
+        model.addAttribute("products", frames);
+        model.addAttribute("productMakers", frameMakers);
         model.addAttribute("byGroupPages", getPageCount(frameMaker));
         model.addAttribute("groupId", groupId);
 
-        return "frames";
+        return "product";
     }
 
     //for delete components for admin
@@ -139,7 +144,7 @@ public class FrameController {
         Frame frame = new Frame(frameMaker,article,url,name,bikeType,frameSize, wheelsDiam, material,bracketWide,headsetType,tubeDiameter,
                 underSaddleTube,brakesType,trunkBinding,weight,color,price,description,way);
         frameService.addFrame(frame);
-        return "redirect:/show_frames";
+        return "redirect:/show_Frame";
     }
 
     //Add Maker to database
@@ -150,7 +155,7 @@ public class FrameController {
     }
 
     // Select one product by url and open in separate page
-    @RequestMapping("/frame/{url}")
+    @RequestMapping("/Frame/{url}")
     public String listFrameUrl(
             @PathVariable(value = "url") String url,
             @RequestParam(required = false, defaultValue = "0") Integer page,

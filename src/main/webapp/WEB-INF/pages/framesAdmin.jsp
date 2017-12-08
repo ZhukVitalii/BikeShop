@@ -72,8 +72,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!--
                             <li><a href="#">Підібрати декілька компонентів</a></li>
                             -->
-                            <li><a href="/show_frames">Рами</a></li>
-                            <li><a href="/show_forks">Вилки</a></li>
+                            <li><a href="/show_Frame">Рами</a></li>
+                            <li><a href="/show_Fork">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
@@ -115,7 +115,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul class="dropdown-menu">
                             <li><a href="/">Default</a></li>
                             <c:forEach items="${frameMakers}" var="frameMaker">
-                                <li><a href="/frameMaker/${frameMaker.id}">${frameMaker.name}</a></li>
+                                <li><a href="/FrameMaker/${frameMaker.id}">${frameMaker.name}</a></li>
                             </c:forEach>
                         </ul>
                     </li>
@@ -225,8 +225,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${frame.price}</td>
                 <td>${frame.description}</td>
                 <c:choose>
-                    <c:when test="${frame.frameMaker ne null}">
-                        <td>${frame.frameMaker.name}</td>
+                    <c:when test="${frame.maker ne null}">
+                        <td>${frame.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -236,8 +236,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </tr>
         </c:forEach>
     </table>
-
-
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <c:if test="${allPages ne null}">
@@ -247,7 +245,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </c:if>
             <c:if test="${byGroupPages ne null}">
                 <c:forEach var="i" begin="1" end="${byGroupPages}">
-                    <li><a href="/frameMaker/${groupId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
+                    <li><a href="/FrameMaker/${groupId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
                 </c:forEach>
             </c:if>
         </ul>

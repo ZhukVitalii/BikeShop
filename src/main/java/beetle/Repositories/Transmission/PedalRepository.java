@@ -16,11 +16,11 @@ import java.util.List;
  */
 public interface PedalRepository extends JpaRepository<Pedal, Long> {
 
-    @Query("SELECT c FROM Pedal c WHERE c.transmissionMaker = :transmissionMaker")
-    List<Pedal> findByTransmissionMakers(@Param("transmissionMaker") TransmissionMaker transmissionMaker, org.springframework.data.domain.Pageable pageable);
+    @Query("SELECT c FROM Pedal c WHERE c.maker = :maker")
+    List<Pedal> findByTransmissionMakers(@Param("maker") TransmissionMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM Pedal c WHERE c.transmissionMaker = :transmissionMaker")
-    long countByTransmissionMakers(@Param("transmissionMaker")  TransmissionMaker transmissionMaker);
+    @Query("SELECT COUNT(c) FROM Pedal c WHERE c.maker = :maker")
+    long countByTransmissionMakers(@Param("maker")  TransmissionMaker maker);
 
     @Query("SELECT c FROM Pedal c WHERE c.bearingType = :bearingType")
     List<Pedal> findByBearingType(@Param("bearingType") BearingType bearingType, Pageable pageable);

@@ -1,5 +1,10 @@
 package beetle;
 
+import beetle.Entities.Security.CustomUser;
+import beetle.Entities.Security.UserRole;
+import beetle.Entities.Security.UserRoleEnum;
+import beetle.Services.SecurityService;
+import beetle.Services.UserRoleService;
 import beetle.Services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,20 +14,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {
+
         SpringApplication.run(Application.class, args);
     }
-/*
-    @Bean
-    public FilterRegistrationBean filterRegistrationBean() {
-        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        filter.setEncoding("UTF-8");
-
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        registrationBean.setFilter(filter);
-        registrationBean.addUrlPatterns("/*");
-        return registrationBean;
-    }
-    */
     @Bean
     public CommandLineRunner addToList (final UserService userService) {
         return new CommandLineRunner() {
@@ -55,6 +49,5 @@ public class Application {
                 securityService.addUser(new CustomUser("admin","admin", new UserRole(UserRoleEnum.ADMIN)));
             }
         };
-    }
-*/
+    }*/
 }

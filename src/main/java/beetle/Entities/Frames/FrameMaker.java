@@ -19,11 +19,11 @@ public class FrameMaker {
     private long id;
     private String name;
 
-   @OneToMany(mappedBy="frameMaker", cascade=CascadeType.ALL)
+   @OneToMany(mappedBy="maker", cascade=CascadeType.ALL)
     private List<Frame> frames = new ArrayList<Frame>();
 
-   @OneToMany(mappedBy="frameMaker", cascade= CascadeType.ALL)
-    private List<FrameMaker> frameMaker = new ArrayList<FrameMaker>();
+   @OneToMany(mappedBy="maker", cascade= CascadeType.ALL)
+    private List<FrameMaker> maker = new ArrayList<FrameMaker>();
 
 
   public FrameMaker(String name) {

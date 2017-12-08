@@ -75,8 +75,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!--
                             <li><a href="#">Підібрати декілька компонентів</a></li>
                             -->
-                            <li><a href="/show_frames">Рами</a></li>
-                            <li><a href="/show_forks">Вилки</a></li>
+                            <li><a href="/show_Frame">Рами</a></li>
+                            <li><a href="/show_Fork">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
@@ -105,29 +105,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <h3>Категорії</h3>
         <div class="categorie-grids">
-            <a href="/show_wheels"><div class="col-md-4 cate-grid grid6">
+            <a href="/show_Wheel"><div class="col-md-4 cate-grid grid6">
                 <h4>Колеса</h4>
-                <a class="store" href="/show_wheels">Вибрати</a>
+                <a class="store" href="/show_Wheel">Вибрати</a>
             </div></a>
-            <a href="/show_rims"><div class="col-md-4 cate-grid grid7">
+            <a href="/show_Rim"><div class="col-md-4 cate-grid grid7">
                 <h4>Обода</h4>
-                <a class="store" href="/show_rims">Вибрати</a>
+                <a class="store" href="/show_Rim">Вибрати</a>
             </div></a>
-            <a href="/show_frontHubs"><div class="col-md-4 cate-grid grid8">
+            <a href="/show_FrontHub"><div class="col-md-4 cate-grid grid8">
                 <h4>Передні втулки</h4>
-                <a class="store" href="/show_frontHubs">Вибрати</a>
+                <a class="store" href="/show_FrontHub">Вибрати</a>
             </div></a>
-            <a href="/show_backHubs"><div class="col-md-4 cate-grid grid9">
+            <a href="/show_BackHub"><div class="col-md-4 cate-grid grid9">
                 <h4>Задні втулки</h4>
-                <a class="store" href="/show_backHubs">Вибрати</a>
+                <a class="store" href="/show_BackHub">Вибрати</a>
             </div></a>
-            <a href="/show_spokes"><div class="col-md-4 cate-grid grid10">
+            <a href="/show_Spoke"><div class="col-md-4 cate-grid grid10">
                 <h4>Спиці</h4>
-                <a class="store" href="/show_spokes">Вибрати</a>
+                <a class="store" href="/show_Spoke">Вибрати</a>
             </div></a>
-            <a href="/show_tires"><div class="col-md-4 cate-grid grid11">
+            <a href="/show_Tire"><div class="col-md-4 cate-grid grid11">
                 <h4>Покришки</h4>
-                <a class="store" href="/show_tires">Вибрати</a>
+                <a class="store" href="/show_Tire">Вибрати</a>
             </div></a>
             <div class="clearfix"></div>
         </div>

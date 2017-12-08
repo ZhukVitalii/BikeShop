@@ -76,8 +76,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!--
                             <li><a href="#">Підібрати декілька компонентів</a></li>
                             -->
-                            <li><a href="/show_frames">Рами</a></li>
-                            <li><a href="/show_forks">Вилки</a></li>
+                            <li><a href="/show_Frame">Рами</a></li>
+                            <li><a href="/show_Fork">Вилки</a></li>
                             <li><a href="/show_brakesComponents">Гальма</a></li>
                             <li><a href="/show_handlebarsComponents">Рульове управління</a></li>
                             <li><a href="/show_wheelsComponent">Колеса та комплектуючі</a></li>
@@ -152,7 +152,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                                 <h3>${frame.name}</h3>
                                 <h5> Артикул  : ${frame.article}</h5>
-                                <p class="maker"> <h3> Виробник  : ${frame.frameMaker.name} </h3></p>
+                                <p class="maker"> <h3> Виробник  : ${frame.maker.name} </h3></p>
                                 <h4></h4>
                                 <p>${frame.price}<label>грн</label><a href="#"></a></p>
                                 <p class="size">Розмір ::</p>
@@ -211,6 +211,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             <th><h5>Кріплення багажника  :   </h5></th>
                                             <th><p align="center"><font size="4" color="#0080C0" >
                                                 <b><i>   ${frame.trunkBinding.trunk} </i></b></font></th>
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr>
+                                            <th><h5>Діаметр колес  :   </h5></th>
+                                            <th><p align="center"><font size="4" color="#0080C0" >
+                                                <b><i>   ${frame.wheelsDiam.diam} </i></b></font></th>
                                         </tr>
                                     </table>
                                     <table>

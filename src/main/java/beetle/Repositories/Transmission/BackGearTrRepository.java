@@ -14,11 +14,11 @@ import java.util.List;
  */
 public interface BackGearTrRepository extends JpaRepository<BackGearTr, Long> {
 
-    @Query("SELECT c FROM BackGearTr c WHERE c.transmissionMaker = :transmissionMaker")
-    List<BackGearTr> findByTransmissionMakers(@Param("transmissionMaker") TransmissionMaker transmissionMaker, Pageable pageable);
+    @Query("SELECT c FROM BackGearTr c WHERE c.maker = :maker")
+    List<BackGearTr> findByTransmissionMakers(@Param("maker") TransmissionMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM BackGearTr c WHERE c.transmissionMaker = :transmissionMaker")
-    long countByTransmissionMakers(@Param("transmissionMaker")  TransmissionMaker transmissionMaker);
+    @Query("SELECT COUNT(c) FROM BackGearTr c WHERE c.maker = :maker")
+    long countByTransmissionMakers(@Param("maker")  TransmissionMaker maker);
 
     @Query("SELECT c FROM BackGearTr c WHERE c.backSprocketNumber = :backSprocketNumber")
     List<BackGearTr> findByBackSprocketNumber(@Param("backSprocketNumber") BackSprocketNumber backSprocketNumber, Pageable pageable);

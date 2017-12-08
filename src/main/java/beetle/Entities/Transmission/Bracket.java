@@ -21,7 +21,7 @@ public class Bracket {
     private long id;
     @ManyToOne
     @JoinColumn(name="maker_id")
-    private TransmissionMaker transmissionMaker;
+    private TransmissionMaker maker;
     private Long article;
     private String url;
     private String name;
@@ -47,10 +47,10 @@ public class Bracket {
     private Double price;
     private String way;
 
-    public Bracket (TransmissionMaker transmissionMaker, Long article, String url, String name, BracketAxisLength bracketAxisLength, BracketWide bracketWide, BracketType bracketType,
+    public Bracket (TransmissionMaker maker, Long article, String url, String name, BracketAxisLength bracketAxisLength, BracketWide bracketWide, BracketType bracketType,
                     BearingType bearingType, String axisMaterial, CarvingType carvingType, String color, String description,
                     Double price, String way) {
-        this.transmissionMaker = transmissionMaker;
+        this.maker = maker;
         this.article = article;
         this.url = url;
         this.name = name;

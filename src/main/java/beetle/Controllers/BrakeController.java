@@ -77,49 +77,49 @@ public class BrakeController {
     }
 
     // return pages with type of brakes components
-    @RequestMapping("/show_brakesHydro")
+    @RequestMapping("/show_BrakeDiscHydraulic")
 
     public String brakesHydroVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
                 .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
-        model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
+        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+        model.addAttribute("products", brakeDiscHydraulics);
         model.addAttribute("allPages", getPageCountBrakeDiscHydr());
-        return "brakesHydro";
+        return "product";
     }
 
-    @RequestMapping("/show_brakesMech")
+    @RequestMapping("/show_BrakeDiscMechanik")
     public String brakesMechVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
                 .findAllOne(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
-        model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
+        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+        model.addAttribute("products", brakeDiscMechaniks);
         model.addAttribute("allPages", getPageCountBrakeDiscMech());
-        return "brakesMech";
+        return "product";
     }
 
-    @RequestMapping("/show_brakesVBrake")
+    @RequestMapping("/show_BrakeVBrake")
     public String brakesVBrakeVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<BrakeVBrake> brakeVBrakes = brakeService
                 .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
-        model.addAttribute("brakeVBrakes", brakeVBrakes);
+        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+        model.addAttribute("products", brakeVBrakes);
         model.addAttribute("allPages", getPageCountVBrake());
-        return "brakesVBrake";
+        return "product";
     }
 
-    @RequestMapping("/show_brakesHandle")
+    @RequestMapping("/show_BrakeHandle")
     public String brakesHandleVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<BrakeHandle> brakeHandles = brakeService
                 .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
-        model.addAttribute("brakeHandles", brakeHandles);
+        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+        model.addAttribute("products", brakeHandles);
         model.addAttribute("allPages", getPageCountBrakeHandle());
-        return "brakesHandle";
+        return "product";
     }
 
     //add components from browser
@@ -167,8 +167,8 @@ public class BrakeController {
     }
 
     // for filter by Maker
-    @RequestMapping("/brakeMaker/{id}")
-    public String listBrakeMaker(
+    @RequestMapping("/brakeMakerAdmin/{id}")
+    public String listBrakeMakerAdmin(
             @PathVariable(value = "id") long brakeMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
@@ -195,6 +195,71 @@ public class BrakeController {
         model.addAttribute("groupId", brakeMakerId);
         return "brakes";
     }
+    @RequestMapping("/BrakeDiscHydraulicMaker/{id}")
+    public String listBrakeDiscHydraulicMaker(
+            @PathVariable(value = "id") long groupId,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        BrakeMaker brakeMaker = (groupId != DEFAULT_GROUP_ID) ? brakeService.findBrakeMaker(groupId) : null;
+        if (page < 0) page = 0;
+        List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
+                .findByBrakeDiscHydraulicMakers(brakeMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+        model.addAttribute("objects", brakeDiscHydraulics);
+        model.addAttribute("byGroupPages", getPageCountBrakeDiscHydr(brakeMaker));
+        model.addAttribute("groupId", groupId);
+        return "product";
+    }
+    @RequestMapping("/BrakeDiscMechanikMaker/{id}")
+    public String listBrakeDiscMechanikMaker(
+            @PathVariable(value = "id") long groupId,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        BrakeMaker brakeMaker = (groupId != DEFAULT_GROUP_ID) ? brakeService.findBrakeMaker(groupId) : null;
+        if (page < 0) page = 0;
+        List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
+                .findByBrakeDiscMechanikMakers(brakeMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+        model.addAttribute("products", brakeDiscMechaniks);
+        model.addAttribute("byGroupPages", getPageCountBrakeDiscMech(brakeMaker));
+        model.addAttribute("groupId", groupId);
+        return "product";
+    }
+    @RequestMapping("/BrakeVBrakeMaker/{id}")
+    public String listBrakeVBrakeMaker(
+            @PathVariable(value = "id") long groupId,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        BrakeMaker brakeMaker = (groupId != DEFAULT_GROUP_ID) ? brakeService.findBrakeMaker(groupId) : null;
+        if (page < 0) page = 0;
+        List<BrakeVBrake> brakeVBrakes = brakeService
+                .findByBrakeVBrakeMakers(brakeMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+        model.addAttribute("products", brakeVBrakes);
+        model.addAttribute("byGroupPages", getPageCountBrakeVBrake(brakeMaker));
+        model.addAttribute("groupId", groupId);
+        return "product";
+    }
+    @RequestMapping("/BrakeHandleMaker/{id}")
+    public String listBrakeHandleMaker(
+            @PathVariable(value = "id") long groupId,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        BrakeMaker brakeMaker = (groupId != DEFAULT_GROUP_ID) ? brakeService.findBrakeMaker(groupId) : null;
+        if (page < 0) page = 0;
+        List<BrakeHandle> brakeHandles = brakeService
+                .findByBrakeHandleMakers(brakeMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+        model.addAttribute("products", brakeHandles);
+        model.addAttribute("byGroupPages", getPageCountBrakeHandle(brakeMaker));
+        model.addAttribute("groupId", groupId);
+        return "product";
+    }
+
 
     //for delete components for admin
     @RequestMapping(value = "/admin/brakeDiscHydr/delete", method = RequestMethod.POST)
@@ -258,7 +323,7 @@ public class BrakeController {
                 rotorDiam,rotorWeight,material,brakeWeight,rotorFixType,color,description,price,way);
 
         brakeService.addBrakeDiscHydraulic(brakeDiscHydraulic);
-        return "redirect:/show_brakesHydro";
+        return "redirect:/show_BrakeDiscHydraulic";
     }
 
     @RequestMapping(value="/admin/brakeDiscMech/add", method = RequestMethod.POST)
@@ -285,7 +350,7 @@ public class BrakeController {
         BrakeDiscMechanik brakeDiscMechanik = new BrakeDiscMechanik(brakeMaker,article,url,name,location,rotorDiam,rotorWeight,materialBrake,brakeWeight,
                 rotorFixType,color,description,price,way);
         brakeService.addBrakeDiscMechanik(brakeDiscMechanik);
-        return "redirect:/show_brakesMech";
+        return "redirect:/show_BrakeDiscMechanik";
     }
 
     @RequestMapping(value="/admin/brakeVBrake/add", method = RequestMethod.POST)
@@ -305,7 +370,7 @@ public class BrakeController {
         Location location = (locationId != DEFAULT_GROUP_ID) ? brakeService.findLication(locationId) : null;
         BrakeVBrake brakeVBrake = new BrakeVBrake(brakeMaker,article,url, name,location,material,color,description,price,way);
         brakeService.addBrakeVBrake(brakeVBrake);
-        return "redirect:/show_brakesVBrake";
+        return "redirect:/show_BrakeVBrake";
     }
 
     @RequestMapping(value="/admin/brakeHandle/add", method = RequestMethod.POST)
@@ -334,7 +399,7 @@ public class BrakeController {
         BrakeHandle brakeHandle = new BrakeHandle(brakeMaker,article,url,name,brakeHandleLocation,brakeHandleCompatibility,materialHandle,materialCorp,
                 handlebarDiameter,brakeHandleWide,weight,color,description,price,way);
         brakeService.addBrakeHandle(brakeHandle);
-        return "redirect:/show_brakesHandle";
+        return "redirect:/show_BrakeHandle";
     }
 
     //Add Maker to database
@@ -345,7 +410,7 @@ public class BrakeController {
     }
 
     // Select one product by url and open in separate page
-    @RequestMapping("/brakeDiscHydraulic/{url}")
+    @RequestMapping("/BrakeDiscHydraulic/{url}")
     public String listBrakeDiscHydraulicUrl(
             @PathVariable(value = "url") String url,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -358,7 +423,7 @@ public class BrakeController {
         return "OneBrakeDiscHydraulic";
     }
 
-    @RequestMapping("/brakeDiscMechanik/{url}")
+    @RequestMapping("/BrakeDiscMechanik/{url}")
     public String listBrakeDiscMechanikUrl(
             @PathVariable(value = "url") String url,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -371,7 +436,7 @@ public class BrakeController {
         return "OneBrakeDiscMechanik";
     }
 
-    @RequestMapping("/brakeVBrake/{url}")
+    @RequestMapping("/BrakeVBrake/{url}")
     public String listBrakeVBrakeUrl(
             @PathVariable(value = "url") String url,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -384,7 +449,7 @@ public class BrakeController {
         return "OneBrakeVBrake";
     }
 
-    @RequestMapping("/brakeHandle/{url}")
+    @RequestMapping("/BrakeHandle/{url}")
     public String listBrakeHandleUrl(
             @PathVariable(value = "url") String url,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -396,7 +461,6 @@ public class BrakeController {
         model.addAttribute("brakeHandles", brakeHandles);
         return "OneBrakeHandle";
     }
-
 
     private long getPageCountBrakeDiscHydr() {
         long totalCount = brakeService.countBrakeDiscHydr();

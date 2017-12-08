@@ -22,11 +22,20 @@ public class HandlebarMaker {
     private long id;
     private String name;
 
-    @OneToMany(mappedBy="handlebarMaker", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="maker", cascade=CascadeType.ALL)
+    private List<Grips> grips = new ArrayList<Grips>();
+
+    @OneToMany(mappedBy="maker", cascade=CascadeType.ALL)
     private List<Handlebar> handlebars = new ArrayList<Handlebar>();
 
-    @OneToMany(mappedBy="handlebarMaker", cascade= CascadeType.ALL)
-    private List<HandlebarMaker> handlebarMaker = new ArrayList<HandlebarMaker>();
+    @OneToMany(mappedBy="maker", cascade=CascadeType.ALL)
+    private List<Stem> stems = new ArrayList<>();
+
+    @OneToMany(mappedBy="maker", cascade=CascadeType.ALL)
+    private List<Headset> headsets = new ArrayList<>();
+
+    @OneToMany(mappedBy="maker", cascade= CascadeType.ALL)
+    private List<Winding> windings = new ArrayList<>();
 
     public HandlebarMaker(String name) {
         this.name = name;

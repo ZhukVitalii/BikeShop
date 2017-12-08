@@ -14,11 +14,11 @@ import java.util.List;
  */
 public interface BrakeHandleRepository extends JpaRepository<BrakeHandle, Long> {
 
-    @Query("SELECT c FROM BrakeHandle c WHERE c.brakeMaker = :brakeMaker")
-    List<BrakeHandle> findByBrakeMakers(@Param("brakeMaker") BrakeMaker brakeMaker, Pageable pageable);
+    @Query("SELECT c FROM BrakeHandle c WHERE c.maker = :maker")
+    List<BrakeHandle> findByBrakeMakers(@Param("maker") BrakeMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM BrakeHandle c WHERE c.brakeMaker = :brakeMaker")
-    long countByBrakeMakers(@Param("brakeMaker")  BrakeMaker brakeMaker);
+    @Query("SELECT COUNT(c) FROM BrakeHandle c WHERE c.maker = :maker")
+    long countByBrakeMakers(@Param("maker")  BrakeMaker maker);
 
     @Query("SELECT c FROM BrakeHandle c WHERE c.brakeHandleLocation = :brakeHandleLocation")
     List<BrakeHandle> findByBrakeHandleLocation(@Param("brakeHandleLocation") BrakeHandleLocation brakeHandleLocation, Pageable pageable);

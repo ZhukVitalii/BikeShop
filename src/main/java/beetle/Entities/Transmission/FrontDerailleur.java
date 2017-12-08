@@ -21,7 +21,7 @@ public class FrontDerailleur {
     private long id;
     @ManyToOne
     @JoinColumn(name="maker_id")
-    private TransmissionMaker transmissionMaker;
+    private TransmissionMaker maker;
     private Long article;
     private String url;
     private String name;
@@ -58,11 +58,11 @@ public class FrontDerailleur {
     private Double price;
     private String way;
 
-    public FrontDerailleur (TransmissionMaker transmissionMaker, Long article , String url, String name, FrontSprocketNumber frontSprocketNumber,
+    public FrontDerailleur (TransmissionMaker maker, Long article , String url, String name, FrontSprocketNumber frontSprocketNumber,
                             BackSprocketNumber backSprocketNumber, FrontSprocketMax frontSprocketMax,FrontSprocketMin frontSprocketMin, TeethCapasity teethCapasity,
                             String chainLine,FrontDerailleurFixType frontDerailleurFixType, CollarDiam collarDiam,
                             TractionType tractionType,String  material, String weight, String color, String description, Double price, String way) {
-        this.transmissionMaker = transmissionMaker;
+        this.maker = maker;
         this.article = article;
         this.url = url;
         this.name = name;

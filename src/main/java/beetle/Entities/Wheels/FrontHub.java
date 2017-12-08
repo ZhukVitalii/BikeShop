@@ -21,7 +21,7 @@ public class FrontHub {
     private long id;
     @ManyToOne
     @JoinColumn(name="maker_id")
-    private WheelMaker wheelMaker;
+    private WheelMaker maker;
     private Long article;
     private String url;
     private String name;
@@ -54,10 +54,10 @@ public class FrontHub {
     private Double price;
     private String way;
 
-    public FrontHub (WheelMaker wheelMaker,Long article, String url, String name, HubFixType hubFixType,BearingType bearingType, String material,
+    public FrontHub (WheelMaker maker,Long article, String url, String name, HubFixType hubFixType,BearingType bearingType, String material,
                      AxisLength axisLength,AxisDiam axisDiam, BrakesType brakesType, RotorFixType rotorFixType,SpokeNumber spokeNumber,
                String weight, String color, String description, Double price,  String way) {
-        this.wheelMaker = wheelMaker;
+        this.maker = maker;
         this.article = article;
         this.url = url;
         this.name = name;

@@ -131,7 +131,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="details-left-info">
                                 <h3>${brakeHandle.name}</h3>
                                 <h5> Артикул  : ${brakeHandle.article}</h5>
-                                <p class="maker"> <h5> Виробник  : ${brakeHandle.brakeMaker.name} </h5></p>
+                                <p class="maker"> <h5> Виробник  : ${brakeHandle.maker.name} </h5></p>
                                 <h4></h4>
                                 <p>${brakeHandle.price}<label>грн</label><a href="#"></a></p>
                                 <div class="btn_form">

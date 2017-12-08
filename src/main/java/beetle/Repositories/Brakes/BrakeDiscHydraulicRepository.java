@@ -14,11 +14,11 @@ import java.util.List;
  */
 public interface BrakeDiscHydraulicRepository extends JpaRepository<BrakeDiscHydraulic, Long> {
 
-    @Query("SELECT c FROM BrakeDiscHydraulic c WHERE c.brakeMaker = :brakeMaker")
-    List<BrakeDiscHydraulic> findByBrakeMakers(@Param("brakeMaker") BrakeMaker brakeMaker, Pageable pageable);
+    @Query("SELECT c FROM BrakeDiscHydraulic c WHERE c.maker = :maker")
+    List<BrakeDiscHydraulic> findByBrakeMakers(@Param("maker") BrakeMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM BrakeDiscHydraulic c WHERE c.brakeMaker = :brakeMaker")
-    long countByBrakeMakers(@Param("brakeMaker")  BrakeMaker brakeMaker);
+    @Query("SELECT COUNT(c) FROM BrakeDiscHydraulic c WHERE c.maker = :maker")
+    long countByBrakeMakers(@Param("maker")  BrakeMaker maker);
 
     @Query("SELECT c FROM BrakeDiscHydraulic c WHERE c.location = :location")
     List<BrakeDiscHydraulic> findByLocation(@Param("location") Location location, Pageable pageable);

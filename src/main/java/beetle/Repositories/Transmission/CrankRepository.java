@@ -15,11 +15,11 @@ import java.util.List;
  */
 public interface CrankRepository extends JpaRepository<Crank, Long> {
 
-    @Query("SELECT c FROM Crank c WHERE c.transmissionMaker = :transmissionMaker")
-    List<Crank> findByTransmissionMakers(@Param("transmissionMaker") TransmissionMaker transmissionMaker, Pageable pageable);
+    @Query("SELECT c FROM Crank c WHERE c.maker = :maker")
+    List<Crank> findByTransmissionMakers(@Param("maker") TransmissionMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM Crank c WHERE c.transmissionMaker = :transmissionMaker")
-    long countByTransmissionMakers(@Param("transmissionMaker")  TransmissionMaker transmissionMaker);
+    @Query("SELECT COUNT(c) FROM Crank c WHERE c.maker = :maker")
+    long countByTransmissionMakers(@Param("maker")  TransmissionMaker maker);
 
     @Query("SELECT c FROM Crank c WHERE c.bikeType = :bikeType")
     List<Crank> findByBikeType(@Param("bikeType")BikeType bikeType, Pageable pageable);

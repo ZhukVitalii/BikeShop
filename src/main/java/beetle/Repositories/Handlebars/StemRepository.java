@@ -15,11 +15,11 @@ import java.util.List;
  * Created by VitaliiZhuk on 04.06.2017.
  */
 public interface StemRepository extends JpaRepository<Stem, Long> {
-    @Query("SELECT c FROM Stem c WHERE c.handlebarMaker = :handlebarMaker")
-    List<Stem> findByHandlebarMakers(@Param("handlebarMaker") HandlebarMaker handlebarMaker, Pageable pageable);
+    @Query("SELECT c FROM Stem c WHERE c.maker = :maker")
+    List<Stem> findByHandlebarMakers(@Param("maker") HandlebarMaker maker, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM Stem c WHERE c.handlebarMaker = :handlebarMaker")
-    long countByHandlebarMaker(@Param("handlebarMaker") HandlebarMaker handlebarMaker);
+    @Query("SELECT COUNT(c) FROM Stem c WHERE c.maker = :maker")
+    long countByHandlebarMaker(@Param("maker") HandlebarMaker maker);
 
     @Query("SELECT c FROM Stem c WHERE c.url = :url")
     List<Stem> findByUrl(@Param("url") String url, Pageable pageable);

@@ -14,11 +14,11 @@ import java.util.List;
  */
 public interface BackHubRepository extends JpaRepository<BackHub, Long>  {
 
-        @Query("SELECT c FROM BackHub c WHERE c.wheelMaker = :wheelMaker")
-        List<BackHub> findByWheelMakers(@Param("wheelMaker") WheelMaker wheelMaker, Pageable pageable);
+        @Query("SELECT c FROM BackHub c WHERE c.maker = :maker")
+        List<BackHub> findByWheelMakers(@Param("maker") WheelMaker maker, Pageable pageable);
 
-        @Query("SELECT COUNT(c) FROM BackHub c WHERE c.wheelMaker = :wheelMaker")
-        long countByWheelMakers(@Param("wheelMaker")  WheelMaker wheelMaker);
+        @Query("SELECT COUNT(c) FROM BackHub c WHERE c.maker = :maker")
+        long countByWheelMakers(@Param("maker")  WheelMaker maker);
 
         @Query("SELECT c FROM BackHub c WHERE c.hubFixType = :hubFixType")
         List<BackHub> findByHubFixType(@Param("hubFixType") HubFixType hubFixType, Pageable pageable);

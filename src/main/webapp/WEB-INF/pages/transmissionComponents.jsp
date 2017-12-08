@@ -105,37 +105,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <h3>Категорії</h3>
         <div class="categorie-grids">
-            <a href="/show_backDerailleurs"><div class="col-md-4 cate-grid grid18">
+            <a href="/show_BackDerailleur"><div class="col-md-4 cate-grid grid18">
                 <h4>Задні перекидки</h4>
-                <a class="store" href="/show_backDerailleurs">Вибрати</a>
+                <a class="store" href="/show_BackDerailleur">Вибрати</a>
             </div></a>
-            <a href="/show_backGearKass"><div class="col-md-4 cate-grid grid21">
+            <a href="/show_BackGearKas"><div class="col-md-4 cate-grid grid21">
                 <h4>Касети</h4>
-                <a class="store" href="/show_backGearKass">Вибрати</a>
+                <a class="store" href="/show_BackGearKas">Вибрати</a>
             </div></a>
-            <a href="/show_backGearTrs"><div class="col-md-4 cate-grid grid22">
+            <a href="/show_BackGearTr"><div class="col-md-4 cate-grid grid22">
                 <h4>Трещітки</h4>
-                <a class="store" href="/show_backGearTrs">Вибрати</a>
+                <a class="store" href="/show_BackGearTr">Вибрати</a>
             </div></a>
-            <a href="/show_brackets"><div class="col-md-4 cate-grid grid20">
+            <a href="/show_Bracket"><div class="col-md-4 cate-grid grid20">
                 <h4>Каретки</h4>
-                <a class="store" href="/show_brackets">Вибрати</a>
+                <a class="store" href="/show_Bracket">Вибрати</a>
             </div></a>
-            <a href="/show_chains"><div class="col-md-4 cate-grid grid23">
+            <a href="/show_Chain"><div class="col-md-4 cate-grid grid23">
                 <h4>Ланцюги</h4>
-                <a class="store" href="/show_chains">Вибрати</a>
+                <a class="store" href="/show_Chain">Вибрати</a>
             </div></a>
-            <a href="/show_cranks"><div class="col-md-4 cate-grid grid24">
+            <a href="/show_Crank"><div class="col-md-4 cate-grid grid24">
                 <h4>Шатуни</h4>
-                <a class="store" href="/show_cranks">Вибрати</a>
+                <a class="store" href="/show_Crank">Вибрати</a>
             </div></a>
-            <a href="/show_frontDerailleurs"><div class="col-md-4 cate-grid grid19">
+            <a href="/show_FrontDerailleur"><div class="col-md-4 cate-grid grid19">
                 <h4>Передні перекидки</h4>
-                <a class="store" href="/show_frontDerailleurs">Вибрати</a>
+                <a class="store" href="/show_FrontDerailleur">Вибрати</a>
             </div></a>
-            <a href="/show_pedals"><div class="col-md-4 cate-grid grid25">
+            <a href="/show_Pedal"><div class="col-md-4 cate-grid grid25">
                 <h4>Педалі</h4>
-                <a class="store" href="/show_pedals">Вибрати</a>
+                <a class="store" href="/show_Pedal">Вибрати</a>
             </div></a>
             <div class="clearfix"></div>
         </div>
