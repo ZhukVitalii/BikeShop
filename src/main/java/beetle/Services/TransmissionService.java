@@ -490,42 +490,42 @@ public class TransmissionService {
 
     //find all components from database
     @Transactional(readOnly=true)
-    public List<BackDerailleur> findAll(Pageable pageable) {
+    public List<BackDerailleur> findAllBackDerailleur(Pageable pageable) {
         return backDerailleurRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<BackGearKas> findAllOne(Pageable pageable) {
+    public List<BackGearKas> findAllBackGearKas(Pageable pageable) {
         return backGearKasRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<BackGearTr> findAllTwo(Pageable pageable) {
+    public List<BackGearTr> findAllBackGearTr(Pageable pageable) {
         return backGearTrRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<Bracket> findAllThree(Pageable pageable) {
+    public List<Bracket> findAllBracket(Pageable pageable) {
         return bracketRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<Chain> findAllFor(Pageable pageable) {
+    public List<Chain> findAllChain(Pageable pageable) {
         return chainRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<Crank> findAllFive(Pageable pageable) {
+    public List<Crank> findAllCrank(Pageable pageable) {
         return crankRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<FrontDerailleur> findAllSix(Pageable pageable) {
+    public List<FrontDerailleur> findAllFrontDerailleur(Pageable pageable) {
         return frontDerailleurRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<Pedal> findAllSeven(Pageable pageable) {
+    public List<Pedal> findAllPedal(Pageable pageable) {
         return pedalRepository.findAll(pageable).getContent();
     }
 

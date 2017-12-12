@@ -240,22 +240,22 @@ public class BrakeService {
 
     //find all components from database
     @Transactional(readOnly=true)
-    public List<BrakeDiscHydraulic> findAll(Pageable pageable) {
+    public List<BrakeDiscHydraulic> findAllBrakeDiscHydraulic(Pageable pageable) {
         return brakeDiscHydraulicRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<BrakeDiscMechanik> findAllOne(Pageable pageable) {
+    public List<BrakeDiscMechanik> findAllBrakeDiscMechanik(Pageable pageable) {
         return brakeDiscMechanikRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<BrakeVBrake> findAllTwo(Pageable pageable) {
+    public List<BrakeVBrake> findAllBraleVBrake(Pageable pageable) {
         return brakeVBrakeRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<BrakeHandle> findAllThree(Pageable pageable) {
+    public List<BrakeHandle> findAllBrakeHandle(Pageable pageable) {
         return brakeHandleRepository.findAll(pageable).getContent();
     }
 

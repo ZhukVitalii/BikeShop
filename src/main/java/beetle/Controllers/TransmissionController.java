@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by VitaliiZhuk on 02.07.2017.
@@ -45,21 +47,21 @@ public class TransmissionController {
     public String transmissionsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<BackDerailleur> backDerailleurs = transmissionService
-                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllBackDerailleur(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<BackGearKas> backGearKass = transmissionService
-                .findAllOne(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllBackGearKas(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<BackGearTr> backGearTrs = transmissionService
-                .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllBackGearTr(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<Bracket> brackets = transmissionService
-                .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllBracket(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<Chain>  chains = transmissionService
-                .findAllFor(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllChain(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<Crank> cranks = transmissionService
-                .findAllFive(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllCrank(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<FrontDerailleur> frontDerailleurs = transmissionService
-                .findAllSix(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllFrontDerailleur(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<Pedal> pedals  = transmissionService
-                .findAllSeven(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllPedal(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("transmissionMakers", transmissionService.findTransmissionMakers());
         model.addAttribute("backDerailleurs", backDerailleurs);
         model.addAttribute("backGearKass", backGearKass);
@@ -77,9 +79,13 @@ public class TransmissionController {
     @RequestMapping("/show_BackDerailleur")
     public String backDerailleursVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<BackDerailleur> backDerailleurs = transmissionService
-                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+                .findAllBackDerailleur(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (BackDerailleur backDerailleur : backDerailleurs) {
+            transmissionMakers.add(backDerailleur.getMaker());
+        }
+        model.addAttribute("productMakers",transmissionMakers);
         model.addAttribute("products", backDerailleurs);
         model.addAttribute("allPages", getPageCountBackDerailleur());
         return "product";
@@ -88,9 +94,13 @@ public class TransmissionController {
     @RequestMapping("/show_BackGearKas")
     public String backGearKassVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<BackGearKas> backGearKass = transmissionService
-                .findAllOne(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+                .findAllBackGearKas(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (BackGearKas gearKass : backGearKass) {
+            transmissionMakers.add(gearKass.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", backGearKass);
         model.addAttribute("allPages", getPageCountBackGearKas());
         return "product";
@@ -99,9 +109,13 @@ public class TransmissionController {
     @RequestMapping("/show_BackGearTr")
     public String backGearTrsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<BackGearTr> backGearTrs = transmissionService
-                .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+                .findAllBackGearTr(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (BackGearTr backGearTr : backGearTrs) {
+            transmissionMakers.add(backGearTr.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", backGearTrs);
         model.addAttribute("allPages", getPageCountBackGearTr());
         return "product";
@@ -110,9 +124,13 @@ public class TransmissionController {
     @RequestMapping("/show_Bracket")
     public String bracketsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<Bracket> brackets = transmissionService
-                .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+                .findAllBracket(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (Bracket bracket : brackets) {
+            transmissionMakers.add(bracket.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", brackets);
         model.addAttribute("allPages", getPageCountBracket());
         return "product";
@@ -121,9 +139,13 @@ public class TransmissionController {
     @RequestMapping("/show_Chain")
     public String chainsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<Chain>  chains = transmissionService
-                .findAllFor(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+                .findAllChain(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (Chain chain : chains) {
+            transmissionMakers.add(chain.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", chains);
         model.addAttribute("allPages", getPageCountChain());
         return "product";
@@ -132,9 +154,13 @@ public class TransmissionController {
     @RequestMapping("/show_Crank")
     public String cranksVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<Crank> cranks = transmissionService
-                .findAllFive(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+                .findAllCrank(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (Crank crank : cranks) {
+            transmissionMakers.add(crank.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", cranks);
         model.addAttribute("allPages", getPageCountCrank());
         return "product";
@@ -143,9 +169,13 @@ public class TransmissionController {
     @RequestMapping("/show_FrontDerailleur")
     public String frontDerailleursVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<FrontDerailleur> frontDerailleurs = transmissionService
-                .findAllSix(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+                .findAllFrontDerailleur(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (FrontDerailleur frontDerailleur : frontDerailleurs) {
+            transmissionMakers.add(frontDerailleur.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", frontDerailleurs);
         model.addAttribute("allPages", getPageCountFrontDerailleur());
         return "product";
@@ -154,9 +184,13 @@ public class TransmissionController {
     @RequestMapping("/show_Pedal")
     public String pedalsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<Pedal> pedals  = transmissionService
-                .findAllSeven(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+                .findAllPedal(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (Pedal pedal : pedals) {
+            transmissionMakers.add(pedal.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", pedals);
         model.addAttribute("allPages", getPageCountPedal());
         return "product";
@@ -303,7 +337,7 @@ public class TransmissionController {
         model.addAttribute("groupId", transmissionMakerId);
         return "transmissions";
     }
-    @RequestMapping("/BackDerailleurMaker/{id}")
+    @RequestMapping("/TransmissionMaker/BackDerailleur/{id}")
     public String listBackDerailleurMaker(
             @PathVariable(value = "id") long transmissionMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -311,15 +345,20 @@ public class TransmissionController {
     {
         TransmissionMaker transmissionMaker = (transmissionMakerId != DEFAULT_GROUP_ID) ? transmissionService.findTransmissionMaker(transmissionMakerId) : null;
         if (page < 0) page = 0;
+        List<BackDerailleur> backDerailleursAll = transmissionService.findAllBackDerailleur(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<BackDerailleur> backDerailleurs  = transmissionService
                 .findByBackDerailleurMakers(transmissionMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+        for (BackDerailleur backDerailleur : backDerailleursAll) {
+            transmissionMakers.add(backDerailleur.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", backDerailleurs);
         model.addAttribute("byGroupPages", getPageCountBackDerailleurMaker(transmissionMaker));
         model.addAttribute("groupId", transmissionMakerId);
         return "product";
     }
-    @RequestMapping("/BackGearKasMaker/{id}")
+    @RequestMapping("/TransmissionMaker/BackGearKas/{id}")
     public String listBackGearKasMaker(
             @PathVariable(value = "id") long transmissionMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -327,17 +366,20 @@ public class TransmissionController {
     {
         TransmissionMaker transmissionMaker = (transmissionMakerId != DEFAULT_GROUP_ID) ? transmissionService.findTransmissionMaker(transmissionMakerId) : null;
         if (page < 0) page = 0;
-
+        List<BackGearKas> backGearKasAll = transmissionService.findAllBackGearKas(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<BackGearKas> backGearKass  = transmissionService
                 .findByBackGearKasMakers(transmissionMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+        for (BackGearKas backGearKas : backGearKasAll) {
+            transmissionMakers.add(backGearKas.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", backGearKass);
         model.addAttribute("byGroupPages", getPageCountBackGearKasMaker(transmissionMaker));
         model.addAttribute("groupId", transmissionMakerId);
         return "product";
     }
-    @RequestMapping("/BackGearTrMaker/{id}")
+    @RequestMapping("/TransmissionMaker/BackGearTr/{id}")
     public String listBackGearTrMaker(
             @PathVariable(value = "id") long transmissionMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -345,15 +387,20 @@ public class TransmissionController {
     {
         TransmissionMaker transmissionMaker = (transmissionMakerId != DEFAULT_GROUP_ID) ? transmissionService.findTransmissionMaker(transmissionMakerId) : null;
         if (page < 0) page = 0;
+        List<BackGearTr> backGearTrsAll = transmissionService.findAllBackGearTr(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<BackGearTr> backGearTrs = transmissionService
                 .findByBackGearTrMakers(transmissionMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+        for (BackGearTr backGearTr : backGearTrsAll) {
+            transmissionMakers.add(backGearTr.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", backGearTrs);
         model.addAttribute("byGroupPages", getPageCountBackGearTrMaker(transmissionMaker));
         model.addAttribute("groupId", transmissionMakerId);
         return "product";
     }
-    @RequestMapping("/BracketMaker/{id}")
+    @RequestMapping("/TransmissionMaker/Bracket/{id}")
     public String listBracketnMaker(
             @PathVariable(value = "id") long transmissionMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -361,15 +408,20 @@ public class TransmissionController {
     {
         TransmissionMaker transmissionMaker = (transmissionMakerId != DEFAULT_GROUP_ID) ? transmissionService.findTransmissionMaker(transmissionMakerId) : null;
         if (page < 0) page = 0;
+        List<Bracket> bracketsAll = transmissionService.findAllBracket(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<Bracket> brackets  = transmissionService
                 .findByBracketMakers(transmissionMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+        for (Bracket bracket : bracketsAll) {
+            transmissionMakers.add(bracket.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", brackets);
         model.addAttribute("byGroupPages", getPageCountBracketMaker(transmissionMaker));
         model.addAttribute("groupId", transmissionMakerId);
         return "product";
     }
-    @RequestMapping("/ChainMaker/{id}")
+    @RequestMapping("/TransmissionMaker/Chain/{id}")
     public String listChainMaker(
             @PathVariable(value = "id") long transmissionMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -377,15 +429,20 @@ public class TransmissionController {
     {
         TransmissionMaker transmissionMaker = (transmissionMakerId != DEFAULT_GROUP_ID) ? transmissionService.findTransmissionMaker(transmissionMakerId) : null;
         if (page < 0) page = 0;
-         List<Chain> chains  = transmissionService
+        List<Chain> chainsAll = transmissionService.findAllChain(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
+        List<Chain> chains  = transmissionService
                 .findByChainMakers(transmissionMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+        for (Chain chain : chainsAll) {
+            transmissionMakers.add(chain.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", chains);
         model.addAttribute("byGroupPages", getPageCountChainMaker(transmissionMaker));
         model.addAttribute("groupId", transmissionMakerId);
         return "product";
     }
-    @RequestMapping("/CrankMaker/{id}")
+    @RequestMapping("/TransmissionMaker/Crank/{id}")
     public String listCranknMaker(
             @PathVariable(value = "id") long transmissionMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -393,15 +450,20 @@ public class TransmissionController {
     {
         TransmissionMaker transmissionMaker = (transmissionMakerId != DEFAULT_GROUP_ID) ? transmissionService.findTransmissionMaker(transmissionMakerId) : null;
         if (page < 0) page = 0;
+        List<Crank> cranksAll = transmissionService.findAllCrank(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<Crank> cranks  = transmissionService
                 .findByCrankMakers(transmissionMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+        for (Crank crank : cranksAll) {
+            transmissionMakers.add(crank.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", cranks);
         model.addAttribute("byGroupPages", getPageCountCrankMaker(transmissionMaker));
         model.addAttribute("groupId", transmissionMakerId);
         return "product";
     }
-    @RequestMapping("/FrontDerailleurMaker/{id}")
+    @RequestMapping("/TransmissionMaker/FrontDerailleur/{id}")
     public String listFrontDerailleurMaker(
             @PathVariable(value = "id") long transmissionMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -409,15 +471,20 @@ public class TransmissionController {
     {
         TransmissionMaker transmissionMaker = (transmissionMakerId != DEFAULT_GROUP_ID) ? transmissionService.findTransmissionMaker(transmissionMakerId) : null;
         if (page < 0) page = 0;
+        List<FrontDerailleur> frontDerailleursAll = transmissionService.findAllFrontDerailleur(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
+        for (FrontDerailleur frontDerailleur : frontDerailleursAll) {
+            transmissionMakers.add(frontDerailleur.getMaker());
+        }
         List<FrontDerailleur> frontDerailleurs  = transmissionService
                 .findByFrontDerailleurMakers(transmissionMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", frontDerailleurs);
         model.addAttribute("byGroupPages", getPageCountFrontDerailleurMaker(transmissionMaker));
         model.addAttribute("groupId", transmissionMakerId);
         return "product";
     }
-    @RequestMapping("/PedalMaker/{id}")
+    @RequestMapping("/TransmissionMaker/Pedal/{id}")
     public String listPedalMaker(
             @PathVariable(value = "id") long transmissionMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -425,9 +492,14 @@ public class TransmissionController {
     {
         TransmissionMaker transmissionMaker = (transmissionMakerId != DEFAULT_GROUP_ID) ? transmissionService.findTransmissionMaker(transmissionMakerId) : null;
         if (page < 0) page = 0;
+        List<Pedal> pedalsAll = transmissionService.findAllPedal(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<TransmissionMaker> transmissionMakers = new HashSet<>();
         List<Pedal> pedals  = transmissionService
                 .findByPedalMakers(transmissionMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", transmissionService.findTransmissionMakers());
+        for (Pedal pedal : pedalsAll) {
+            transmissionMakers.add(pedal.getMaker());
+        }
+        model.addAttribute("productMakers", transmissionMakers);
         model.addAttribute("products", pedals);
         model.addAttribute("byGroupPages", getPageCountPedalMaker(transmissionMaker));
         model.addAttribute("groupId", transmissionMakerId);

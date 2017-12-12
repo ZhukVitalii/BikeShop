@@ -2,6 +2,8 @@ package beetle.Controllers;
 
 import beetle.Entities.Brakes.*;
 import beetle.Entities.Handlebars.HandlebarDiameter;
+import beetle.Entities.Handlebars.HandlebarMaker;
+import beetle.Entities.Handlebars.Headset;
 import beetle.Services.HandlebarService;
 import beetle.Services.BrakeService;
 import beetle.Entities.Wheels.RotorFixType;
@@ -18,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by VitaliiZhuk on 26.06.2017.
@@ -48,13 +52,13 @@ public class BrakeController {
         if (page < 0) page = 0;
 
         List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
-                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllBrakeDiscHydraulic(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
-                .findAllOne(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllBrakeDiscMechanik(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<BrakeVBrake> brakeVBrakes = brakeService
-                .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllBraleVBrake(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<BrakeHandle> brakeHandles = brakeService
-                .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllBrakeHandle(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("brakeMakers", brakeService.findBrakeMakers());
         model.addAttribute("locations", brakeService.findLocation());
         model.addAttribute("brakeLiquids", brakeService.findBrakeLiquid());
@@ -82,8 +86,12 @@ public class BrakeController {
     public String brakesHydroVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
-                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+                .findAllBrakeDiscHydraulic(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<BrakeMaker>brakeMakers = new HashSet<>();
+        for (BrakeDiscHydraulic brakeDiscHydraulic : brakeDiscHydraulics) {
+            brakeMakers.add(brakeDiscHydraulic.getMaker());
+        }
+        model.addAttribute("productMakers",brakeMakers);
         model.addAttribute("products", brakeDiscHydraulics);
         model.addAttribute("allPages", getPageCountBrakeDiscHydr());
         return "product";
@@ -93,8 +101,12 @@ public class BrakeController {
     public String brakesMechVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
-                .findAllOne(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+                .findAllBrakeDiscMechanik(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<BrakeMaker>brakeMakers = new HashSet<>();
+        for (BrakeDiscMechanik brakeDiscMechanik : brakeDiscMechaniks) {
+            brakeMakers.add(brakeDiscMechanik.getMaker());
+        }
+        model.addAttribute("productMakers",brakeMakers);
         model.addAttribute("products", brakeDiscMechaniks);
         model.addAttribute("allPages", getPageCountBrakeDiscMech());
         return "product";
@@ -104,8 +116,13 @@ public class BrakeController {
     public String brakesVBrakeVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<BrakeVBrake> brakeVBrakes = brakeService
-                .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+                .findAllBraleVBrake(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<BrakeMaker>brakeMakers = new HashSet<>();
+        for (BrakeVBrake brakeVBrake : brakeVBrakes) {
+            brakeMakers.add(brakeVBrake.getMaker());
+        }
+
+        model.addAttribute("productMakers", brakeMakers);
         model.addAttribute("products", brakeVBrakes);
         model.addAttribute("allPages", getPageCountVBrake());
         return "product";
@@ -115,8 +132,12 @@ public class BrakeController {
     public String brakesHandleVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<BrakeHandle> brakeHandles = brakeService
-                .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+                .findAllBrakeHandle(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        Set<BrakeMaker>brakeMakers = new HashSet<>();
+        for (BrakeHandle brakeHandle : brakeHandles) {
+            brakeMakers.add(brakeHandle.getMaker());
+        }
+        model.addAttribute("productMakers",brakeMakers);
         model.addAttribute("products", brakeHandles);
         model.addAttribute("allPages", getPageCountBrakeHandle());
         return "product";
@@ -195,7 +216,7 @@ public class BrakeController {
         model.addAttribute("groupId", brakeMakerId);
         return "brakes";
     }
-    @RequestMapping("/BrakeDiscHydraulicMaker/{id}")
+    @RequestMapping("/BrakeMaker/BrakeDiscHydraulic/{id}")
     public String listBrakeDiscHydraulicMaker(
             @PathVariable(value = "id") long groupId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -203,15 +224,20 @@ public class BrakeController {
     {
         BrakeMaker brakeMaker = (groupId != DEFAULT_GROUP_ID) ? brakeService.findBrakeMaker(groupId) : null;
         if (page < 0) page = 0;
+        List<BrakeDiscHydraulic> brakeDiscHydraulicsAll = brakeService.findAllBrakeDiscHydraulic(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        Set<BrakeMaker> brakeMakers = new HashSet<>();
+        for (BrakeDiscHydraulic brakeDiscHydraulic : brakeDiscHydraulicsAll) {
+            brakeMakers.add(brakeDiscHydraulic.getMaker());
+        }
         List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
                 .findByBrakeDiscHydraulicMakers(brakeMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", brakeService.findBrakeMakers());
-        model.addAttribute("objects", brakeDiscHydraulics);
+        model.addAttribute("productMakers",brakeMakers);
+        model.addAttribute("products", brakeDiscHydraulics);
         model.addAttribute("byGroupPages", getPageCountBrakeDiscHydr(brakeMaker));
         model.addAttribute("groupId", groupId);
         return "product";
     }
-    @RequestMapping("/BrakeDiscMechanikMaker/{id}")
+    @RequestMapping("/BrakeMaker/BrakeDiscMechanik/{id}")
     public String listBrakeDiscMechanikMaker(
             @PathVariable(value = "id") long groupId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -219,15 +245,20 @@ public class BrakeController {
     {
         BrakeMaker brakeMaker = (groupId != DEFAULT_GROUP_ID) ? brakeService.findBrakeMaker(groupId) : null;
         if (page < 0) page = 0;
+        List<BrakeDiscMechanik> brakeDiscMechaniksAll = brakeService.findAllBrakeDiscMechanik(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        Set<BrakeMaker>brakeMakers = new HashSet<>();
+        for (BrakeDiscMechanik brakeDiscMechanik : brakeDiscMechaniksAll) {
+            brakeMakers.add(brakeDiscMechanik.getMaker());
+        }
         List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
                 .findByBrakeDiscMechanikMakers(brakeMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+        model.addAttribute("productMakers", brakeMakers);
         model.addAttribute("products", brakeDiscMechaniks);
         model.addAttribute("byGroupPages", getPageCountBrakeDiscMech(brakeMaker));
         model.addAttribute("groupId", groupId);
         return "product";
     }
-    @RequestMapping("/BrakeVBrakeMaker/{id}")
+    @RequestMapping("/BrakeMaker/BrakeVBrake/{id}")
     public String listBrakeVBrakeMaker(
             @PathVariable(value = "id") long groupId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -235,15 +266,20 @@ public class BrakeController {
     {
         BrakeMaker brakeMaker = (groupId != DEFAULT_GROUP_ID) ? brakeService.findBrakeMaker(groupId) : null;
         if (page < 0) page = 0;
+        List<BrakeVBrake> brakeVBrakesAll = brakeService.findAllBraleVBrake(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        Set<BrakeMaker>brakeMakers = new HashSet<>();
+        for (BrakeVBrake brakeVBrake : brakeVBrakesAll) {
+            brakeMakers.add(brakeVBrake.getMaker());
+        }
         List<BrakeVBrake> brakeVBrakes = brakeService
                 .findByBrakeVBrakeMakers(brakeMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+        model.addAttribute("productMakers", brakeMakers);
         model.addAttribute("products", brakeVBrakes);
         model.addAttribute("byGroupPages", getPageCountBrakeVBrake(brakeMaker));
         model.addAttribute("groupId", groupId);
         return "product";
     }
-    @RequestMapping("/BrakeHandleMaker/{id}")
+    @RequestMapping("/BrakeMaker/BrakeHandle/{id}")
     public String listBrakeHandleMaker(
             @PathVariable(value = "id") long groupId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -251,9 +287,14 @@ public class BrakeController {
     {
         BrakeMaker brakeMaker = (groupId != DEFAULT_GROUP_ID) ? brakeService.findBrakeMaker(groupId) : null;
         if (page < 0) page = 0;
+        List<BrakeHandle> brakeHandlesAll = brakeService.findAllBrakeHandle( new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        Set<BrakeMaker>brakeMakers = new HashSet<>();
+        for (BrakeHandle brakeHandle : brakeHandlesAll) {
+            brakeMakers.add(brakeHandle.getMaker());
+        }
         List<BrakeHandle> brakeHandles = brakeService
                 .findByBrakeHandleMakers(brakeMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", brakeService.findBrakeMakers());
+        model.addAttribute("productMakers", brakeMakers);
         model.addAttribute("products", brakeHandles);
         model.addAttribute("byGroupPages", getPageCountBrakeHandle(brakeMaker));
         model.addAttribute("groupId", groupId);

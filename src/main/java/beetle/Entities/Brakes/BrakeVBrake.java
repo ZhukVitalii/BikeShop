@@ -51,4 +51,8 @@ public class BrakeVBrake {
         return price;
     }
 
+    public BrakeMaker getMaker() {
+        return maker;
+    }
+
 }

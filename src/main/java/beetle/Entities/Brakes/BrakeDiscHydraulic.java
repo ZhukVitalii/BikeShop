@@ -74,4 +74,8 @@ public class BrakeDiscHydraulic {
     public Double getPrice(){
         return price;
     }
+
+    public BrakeMaker getMaker() {
+        return maker;
+    }
 }

@@ -65,4 +65,8 @@ public class BrakeDiscMechanik {
         return price;
     }
 
+    public BrakeMaker getMaker() {
+        return maker;
+    }
+
 }

@@ -66,4 +66,8 @@ public class BackDerailleur {
     public Double getPrice(){
         return price;
     }
+
+    public TransmissionMaker getMaker() {
+        return maker;
+    }
 }

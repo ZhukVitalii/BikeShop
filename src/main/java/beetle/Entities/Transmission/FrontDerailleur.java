@@ -86,4 +86,8 @@ public class FrontDerailleur {
     public Double getPrice(){
         return price;
     }
+
+    public TransmissionMaker getMaker() {
+        return maker;
+    }
 }
