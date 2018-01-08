@@ -135,6 +135,11 @@ li.dropdown1:hover{
 .nav ul.dropdown2 {
 	color: #FFF;
 	background-color:#fcff19;
+	width: 100%;
+}
+.nav ul.dropdown2 li a:hover {
+	color: #FFF;
+	background-color: #000000;
 }
 .nav ul  li:hover > a {
 	color:#000;

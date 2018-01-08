@@ -65,9 +65,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul class="nav">
                     <li class="dropdown1"><a href="#chooseBike">Зібрати велосипед</a>
                         <ul class="dropdown2">
-                            <li><a href="/chooseMTBSize">МТВ</a></li>
-                            <li><a href="/chooseShosseSize">ШОССЕ</a></li>
-                            <li><a href="/chooseCitySize">МІСЬКИЙ</a></li>
+                            <li><a href="/chooseSize/${'MTB'}">МТВ</a></li>
+                            <li><a href="/chooseSize/${'Shosse'}">ШОССЕ</a></li>
+                            <li><a href="/chooseSize/${'City'}">МІСЬКИЙ</a></li>
                         </ul>
                     </li>
                     <li class="dropdown1"><a href="#cate">КОМППОНЕНТИ</a>
@@ -104,28 +104,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div id="cate" class="categories">
     <div class="container">
         <h3>Категорії</h3>
-        <div class="categorie-grids">
-            <a href="/show_Wheel"><div class="col-md-4 cate-grid grid6">
+        <div class="row">
+            <a href="/show_Wheel"><div class="col-md-4 col-sm-12 col-xs-12 component grid6">
                 <h4>Колеса</h4>
                 <a class="store" href="/show_Wheel">Вибрати</a>
             </div></a>
-            <a href="/show_Rim"><div class="col-md-4 cate-grid grid7">
+            <a href="/show_Rim"><div class="col-md-4 col-sm-12 col-xs-12 component grid7">
                 <h4>Обода</h4>
                 <a class="store" href="/show_Rim">Вибрати</a>
             </div></a>
-            <a href="/show_FrontHub"><div class="col-md-4 cate-grid grid8">
+            <a href="/show_FrontHub"><div class="col-md-4 col-sm-12 col-xs-12 component grid8">
                 <h4>Передні втулки</h4>
                 <a class="store" href="/show_FrontHub">Вибрати</a>
             </div></a>
-            <a href="/show_BackHub"><div class="col-md-4 cate-grid grid9">
+            <a href="/show_BackHub"><div class="col-md-4 col-sm-12 col-xs-12 component grid9">
                 <h4>Задні втулки</h4>
                 <a class="store" href="/show_BackHub">Вибрати</a>
             </div></a>
-            <a href="/show_Spoke"><div class="col-md-4 cate-grid grid10">
+            <a href="/show_Spoke"><div class="col-md-4 col-sm-12 col-xs-12 component grid10">
                 <h4>Спиці</h4>
                 <a class="store" href="/show_Spoke">Вибрати</a>
             </div></a>
-            <a href="/show_Tire"><div class="col-md-4 cate-grid grid11">
+            <a href="/show_Tire"><div class="col-md-4 col-sm-12 col-xs-12 component grid11">
                 <h4>Покришки</h4>
                 <a class="store" href="/show_Tire">Вибрати</a>
             </div></a>
@@ -133,6 +133,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
+<div class="footer">
+    <div class="container" id="about">
+        <div class="contact-details">
+            <div class="logo2">
+                <a href="/"><img src="resources/images/logo.png"
+                                 alt="logo"
+                                 width="60"
+                                 height="62"/>
+                </a>
+                <div class="about">
+                    <p>
+                        Даний проект являється демонстраційним і не використовуєтсья для продажу комплектуючих.
+                    </p>
+                </div>
+            </div>
+            <h2>Контакти розробника</h2>
+            <p class="address">
+                <span>Vitalii Zhuk</span><br>
+                <span>Ukraine, Kiev</span><br>
+                <span class="address-block-label"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                <a class="address-block-link" target="_blank" href="tel:+380638521116">+380638521116</a><br>
+                <span class="address-block-label"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                <a class="address-block-link" target="_blank" href="mailto:golden_beetle@bigmir.net">zhukvitaliis@gmail.com</a><br>
+                <span class="address-block-label"><i class="fa fa-facebook"></i></span>
+                <a class="address-block-link" target="_blank" href="https://www.facebook.com/vitalii.zh">ZhukVitalii</a>
+            </p>
+        </div>
+    </div>
+</div>
+<ul class="copyright">
+    <li>&copy; Copyright 2018 VitaliiZhuk</li>
+    <li>All Rights Reserved</li>
+</ul>
 </body>
 </html>
 

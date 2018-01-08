@@ -54,28 +54,8 @@ public class UserController {
 
     Map<Long, Integer> productsNumber = new HashMap<Long, Integer>();
     double totalPrice = 0; // total Price in cart
-    int total = 0; // number of product in cart
+    int total = 0; //total number of products in cart
 
-
-    @RequestMapping("/upNumber/{article}")
-    public String upNumber(Model model,
-            @PathVariable(value = "article") Long article) {
-            int number = productsNumber.get(article);
-            productsNumber.put(article, number +1);
-            int count = productsNumber.get(article);
-            model.addAttribute("count",count);
-            return "counting";
-    }
-    @RequestMapping("/downNumber/{article}")
-    public String downNumber(Model model,
-            @PathVariable(value = "article") Long article) {
-        int number = productsNumber.get(article);
-        if (number > 1) {
-            productsNumber.put(article, number - 1);
-        }
-        int count = productsNumber.get(article);
-        model.addAttribute("count",count);
-        return "counting";        }
     //Return HOME-PAGE
     @RequestMapping("/")
     public String index(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
@@ -83,110 +63,79 @@ public class UserController {
         return "index";
     }
 
-    //Select from database bike type MTB
-    @RequestMapping("/MTB_page")
-    public String mtbVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        BikeType bikeType = frameService.findBikeType(1);
-        List<Frame> frames = frameService.
-                findByBikeType(bikeType, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
-        return "mtbBike";
+    //Add count for product in cart
+    @RequestMapping("/upNumber/{article}")
+    public String upNumber(Model model,
+                           @PathVariable(value = "article") Long article) {
+        int number = productsNumber.get(article);
+        productsNumber.put(article, number + 1);
+        int count = productsNumber.get(article);
+        model.addAttribute("count", count);
+        return "counting";
+    }
+    //Remove count for product in cart
+    @RequestMapping("/downNumber/{article}")
+    public String downNumber(Model model,
+                             @PathVariable(value = "article") Long article) {
+        int number = productsNumber.get(article);
+        if (number > 1) {
+            productsNumber.put(article, number - 1);
+        }
+        int count = productsNumber.get(article);
+        model.addAttribute("count", count);
+        return "counting";
     }
 
-    //Select from database bike type Shosse
-    @RequestMapping("/Shosse_page")
-    public String shosseVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        BikeType bikeType = frameService.findBikeType(2);
-        List<Frame> frames = frameService.
-                findByBikeType(bikeType, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
-        return "shosseBike";
-    }
 
-    //Select from database bike type City
-    @RequestMapping("/City_page")
-    public String cityVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        BikeType bikeType = frameService.findBikeType(3);
-        List<Frame> frames = frameService.
-                findByBikeType(bikeType, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
-        return "cityBike";
-    }
-
-    //select from database frame by size for MTB
-    @RequestMapping("/chooseMTBSize")
-    public String chooseMTBSizeVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        List<FrameSize> frameSizes = frameService.findFrameSize();
-        model.addAttribute("framesizes", frameSizes);
-        return "chooseMTBSize";
-    }
-
-    //select from database frame by size for Shosse
-    @RequestMapping("/chooseShosseSize")
-    public String chooseShosseSizeVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        List<FrameSize> frameSizes = frameService.findFrameSize();
-        model.addAttribute("framesizes", frameSizes);
-        return "chooseShosseSize";
-    }
-
-    //select from database frame by size for city
-    @RequestMapping("/chooseCitySize")
-    public String chooseCitySizeVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        List<FrameSize> frameSizes = frameService.findFrameSize();
-        model.addAttribute("framesizes", frameSizes);
-        return "chooseCITYSize";
-    }
-
-    // Select Bike By Type and Size
-    @RequestMapping("/framesMTB/{id}")
-    public String listFrameMTBSize(
-            @PathVariable(value = "id") Long id,
+    @RequestMapping("/chooseSize/{type}")
+    public String sizeVeiw(
+            @PathVariable(value = "type") String type,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model) {
         if (page < 0) page = 0;
-        BikeType bikeType = frameService.findBikeType(1);
-        FrameSize frameSize = frameService.findFrameSize(id);
-        List<Frame> frames = frameService
-                .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
-        return "mtbBike";
+        List<FrameSize> frameSizes = frameService.findFrameSize();
+        model.addAttribute("type", type);
+        model.addAttribute("framesizes", frameSizes);
+        return "chooseSize";
     }
 
     // Select Bike By Type and Size
-    @RequestMapping("/framesShosse/{id}")
-    public String listFrameShosseSize(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model) {
-        if (page < 0) page = 0;
-        BikeType bikeType = frameService.findBikeType(2);
-        FrameSize frameSize = frameService.findFrameSize(id);
-        List<Frame> frames = frameService
-                .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
-        return "shosseBike";
-    }
-    // Select Bike By Type and Size
-    @RequestMapping("/framesCity/{id}")
-    public String listFrameCitySize(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model) {
-        if (page < 0) page = 0;
-        BikeType bikeType = frameService.findBikeType(3);
-        FrameSize frameSize = frameService.findFrameSize(id);
-        List<Frame> frames = frameService
-                .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
-        return "cityBike";
-    }
 
+    @RequestMapping("/frames/{id}/{type}")
+    public String listFrame(
+            @PathVariable(value = "id") Long id,
+            @PathVariable(value = "type") String type,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model) {
+        if (page < 0) page = 0;
+        FrameSize frameSize = frameService.findFrameSize(id);
+        if (type.equals("MTB")) {
+            BikeType bikeType = frameService.findBikeType(1);
+            List<Frame> frames = frameService
+                    .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            String check = "product";
+            model.addAttribute("check", check);
+            model.addAttribute("products", frames);
+            return "chooseComponentsForBike";
+        } else if (type.equals("Shosse")) {
+            BikeType bikeType = frameService.findBikeType(2);
+            List<Frame> frames = frameService
+                    .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            String check = "product";
+            model.addAttribute("check", check);
+            model.addAttribute("products", frames);
+            return "chooseComponentsForBike";
+        } else  {
+            BikeType bikeType = frameService.findBikeType(3);
+            List<Frame> frames = frameService
+                    .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            String check = "product";
+            model.addAttribute("check", check);
+            model.addAttribute("products", frames);
+            return "chooseComponentsForBike";
+        }
+    }
+    //Remove product from cart
     @RequestMapping("/cartDel/{name}/{article}/{quantity}")
     public ResponseEntity<Void> delete(
             @PathVariable(value = "name") String name,
@@ -323,7 +272,7 @@ public class UserController {
         total -= quantity;
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    //Add product to cart
     @RequestMapping("/cartAdd/{name}/{article}")
     public ResponseEntity<Void> addToCart(
             @PathVariable(value = "name") String name,
@@ -409,7 +358,7 @@ public class UserController {
 
                 break;
             case "Tire" :
-                if (wheelService.getArticlesTire().contains(article)) {
+                if (!wheelService.getArticlesTire().contains(article)) {
                     wheelService.addToArticleTire(article);
                     productsNumber.put(article, 1);
                     Tire tire = wheelService.findTireByArticle(article);
@@ -462,7 +411,7 @@ public class UserController {
 
                 break;
             case "BrakeHandle" :
-                if (!brakeService.articlesBrakeHandle.contains(article)) {
+                if (!brakeService.getArticlesBrakeHandle().contains(article)) {
                     brakeService.addToArticleBrakeHandle(article);
                     productsNumber.put(article, 1);
                     BrakeHandle brakeHandle = brakeService.findBrakeHandleByArticle(article);
@@ -591,6 +540,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    //Add price for product in cart
     @RequestMapping("/upPrice/{price}")
     public ResponseEntity<Void> upPrice(
                             @PathVariable(value = "price") Double price) {
@@ -598,7 +548,7 @@ public class UserController {
         total ++;
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    //Remove price for product in cart
     @RequestMapping("/downPrice/{price}")
     public ResponseEntity<Void> downPrice(
             @PathVariable(value = "price") Double price) {
@@ -608,7 +558,7 @@ public class UserController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    //Total price in cart
     @RequestMapping("/price")
     public String price(Model model) {
         String pattern = "##0.00";
@@ -618,6 +568,7 @@ public class UserController {
         return "price";
     }
 
+
     @RequestMapping("/counting/{article}")
     public String counting(Model model,
                            @PathVariable(value = "article") Long article) {
@@ -626,6 +577,7 @@ public class UserController {
         return "counting";
     }
 
+    //Total number of products in cart
     @RequestMapping("/totalNumber")
     public String totalNumber(Model model) {
         model.addAttribute("total", total);
@@ -762,7 +714,7 @@ public class UserController {
             cranks.add(crank);
         }
         for (int i = 0; i < transmissionService.getSizeFrontDerailleur(); i++) {
-            FrontDerailleur frontDerailleur = transmissionService.findFrontDerailleur(transmissionService.getArticleFrontDerailleurFromCart(i));
+            FrontDerailleur frontDerailleur = transmissionService.findFrontDerailleurByArticle(transmissionService.getArticleFrontDerailleurFromCart(i));
             frontDerailleurs.add(frontDerailleur);
         }
         for (int i = 0; i < transmissionService.getSizePedal(); i++) {
@@ -807,8 +759,8 @@ public class UserController {
             return "cart";
         }
 
-// Select Forks
-     @RequestMapping("/chooseFork/{id}")
+    // Select Forks
+    @RequestMapping("/choosenFrame/{id}")
     public String listForkForBike(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -823,12 +775,14 @@ public class UserController {
         BrakesType brakesType = frame.getBrakesType();
         List<Fork> forks = forkService.
                 findByTypeAndWhDiamAndTubeDiamAndBrType(bikeType,wheelsDiam,tubeDiameter,brakesType,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("forks", forks);
-        return "forksToFrame";
+        String check = "product";
+        model.addAttribute("check",check);
+        model.addAttribute("products", forks);
+        return "chooseComponentsForBike";
     }
 
     // Select Wheels
-    @RequestMapping("/chooseWheel/{id}")
+    @RequestMapping("/choosenFork/{id}")
     public String listWheelForFork(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -842,12 +796,14 @@ public class UserController {
         BrakesType brakesType = frame.getBrakesType();
         List<Wheel> wheels = wheelService.
                 findByTypeAndWhDiamAndBrType(bikeType,wheelsDiam,brakesType,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("wheels", wheels);
-        return "wheelsToFork";
+        String check = "product";
+        model.addAttribute("check",check);
+        model.addAttribute("products", wheels);
+        return "chooseComponentsForBike";
     }
 
     // Select Brackets
-    @RequestMapping("/chooseBracket/{id}")
+    @RequestMapping("/choosenWheel/{id}")
     public String listBracketForBike(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -859,12 +815,14 @@ public class UserController {
         BracketWide bracketWide = frame.getBracketWide();
         List<Bracket> brackets = transmissionService.
                 findByBracketWide(bracketWide,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brackets", brackets);
-        return "bracketsToFork";
+        String check = "product";
+        model.addAttribute("check",check);
+        model.addAttribute("products", brackets);
+        return "chooseComponentsForBike";
     }
 
     // Select Cranks
-    @RequestMapping("/chooseCrank/{id}")
+    @RequestMapping("/choosenBracket/{id}")
     public String listCrankForBracket(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -876,11 +834,13 @@ public class UserController {
         BracketType bracketType = bracket.getBracketType();
         List<Crank> cranks = transmissionService.
                 findByBracketTypeCrank(bracketType,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("cranks", cranks);
-        return "cranksToBracket";
+        String check = "product";
+        model.addAttribute("check",check);
+        model.addAttribute("products", cranks);
+        return "chooseComponentsForBike";
     }
 
-    @RequestMapping("/chooseBackGearKas/{id}")
+    @RequestMapping("/choosenCrank/{id}")
     public String listBackSprocketKasForCrank(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -892,11 +852,13 @@ public class UserController {
         BackSprocketNumber backSprocketNumber = crank.getBackSprocketNumber();
         List<BackGearKas> backGearKass = transmissionService.
                 findByBackSprocketNumberBackGearKas(backSprocketNumber,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("backGearKass", backGearKass);
-        return "backGearKassToCrank";
+        String check = "product";
+        model.addAttribute("check",check);
+        model.addAttribute("products", backGearKass);
+        return "chooseComponentsForBike";
     }
 
-    @RequestMapping("/chooseBackDerailleur/{id}")
+    @RequestMapping("/choosenBackGearKas/{id}")
     public String listBackDeraileurForKas(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -911,11 +873,13 @@ public class UserController {
 
         List<BackDerailleur> backDerailleurs = transmissionService.
                 findBySprNumberAndSprMaxAndSprMin(backSprocketNumber,backSprocketMax,backSprocketMin,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("backDerailleurs", backDerailleurs);
-        return "backDerailleursToBackGear";
+        String check = "product";
+        model.addAttribute("check",check);
+        model.addAttribute("products", backDerailleurs);
+        return "chooseComponentsForBike";
     }
 
-    @RequestMapping("/chooseFrontDerailleur/{id}")
+    @RequestMapping("/choosenBackDerailleur/{id}")
     public String listFrontDeraileurForCrank(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -937,11 +901,13 @@ public class UserController {
                         frontSprocketMax,
                         frontSprocketMin,
                         new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frontDerailleurs", frontDerailleurs);
-        return "frontDerailleursToCrank";
+        String check = "product";
+        model.addAttribute("check",check);
+        model.addAttribute("products", frontDerailleurs);
+        return "chooseComponentsForBike";
     }
 
-    @RequestMapping("/chooseChain/{id}")
+    @RequestMapping("/choosenFrontDerailleur/{id}")
     public String listChainForKas(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -953,11 +919,13 @@ public class UserController {
         BackSprocketNumber backSprocketNumber = backGearKas.getBackSprocketNumber();
         List<Chain> chains = transmissionService.
                 findByBackSprocketNumberChain(backSprocketNumber,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("chains", chains);
-        return "chainsToBackGear";
+        String check = "product";
+        model.addAttribute("check",check);
+        model.addAttribute("products", chains);
+        return "chooseComponentsForBike";
     }
 
-    @RequestMapping("/choosePedal/{id}")
+    @RequestMapping("/choosenChain/{id}")
     public String listPedalForBike(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -966,12 +934,14 @@ public class UserController {
         if (page < 0) page = 0;
         userService.addIdChain(id);
         List<Pedal> pedals = transmissionService.
-                findAllSeven(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("pedals", pedals);
-        return "pedalToBike";
+                findAllPedal(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        String check = "product";
+        model.addAttribute("check",check);
+        model.addAttribute("products", pedals);
+        return "chooseComponentsForBike";
     }
 
-    @RequestMapping("/chooseBrakes/{id}")
+    @RequestMapping("/choosenPedal/{id}")
     public String listBrakesForBike(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -980,14 +950,16 @@ public class UserController {
         Frame frame = frameService.findFrame(userService.getIdFrame());
         BrakesType brakesType = frame.getBrakesType();
         int a = (int)brakesType.getId();
-        Location location = brakeService.findLication(1);
-        List<BrakeVBrake> brakeVBrakes = brakeService
-                .findByLocationVBrake(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeVBrakes", brakeVBrakes);
         if (a == 1) {
             return "brakesDiscSelect";
         } else if (a == 2) {
-            return "brakesVBrakeFrontToBike";
+            Location location = brakeService.findLication(1);
+            List<BrakeVBrake> brakeVBrakes = brakeService
+                    .findByLocationVBrake(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            String check = "frontBrakeVBrake";
+            model.addAttribute("check",check);
+            model.addAttribute("products", brakeVBrakes);
+            return "chooseComponentsForBike";
         } else {
             return "brakesSelectType";
         }
@@ -998,11 +970,13 @@ public class UserController {
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model) {
         if (page < 0) page = 0;
+        String check = "frontBrakeDiscHydraulik";
         Location location = brakeService.findLication(1);
         List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
                 .findByLocationHydraulic(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
-        return "brakesHydraulicFrontToBike";
+        model.addAttribute("check",check);
+        model.addAttribute("products", brakeDiscHydraulics);
+        return "chooseComponentsForBike";
     }
 
     @RequestMapping("/chooseDiscHydraulicBack/{id}")
@@ -1016,9 +990,10 @@ public class UserController {
         Location location = brakeService.findLication(2);
         List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
                 .findByLocationHydraulic(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
-
-        return "brakesHydraulicBackToBike";
+        String check = "backBrakeDiscHydraulik";
+        model.addAttribute("check",check);
+        model.addAttribute("products", brakeDiscHydraulics);
+        return "chooseComponentsForBike";
     }
 
     @RequestMapping("/chooseDiscMechanik")
@@ -1029,9 +1004,12 @@ public class UserController {
         Location location = brakeService.findLication(1);
         List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
                 .findByLocationMechanik(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
-        return "brakesMechanikFrontToBike";
+        String check = "frontBrakeDiscMechanik";
+        model.addAttribute("check",check);
+        model.addAttribute("products", brakeDiscMechaniks);
+        return "chooseComponentsForBike";
     }
+
     @RequestMapping("/chooseDiscMechanikBack/{id}")
     public String listDiscMechanikBack(
             @PathVariable(value = "id") Long id,
@@ -1043,8 +1021,10 @@ public class UserController {
         Location location = brakeService.findLication(2);
         List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
                 .findByLocationMechanik(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
-        return "brakesMechanikBackToBike";
+        String check = "backBrakeDiscMechanik";
+        model.addAttribute("check",check);
+        model.addAttribute("products", brakeDiscMechaniks);
+        return "chooseComponentsForBike";
     }
 
     @RequestMapping("/chooseVBrakeFront")
@@ -1053,11 +1033,15 @@ public class UserController {
             Model model) {
         if (page < 0) page = 0;
         Location location = brakeService.findLication(1);
+
         List<BrakeVBrake> brakeVBrakes = brakeService
                 .findByLocationVBrake(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeVBrakes", brakeVBrakes);
-        return "brakesVBrakeFrontToBike";
+        String check = "frontBrakeVBrake";
+        model.addAttribute("check",check);
+        model.addAttribute("products", brakeVBrakes);
+        return "chooseComponentsForBike";
     }
+
     @RequestMapping("/chooseVBrakeBack/{id}")
     public String listVBrakeBack(
             @PathVariable(value = "id") Long id,
@@ -1069,8 +1053,10 @@ public class UserController {
         Location location = brakeService.findLication(2);
         List<BrakeVBrake> brakeVBrakes = brakeService
                 .findByLocationVBrake(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeVBrakes", brakeVBrakes);
-        return "brakesVBrakeBackToBike";
+        String check = "backBrakeVBrake";
+        model.addAttribute("check",check);
+        model.addAttribute("products", brakeVBrakes);
+        return "chooseComponentsForBike";
     }
 
     @RequestMapping("/chooseHandlebar/{type}/{id}")
@@ -1085,23 +1071,22 @@ public class UserController {
         String mechanik = "mechanik";
         if (type.equals(hydraulic)) {
             userService.addIdBrakeDiscHydraulicBack(id);
-            System.out.println("hydro" + id +" " + type);
         } else if (type.equals(mechanik)) {
             userService.addIdBrakeDiscMechanikBack(id);
-            System.out.println("mech" + id +" " + type);
         } else {
             userService.addIdBrakeVBrakeBack(id);
-            System.out.println("VBrake" + id +" " + type);
         }
         Frame frame = frameService.findFrame(userService.getIdFrame());
         BikeType bikeType = frame.getBikeType();
         List<Handlebar> handlebars = handlebarService.
                 findByBikeType(bikeType, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("handlebars", handlebars);
-        return "handlebarsToBike";
+        String check = "product";
+        model.addAttribute("check",check);
+        model.addAttribute("products", handlebars);
+        return "chooseComponentsForBike";
     }
 
-    @RequestMapping("/chooseStem/{id}")
+    @RequestMapping("/choosenHandlebar/{id}")
     public String listStemForHandlebar(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -1115,11 +1100,13 @@ public class UserController {
         TubeDiameter tubeDiameter = fork.getTubeDiameter();
         List<Stem> stems = handlebarService
                 .findByHandlebarDiamAndTubeDiam(handlebarDiameter,tubeDiameter,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("stems", stems);
-        return "stemsToHandlebar";
+        String check = "product";
+        model.addAttribute("check",check);
+        model.addAttribute("products", stems);
+        return "chooseComponentsForBike";
     }
 
-    @RequestMapping("/chooseBrakeHandle/{id}")
+    @RequestMapping("/choosenStem/{id}")
     public String listBrakeHandleForHandlebar(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -1131,28 +1118,36 @@ public class UserController {
         if(userService.getIdBrakeDiscHydraulicFront()!= 0) {
             List<Grips> gripss = handlebarService.
                     findAllGrips(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            model.addAttribute("gripss", gripss);
-            return "gripsToHandlebar";
+            String check = "product";
+            model.addAttribute("check",check);
+            model.addAttribute("products", gripss);
+            return "chooseComponentsForBike";
         } else if (userService.getIdBrakeDiscMechanikFront() != 0) {
             // 2 is Id of Mechanik Disc Brake in DB
             BrakeHandleCompatibility brakeHandleCompatibility = brakeService.
-                    findBrakeHandleCompatibility(2);
+                    findBrakeHandleCompatibility(3);/*
             List<BrakeHandle> brakeHandles = brakeService.
                     findByBrakeHandleCompatibility(brakeHandleCompatibility,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            model.addAttribute("brakeHandles", brakeHandles);
-            return "brakesHandleToHandlebar";
+            */
+            List<BrakeHandle> brakeHandles = brakeService.findAllBrakeHandle(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+            String check = "product";
+            model.addAttribute("check",check);
+            model.addAttribute("products", brakeHandles);
+            return "chooseComponentsForBike";
         } else {
             // 3 is Id of V-Brake in DB
             BrakeHandleCompatibility brakeHandleCompatibility = brakeService.
                     findBrakeHandleCompatibility(3);
             List<BrakeHandle> brakeHandles = brakeService.
                     findByBrakeHandleCompatibility(brakeHandleCompatibility,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            model.addAttribute("brakeHandles", brakeHandles);
-            return "brakesHandleToHandlebar";
+            String check = "product";
+            model.addAttribute("check",check);
+            model.addAttribute("products", brakeHandles);
+            return "chooseComponentsForBike";
         }
     }
 
-    @RequestMapping("/chooseGrips/{id}")
+    @RequestMapping("/choosenBrakeHandle/{id}")
     public String listGripsForHandlebar(
             @PathVariable(value = "id") Long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -1162,8 +1157,185 @@ public class UserController {
         userService.addIdBrakeHandle(id);
         List<Grips> gripss = handlebarService.
                 findAllGrips(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("gripss", gripss);
-        return "gripsToHandlebar";
+        String check = "product";
+        model.addAttribute("check",check);
+        model.addAttribute("products", gripss);
+        return "chooseComponentsForBike";
+    }
+    @RequestMapping("/choosenGrips/{id}")
+    public String listForGripss(
+            @PathVariable(value = "id") Long id,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        List<Object> objects = new ArrayList<>();
+        //Lists with components, that user added to cart
+        List<Frame> frames = new ArrayList<>();
+        List<Fork> forks = new ArrayList<Fork>();
+        List<Handlebar> handlebars = new ArrayList<Handlebar>();
+        List<Stem> stems = new ArrayList<Stem>();
+        List<Grips> grips = new ArrayList<Grips>();
+        List<Headset> headsets = new ArrayList<Headset>();
+        List<Winding> windings = new ArrayList<Winding>();
+        List<BrakeDiscHydraulic> brakeDiscHydraulics = new ArrayList<BrakeDiscHydraulic>();
+        List<BrakeDiscMechanik> brakeDiscMechaniks = new ArrayList<>();
+        List<BrakeVBrake> brakeVBrakes = new ArrayList<BrakeVBrake>();
+        List<BrakeHandle> brakeHandles = new ArrayList<BrakeHandle>();
+        List<BackHub> backHubs = new ArrayList<>();
+        List<FrontHub> frontHubs = new ArrayList<>();
+        List<Rim> rims = new ArrayList<>();
+        List<Spoke> spokes = new ArrayList<>();
+        List<Tire> tires = new ArrayList<>();
+        List<Wheel> wheels = new ArrayList<>();
+        List<BackDerailleur> backDerailleurs = new ArrayList<>();
+        List<BackGearKas> backGearKass = new ArrayList<>();
+        List<BackGearTr> backGearTrs = new ArrayList<>();
+        List<Bracket> brackets = new ArrayList<>();
+        List<Chain> chains = new ArrayList<>();
+        List<Crank> cranks = new ArrayList<>();
+        List<FrontDerailleur> frontDerailleurs = new ArrayList<>();
+        List<Pedal> pedals = new ArrayList<>();
+
+//Select components from database by article, that user added to cart, and add this components to List
+
+        for (int i = 0; i < frameService.getSize(); i++){
+            Frame frame = frameService.findFrameByArticle(frameService.getArticleFromCart(i));
+            frames.add(frame);
+        }
+        for (int i = 0; i < forkService.getSize(); i++){
+            Fork fork = forkService.findForkByArticle(forkService.getArticleFromCart(i));
+            forks.add(fork);
+        }
+        for (int i = 0; i < handlebarService.getSizeHandlebar(); i++) {
+            Handlebar handlebar = handlebarService.findHandlebarByArticle(handlebarService.getArticleHandlebarFromCart(i));
+            handlebars.add(handlebar);
+        }
+        for (int i = 0; i < handlebarService.getSizeStem(); i++) {
+            Stem stem = handlebarService.findStemByArticle(handlebarService.getArticleStemFromCart(i));
+            stems.add(stem);
+        }
+        for (int i = 0; i < handlebarService.getSizeGrips(); i++) {
+            Grips gripss = handlebarService.findGripsByArticle(handlebarService.getArticleGripsFromCart(i));
+            grips.add(gripss);
+        }
+        for (int i = 0; i < handlebarService.getSizeHeadset(); i++) {
+            Headset headset = handlebarService.findHeadsetByArticle(handlebarService.getArticleHeadsetFromCart(i));
+            headsets.add(headset);
+        }
+        for (int i = 0; i < handlebarService.getSizeWinding(); i++) {
+            Winding winding = handlebarService.findWindingByArticle(handlebarService.getArticleWindingFromCart(i));
+            windings.add(winding);
+        }
+        for (int i = 0; i < brakeService.getSizeBrakeDiscHydraulic(); i++) {
+            BrakeDiscHydraulic brakeDiscHydraulic = brakeService.
+                    findBrakeDiscHydraulicByArticle(brakeService.getArticleBrakeDiscHydraulicFromCart(i));
+            brakeDiscHydraulics.add(brakeDiscHydraulic);
+        }
+        for (int i = 0; i < brakeService.getSizeBrakeDiscMechanik(); i++) {
+            BrakeDiscMechanik brakeDiscMechanik = brakeService.
+                    findBrakeDiscMechanikByArticle(brakeService.getArticleBrakeDiscMechanikFromCart(i));
+            brakeDiscMechaniks.add(brakeDiscMechanik);
+        }
+        for (int i = 0; i < brakeService.getSizeBrakeVBrake(); i++) {
+            BrakeVBrake brakeVBrake = brakeService.findBrakeVBrakeByArticle(brakeService.getArticleBrakeVBrakeFromCart(i));
+            brakeVBrakes.add(brakeVBrake);
+        }
+        for (int i = 0; i < brakeService.getSizeBrakeHandle(); i++) {
+            BrakeHandle brakeHandle = brakeService.findBrakeHandleByArticle(brakeService.getArticleBrakeHandleFromCart(i));
+            brakeHandles.add(brakeHandle);
+        }
+        for (int i = 0; i < wheelService.getSizeBackHub(); i++) {
+            BackHub backHub = wheelService.findBackHubByArticle(wheelService.getArticleBackHubFromCart(i));
+            backHubs.add(backHub);
+        }
+        for (int i = 0; i < wheelService.getSizeFrontHub(); i++) {
+            FrontHub frontHub = wheelService.findFrontHubByArticle(wheelService.getArticleFrontHubFromCart(i));
+            frontHubs.add(frontHub);;
+        }
+        for (int i = 0; i < wheelService.getSizeRim(); i++) {
+            Rim rim = wheelService.findRimByArticle(wheelService.getArticleRimFromCart(i));
+            rims.add(rim);
+        }
+        for (int i = 0; i < wheelService.getSizeSpoke(); i++) {
+            Spoke spoke = wheelService.findSpokeByArticle(wheelService.getArticleSpokeFromCart(i));
+            spokes.add(spoke);;
+        }
+        for (int i = 0; i < wheelService.getSizeTire(); i++) {
+            Tire tire = wheelService.findTireByArticle(wheelService.getArticleTireFromCart(i));
+            tires.add(tire);
+        }
+        for (int i = 0; i < wheelService.getSizeWheel(); i++) {
+            Wheel wheel = wheelService.findWheelByArticle(wheelService.getArticleWheelFromCart(i));
+            wheels.add(wheel);
+        }
+        for (int i = 0; i < transmissionService.getSizeBackDerailleur(); i++) {
+            BackDerailleur backDerailleur = transmissionService.findBackDerailleurByArticle(transmissionService.getArticleBackDerailleurFromCart(i));
+            backDerailleurs.add(backDerailleur);
+        }
+        for (int i = 0; i < transmissionService.getSizeBackGearKas(); i++) {
+            BackGearKas backGearKas = transmissionService.findBackGearKasByArticle(transmissionService.getArticleBackGearKasFromCart(i));
+            backGearKass.add(backGearKas);
+        }
+        for (int i = 0; i < transmissionService.getSizeBackGearTr(); i++) {
+            BackGearTr backGearTr = transmissionService.findBackGearTrByArticle(transmissionService.getArticleBackGearTrFromCart(i));
+            backGearTrs.add(backGearTr);
+        }
+        for (int i = 0; i < transmissionService.getSizeBracket(); i++) {
+            Bracket bracket = transmissionService.findBracketByArticle(transmissionService.getArticleBracketFromCart(i));
+            brackets.add(bracket);
+        }
+        for (int i = 0; i < transmissionService.getSizeChain(); i++) {
+            Chain chain = transmissionService.findChainByArticle(transmissionService.getArticleChainFromCart(i));
+            chains.add(chain);
+        }
+        for (int i = 0; i < transmissionService.getSizeCrank(); i++) {
+            Crank crank = transmissionService.findCrankByArticle(transmissionService.getArticleCrankFromCart(i));
+            cranks.add(crank);
+        }
+        for (int i = 0; i < transmissionService.getSizeFrontDerailleur(); i++) {
+            FrontDerailleur frontDerailleur = transmissionService.findFrontDerailleurByArticle(transmissionService.getArticleFrontDerailleurFromCart(i));
+            frontDerailleurs.add(frontDerailleur);
+        }
+        for (int i = 0; i < transmissionService.getSizePedal(); i++) {
+            Pedal pedal = transmissionService.findPedalByArticle(transmissionService.getArticlePedalFromCart(i));
+            pedals.add(pedal);
+        }
+
+        objects.add(frames);
+        objects.add(forks);
+        objects.add(handlebars);
+        objects.add(stems);
+        objects.add(grips);
+        objects.add(headsets);
+        objects.add(windings);
+        objects.add(brakeDiscHydraulics);
+        objects.add(brakeDiscMechaniks);
+        objects.add(brakeVBrakes);
+        objects.add(brakeHandles);
+        objects.add(backHubs);
+        objects.add(frontHubs);
+        objects.add(rims);
+        objects.add(spokes);
+        objects.add(tires);
+        objects.add(wheels);
+        objects.add(backDerailleurs);
+        objects.add(backGearKass);
+        objects.add(backGearTrs);
+        objects.add(brackets);
+        objects.add(chains);
+        objects.add(cranks);
+        objects.add(frontDerailleurs);
+        objects.add(pedals);
+        String pattern = "##0.00";
+        DecimalFormat decimalFormat = new DecimalFormat(pattern);
+        String price = decimalFormat.format(totalPrice);
+        //models for cart
+        model.addAttribute("total", total);
+        model.addAttribute("totalPrice", price );
+        model.addAttribute("objects", objects);
+        model.addAttribute("productsNumber",productsNumber);
+        return "/cart";
     }
 
 }

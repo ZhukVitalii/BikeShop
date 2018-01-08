@@ -426,32 +426,32 @@ public class WheelService {
     //find all components from database
 
     @Transactional(readOnly=true)
-    public List<Wheel> findAll(Pageable pageable) {
+    public List<Wheel> findAllWheels(Pageable pageable) {
         return wheelRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<Spoke> findAllOne(Pageable pageable) {
+    public List<Spoke> findAllSpokes(Pageable pageable) {
         return spokeRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<Rim> findAllTwo(Pageable pageable) {
+    public List<Rim> findAllRims(Pageable pageable) {
         return rimRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<FrontHub> findAllThree(Pageable pageable) {
+    public List<FrontHub> findAllFrontHubs(Pageable pageable) {
         return frontHubRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<BackHub> findAllFor(Pageable pageable) {
+    public List<BackHub> findAllBackHubs(Pageable pageable) {
         return backHubRepository.findAll(pageable).getContent();
     }
 
     @Transactional(readOnly=true)
-    public List<Tire> findAllFive(Pageable pageable) {
+    public List<Tire> findAllTires(Pageable pageable) {
         return tireRepository.findAll(pageable).getContent();
     }
 

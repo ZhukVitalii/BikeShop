@@ -62,9 +62,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul class="nav">
                     <li class="dropdown1"><a href="#chooseBike">Зібрати велосипед</a>
                         <ul class="dropdown2">
-                            <li><a href="/chooseMTBSize">МТВ</a></li>
-                            <li><a href="/chooseShosseSize">ШОССЕ</a></li>
-                            <li><a href="/chooseCitySize">МІСЬКИЙ</a></li>
+                            <li><a href="/chooseSize/${'MTB'}">МТВ</a></li>
+                            <li><a href="/chooseSize/${'Shosse'}">ШОССЕ</a></li>
+                            <li><a href="/chooseSize/${'City'}">МІСЬКИЙ</a></li>
                         </ul>
                     </li>
                     <li class="dropdown1"><a href="#cate">КОМППОНЕНТИ</a>
@@ -675,8 +675,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${spoke.price}</td>
 
                 <c:choose>
-                    <c:when test="${spoke.wheelMaker ne null}">
-                        <td>${spoke.wheelMaker.name}</td>
+                    <c:when test="${spoke.maker ne null}">
+                        <td>${spoke.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>

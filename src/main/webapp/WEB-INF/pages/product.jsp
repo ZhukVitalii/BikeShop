@@ -66,9 +66,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul class="nav">
                     <li class="dropdown1"><a href="#chooseBike">Зібрати велосипед</a>
                         <ul class="dropdown2">
-                            <li><a href="/chooseMTBSize">МТВ</a></li>
-                            <li><a href="/chooseShosseSize">ШОССЕ</a></li>
-                            <li><a href="/chooseCitySize">МІСЬКИЙ</a></li>
+                            <li><a href="/chooseSize/${'MTB'}">МТВ</a></li>
+                            <li><a href="/chooseSize/${'Shosse'}">ШОССЕ</a></li>
+                            <li><a href="/chooseSize/${'City'}">МІСЬКИЙ</a></li>
                         </ul>
                     </li>
                     <li class="dropdown1"><a href="#cate">КОМППОНЕНТИ</a>
@@ -130,13 +130,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <link rel="stylesheet" href="/resources/css/etalage.css">
             <script src="/resources/js/jquery.etalage.min.js"></script>
             <div class="details-left-slider">
-                <a href="<c:url value="/${product.getClass().getSimpleName()}/${product.url}"/>"
+                <a href="<c:url value="/${product.getClass().getSimpleName()}/${product.url}/${product.id}"/>"
                    title="Перейти до <c:out value="${product.name}"/>">
                     <img height="300" width="300" src="${product.way}" />
                 </a>
                 <div class="details-left-info">
                     <div class="link-to-one">
-                        <a href="<c:url value="/${product.getClass().getSimpleName()}/${product.url}"/>"
+                        <a href="<c:url value="/${product.getClass().getSimpleName()}/${product.url}/${product.id}"/>"
                            title="Перейти до <c:out value="${product.name}"/>">
                             <h3>${product.name}</h3>
                         </a>
@@ -172,5 +172,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </nav>
     </div>
 </div>
+<div class="footer">
+    <div class="container" id="about">
+        <div class="contact-details">
+            <div class="logo2">
+                <a href="/"><img src="/resources/images/logo.png"
+                                 alt="logo"
+                                 width="60"
+                                 height="62"/>
+                </a>
+                <div class="about">
+                    <p>
+                        Даний проект являється демонстраційним і не використовуєтсья для продажу комплектуючих.
+                    </p>
+                </div>
+            </div>
+            <h2>Контакти розробника</h2>
+            <p class="address">
+                <span>Vitalii Zhuk</span><br>
+                <span>Ukraine, Kiev</span><br>
+                <span class="address-block-label"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                <a class="address-block-link" target="_blank" href="tel:+380638521116">+380638521116</a><br>
+                <span class="address-block-label"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                <a class="address-block-link" target="_blank" href="mailto:golden_beetle@bigmir.net">zhukvitaliis@gmail.com</a><br>
+                <span class="address-block-label"><i class="fa fa-facebook"></i></span>
+                <a class="address-block-link" target="_blank" href="https://www.facebook.com/vitalii.zh">ZhukVitalii</a>
+            </p>
+        </div>
+    </div>
+</div>
+<ul class="copyright">
+    <li>&copy; Copyright 2018 VitaliiZhuk</li>
+    <li>All Rights Reserved</li>
+</ul>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package beetle.Controllers;
 
+import beetle.Entities.Brakes.BrakeDiscHydraulic;
+import beetle.Entities.Brakes.BrakeMaker;
 import beetle.Entities.Frames.BikeType;
 import beetle.Entities.Forks.BrakesType;
 import beetle.Entities.Wheels.*;
@@ -18,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by VitaliiZhuk on 12.06.2017.
@@ -46,17 +50,17 @@ public class WheelController {
     public String wheelsAdminVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<Wheel> wheels = wheelService
-                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllWheels(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<Spoke> spokes = wheelService
-                .findAllOne(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllSpokes(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<Rim> rims = wheelService
-                .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllRims(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<FrontHub> frontHubs = wheelService
-                .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllFrontHubs(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<BackHub> backHubs = wheelService
-                .findAllFor(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllBackHubs(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         List<Tire> tires = wheelService
-                .findAllFive(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findAllTires(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
         model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
         model.addAttribute("rimWide", wheelService.findRimWide());
@@ -95,9 +99,13 @@ public class WheelController {
     @RequestMapping("/show_BackHub")
     public String backHubVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<WheelMaker> wheelMakers = new HashSet<>();
         List<BackHub> backHubs = wheelService
-                .findAllFor(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", wheelService.findWheelMakers());
+                .findAllBackHubs(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (BackHub backHub : backHubs) {
+            wheelMakers.add(backHub.getMaker());
+        }
+        model.addAttribute("productMakers",wheelMakers);
         model.addAttribute("products", backHubs);
         model.addAttribute("allPages", getPageCountBackHub());
         return "product";
@@ -106,10 +114,13 @@ public class WheelController {
     @RequestMapping("/show_Wheel")
     public String wheelsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
-
+        Set<WheelMaker> wheelMakers = new HashSet<>();
         List<Wheel> wheels = wheelService
-                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", wheelService.findWheelMakers());
+                .findAllWheels(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (Wheel wheel : wheels) {
+            wheelMakers.add(wheel.getMaker());
+        }
+        model.addAttribute("productMakers", wheelMakers);
         model.addAttribute("products", wheels);
         model.addAttribute("allPages", getPageCountWheel());
         return "product";
@@ -118,9 +129,13 @@ public class WheelController {
     @RequestMapping("/show_FrontHub")
     public String frontHubsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<WheelMaker> wheelMakers = new HashSet<>();
         List<FrontHub> frontHubs = wheelService
-                .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", wheelService.findWheelMakers());
+                .findAllFrontHubs(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (FrontHub frontHub : frontHubs) {
+            wheelMakers.add(frontHub.getMaker());
+        }
+        model.addAttribute("productMakers", wheelMakers);
         model.addAttribute("products", frontHubs);
         model.addAttribute("allPages", getPageCountFrontHub());
         return "product";
@@ -129,9 +144,13 @@ public class WheelController {
     @RequestMapping("/show_Rim")
     public String rimsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<WheelMaker> wheelMakers = new HashSet<>();
         List<Rim> rims = wheelService
-                .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", wheelService.findWheelMakers());
+                .findAllRims(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (Rim rim : rims) {
+            wheelMakers.add(rim.getMaker());
+        }
+        model.addAttribute("productMakers", wheelMakers);
         model.addAttribute("products", rims);
         model.addAttribute("allPages", getPageCountRim());
         return "product";
@@ -140,20 +159,29 @@ public class WheelController {
     @RequestMapping("/show_Spoke")
     public String spokesVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<WheelMaker> wheelMakers = new HashSet<>();
         List<Spoke> spokes = wheelService
-                .findAllOne(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", wheelService.findWheelMakers());
+                .findAllSpokes(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (Spoke spoke : spokes) {
+            wheelMakers.add(spoke.getMaker());
+        }
+        model.addAttribute("productMakers",  wheelMakers);
         model.addAttribute("products", spokes);
         model.addAttribute("allPages", getPageCountSpoke());
-        return "products";
+        return "product";
     }
 
     @RequestMapping("/show_Tire")
     public String tiresVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
+        Set<WheelMaker> wheelMakers = new HashSet<>();
+
         List<Tire> tires = wheelService
-                .findAllFive(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", wheelService.findWheelMakers());
+                .findAllTires(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (Tire tire : tires) {
+            wheelMakers.add(tire.getMaker());
+        }
+        model.addAttribute("productMakers",  wheelMakers);
         model.addAttribute("products", tires);
         model.addAttribute("allPages", getPageCountTire());
         return "product";
@@ -269,7 +297,7 @@ public class WheelController {
         model.addAttribute("groupId", wheelMakerId);
         return "wheelsAdmin";
     }
-    @RequestMapping("/WheelMaker/{id}")
+    @RequestMapping("/WheelMaker/Wheel/{id}")
     public String listWheelMaker(
             @PathVariable(value = "id") long wheelMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -277,31 +305,51 @@ public class WheelController {
     {
         WheelMaker wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
         if (page < 0) page = 0;
+
+        Set<WheelMaker> wheelMakers = new HashSet<>();
+
+        List<Wheel> wheelsAll = wheelService.findAllWheels(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+
+        for (Wheel wheel : wheelsAll) {
+            wheelMakers.add(wheel.getMaker());
+        }
+
         List<Wheel> wheels = wheelService
                 .findByWheelMakers(wheelMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            model.addAttribute("productMakers", wheelService.findWheelMakers());
+            model.addAttribute("productMakers", wheelMakers);
+
         model.addAttribute("products", wheels);
         model.addAttribute("byGroupPages", getPageCountWheel(wheelMaker));
         model.addAttribute("groupId", wheelMakerId);
         return "product";
     }
-    @RequestMapping("/BackHubMaker/{id}")
+    @RequestMapping("/WheelMaker/BackHub/{id}")
     public String listBackHubMaker(
             @PathVariable(value = "id") long wheelMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         WheelMaker wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
+
         if (page < 0) page = 0;
+
+        Set<WheelMaker> wheelMakers = new HashSet<>();
+
+        List<BackHub> backHubsAll = wheelService.findAllBackHubs(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+
+        for (BackHub backHub : backHubsAll) {
+            wheelMakers.add(backHub.getMaker());
+        }
+
         List<BackHub> backHubs = wheelService
                 .findByBackHubMaker(wheelMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", wheelService.findWheelMakers());
+        model.addAttribute("productMakers", wheelMakers);
         model.addAttribute("products", backHubs);
-        model.addAttribute("byGroupPages", getPageCountWheel(wheelMaker));
+        model.addAttribute("byGroupPages", getPageCountBackHub(wheelMaker));
         model.addAttribute("groupId", wheelMakerId);
         return "product";
     }
-    @RequestMapping("/FrontHubMaker/{id}")
+    @RequestMapping("/WheelMaker/FrontHub/{id}")
     public String listFrontHubMaker(
             @PathVariable(value = "id") long wheelMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -309,15 +357,22 @@ public class WheelController {
     {
         WheelMaker wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
         if (page < 0) page = 0;
+
+        Set<WheelMaker> wheelMakers = new HashSet<>();
+
+        List<FrontHub> frontHubsAll = wheelService.findAllFrontHubs(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        for (FrontHub frontHub : frontHubsAll) {
+            wheelMakers.add(frontHub.getMaker());
+        }
         List<FrontHub> frontHubs = wheelService
                 .findByFrontHubMaker(wheelMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", wheelService.findWheelMakers());
+        model.addAttribute("productMakers", wheelMakers);
         model.addAttribute("products", frontHubs);
-        model.addAttribute("byGroupPages", getPageCountWheel(wheelMaker));
+        model.addAttribute("byGroupPages", getPageCountFrontHub(wheelMaker));
         model.addAttribute("groupId", wheelMakerId);
         return "product";
     }
-    @RequestMapping("/RimMaker/{id}")
+    @RequestMapping("/WheelMaker/Rim/{id}")
     public String listRimMaker(
             @PathVariable(value = "id") long wheelMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -325,15 +380,21 @@ public class WheelController {
     {
         WheelMaker wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
         if (page < 0) page = 0;
+
+        Set<WheelMaker> wheelMakers = new HashSet<>();
+        List<Rim> rimsAll = wheelService.findAllRims(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        for (Rim rim : rimsAll) {
+            wheelMakers.add(rim.getMaker());
+        }
         List<Rim> rims = wheelService
                 .findByRimMaker(wheelMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", wheelService.findWheelMakers());
+        model.addAttribute("productMakers", wheelMakers);
         model.addAttribute("products", rims);
-        model.addAttribute("byGroupPages", getPageCountWheel(wheelMaker));
+        model.addAttribute("byGroupPages", getPageCountRim(wheelMaker));
         model.addAttribute("groupId", wheelMakerId);
         return "product";
     }
-    @RequestMapping("/SpokeMaker/{id}")
+    @RequestMapping("/WheelMaker/Spoke/{id}")
     public String listSpokeMaker(
             @PathVariable(value = "id") long wheelMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -341,15 +402,20 @@ public class WheelController {
     {
         WheelMaker wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
         if (page < 0) page = 0;
+        Set<WheelMaker> wheelMakers = new HashSet<>();
+        List<Spoke> spokesAll = wheelService.findAllSpokes(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        for (Spoke spoke : spokesAll) {
+            wheelMakers.add(spoke.getMaker());
+        }
         List<Spoke> spokes = wheelService
                 .findBySpokeMaker(wheelMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", wheelService.findWheelMakers());
+        model.addAttribute("productMakers", wheelMakers);
         model.addAttribute("products", spokes);
-        model.addAttribute("byGroupPages", getPageCountWheel(wheelMaker));
+        model.addAttribute("byGroupPages", getPageCountSpoke(wheelMaker));
         model.addAttribute("groupId", wheelMakerId);
         return "product";
     }
-    @RequestMapping("/TireMaker/{id}")
+    @RequestMapping("/WheelMaker/Tire/{id}")
     public String listTireMaker(
             @PathVariable(value = "id") long wheelMakerId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
@@ -357,16 +423,22 @@ public class WheelController {
     {
         WheelMaker wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
         if (page < 0) page = 0;
+
+        Set<WheelMaker> wheelMakers = new HashSet<>();
+        List<Tire> tiresAll = wheelService.findAllTires(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        for (Tire tire : tiresAll) {
+            wheelMakers.add(tire.getMaker());
+        }
         List<Tire> tires = wheelService
                 .findByTireMaker(wheelMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("productMakers", wheelService.findWheelMakers());
+        model.addAttribute("productMakers", wheelMakers);
         model.addAttribute("products", tires);
-        model.addAttribute("byGroupPages", getPageCountWheel(wheelMaker));
+        model.addAttribute("byGroupPages", getPageCountTire(wheelMaker));
         model.addAttribute("groupId", wheelMakerId);
         return "product";
     }
 
-    //for delete components for admin
+    //delete components for admin
 
     @RequestMapping(value = "/admin/wheel/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> delete(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
@@ -608,85 +680,81 @@ public class WheelController {
 
     // Select one product by url and open in separate page
 
-    @RequestMapping("/Wheel/{url}")
+    @RequestMapping("/Wheel/{url}/{id}")
     public String listWheelUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Wheel> wheels = wheelService
-                .findWheelByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("wheels", wheels);
-        return "OneWheel";
+        Wheel wheel = wheelService.findWheel(id);
+        model.addAttribute("product", wheel);
+        return "oneProduct";
     }
-
-    @RequestMapping("/BackHub/{url}")
-    public String listBachHubUrl(
-            @PathVariable(value = "url") String url,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
-        if (page < 0) page = 0;
-        List<BackHub> backHubs = wheelService
-                .findBackHubByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("backHubs", backHubs);
-        return "OneBackHub";
-    }
-
-    @RequestMapping("/FrontHub/{url}")
-    public String listFrontHubUrl(
-            @PathVariable(value = "url") String url,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
-        if (page < 0) page = 0;
-        List<FrontHub> frontHubs = wheelService
-                .findFrontHubByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frontHubs", frontHubs);
-        return "OneFrontHub";
-    }
-
-    @RequestMapping("/Rim/{url}")
+    @RequestMapping("/Rim/{url}/{id}")
     public String listRimUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Rim> rims = wheelService
-                .findRimByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("rims", rims);
-        return "OneRim";
+        Rim rim = wheelService.findRim(id);
+        model.addAttribute("product", rim);
+        return "oneProduct";
+    }
+    @RequestMapping("/BackHub/{url}/{id}")
+    public String listBachHubUrl(
+            @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        BackHub backHub = wheelService.findBackHub(id);
+        model.addAttribute("product", backHub);
+        return "oneProduct";
     }
 
-    @RequestMapping("/Spoke/{url}")
+    @RequestMapping("/FrontHub/{url}/{id}")
+    public String listFrontHubUrl(
+            @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        if (page < 0) page = 0;
+        FrontHub frontHub = wheelService.findFrontHub(id);
+        model.addAttribute("product", frontHub);
+        return "oneProduct";
+    }
+
+    @RequestMapping("/Spoke/{url}/{id}")
     public String listSpokeUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Spoke> spokes = wheelService
-                .findSpokeByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("spokes", spokes);
-        return "OneSpoke";
+        Spoke spoke = wheelService.findSpoke(id);
+        model.addAttribute("product", spoke);
+        return "oneProduct";
     }
 
-    @RequestMapping("/Tire/{url}")
+    @RequestMapping("/Tire/{url}/{id}")
     public String listTireUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Tire> tires = wheelService
-                .findTireByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("tires", tires);
-        return "OneTire";
+        Tire tire = wheelService.findTire(id);
+        model.addAttribute("product", tire);
+        return "oneProduct";
     }
-
-
 
     private long getPageCountWheel() {
         long totalCount = wheelService.countWheel();
@@ -729,6 +797,10 @@ public class WheelController {
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
     private long getPageCountBackHub(WheelMaker wheelMaker) {
+        long totalCount = wheelService.countByWheelMakerBackHub(wheelMaker);
+        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
+    }
+    private long getPageCountTire(WheelMaker wheelMaker) {
         long totalCount = wheelService.countByWheelMakerBackHub(wheelMaker);
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }

@@ -224,11 +224,15 @@ public class BrakeController {
     {
         BrakeMaker brakeMaker = (groupId != DEFAULT_GROUP_ID) ? brakeService.findBrakeMaker(groupId) : null;
         if (page < 0) page = 0;
+
         List<BrakeDiscHydraulic> brakeDiscHydraulicsAll = brakeService.findAllBrakeDiscHydraulic(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+
         Set<BrakeMaker> brakeMakers = new HashSet<>();
+
         for (BrakeDiscHydraulic brakeDiscHydraulic : brakeDiscHydraulicsAll) {
             brakeMakers.add(brakeDiscHydraulic.getMaker());
         }
+
         List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
                 .findByBrakeDiscHydraulicMakers(brakeMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("productMakers",brakeMakers);
@@ -451,56 +455,57 @@ public class BrakeController {
     }
 
     // Select one product by url and open in separate page
-    @RequestMapping("/BrakeDiscHydraulic/{url}")
+    @RequestMapping("/BrakeDiscHydraulic/{url}/{id}")
     public String listBrakeDiscHydraulicUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
-                .findBrakeDiscHydraulicByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
-        return "OneBrakeDiscHydraulic";
+        BrakeDiscHydraulic brakeDiscHydraulic = brakeService.findBrakeDiscHydraulic(id);
+        model.addAttribute("product", brakeDiscHydraulic);
+        return "oneProduct";
     }
 
-    @RequestMapping("/BrakeDiscMechanik/{url}")
+    @RequestMapping("/BrakeDiscMechanik/{url}/{id}")
     public String listBrakeDiscMechanikUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
-                .findBrakeDiscMechanikByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
-        return "OneBrakeDiscMechanik";
+        BrakeDiscMechanik brakeDiscMechanik = brakeService.findBrakeDiscMechanik(id);
+        model.addAttribute("product", brakeDiscMechanik);
+        return "oneProduct";
     }
 
-    @RequestMapping("/BrakeVBrake/{url}")
+    @RequestMapping("/BrakeVBrake/{url}/{id}")
     public String listBrakeVBrakeUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<BrakeVBrake> brakeVBrakes = brakeService
-                .findBrakeVBrakeByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeVBrakes", brakeVBrakes);
-        return "OneBrakeVBrake";
+        BrakeVBrake brakeVBrake = brakeService.findBrakeVBrake(id);
+        model.addAttribute("product", brakeVBrake);
+        return "oneProduct";
     }
 
-    @RequestMapping("/BrakeHandle/{url}")
+    @RequestMapping("/BrakeHandle/{url}/{id}")
     public String listBrakeHandleUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<BrakeHandle> brakeHandles = brakeService
-                .findBrakeHandleByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeHandles", brakeHandles);
-        return "OneBrakeHandle";
+        BrakeHandle brakeHandle = brakeService.findBrakeHandle(id);
+
+        model.addAttribute("product", brakeHandle);
+        return "oneProduct";
     }
 
     private long getPageCountBrakeDiscHydr() {

@@ -66,9 +66,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul class="nav">
                     <li class="dropdown1"><a href="#chooseBike">Зібрати велосипед</a>
                         <ul class="dropdown2">
-                            <li><a href="/chooseMTBSize">МТВ</a></li>
-                            <li><a href="/chooseShosseSize">ШОССЕ</a></li>
-                            <li><a href="/chooseCitySize">МІСЬКИЙ</a></li>
+                            <li><a href="/chooseSize/${'MTB'}">МТВ</a></li>
+                            <li><a href="/chooseSize/${'Shosse'}">ШОССЕ</a></li>
+                            <li><a href="/chooseSize/${'City'}">МІСЬКИЙ</a></li>
                         </ul>
                     </li>
                     <li class="dropdown1"><a href="#cate">КОМППОНЕНТИ</a>
@@ -105,16 +105,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div id="cate" class="categories">
     <div class="container">
         <h3>Категорії</h3>
-        <div class="categorie-grids">
-            <a href="/chooseDiscHydraulic"><div class="col-md-2 cate-grid grid1">
+        <div class="row">
+            <a href="/chooseDiscHydraulic"><div class="col-md-4 col-sm-12 col-xs-12 component grid1">
                 <h4>Дискові гальма гідравлічні</h4>
                 <a class="store" href="/chooseDiscHydraulic">Вибрати</a>
             </div></a>
-            <a href="/chooseDiscMechanik"><div class="col-md-2 cate-grid grid2">
+            <a href="/chooseDiscMechanik"><div class="col-md-4 col-sm-12 col-xs-12 component grid2">
                 <h4>Дискові гальма механічні</h4>
                 <a class="store" href="/chooseDiscMechanik">Вибрати</a>
             </div></a>
-            <a href="/chooseVBrakeFront"><div class="col-md-4 cate-grid grid3">
+            <a href="/chooseVBrakeFront"><div class="col-md-4 col-sm-12 col-xs-12 component grid3">
                 <h4>Ободні гальма (V-brake)</h4>
                 <a class="store" href="/chooseVBrakeFront">Вибрати</a>
             </div></a>
@@ -122,8 +122,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
-
-
+<div class="footer">
+    <div class="container" id="about">
+        <div class="contact-details">
+            <div class="logo2">
+                <a href="/"><img src="/resources/images/logo.png"
+                                 alt="logo"
+                                 width="60"
+                                 height="62"/>
+                </a>
+                <div class="about">
+                    <p>
+                        Даний проект являється демонстраційним і не використовуєтсья для продажу комплектуючих.
+                    </p>
+                </div>
+            </div>
+            <h2>Контакти розробника</h2>
+            <p class="address">
+                <span>Vitalii Zhuk</span><br>
+                <span>Ukraine, Kiev</span><br>
+                <span class="address-block-label"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                <a class="address-block-link" target="_blank" href="tel:+380638521116">+380638521116</a><br>
+                <span class="address-block-label"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                <a class="address-block-link" target="_blank" href="mailto:golden_beetle@bigmir.net">zhukvitaliis@gmail.com</a><br>
+                <span class="address-block-label"><i class="fa fa-facebook"></i></span>
+                <a class="address-block-link" target="_blank" href="https://www.facebook.com/vitalii.zh">ZhukVitalii</a>
+            </p>
+        </div>
+    </div>
+</div>
+<ul class="copyright">
+    <li>&copy; Copyright 2018 VitaliiZhuk</li>
+    <li>All Rights Reserved</li>
+</ul>
 </body>
 </html>
 

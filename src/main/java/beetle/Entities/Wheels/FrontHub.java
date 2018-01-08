@@ -78,5 +78,7 @@ public class FrontHub {
     public Double getPrice(){
         return price;
     }
-
+    public WheelMaker getMaker() {
+        return maker;
+    }
 }

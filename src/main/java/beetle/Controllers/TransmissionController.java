@@ -806,110 +806,109 @@ public class TransmissionController {
 
     // Select one product by url and open in separate page
 
-    @RequestMapping("/BackDerailleur/{url}")
+    @RequestMapping("/BackDerailleur/{url}/{id}")
     public String listBackDerailleurUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<BackDerailleur> backDerailleurs = transmissionService
-                .findBackDerailleurByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("backDerailleurs", backDerailleurs);
-        return "OneBackDerailleur";
+        BackDerailleur backDerailleur = transmissionService.findBackDerailleur(id);
+        model.addAttribute("product", backDerailleur);
+        return "oneProduct";
     }
 
-    @RequestMapping("/BackGearKas/{url}")
+    @RequestMapping("/BackGearKas/{url}/{id}")
     public String listBackGearKasUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<BackGearKas> backGearKass = transmissionService
-                .findBackGearKasByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("backGearKass", backGearKass);
-        return "OneBackGearKas";
+        BackGearKas backGearKas = transmissionService.findBackGearKas(id);
+        model.addAttribute("product", backGearKas);
+        return "oneProduct";
     }
 
-    @RequestMapping("/BackGearTr/{url}")
+    @RequestMapping("/BackGearTr/{url}/{id}")
     public String listBackGearTrUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<BackGearTr> backGearTrs = transmissionService
-                .findBackGearTrByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("backGearTrs", backGearTrs);
-        return "OneBackGearTr";
+        BackGearTr backGearTr = transmissionService.findBackGearTr(id);
+        model.addAttribute("product", backGearTr);
+        return "oneProduct";
     }
 
-    @RequestMapping("/Bracket/{url}")
+    @RequestMapping("/Bracket/{url}/{id}")
     public String listBracketUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Bracket> brackets = transmissionService
-                .findBracketByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brackets", brackets);
-        return "OneBracket";
+        Bracket bracket = transmissionService.findBracket(id);
+        model.addAttribute("product", bracket);
+        return "oneProduct";
     }
 
-    @RequestMapping("/Chain/{url}")
+    @RequestMapping("/Chain/{url}/{id}")
     public String listChainUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Chain> chains = transmissionService
-                .findChainByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("chains", chains);
-        return "OneChain";
+        Chain chain = transmissionService.findChain(id);
+        model.addAttribute("product", chain);
+        return "oneProduct";
     }
 
-    @RequestMapping("/Crank/{url}")
+    @RequestMapping("/Crank/{url}/{id}")
     public String listCrankUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Crank> cranks = transmissionService
-                .findCrankByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("cranks", cranks);
-        return "OneCrank";
+        Crank crank = transmissionService.findCrank(id);
+        model.addAttribute("product", crank);
+        return "oneProduct";
     }
 
-    @RequestMapping("/FrontDerailleur/{url}")
+    @RequestMapping("/FrontDerailleur/{url}/{id}")
     public String listFrontDerailleurUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<FrontDerailleur> frontDerailleurs = transmissionService
-                .findFrontDerailleurByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frontDerailleurs", frontDerailleurs);
-        return "OneFrontDerailleur";
+        FrontDerailleur frontDerailleur = transmissionService.findFrontDerailleur(id);
+        model.addAttribute("product", frontDerailleur);
+        return "oneProduct";
     }
 
-    @RequestMapping("/Pedal/{url}")
+    @RequestMapping("/Pedal/{url}/{id}")
     public String listPedalUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Pedal> pedals = transmissionService
-                .findPedalByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("pedals", pedals);
-        return "OnePedal";
+        Pedal pedal = transmissionService.findPedal(id);
+        model.addAttribute("product", pedal);
+        return "oneProduct";
     }
-
 
     private long getPageCountBackDerailleur() {
         long totalCount = transmissionService.countBackDerailleur();

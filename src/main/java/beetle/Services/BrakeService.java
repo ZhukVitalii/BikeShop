@@ -489,7 +489,22 @@ public class BrakeService {
     }
 
     //find by id
-
+    @Transactional(readOnly=true)
+    public  BrakeDiscHydraulic findBrakeDiscHydraulic(long id) {
+        return brakeDiscHydraulicRepository.findOne(id);
+    }
+    @Transactional(readOnly=true)
+    public  BrakeDiscMechanik findBrakeDiscMechanik(long id) {
+        return brakeDiscMechanikRepository.findOne(id);
+    }
+    @Transactional(readOnly=true)
+    public  BrakeHandle findBrakeHandle(long id) {
+        return brakeHandleRepository.findOne(id);
+    }
+    @Transactional(readOnly=true)
+    public  BrakeVBrake findBrakeVBrake(long id) {
+        return brakeVBrakeRepository.findOne(id);
+    }
     @Transactional(readOnly=true)
     public BrakeMaker findBrakeMaker(long id) {
         return brakeMakerRepository.findOne(id);

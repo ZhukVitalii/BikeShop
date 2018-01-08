@@ -482,69 +482,69 @@ public class HandlebarController {
 
     // Select one product by url and open in separate page
 
-    @RequestMapping("/Handlebar/{url}")
+    @RequestMapping("/Handlebar/{url}/{id}")
     public String listHandlebarUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Handlebar> handlebars = handlebarService
-                .findHandlebarByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("handlebars", handlebars);
-        return "OneHandlebar";
+        Handlebar handlebar = handlebarService.findHandlebar(id);
+        model.addAttribute("product", handlebar);
+        return "oneProduct";
     }
 
-    @RequestMapping("/Stem/{url}")
+    @RequestMapping("/Stem/{url}/{id}")
     public String listStemUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Stem> stems = handlebarService
-                .findStemByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("stems", stems);
-        return "OneStem";
+        Stem stem = handlebarService.findStem(id);
+        model.addAttribute("product", stem);
+        return "oneProduct";
     }
 
-    @RequestMapping("/Grips/{url}")
+    @RequestMapping("/Grips/{url}/{id}")
     public String listGripsUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Grips> grips = handlebarService
-                .findGripsByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("grips", grips);
-        return "OneGrips";
+        Grips grips = handlebarService.findGrips(id);
+        model.addAttribute("product", grips);
+        return "oneProduct";
     }
 
-    @RequestMapping("/Headset/{url}")
+    @RequestMapping("/Headset/{url}/{id}")
     public String listHeadsetUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Headset> headsets = handlebarService
-                .findHeadsetByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("headsets", headsets);
-        return "OneHeadset";
+        Headset headset = handlebarService.findHeadset(id);
+        model.addAttribute("product", headset);
+        return "oneProduct";
     }
 
-    @RequestMapping("/Winding/{url}")
+    @RequestMapping("/Winding/{url}/{id}")
     public String listWindingUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Winding> windings  = handlebarService
-                .findWindingByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("windings", windings);
-        return "OneWinding";
+        Winding winding = handlebarService.findWinding(id);
+        model.addAttribute("product", winding);
+        return "oneProduct";
     }
 
     private long getPageCountHandlebar() {

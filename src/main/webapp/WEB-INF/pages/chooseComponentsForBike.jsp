@@ -1,24 +1,25 @@
-
 <!DOCTYPE html>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <html>
 <head>
-    <title>Cart</title>
+    <title> </title>
     <link rel="shortcut icon"
           href="/resources/images/logo_brauser.png" >
+    <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
     <link href="/resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (Bootstrap's JavaScript plugins) -->
     <script src="/resources/js/jquery.min.js"></script>
-    <script src="/resources/js/my.js"></script>
     <!-- Custom Theme files -->
     <link href="/resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="bike Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+    <meta name="keywords" content="Bike-shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!--webfont-->
@@ -31,9 +32,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="/resources/js/ajax.js" type="text/javascript"></script>
     <!--js-->
 
+
 </head>
+
 <body>
-<!--banner-->
 <script src="/resources/js/responsiveslides.min.js"></script>
 <script>
     $(function () {
@@ -50,10 +52,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="/resources/images/logo.png"
-                                 alt=""
-                                 width="110"
-                                 height="112"/>
+                <a  href="/"><img  src="/resources/images/logo.png"
+                                   width="110"
+                                   height="112"
+                                   alt=""/>
                 </a>
             </div>
             <div class="top-nav">
@@ -99,122 +101,97 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
-<!--/banner-->
-<div class="cart">
-    <div class="container">
-        <div class="cart-top">
-            <a href="/"><< home</a>
-        </div>
 
-        <div class="col-md-8 cart-items">
-            <h2 id="total-number">${total} <label> товарів в корзині</label></h2>
-
-            <!----------------------------------------------------------------------->
-            <c:forEach items="${objects}" var="products">
-                <c:forEach items="${products}" var="product">
-                    <div class="cart-header">
-                        <div class="close1">
-                            <button type="button"
-                                    class="delete-from-cart"
-                                    onclick="deleteFromCart('${product.getClass().getSimpleName()}',${product.article})">
-                            </button>
-                        </div>
-                        <div class="cart-sec">
-                            <div class="cart-item cyc">
-                                <img src="${product.way}"/>
-                            </div>
-                            <div class="cart-item-info">
-                                <div class="link-to-one">
-                                    <a href="<c:url value="/${product.getClass().getSimpleName()}/${product.url}"/>"
-                                       title="Перейти до <c:out value="${product.name}"/>">
-                                        <h3>${product.name}</h3>
-                                    </a>
-                                </div>
-                                <h4></h4>
-                                <p>${product.price} <label> грн</label><a href="#"></a></p>
-                                <p class="qty">Кількість ::</p>
-                                <p id="${product.article}" class="form-control input-small" >
-                                        ${productsNumber.get(product.article)}
-                                </p>
-                                <button type="button"
-                                        class="add-number"
-                                        onclick="add('/upPrice/${product.price}', ${product.price},${product.article})">
-                                </button>
-                                <button type="button"
-                                        class="remove-number"
-                                        onclick="remove('/downPrice/${product.price}',${product.price},${product.article})">
-                                </button>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </c:forEach>
-            </c:forEach>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul id="groupList" class="nav navbar-nav">
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Виробник <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Default</a></li>
+                            <c:forEach items="${productMakers}" var="productMaker">
+                                <li><a href="/${productMaker.getClass().getSimpleName()}/${products.get(0).getClass().getSimpleName()}/${productMaker.id}">${productMaker.name}</a></li>
+                            </c:forEach>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="col-md-4 cart-total">
-            <h3>
-                 Для оформлення замовлення заповніть дані
-            </h3>
-            <form role="form"
-                  action="#"
-                  method="post">
-                <div class="user" novalidate>
-                    <div class="user-input">
-                        <input class="input-box"
-                               id="username"
-                               type="text"
-                               name="name"
-                               placeholder="ПІБ"
-                               required/>
+    </nav>
+    <div class="product">
+        <div class="product-head">
+            <a href="/">Home</a> <span>::</span>
+        </div>
+        <c:forEach items="${products}" var="product">
+            <link rel="stylesheet" href="/resources/css/etalage.css">
+            <script src="/resources/js/jquery.etalage.min.js"></script>
+            <div class="details-left-slider">
+                <a href="<c:url value="/${product.getClass().getSimpleName()}/${product.url}/${product.id}"/>"
+                   title="Перейти до <c:out value="${product.name}"/>">
+                    <img height="300" width="300" src="${product.way}" />
+                </a>
+                <div class="details-left-info">
+                    <div class="link-to-one">
+                        <a href="<c:url value="/${product.getClass().getSimpleName()}/${product.url}/${product.id}"/>"
+                           title="Перейти до <c:out value="${product.name}"/>">
+                            <h3>${product.name}</h3>
+                        </a>
                     </div>
-                    <div class="user-input">
-                        <input class="input-box"
-                               id="email"
-                               type="email"
-                               name="email"
-                               placeholder="Е-mail"
-                               required/>
+                    <h5> Артикул  : ${product.article}</h5>
+                    <p class="maker"> <h3> Виробник  : ${product.maker.name} </h3></p>
+                    <h4></h4>
+                    <p>${product.price}<label>грн</label><a href="#"></a></p>
+                    <div class="btn_form">
+                        <c:if test="${check == 'frontBrakeDiscHydraulik'}">
+                            <a href="/chooseDiscHydraulicBack/${product.id}">Вибрати передні гальма</a>
+                        </c:if>
+                        <c:if test="${check == 'backBrakeDiscHydraulik'}">
+                            <a href="/chooseHandlebar/${'hydraulic'}/${product.id}">Вибрати задні гальма</a>
+                        </c:if>
+                        <c:if test="${check == 'frontBrakeDiscMechanik'}">
+                            <a href="/chooseDiscMechanikBack/${product.id}">Вибрати передні гальма</a>
+                        </c:if>
+                        <c:if test="${check == 'backBrakeDiscMechanik'}">
+                            <a href="/chooseHandlebar/${'mechanik'}/${product.id}">Вибрати задні гальма</a>
+                        </c:if>
+                        <c:if test="${check == 'frontBrakeVBrake'}">
+                            <a href="/chooseVBrakeBack/${product.id}">Вибрати передні гальма</a>
+                        </c:if>
+                        <c:if test="${check == 'backBrakeVBrake'}">
+                            <a href="/chooseHandlebar/${'vBrake'}/${product.id}">Вибрати задні гальма</a>
+                        </c:if>
+                        <c:if test="${check == 'product'}">
+                        <a href="/choosen${product.getClass().getSimpleName()}/${product.id}">Вибрати</a>
+                        </c:if>
+                        <button type="button" onclick="addToCart('${product.getClass().getSimpleName()}',${product.article})">Додати до корзини</button>
                     </div>
-                    <div class="user-input">
-                        <input class="input-box"
-                               id="phone"
-                               type="number"
-                               name="phone"
-                               placeholder="Номер телефону"
-                               required/>
-                    </div>
-                    <div class="user-input">
-                        <input class="input-box"
-                               id="adress"
-                               type="text"
-                               name="adress"
-                               placeholder="Адреса"
-                               required/>
-                    </div>
-                    <div class="user-input">
-                        <input class="input-box"
-                               id="comment"
-                               type="text"
-                               name="comment"
-                               placeholder="Коментар"
-                               />
+                    <div class="bike-type">
+                        <h5>Опис  ::</h5>
+                        <p class="desc">${product.description}</p>
                     </div>
                 </div>
-
-            <h4 class="last-price">Загальна сума</h4>
-            <div class="clearfix"></div>
-            <span id="total-price" class="total final">${totalPrice} грн</span>
-            <div class="clearfix"></div>
-            <div class="btn_form">
-                <button type="submit"
-                        name="confirm"
-                        value="Confirm"
-                >Оформити замовлення</button>
-           <!-- <a class="order" href="#">Оформити замовлення</a>-->
-        </div>
-            </form>
+                <div class="clearfix"></div>
+            </div>
+        </c:forEach>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <c:if test="${allPages ne null}">
+                    <c:forEach var="i" begin="1" end="${allPages}">
+                        <li><a href="/show_${product.getClass().getSimpleName()}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
+                    </c:forEach>
+                </c:if>
+                <c:if test="${byGroupPages ne null}">
+                    <c:forEach var="i" begin="1" end="${byGroupPages}">
+                        <li><a href="/${product.getClass().getSimpleName()}Maker/${groupId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
+                    </c:forEach>
+                </c:if>
+            </ul>
+        </nav>
     </div>
-</div>
 </div>
 <div class="footer">
     <div class="container" id="about">
@@ -251,4 +228,3 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </ul>
 </body>
 </html>
-

@@ -9,14 +9,14 @@
 <head>
     <title>Frames</title>
     <link rel="shortcut icon"
-          href="resources/images/logo_brauser.png" >
+          href="/resources/images/logo_brauser.png" >
     <spring:url value="resources/css/bootstrap.css" var="bootstrap"/>
-    <link href="resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (Bootstrap's JavaScript plugins) -->
-    <script src="resources/js/jquery.min.js"></script>
+    <script src="/resources/js/jquery.min.js"></script>
     <!-- Custom Theme files -->
-    <link href="resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -29,16 +29,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
     <!--webfont-->
     <!-- dropdown -->
-    <script src="resources/js/jquery.easydropdown.js"></script>
-    <link href="resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="resources/js/scripts.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.easydropdown.js"></script>
+    <link href="/resources/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
+    <script src="/resources/js/scripts.js" type="text/javascript"></script>
     <!--js-->
 
 
 </head>
 
 <body>
-<script src="resources/js/responsiveslides.min.js"></script>
+<script src="/resources/js/responsiveslides.min.js"></script>
 <script>
     $(function () {
         $("#slider").responsiveSlides({
@@ -54,7 +54,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="header">
             <div class="logo">
-                <a href="/"><img src="resources/images/logo.png"
+                <a href="/"><img src="/resources/images/logo.png"
                                  alt=""
                                  width="110"
                                  height="112"/>
@@ -68,9 +68,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul class="nav">
                     <li class="dropdown1"><a href="#chooseBike">Зібрати велосипед</a>
                         <ul class="dropdown2">
-                            <li><a href="/chooseMTBSize">МТВ</a></li>
-                            <li><a href="/chooseShosseSize">ШОССЕ</a></li>
-                            <li><a href="/chooseCitySize">МІСЬКИЙ</a></li>
+                            <li><a href="/chooseSize/${'MTB'}">МТВ</a></li>
+                            <li><a href="/chooseSize/${'Shosse'}">ШОССЕ</a></li>
+                            <li><a href="/chooseSize/${'City'}">МІСЬКИЙ</a></li>
                         </ul>
                     </li>
                     <li class="dropdown1"><a href="#cate">КОМППОНЕНТИ</a>
@@ -96,7 +96,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Троси</a></li>
                         </ul>
                     </li>
-                    <a class="shop" href="/cart"><img src="resources/images/cart.png" alt=""/></a>
+                    <a class="shop" href="/cart"><img src="/resources/images/cart.png" alt=""/></a>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -188,10 +188,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </table>
     </div>
     <div class="clearfix"></div>
-   <div class="categorie-grids">
+    <div class="row">
         <c:forEach items="${framesizes}" var="framesize">
-            <div class="col-md-4 cate-grid grid26">
-                <a href="<c:url value="/framesMTB/${framesize.id}"/>">
+            <div class="col-md-4 col-sm-12 col-xs-12 component grid26">
+                <a href="<c:url value="/frames/${framesize.id}/${type}"/>">
                     <b><i>${framesize.size} </i></b></font>
                 </a>
             </div>
@@ -199,5 +199,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"></div>
     </div>
 </div>
+<div class="footer">
+    <div class="container" id="about">
+        <div class="contact-details">
+            <div class="logo2">
+                <a href="/"><img src="/resources/images/logo.png"
+                                 alt="logo"
+                                 width="60"
+                                 height="62"/>
+                </a>
+                <div class="about">
+                    <p>
+                        Даний проект являється демонстраційним і не використовуєтсья для продажу комплектуючих.
+                    </p>
+                </div>
+            </div>
+            <h2>Контакти розробника</h2>
+            <p class="address">
+                <span>Vitalii Zhuk</span><br>
+                <span>Ukraine, Kiev</span><br>
+                <span class="address-block-label"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                <a class="address-block-link" target="_blank" href="tel:+380638521116">+380638521116</a><br>
+                <span class="address-block-label"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                <a class="address-block-link" target="_blank" href="mailto:golden_beetle@bigmir.net">zhukvitaliis@gmail.com</a><br>
+                <span class="address-block-label"><i class="fa fa-facebook"></i></span>
+                <a class="address-block-link" target="_blank" href="https://www.facebook.com/vitalii.zh">ZhukVitalii</a>
+            </p>
+        </div>
+    </div>
+</div>
+<ul class="copyright">
+    <li>&copy; Copyright 2018 VitaliiZhuk</li>
+    <li>All Rights Reserved</li>
+</ul>
 </body>
 </html>

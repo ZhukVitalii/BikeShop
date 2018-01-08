@@ -155,17 +155,17 @@ public class FrameController {
     }
 
     // Select one product by url and open in separate page
-    @RequestMapping("/Frame/{url}")
+    @RequestMapping("/Frame/{url}/{id}")
     public String listFrameUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Frame> frames = frameService
-                .findByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
-        return "OneFrame";
+        Frame frame = frameService.findFrame(id);
+        model.addAttribute("product", frame);
+        return "oneProduct";
     }
 
     private long getPageCount() {

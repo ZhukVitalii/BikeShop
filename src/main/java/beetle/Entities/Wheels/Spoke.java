@@ -50,5 +50,8 @@ public class Spoke {
     public Double getPrice(){
         return price;
     }
+    public WheelMaker getMaker() {
+        return maker;
+    }
 
 }

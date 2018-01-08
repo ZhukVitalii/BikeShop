@@ -140,17 +140,17 @@ public class ForkController {
     }
 
     // Select one product by url and open in separate page
-    @RequestMapping("/Fork/{url}")
+    @RequestMapping("/Fork/{url}/{id}")
     public String listForkUrl(
             @PathVariable(value = "url") String url,
+            @PathVariable(value = "id") long id,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
         if (page < 0) page = 0;
-        List<Fork> forks  = forkService
-                .findByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("forks", forks);
-        return "OneFork";
+        Fork fork = forkService.findFork(id);
+        model.addAttribute("product", fork);
+        return "oneProduct";
     }
 
     private long getPageCount() {

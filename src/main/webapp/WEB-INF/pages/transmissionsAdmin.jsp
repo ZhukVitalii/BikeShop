@@ -62,9 +62,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul class="nav">
                     <li class="dropdown1"><a href="#chooseBike">Зібрати велосипед</a>
                         <ul class="dropdown2">
-                            <li><a href="/chooseMTBSize">МТВ</a></li>
-                            <li><a href="/chooseShosseSize">ШОССЕ</a></li>
-                            <li><a href="/chooseCitySize">МІСЬКИЙ</a></li>
+                            <li><a href="/chooseSize/${'MTB'}">МТВ</a></li>
+                            <li><a href="/chooseSize/${'Shosse'}">ШОССЕ</a></li>
+                            <li><a href="/chooseSize/${'City'}">МІСЬКИЙ</a></li>
                         </ul>
                     </li>
                     <li class="dropdown1"><a href="#cate">КОМППОНЕНТИ</a>
@@ -230,8 +230,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${crank.price}</td>
 
                 <c:choose>
-                    <c:when test="${crank.transmissionMaker ne null}">
-                        <td>${crank.transmissionMaker.name}</td>
+                    <c:when test="${crank.maker ne null}">
+                        <td>${crank.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -333,8 +333,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${backGearKas.price}</td>
 
                 <c:choose>
-                    <c:when test="${backGearKas.transmissionMaker ne null}">
-                        <td>${backGearKas.transmissionMaker.name}</td>
+                    <c:when test="${backGearKas.maker ne null}">
+                        <td>${backGearKas.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -436,8 +436,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${backGearTr.price}</td>
 
                 <c:choose>
-                    <c:when test="${backGearTr.transmissionMaker ne null}">
-                        <td>${backGearTr.transmissionMaker.name}</td>
+                    <c:when test="${backGearTr.maker ne null}">
+                        <td>${backGearTr.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -541,8 +541,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${backDerailleur.price}</td>
 
                 <c:choose>
-                    <c:when test="${backDerailleur.transmissionMaker ne null}">
-                        <td>${backDerailleur.transmissionMaker.name}</td>
+                    <c:when test="${backDerailleur.maker ne null}">
+                        <td>${backDerailleur.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -690,8 +690,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${frontDerailleur.price}</td>
 
                 <c:choose>
-                    <c:when test="${frontDerailleur.transmissionMaker ne null}">
-                        <td>${frontDerailleur.transmissionMaker.name}</td>
+                    <c:when test="${frontDerailleur.maker ne null}">
+                        <td>${frontDerailleur.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -802,8 +802,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${bracket.price}</td>
 
                 <c:choose>
-                    <c:when test="${bracket.transmissionMaker ne null}">
-                        <td>${bracket.transmissionMaker.name}</td>
+                    <c:when test="${bracket.maker ne null}">
+                        <td>${bracket.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -884,8 +884,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${pedal.price}</td>
 
                 <c:choose>
-                    <c:when test="${pedal.transmissionMaker ne null}">
-                        <td>${pedal.transmissionMaker.name}</td>
+                    <c:when test="${pedal.maker ne null}">
+                        <td>${pedal.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
@@ -967,8 +967,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>${chain.price}</td>
 
                 <c:choose>
-                    <c:when test="${chain.transmissionMaker ne null}">
-                        <td>${chain.transmissionMaker.name}</td>
+                    <c:when test="${chain.maker ne null}">
+                        <td>${chain.maker.name}</td>
                     </c:when>
                     <c:otherwise>
                         <td>Default</td>
