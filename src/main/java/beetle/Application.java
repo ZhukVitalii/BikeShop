@@ -1,5 +1,6 @@
 package beetle;
 
+import beetle.Secirity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,18 +11,7 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-/*
-    @Bean
-    public FilterRegistrationBean filterRegistrationBean() {
-        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        filter.setEncoding("UTF-8");
 
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        registrationBean.setFilter(filter);
-        registrationBean.addUrlPatterns("/*");
-        return registrationBean;
-    }
-    */
     @Bean
     public CommandLineRunner addToList (final UserService userService) {
         return new CommandLineRunner() {
