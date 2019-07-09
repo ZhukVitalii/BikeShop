@@ -1,10 +1,14 @@
-package beetle.Frames;
+package beetle.service.impl;
 
 import beetle.Forks.*;
+import beetle.FrameSearchParams;
+import beetle.Frames.*;
 import beetle.Handlebars.HeadsetType;
 import beetle.Handlebars.HeadsetTypeRepository;
 import beetle.Transmissions.BracketWide;
 import beetle.Transmissions.BracketWideRepository;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class FrameService {
+public class FrameServiceImpl {
     @Autowired
     private FrameRepository frameRepository;
 
@@ -39,9 +43,12 @@ public class FrameService {
     private BracketWideRepository bracketWideRepository;
     @Autowired
     private WheelsDiamRepository wheelsDiamRepository ;
+//    @Autowired
+//    SessionFactory sessionFactory;
+
 
     //Lists with articles of components, that user added to cart
-    public List<Long> articles = new ArrayList<>();
+    private List<Long> articles = new ArrayList<>();
 
     //add articles to List
     public void addToArticle(Long article) {
@@ -124,27 +131,27 @@ public class FrameService {
     }
 
     @Transactional(readOnly=true)
-    public List<BracketWide > findBracketWide () {
+    public List<BracketWide> findBracketWide() {
         return bracketWideRepository.findAll();
     }
 
     @Transactional(readOnly=true)
-    public List<HeadsetType> findHeadsetType () {
+    public List<HeadsetType> findHeadsetType() {
         return headsetTypeRepository.findAll();
     }
 
     @Transactional(readOnly=true)
-    public List<TubeDiameter> findTubeDiameter () {
+    public List<TubeDiameter> findTubeDiameter() {
         return tubeDiameterRepository.findAll();
     }
 
     @Transactional(readOnly=true)
-    public List<UnderSaddleTube> findUnderSaddleTube () {
+    public List<UnderSaddleTube> findUnderSaddleTube() {
         return underSaddleTubeRepository.findAll();
     }
 
     @Transactional(readOnly=true)
-    public List<BrakesType> findBrakesType () {
+    public List<BrakesType> findBrakesType() {
         return brakesTypeRepository.findAll();
     }
 
@@ -303,5 +310,23 @@ public class FrameService {
     }
 
 
+    @Transactional(readOnly = true)
+    public List<Frame> frames(FrameSearchParams fsp,Pageable pageable) {
 
+        return frameRepository.findFrame(
+//             fsp.getFrameMaker(),
+//             fsp.getUrl(),
+//             fsp.getArticle(),
+//             fsp.getBikeType(),
+//             fsp.getFrameSize(),
+//             fsp.getWheelsDiam(),
+             fsp.getBracketWide(),
+//             fsp.getHeadsetType(),
+//             fsp.getTubeDiameter(),
+//             fsp.getUnderSaddleTube(),
+//             fsp.getBrakesType(),
+//             fsp.getTrunkBinding(),
+             pageable);
+
+    }
 }

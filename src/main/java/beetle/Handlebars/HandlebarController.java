@@ -3,7 +3,7 @@ package beetle.Handlebars;
 import beetle.Frames.BikeType;
 import beetle.Forks.ForkService;
 import beetle.Forks.TubeDiameter;
-import beetle.Frames.FrameService;
+import beetle.service.impl.FrameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -32,7 +32,7 @@ public class HandlebarController {
     @Autowired
     private ForkService forkService;
     @Autowired
-    private FrameService frameService;
+    private FrameServiceImpl frameServiceImpl;
 
     //return page with links to pages with components
     @RequestMapping("/show_handlebarsComponents")

@@ -3,18 +3,56 @@ package beetle.Frames;
 import beetle.Forks.BrakesType;
 import beetle.Forks.TubeDiameter;
 import beetle.Forks.WheelsDiam;
+import beetle.FrameSearchParams;
 import beetle.Handlebars.HeadsetType;
 import beetle.Transmissions.BracketWide;
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 public interface FrameRepository extends JpaRepository<Frame, Long> {
+
+
+    String sql = "SELECT c FROM Frame c WHERE";
+
+//    @Query("SELECT c FROM Frame c WHERE c.frameMaker = :frameMaker " +
+//            "AND c.url = :url " +
+//            "AND c.article = :article " +
+//            "AND c.bikeType = :bikeType " +
+//            "AND c.frameSize = :frameSize " +
+//            "AND c.wheelsDiam =:wheelsDiam " +
+//            "AND c.bracketWide = :bracketWide " +
+//            "AND c.headsetType =:headsetType " +
+//            "AND c.tubeDiameter =:tubeDiameter " +
+//            "AND c.underSaddleTube =:underSaddleTube " +
+//            "AND c.brakesType =:brakesType " +
+//            "AND c.trunkBinding =:trunkBinding")
+    @Query("SELECT c FROM Frame c WHERE c.bracketWide = :bracketWide")
+    List<Frame> findFrame(//@Param("frameMaker") FrameMaker frameMaker,
+//                          @Param("url") String url,
+//                          @Param("article") Long article,
+//                          @Param("bikeType" )BikeType bikeType,
+//                          @Param("frameSize") FrameSize frameSize,
+//                          @Param("wheelsDiam") WheelsDiam wheelsDiam,
+                          @Param("bracketWide")BracketWide bracketWide,
+//                          @Param("headsetType") HeadsetType headsetType,
+//                          @Param("tubeDiameter")TubeDiameter tubeDiameter,
+//                          @Param("underSaddleTube")UnderSaddleTube underSaddleTube,
+//                          @Param("brakesType")BrakesType brakesType,
+//                          @Param("trunkBinding")TrunkBinding trunkBinding,
+                          Pageable pageable);
+
+
     @Query("SELECT c FROM Frame c WHERE c.frameMaker = :frameMaker")
     List<Frame> findByFrameMaker(@Param("frameMaker") FrameMaker frameMaker, Pageable pageable);
+
     @Query("SELECT COUNT(c) FROM Frame c WHERE c.frameMaker = :frameMaker")
     long countByFrameMaker(@Param("frameMaker") FrameMaker frameMaker);
 

@@ -51,4 +51,19 @@ public class BikeType {
     public BikeType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "BikeType{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", cranks=" + cranks +
+                ", frames=" + frames +
+                ", forks=" + forks +
+                ", wheels=" + wheels +
+                ", rims=" + rims +
+                ", handlebars=" + handlebars +
+                ", bikeType=" + bikeType +
+                '}';
+    }
 }

@@ -4,8 +4,9 @@ import beetle.Brakes.*;
 import beetle.Forks.*;
 import beetle.Frames.BikeType;
 import beetle.Frames.Frame;
-import beetle.Frames.FrameService;
-import beetle.Frames.FrameSize;
+import beetle.JSON.FrameSizeJSON;
+import beetle.JSON.FramesSearchInputJSON;
+import beetle.service.impl.FrameServiceImpl;
 import beetle.Handlebars.*;
 import beetle.Transmissions.*;
 import beetle.Wheels.*;
@@ -14,11 +15,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,124 +38,47 @@ public class UserController {
     @Autowired
     private ForkService forkService;
     @Autowired
-    private FrameService frameService;
+    private FrameServiceImpl frameServiceImpl;
     @Autowired
     private HandlebarService handlebarService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private JSONMapper mapper;
 
     //Return HOME-PAGE
     @RequestMapping("/")
-    public String index(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        return "index";
+    @GetMapping
+    @ResponseBody
+    public List<Long> index() {
+        return Arrays.asList(1l,2l);
     }
 
 
-    //Select from database bike type MTB
-    @RequestMapping("/MTB_page")
-    public String mtbVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        BikeType bikeType = frameService.findBikeType(1);
-        List<Frame> frames = frameService.
-                findByBikeType(bikeType, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
-        return "mtbBike";
+    @RequestMapping(value = "/get-frames", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Frame> getFrames( @RequestBody FramesSearchInputJSON input) {
+        List<Frame> frames = frameServiceImpl.findByBikeType(frameServiceImpl.findBikeType(input.getBikeTypeId()),
+                                                                new PageRequest(input.getPage() < 0 ? 0 : input.getPage(),
+                                                                input.getItemsPerPage(),
+                                                                Sort.Direction.DESC, "id"));
+        return frames;
     }
 
-    //Select from database bike type Shosse
-    @RequestMapping("/Shosse_page")
-    public String shosseVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        BikeType bikeType = frameService.findBikeType(2);
-        List<Frame> frames = frameService.
-                findByBikeType(bikeType, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
-        return "shosseBike";
+    @RequestMapping(value = "/get-frame-sizes", method = RequestMethod.GET)
+    @ResponseBody
+    public List<FrameSizeJSON> chooseFrameSizes() {
+        return mapper.toFrameSize(frameServiceImpl.findFrameSize());
     }
 
-    //Select from database bike type City
-    @RequestMapping("/City_page")
-    public String cityVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        BikeType bikeType = frameService.findBikeType(3);
-        List<Frame> frames = frameService.
-                findByBikeType(bikeType, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
-        return "cityBike";
-    }
-
-    //select from database frame by size for MTB
-    @RequestMapping("/chooseMTBSize")
-    public String chooseMTBSizeVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        List<FrameSize> frameSizes = frameService.findFrameSize();
-        model.addAttribute("framesizes", frameSizes);
-        return "chooseMTBSize";
-    }
-
-    //select from database frame by size for Shosse
-    @RequestMapping("/chooseShosseSize")
-    public String chooseShosseSizeVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        List<FrameSize> frameSizes = frameService.findFrameSize();
-        model.addAttribute("framesizes", frameSizes);
-        return "chooseShosseSize";
-    }
-
-    //select from database frame by size for city
-    @RequestMapping("/chooseCitySize")
-    public String chooseCitySizeVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        List<FrameSize> frameSizes = frameService.findFrameSize();
-        model.addAttribute("framesizes", frameSizes);
-        return "chooseCITYSize";
-    }
-
-    // Select Bike By Type and Size
-    @RequestMapping("/framesMTB/{id}")
-    public String listFrameMTBSize(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model) {
-        if (page < 0) page = 0;
-        BikeType bikeType = frameService.findBikeType(1);
-        FrameSize frameSize = frameService.findFrameSize(id);
-        List<Frame> frames = frameService
-                .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
-        return "mtbBike";
-    }
-
-    // Select Bike By Type and Size
-    @RequestMapping("/framesShosse/{id}")
-    public String listFrameShosseSize(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model) {
-        if (page < 0) page = 0;
-        BikeType bikeType = frameService.findBikeType(2);
-        FrameSize frameSize = frameService.findFrameSize(id);
-        List<Frame> frames = frameService
-                .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        ;
-        model.addAttribute("frames", frames);
-        return "shosseBike";
-    }
-
-    // Select Bike By Type and Size
-    @RequestMapping("/framesCity/{id}")
-    public String listFrameCitySize(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model) {
-        if (page < 0) page = 0;
-        BikeType bikeType = frameService.findBikeType(3);
-        FrameSize frameSize = frameService.findFrameSize(id);
-        List<Frame> frames = frameService
-                .findByTypeAndSize(bikeType, frameSize, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frames", frames);
-        return "cityBike";
+    @RequestMapping(value = "/frames-by-size", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Frame> getFramesBySize(@RequestBody FramesSearchInputJSON input) {
+        return frameServiceImpl.findByTypeAndSize(frameServiceImpl.findBikeType(input.getBikeTypeId()),
+                                                                frameServiceImpl.findFrameSize(input.getFrameSizeId()),
+                                                                new PageRequest(input.getPage() < 0 ? 0 : input.getPage(),
+                                                                input.getItemsPerPage(),
+                                                                Sort.Direction.DESC, "id"));
     }
 
     //Add frame to cart
@@ -165,7 +88,7 @@ public class UserController {
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model) {
         if (page < 0) page = 0;
-        frameService.addToArticle(article);
+        frameServiceImpl.addToArticle(article);
         return "redirect:/show_frames";
     }
 
@@ -475,10 +398,10 @@ public class UserController {
         int total = 0; // number of product in cart
 
 //Select components from database by article, that user added to cart, and add this components to List
-        for (int i = 0; i < frameService.getSize(); i++) {
-            System.out.println("артиклі рами в корзині" + " " + frameService.getArticleFromCart(i));
-            List<Frame> frame = frameService
-                    .findByArticle(frameService.getArticleFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        for (int i = 0; i < frameServiceImpl.getSize(); i++) {
+            System.out.println("артиклі рами в корзині" + " " + frameServiceImpl.getArticleFromCart(i));
+            List<Frame> frame = frameServiceImpl
+                    .findByArticle(frameServiceImpl.getArticleFromCart(i), new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
             Frame frameToCart = frame.get(0);
             double price = frameToCart.getPrice();
             frames.add(frameToCart);
@@ -731,7 +654,7 @@ public class UserController {
     {
         if (page < 0) page = 0;
         userService.addIdFrame(id);
-        Frame frame = frameService.findFrame(userService.getIdFrame());
+        Frame frame = frameServiceImpl.findFrame(userService.getIdFrame());
         BikeType bikeType = frame.getBikeType();
         TubeDiameter tubeDiameter = frame.getTubeDiameter();
         WheelsDiam wheelsDiam = frame.getWheelsDiam();
@@ -750,7 +673,7 @@ public class UserController {
     {
         if (page < 0) page = 0;
         userService.addIdFork(id);
-        Frame frame = frameService.findFrame(userService.getIdFrame());
+        Frame frame = frameServiceImpl.findFrame(userService.getIdFrame());
         BikeType bikeType = frame.getBikeType();
         WheelsDiam wheelsDiam = frame.getWheelsDiam();
         BrakesType brakesType = frame.getBrakesType();
@@ -768,7 +691,7 @@ public class UserController {
     {
         if (page < 0) page = 0;
         userService.addIdWheel(id);
-        Frame frame = frameService.findFrame(userService.getIdFrame());
+        Frame frame = frameServiceImpl.findFrame(userService.getIdFrame());
         BracketWide bracketWide = frame.getBracketWide();
         List<Bracket> brackets = transmissionService.
                 findByBracketWide(bracketWide,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
@@ -884,7 +807,7 @@ public class UserController {
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model) {
         userService.addIdPedal(id);
-        Frame frame = frameService.findFrame(userService.getIdFrame());
+        Frame frame = frameServiceImpl.findFrame(userService.getIdFrame());
         BrakesType brakesType = frame.getBrakesType();
         int a = (int)brakesType.getId();
         Location location = brakeService.findLication(1);
@@ -995,7 +918,7 @@ public class UserController {
             userService.addIdBrakeVBrakeBack(id);
             System.out.println("VBrake" + id +" " + type);
         }
-        Frame frame = frameService.findFrame(userService.getIdFrame());
+        Frame frame = frameServiceImpl.findFrame(userService.getIdFrame());
         BikeType bikeType = frame.getBikeType();
         List<Handlebar> handlebars = handlebarService.
                 findByBikeType(bikeType, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));

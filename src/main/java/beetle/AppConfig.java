@@ -11,11 +11,11 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
+//import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+//import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+//import org.springframework.web.servlet.view.JstlView;
+//import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -25,8 +25,7 @@ import java.util.Properties;
 @PropertySource("classpath:config.properties")
 @EnableTransactionManagement
 @ComponentScan("beetle")
-@EnableWebMvc
-public class AppConfig extends WebMvcConfigurerAdapter  {
+public class AppConfig{
     private static final String RESOURCES_URL = "/resources/";
 
     @Value("${hibernate.dialect}")
@@ -61,15 +60,15 @@ public class AppConfig extends WebMvcConfigurerAdapter  {
         return adapter;
     }
 
-    @Bean
-    public UrlBasedViewResolver setupViewResolver() {
-        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-        resolver.setPrefix("/WEB-INF/pages/");
-        resolver.setSuffix(".jsp");
-        resolver.setViewClass(JstlView.class);
-        resolver.setOrder(1);
-        return resolver;
-    }
+//    @Bean
+//    public UrlBasedViewResolver setupViewResolver() {
+//        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
+//        resolver.setPrefix("/WEB-INF/pages/");
+//        resolver.setSuffix(".jsp");
+//        resolver.setViewClass(JstlView.class);
+//        resolver.setOrder(1);
+//        return resolver;
+//    }
 /*
     @Bean
     public MultipartResolver multipartResolver() {
@@ -78,8 +77,8 @@ public class AppConfig extends WebMvcConfigurerAdapter  {
         return multipartResolver;
     }
    */
-    public void addResourceHandlers(final ResourceHandlerRegistry resource) {
-        resource.addResourceHandler(RESOURCES_URL + "**")
-                .addResourceLocations(RESOURCES_URL);
-    }
+//    public void addResourceHandlers(final ResourceHandlerRegistry resource) {
+//        resource.addResourceHandler(RESOURCES_URL + "**")
+//                .addResourceLocations(RESOURCES_URL);
+//    }
 }

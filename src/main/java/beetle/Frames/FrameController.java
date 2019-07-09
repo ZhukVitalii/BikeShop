@@ -5,6 +5,7 @@ import beetle.Forks.TubeDiameter;
 import beetle.Forks.WheelsDiam;
 import beetle.Handlebars.HeadsetType;
 import beetle.Transmissions.BracketWide;
+import beetle.service.impl.FrameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -26,18 +27,18 @@ public class FrameController {
 
 
     @Autowired
-    private FrameService frameService;
+    private FrameServiceImpl frameServiceImpl;
 
     //show all frames
     @RequestMapping("/show_frames")
     public String framesVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
-        List<Frame> frames = frameService
+        List<Frame> frames = frameServiceImpl
                 .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("frameMakers", frameService.findFrameMakers());
+        model.addAttribute("frameMakers", frameServiceImpl.findFrameMakers());
         model.addAttribute("frames", frames);
         model.addAttribute("allPages", getPageCount());
-        int a = frameService.getSize();
+        int a = frameServiceImpl.getSize();
         System.out.println(a);
         return "frames";
     }
@@ -46,7 +47,7 @@ public class FrameController {
     @RequestMapping("/admin/show_framesAdmin")
     public String framesAdminVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
-        List<Frame> frames = frameService
+        List<Frame> frames = frameServiceImpl
                 .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("frames", frames);
         model.addAttribute("allPages", getPageCount());
@@ -56,16 +57,16 @@ public class FrameController {
     //add components from browser
     @RequestMapping("/admin/frame_add_page")
     public String frameAddPage(Model model) {
-        model.addAttribute("frameMakers", frameService.findFrameMakers());
-        model.addAttribute("frameSizes", frameService.findFrameSize());
-        model.addAttribute("wheelsDiams", frameService.findWheelsDiam());
-        model.addAttribute("trunkBindings", frameService.findTrunkBinding());
-        model.addAttribute("bikeTypes", frameService.findBikeType());
-        model.addAttribute("bracketWides", frameService.findBracketWide());
-        model.addAttribute("headsetTypes", frameService.findHeadsetType());
-        model.addAttribute("tubeDiameters", frameService.findTubeDiameter());
-        model.addAttribute("underSaddleTubes", frameService.findUnderSaddleTube());
-        model.addAttribute("brakesTypes", frameService.findBrakesType());
+        model.addAttribute("frameMakers", frameServiceImpl.findFrameMakers());
+        model.addAttribute("frameSizes", frameServiceImpl.findFrameSize());
+        model.addAttribute("wheelsDiams", frameServiceImpl.findWheelsDiam());
+        model.addAttribute("trunkBindings", frameServiceImpl.findTrunkBinding());
+        model.addAttribute("bikeTypes", frameServiceImpl.findBikeType());
+        model.addAttribute("bracketWides", frameServiceImpl.findBracketWide());
+        model.addAttribute("headsetTypes", frameServiceImpl.findHeadsetType());
+        model.addAttribute("tubeDiameters", frameServiceImpl.findTubeDiameter());
+        model.addAttribute("underSaddleTubes", frameServiceImpl.findUnderSaddleTube());
+        model.addAttribute("brakesTypes", frameServiceImpl.findBrakesType());
         return "frame_add_page";
     }
 
@@ -81,9 +82,9 @@ public class FrameController {
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
-        FrameMaker frameMaker = (groupId != DEFAULT_GROUP_ID) ? frameService.findFrameMaker(groupId) : null;
+        FrameMaker frameMaker = (groupId != DEFAULT_GROUP_ID) ? frameServiceImpl.findFrameMaker(groupId) : null;
         if (page < 0) page = 0;
-        List<Frame> frames = frameService
+        List<Frame> frames = frameServiceImpl
                 .findByFrameMaker(frameMaker, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("frames", frames);
         model.addAttribute("byGroupPages", getPageCount(frameMaker));
@@ -96,7 +97,7 @@ public class FrameController {
     @RequestMapping(value = "/admin/frame/delete", method = RequestMethod.POST)
     public ResponseEntity<Void> delete(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
         if (toDelete != null && toDelete.length > 0)
-            frameService.deleteFrame(toDelete);
+            frameServiceImpl.deleteFrame(toDelete);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -124,26 +125,26 @@ public class FrameController {
                             @RequestParam String way
                               )
     {
-        FrameMaker frameMaker = (frameMakerId != DEFAULT_GROUP_ID) ? frameService.findFrameMaker(frameMakerId) : null;
-        BikeType bikeType = (bikeTypeId != DEFAULT_GROUP_ID) ? frameService.findBikeType(bikeTypeId) : null;
-        FrameSize frameSize = (frameSizeId != DEFAULT_GROUP_ID) ? frameService.findFrameSize(frameSizeId) : null;
-        WheelsDiam wheelsDiam = (wheelsDiamId != DEFAULT_GROUP_ID) ? frameService.findWheelsDiam(wheelsDiamId) : null;
-        BracketWide bracketWide = (bracketWideId != DEFAULT_GROUP_ID) ? frameService.findBracketWide(bracketWideId) : null;
-        HeadsetType headsetType = (headsetTypeId != DEFAULT_GROUP_ID) ? frameService.findHeadsetType(headsetTypeId) : null;
-        TubeDiameter tubeDiameter = (tubeDiameterId != DEFAULT_GROUP_ID) ? frameService.findTubeDiameter(tubeDiameterId) : null;
-        UnderSaddleTube underSaddleTube = (underSaddleTubeId != DEFAULT_GROUP_ID) ? frameService.findUnderSaddleTuber(underSaddleTubeId) : null;
-        BrakesType brakesType =  (brakesTypeId != DEFAULT_GROUP_ID) ? frameService.findBrakesType(brakesTypeId) : null;
-        TrunkBinding trunkBinding = (trunkBindingId != DEFAULT_GROUP_ID) ? frameService.findTrunkBinding(trunkBindingId) : null;
+        FrameMaker frameMaker = (frameMakerId != DEFAULT_GROUP_ID) ? frameServiceImpl.findFrameMaker(frameMakerId) : null;
+        BikeType bikeType = (bikeTypeId != DEFAULT_GROUP_ID) ? frameServiceImpl.findBikeType(bikeTypeId) : null;
+        FrameSize frameSize = (frameSizeId != DEFAULT_GROUP_ID) ? frameServiceImpl.findFrameSize(frameSizeId) : null;
+        WheelsDiam wheelsDiam = (wheelsDiamId != DEFAULT_GROUP_ID) ? frameServiceImpl.findWheelsDiam(wheelsDiamId) : null;
+        BracketWide bracketWide = (bracketWideId != DEFAULT_GROUP_ID) ? frameServiceImpl.findBracketWide(bracketWideId) : null;
+        HeadsetType headsetType = (headsetTypeId != DEFAULT_GROUP_ID) ? frameServiceImpl.findHeadsetType(headsetTypeId) : null;
+        TubeDiameter tubeDiameter = (tubeDiameterId != DEFAULT_GROUP_ID) ? frameServiceImpl.findTubeDiameter(tubeDiameterId) : null;
+        UnderSaddleTube underSaddleTube = (underSaddleTubeId != DEFAULT_GROUP_ID) ? frameServiceImpl.findUnderSaddleTuber(underSaddleTubeId) : null;
+        BrakesType brakesType =  (brakesTypeId != DEFAULT_GROUP_ID) ? frameServiceImpl.findBrakesType(brakesTypeId) : null;
+        TrunkBinding trunkBinding = (trunkBindingId != DEFAULT_GROUP_ID) ? frameServiceImpl.findTrunkBinding(trunkBindingId) : null;
         Frame frame = new Frame(frameMaker,article,url,name,bikeType,frameSize, wheelsDiam, material,bracketWide,headsetType,tubeDiameter,
                 underSaddleTube,brakesType,trunkBinding,weight,color,price,description,way);
-        frameService.addFrame(frame);
+        frameServiceImpl.addFrame(frame);
         return "redirect:/show_frames";
     }
 
     //Add Maker to database
     @RequestMapping(value="/admin/frameMaker/add", method = RequestMethod.POST)
     public String groupAdd(@RequestParam String name) {
-        frameService.addFrameMaker(new FrameMaker(name));
+        frameServiceImpl.addFrameMaker(new FrameMaker(name));
         return "redirect:/show_frames";
     }
 
@@ -155,18 +156,18 @@ public class FrameController {
             Model model)
     {
         if (page < 0) page = 0;
-        List<Frame> frames = frameService
+        List<Frame> frames = frameServiceImpl
                 .findByUrl(url, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("frames", frames);
         return "OneFrame";
     }
 
     private long getPageCount() {
-        long totalCount = frameService.count();
+        long totalCount = frameServiceImpl.count();
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
     private long getPageCount(FrameMaker frameMaker) {
-        long totalCount = frameService.countByFrameMaker(frameMaker);
+        long totalCount = frameServiceImpl.countByFrameMaker(frameMaker);
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
 }
