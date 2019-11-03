@@ -1,5 +1,6 @@
 package beetle.Secirity;
 
+import beetle.enums.UserRoleEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

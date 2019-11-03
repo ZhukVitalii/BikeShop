@@ -154,7 +154,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </a>
                 </div>
                 <h5> Артикул  : ${backGearKas.article}</h5>
-                <p class="maker"> <h3> Виробник  : ${backGearKas.transmissionMaker.name} </h3></p>
+                <p class="manufacturer"> <h3> Виробник  : ${backGearKas.transmissionMaker.name} </h3></p>
                 <h4></h4>
                 <p>${backGearKas.price}<label>грн</label><a href="#"></a></p>
                 <div class="btn_form">

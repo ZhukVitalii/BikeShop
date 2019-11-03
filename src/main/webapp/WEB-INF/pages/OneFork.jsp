@@ -138,7 +138,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                                 <h3>${fork.name}</h3>
                                 <h5> Артикул  : ${fork.article}</h5>
-                                <p class="maker"> <h5> Виробник  : ${fork.forkMaker.name} </h5></p>
+                                <p class="manufacturer"> <h5> Виробник  : ${fork.forkMaker.name} </h5></p>
                                 <h4></h4>
                                 <p>${fork.price}<label>грн</label><a href="#"></a></p>
                                 <div class="btn_form">

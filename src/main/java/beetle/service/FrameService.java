@@ -1,11 +1,12 @@
 package beetle.service;
 
-import beetle.Forks.BrakesType;
-import beetle.Forks.TubeDiameter;
-import beetle.Forks.WheelsDiam;
-import beetle.Frames.*;
-import beetle.Handlebars.HeadsetType;
-import beetle.Transmissions.BracketWide;
+import beetle.entity.forks.BrakesType;
+import beetle.entity.forks.TubeDiameter;
+import beetle.entity.forks.WheelsDiam;
+import beetle.entity.Manufacturer;
+import beetle.entity.handlebars.HeadsetType;
+import beetle.entity.transmission.BracketWide;
+import beetle.entity.frame.*;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface FrameService {
 
     void addFrame(Frame frame);
 
-    void addFrameMaker(FrameMaker frameMaker);
+    void addFrameMaker(Manufacturer frameMaker);
 
     void addFrameSize(FrameSize frameSize);
 
@@ -31,7 +32,7 @@ public interface FrameService {
 
     List<Frame> findAll(Pageable pageable);
 
-    List<FrameMaker> findFrameMakers();
+    List<Manufacturer> findFrameMakers();
 
     List<FrameSize> findFrameSize();
 
@@ -51,7 +52,7 @@ public interface FrameService {
 
     List<BrakesType> findBrakesType();
 
-    List<Frame> findByFrameMaker(FrameMaker frameMaker, Pageable pageable);
+    List<Frame> findByFrameMaker(Manufacturer frameMaker, Pageable pageable);
 
     List<Frame> findByFrameSize(FrameSize frameSize, Pageable pageable);
 
@@ -63,5 +64,5 @@ public interface FrameService {
 
     List<Frame> findByTypeAndSize(BikeType bikeType,FrameSize frameSize, Pageable pageable);
 
-    List<Frame> findBySizeM( FrameSize frameSize , Pageable pageable);
+    List<Frame> findBySize(FrameSize frameSize , Pageable pageable);
 }

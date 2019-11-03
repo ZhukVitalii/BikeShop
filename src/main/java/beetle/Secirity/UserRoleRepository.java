@@ -1,5 +1,6 @@
 package beetle.Secirity;
 
+import beetle.enums.UserRoleEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Created by VitaliiZhuk on 10.10.2017.

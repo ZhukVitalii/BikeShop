@@ -1,14 +1,21 @@
 package beetle.service.impl;
 
-import beetle.Forks.*;
-import beetle.FrameSearchParams;
-import beetle.Frames.*;
-import beetle.Handlebars.HeadsetType;
-import beetle.Handlebars.HeadsetTypeRepository;
-import beetle.Transmissions.BracketWide;
-import beetle.Transmissions.BracketWideRepository;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
+import beetle.entity.Manufacturer;
+import beetle.entity.forks.BrakesType;
+import beetle.entity.forks.TubeDiameter;
+import beetle.entity.forks.WheelsDiam;
+import beetle.json.FrameSearchParams;
+import beetle.entity.handlebars.HeadsetType;
+import beetle.repository.ManufacturerRepository;
+import beetle.repository.forks.BrakesTypeRepository;
+import beetle.repository.forks.TubeDiameterRepository;
+import beetle.repository.forks.WheelsDiamRepository;
+import beetle.repository.handlebars.HeadsetTypeRepository;
+import beetle.entity.transmission.BracketWide;
+import beetle.repository.transmission.BracketWideRepository;
+import beetle.entity.frame.*;
+import beetle.repository.frame.*;
+import beetle.service.FrameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,13 +25,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class FrameServiceImpl {
+public class FrameServiceImpl implements FrameService {
     @Autowired
     private FrameRepository frameRepository;
-
-
     @Autowired
-    private FrameMakerRepository frameMakerRepository;
+    private ManufacturerRepository manufacturerRepository;
     @Autowired
     private FrameSizeRepository frameSizeRepository;
     @Autowired
@@ -73,8 +78,8 @@ public class FrameServiceImpl {
     }
 
     @Transactional
-    public void addFrameMaker(FrameMaker frameMaker) {
-        frameMakerRepository.save(frameMaker);
+    public void addFrameMaker(Manufacturer frameMaker) {
+        manufacturerRepository.save(frameMaker);
     }
 
     @Transactional
@@ -106,8 +111,8 @@ public class FrameServiceImpl {
     }
 
     @Transactional(readOnly=true)
-    public List<FrameMaker> findFrameMakers() {
-        return frameMakerRepository.findAll();
+    public List<Manufacturer> findFrameMakers() {
+        return manufacturerRepository.findAll();
     }
 
     @Transactional(readOnly=true)
@@ -157,8 +162,8 @@ public class FrameServiceImpl {
 
     //select from database by parametrs
     @Transactional(readOnly=true)
-    public List<Frame> findByFrameMaker(FrameMaker frameMaker, Pageable pageable) {
-        return frameRepository.findByFrameMaker(frameMaker, pageable);
+    public List<Frame> findByFrameMaker(Manufacturer manufacturer, Pageable pageable) {
+        return frameRepository.findByFrameMaker(manufacturer, pageable);
     }
 
     @Transactional(readOnly=true)
@@ -187,17 +192,7 @@ public class FrameServiceImpl {
     }
 
     @Transactional(readOnly=true)
-    public List<Frame> findBySizeM( FrameSize frameSize , Pageable pageable) {
-        return frameRepository.findBySize( frameSize, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<Frame> findBySizeL( FrameSize frameSize , Pageable pageable) {
-        return frameRepository.findBySize( frameSize, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<Frame> findBySizeS( FrameSize frameSize , Pageable pageable) {
+    public List<Frame> findBySize(FrameSize frameSize , Pageable pageable) {
         return frameRepository.findBySize( frameSize, pageable);
     }
 
@@ -243,7 +238,7 @@ public class FrameServiceImpl {
 
     //Count
     @Transactional(readOnly = true)
-    public long countByFrameMaker(FrameMaker frameMaker) {
+    public long countByFrameMaker(Manufacturer frameMaker) {
         return frameRepository.countByFrameMaker(frameMaker);
     }
 
@@ -260,8 +255,8 @@ public class FrameServiceImpl {
     }
 
     @Transactional(readOnly=true)
-    public FrameMaker findFrameMaker(long id) {
-        return frameMakerRepository.findOne(id);
+    public Manufacturer findFrameMaker(long id) {
+        return manufacturerRepository.findOne(id);
     }
 
     @Transactional(readOnly=true)

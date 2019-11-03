@@ -1,0 +1,32 @@
+package beetle.enums;
+
+public enum ComponentType {
+    FRAME,
+    FORK,
+    BRAKE_DISC_HYDRAULIC_FRONT,
+    BRAKE_DISC_HYDRAULIC_BACK,
+    BRAKE_V_BRAKE_FRONT,
+    BRAKE_V_BRAKE_BACK,
+    GRIPS,
+    HANDLEBAR,
+    HEADSET,
+    STEM,
+    WINDING,
+    BACK_DERAILLEUR,
+    BACK_GEAR_KAS,
+    BACK_GEAR_TR,
+    BRACKET,
+    CHAIN,
+    CRANK,
+    FRONT_DERAILLEUR,
+    PEDAL,
+    BACK_HUB,
+    FRONT_HUB,
+    RIM,
+    SPOKE,
+    TIRE,
+    WHEEL,
+    BRAKE_DISC_MECHANIK_FRONT,
+    BRAKE_DISC_MECHANIK_BACK,
+    BRAKE_HANDLE
+}

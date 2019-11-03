@@ -1,6 +1,6 @@
 package beetle;
 
-import beetle.Secirity.*;
+import beetle.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,9 +17,9 @@ public class Application {
         return new CommandLineRunner() {
             @Override
             public void run(String... strings) throws Exception {
-                 for (int i = 0; i <= 27; i++) {
-                     userService.addAllId();
-                }
+//                 for (int i = 0; i <= 27; i++) {
+//                     userService.addAllId();
+//                }
             }
         };
     }

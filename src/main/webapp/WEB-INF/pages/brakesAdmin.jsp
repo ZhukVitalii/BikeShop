@@ -500,7 +500,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </c:if>
             <c:if test="${byGroupPages ne null}">
                 <c:forEach var="i" begin="1" end="${byGroupPages}">
-                    <li><a href="/brakeMaker/${brakeMakerId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
+                    <li><a href="/brakeMaker/${manufacturer}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
                 </c:forEach>
             </c:if>
         </ul>

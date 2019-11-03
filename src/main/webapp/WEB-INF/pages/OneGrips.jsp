@@ -130,7 +130,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="details-left-info">
                                 <h3>${grips.name}</h3>
                                 <h5> Артикул  : ${grips.article}</h5>
-                                <p class="maker"> <h3> Виробник  : ${grips.handlebarMaker.name} </h3></p>
+                                <p class="manufacturer"> <h3> Виробник  : ${grips.handlebarMaker.name} </h3></p>
                                 <h4></h4>
                                 <p>${grips.price}<label>грн</label><a href="#"></a></p>
                                 <div class="btn_form">

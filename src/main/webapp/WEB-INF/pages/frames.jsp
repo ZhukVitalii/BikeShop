@@ -162,7 +162,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </a>
                 </div>
                 <h5> Артикул  : ${frame.article}</h5>
-                <p class="maker"> <h3> Виробник  : ${frame.frameMaker.name} </h3></p>
+                <p class="manufacturer"> <h3> Виробник  : ${frame.frameMaker.name} </h3></p>
                 <h4></h4>
                 <p>${frame.price}<label>грн</label><a href="#"></a></p>
                 <p class="size">Доступні розміри ::</p>
