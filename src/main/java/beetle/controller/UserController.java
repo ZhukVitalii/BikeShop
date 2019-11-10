@@ -62,7 +62,7 @@ public class UserController {
         return Arrays.asList(1l,2l);
     }
 
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/get-frames", method = RequestMethod.POST)
     @ResponseBody
     public List<FramesJSON> getFrames( @RequestBody FramesSearchInputJSON input) {
