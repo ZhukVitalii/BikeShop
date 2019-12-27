@@ -9,11 +9,11 @@ import beetle.entity.frame.Frame;
 import beetle.entity.handlebars.*;
 import beetle.entity.transmission.*;
 import beetle.entity.wheels.*;
+import beetle.json.FrameSearchResultResponseJSON;
 import beetle.json.FrameSizeJSON;
 import beetle.json.FramesJSON;
 import beetle.json.FramesSearchInputJSON;
 import beetle.mapper.FrameMapper;
-import beetle.mapper.JSONMapper;
 import beetle.service.*;
 import beetle.entity.brake.*;
 import beetle.service.impl.FrameServiceImpl;
@@ -46,7 +46,7 @@ public class UserController {
     @Autowired
     private ForkService forkService;
     @Autowired
-    private FrameServiceImpl frameServiceImpl;
+    private FrameService frameService;
     @Autowired
     private HandlebarService handlebarService;
     @Autowired
@@ -65,27 +65,28 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/get-frames", method = RequestMethod.POST)
     @ResponseBody
-    public List<FramesJSON> getFrames( @RequestBody FramesSearchInputJSON input) {
-        return frameMapper.toFrames(frameServiceImpl.findByBikeType(frameServiceImpl.findBikeType(input.getBikeTypeId()),
-                                                                new PageRequest(input.getPage() < 0 ? 0 : input.getPage(),
-                                                                input.getItemsPerPage(),
-                                                                Sort.Direction.DESC, "id")));
+    public FrameSearchResultResponseJSON getFrames( @RequestBody FramesSearchInputJSON input) {
+
+        return frameMapper.toSearchResult(frameService.findByBikeType(frameService.findBikeType(input.getBikeTypeId()),
+                new PageRequest(input.getPage() < 0 ? 0 : input.getPage(),
+                        input.getItemsPerPage(),
+                        Sort.Direction.DESC, "id")), input);
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/get-frame-sizes", method = RequestMethod.GET)
     @ResponseBody
     public List<FrameSizeJSON> chooseFrameSizes() {
-        return frameMapper.toFrameSize(frameServiceImpl.findFrameSize());
+        return frameMapper.toFrameSize(frameService.findFrameSize());
     }
 
     @RequestMapping(value = "/frames-by-size", method = RequestMethod.POST)
     @ResponseBody
-    public List<FramesJSON> getFramesBySize(@RequestBody FramesSearchInputJSON input) {
-        return frameMapper.toFrames(frameServiceImpl.findByTypeAndSize(frameServiceImpl.findBikeType(input.getBikeTypeId()),
-                                                                frameServiceImpl.findFrameSize(input.getFrameSizeId()),
+    public FrameSearchResultResponseJSON getFramesBySize(@RequestBody FramesSearchInputJSON input) {
+        return frameMapper.toSearchResult(frameService.findByTypeAndSize(frameService.findBikeType(input.getBikeTypeId()),
+                                                                frameService.findFrameSize(input.getFrameSizeId()),
                                                                 new PageRequest(input.getPage() < 0 ? 0 : input.getPage(),
                                                                 input.getItemsPerPage(),
-                                                                Sort.Direction.DESC, "id")));
+                                                                Sort.Direction.DESC, "id")), input);
     }
 
 
@@ -98,7 +99,7 @@ public class UserController {
     {
         if (page < 0) page = 0;
         userService.addChosenId(FRAME,id);
-        Frame frame = frameServiceImpl.findFrame(userService.getChosenId(FRAME));
+        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
         BikeType bikeType = frame.getBikeType();
         TubeDiameter tubeDiameter = frame.getTubeDiameter();
         WheelsDiam wheelsDiam = frame.getWheelsDiam();
@@ -117,7 +118,7 @@ public class UserController {
     {
         if (page < 0) page = 0;
         userService.addChosenId(FORK,id);
-        Frame frame = frameServiceImpl.findFrame(userService.getChosenId(FRAME));
+        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
         BikeType bikeType = frame.getBikeType();
         WheelsDiam wheelsDiam = frame.getWheelsDiam();
         BrakesType brakesType = frame.getBrakesType();
@@ -135,7 +136,7 @@ public class UserController {
     {
         if (page < 0) page = 0;
         userService.addChosenId(WHEEL,id);
-        Frame frame = frameServiceImpl.findFrame(userService.getChosenId(FRAME));
+        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
         BracketWide bracketWide = frame.getBracketWide();
         List<Bracket> brackets = transmissionService.
                 findByBracketWide(bracketWide,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
@@ -251,7 +252,7 @@ public class UserController {
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model) {
         userService.addChosenId(PEDAL,id);
-        Frame frame = frameServiceImpl.findFrame(userService.getChosenId(FRAME));
+        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
         BrakesType brakesType = frame.getBrakesType();
         int a = (int)brakesType.getId();
         Location location = brakeService.findLication(1);
@@ -362,7 +363,7 @@ public class UserController {
             userService.addChosenId(BRAKE_V_BRAKE_BACK,id);
             System.out.println("VBrake" + id +" " + type);
         }
-        Frame frame = frameServiceImpl.findFrame(userService.getChosenId(FRAME));
+        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
         BikeType bikeType = frame.getBikeType();
         List<Handlebar> handlebars = handlebarService.
                 findByBikeType(bikeType, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));

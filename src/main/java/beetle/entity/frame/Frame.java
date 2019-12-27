@@ -64,6 +64,17 @@ public class Frame {
     private Double price;
     private String way;
 
+    public Frame(BikeType bikeType, FrameSize frameSize, String name, String description, Double price) {
+        this.bikeType = bikeType;
+        this.frameSize = frameSize;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
+    public Frame() {
+    }
+
     public Manufacturer getManufacturer() {
         return manufacturer;
     }

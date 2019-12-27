@@ -52,6 +52,13 @@ public class FrameServiceImpl implements FrameService {
 //    SessionFactory sessionFactory;
 
 
+    public FrameServiceImpl(FrameRepository frameRepository) {
+        this.frameRepository = frameRepository;
+    }
+
+    public FrameServiceImpl() {
+    }
+
     //Lists with articles of components, that user added to cart
     private List<Long> articles = new ArrayList<>();
 
@@ -248,7 +255,7 @@ public class FrameServiceImpl implements FrameService {
     }
 
     //find by id
-
+    @Override
     @Transactional(readOnly = true)
     public  Frame findFrame(Long id) {
         return frameRepository.findOne(id);
@@ -259,6 +266,7 @@ public class FrameServiceImpl implements FrameService {
         return manufacturerRepository.findOne(id);
     }
 
+    @Override
     @Transactional(readOnly=true)
     public FrameSize findFrameSize(long id) {
         return frameSizeRepository.findOne(id);

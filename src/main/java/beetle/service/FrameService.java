@@ -42,6 +42,8 @@ public interface FrameService {
 
     List<BikeType> findBikeType();
 
+    BikeType findBikeType(long id);
+
     List<BracketWide> findBracketWide();
 
     List<HeadsetType> findHeadsetType();
@@ -65,4 +67,10 @@ public interface FrameService {
     List<Frame> findByTypeAndSize(BikeType bikeType,FrameSize frameSize, Pageable pageable);
 
     List<Frame> findBySize(FrameSize frameSize , Pageable pageable);
+
+    List<Frame> findByBikeType(BikeType bikeType, Pageable pageable);
+
+    FrameSize findFrameSize(long id);
+
+    Frame findFrame(Long id);
 }
