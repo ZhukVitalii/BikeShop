@@ -15,7 +15,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="frames")
-@NoArgsConstructor
+//@NoArgsConstructor
 @Getter
 @Setter
 public class Frame {

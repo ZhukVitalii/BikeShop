@@ -89,7 +89,6 @@ public class FrameMapper {
             ret.setPage(input.getPage());
         }
         ret.setTotalItems(frames.size());
-
         return ret;
     }
 
@@ -108,6 +107,8 @@ public class FrameMapper {
         ret.setUnderSaddleTubeDiameter(frame.getUnderSaddleTube().getDiam());
         ret.setWeight(frame.getWeight());
         ret.setWheelsDiameter(frame.getWheelsDiam().getDiam());
+        ret.setManufacturerId(frame.getManufacturer().getId());
+        ret.setManufacturerName(frame.getManufacturer().getName());
         return ret;
     }
 }

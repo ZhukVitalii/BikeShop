@@ -33,6 +33,7 @@ import static beetle.enums.ComponentType.*;
  * Created by VitaliiZhuk on 07.07.2017.
  */
 @Controller
+@CrossOrigin
 public class UserController {
     static final int DEFAULT_GROUP_ID = -1;
     static final int ITEMS_PER_PAGE = 6;
@@ -62,32 +63,7 @@ public class UserController {
         return Arrays.asList(1l,2l);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping(value = "/get-frames", method = RequestMethod.POST)
-    @ResponseBody
-    public FrameSearchResultResponseJSON getFrames( @RequestBody FramesSearchInputJSON input) {
 
-        return frameMapper.toSearchResult(frameService.findByBikeType(frameService.findBikeType(input.getBikeTypeId()),
-                new PageRequest(input.getPage() < 0 ? 0 : input.getPage(),
-                        input.getItemsPerPage(),
-                        Sort.Direction.DESC, "id")), input);
-    }
-    @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping(value = "/get-frame-sizes", method = RequestMethod.GET)
-    @ResponseBody
-    public List<FrameSizeJSON> chooseFrameSizes() {
-        return frameMapper.toFrameSize(frameService.findFrameSize());
-    }
-
-    @RequestMapping(value = "/frames-by-size", method = RequestMethod.POST)
-    @ResponseBody
-    public FrameSearchResultResponseJSON getFramesBySize(@RequestBody FramesSearchInputJSON input) {
-        return frameMapper.toSearchResult(frameService.findByTypeAndSize(frameService.findBikeType(input.getBikeTypeId()),
-                                                                frameService.findFrameSize(input.getFrameSizeId()),
-                                                                new PageRequest(input.getPage() < 0 ? 0 : input.getPage(),
-                                                                input.getItemsPerPage(),
-                                                                Sort.Direction.DESC, "id")), input);
-    }
 
 
 // Select Forks

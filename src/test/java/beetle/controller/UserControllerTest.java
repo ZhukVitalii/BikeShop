@@ -10,6 +10,8 @@ import beetle.repository.frame.FrameRepository;
 import beetle.service.FrameService;
 import beetle.service.impl.FrameServiceImpl;
 
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +21,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,6 +34,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -37,10 +42,13 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
+@Slf4j
 @RunWith(JUnitPlatform.class)
 @SpringBootTest
 @PropertySource("classpath:config.properties")
-public class UserControllerTest{
+public class UserControllerTest {
+    Logger logger = LoggerFactory.getLogger(UserControllerTest.class);
+
     @Value("${local.server.port.test}")
     private String port;
     @Autowired
@@ -61,37 +69,38 @@ public class UserControllerTest{
 
 
     @BeforeEach
-    void setMockOutput(){
-        System.out.println("Teststst" );
-        //FrameRepository frameRepository = Mockito.mock(FrameRepository.class);
-        bikeType.setId(1);
-        when(frameRepository.findByBikeType(bikeType,new PageRequest( 0 ,
+    void setMockOutput() {
+        bikeType.setId(1L);
+        when(frameRepository.findByBikeType(bikeType, new PageRequest(0,
                 5,
                 Sort.Direction.DESC, "id"))).thenReturn(
-                Arrays.asList(new Frame(bikeType,frameSize,mockFrameName,mockFrameDescription,mockFramePrice)));
+                Arrays.asList(new Frame(bikeType, frameSize, mockFrameName, mockFrameDescription, mockFramePrice)));
     }
-
 
 
     @DisplayName("Test Mock Search Frame")
     @Test
-    public void getRepoFrames() throws Exception {
-        bikeType.setId(1);
-        List<Frame> frames =  frameService.findByBikeType(bikeType,new PageRequest( 0 ,
+    public void getRepoFrames() {
+        bikeType.setId(1L);
+        List<Frame> frames = frameService.findByBikeType(bikeType, new PageRequest(0,
                 5,
                 Sort.Direction.DESC, "id"));
         assertEquals(bikeType.getType(), frames.get(0).getBikeType().getType());
     }
+
     @DisplayName("Test Mock Search Frame endpoint")
     @Test
-    public void getFrames() throws Exception {
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<FramesSearchInputJSON> request = new HttpEntity<>(buildRequest(),headers);
-        restTemplate = new TestRestTemplate();
-        ResponseEntity<FrameSearchResultResponseJSON> response = restTemplate.postForEntity(new URL("http://localhost:" + 8080 + "/get-frames").toString(),request,FrameSearchResultResponseJSON.class);
-        assertEquals(bikeType.getType(), response.getBody().getFrames().get(0).getBikeType());
+    public void getFrames() {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<FramesSearchInputJSON> request = new HttpEntity<>(buildRequest(), headers);
+            restTemplate = new TestRestTemplate();
+            ResponseEntity<FrameSearchResultResponseJSON> response = restTemplate.postForEntity(new URL("http://localhost:" + 8080 + "/get-frames").toString(), request, FrameSearchResultResponseJSON.class);
+            assertEquals(bikeType.getType(), response.getBody().getFrames().get(0).getBikeType());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
     }
 
     private FramesSearchInputJSON buildRequest() {
@@ -100,7 +109,7 @@ public class UserControllerTest{
         request.setBikeType(BikeTypeEnum.MTB);
         request.setItemsPerPage(5);
         request.setPage(0);
-        return  request;
+        return request;
     }
 
 

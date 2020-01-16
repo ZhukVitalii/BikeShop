@@ -3,23 +3,24 @@ package beetle.json;
 import beetle.enums.BikeTypeEnum;
 
 public class FramesSearchInputJSON extends PaggingJSON {
-    private long bikeTypeId;
+    private Long bikeTypeId;
     private BikeTypeEnum bikeType;
-    private long frameSizeId;
+    private Long frameSizeId;
+    private Long manufacturerId;
 
-    public long getFrameSizeId() {
-        return frameSizeId;
+    public Long getManufacturerId() {
+        return manufacturerId;
     }
 
-    public void setFrameSizeId(long frameSizeId) {
-        this.frameSizeId = frameSizeId;
+    public void setManufacturerId(Long manufacturerId) {
+        this.manufacturerId = manufacturerId;
     }
 
-    public long getBikeTypeId() {
+    public Long getBikeTypeId() {
         return bikeTypeId;
     }
 
-    public void setBikeTypeId(long bikeTypeId) {
+    public void setBikeTypeId(Long bikeTypeId) {
         this.bikeTypeId = bikeTypeId;
     }
 
@@ -29,5 +30,13 @@ public class FramesSearchInputJSON extends PaggingJSON {
 
     public void setBikeType(BikeTypeEnum bikeType) {
         this.bikeType = bikeType;
+    }
+
+    public Long getFrameSizeId() {
+        return frameSizeId;
+    }
+
+    public void setFrameSizeId(Long frameSizeId) {
+        this.frameSizeId = frameSizeId;
     }
 }

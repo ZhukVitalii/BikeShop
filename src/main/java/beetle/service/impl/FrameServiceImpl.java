@@ -6,6 +6,7 @@ import beetle.entity.forks.TubeDiameter;
 import beetle.entity.forks.WheelsDiam;
 import beetle.json.FrameSearchParams;
 import beetle.entity.handlebars.HeadsetType;
+import beetle.json.FramesSearchInputJSON;
 import beetle.repository.ManufacturerRepository;
 import beetle.repository.forks.BrakesTypeRepository;
 import beetle.repository.forks.TubeDiameterRepository;
@@ -16,6 +17,10 @@ import beetle.repository.transmission.BracketWideRepository;
 import beetle.entity.frame.*;
 import beetle.repository.frame.*;
 import beetle.service.FrameService;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -48,8 +53,8 @@ public class FrameServiceImpl implements FrameService {
     private BracketWideRepository bracketWideRepository;
     @Autowired
     private WheelsDiamRepository wheelsDiamRepository ;
-//    @Autowired
-//    SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
 
     public FrameServiceImpl(FrameRepository frameRepository) {
@@ -115,6 +120,20 @@ public class FrameServiceImpl implements FrameService {
     @Transactional(readOnly=true)
     public List<Frame> findAll(Pageable pageable) {
         return frameRepository.findAll(pageable).getContent();
+    }
+
+    @Override
+    public List<Frame> searchByCriteria(FramesSearchInputJSON input){
+        Criteria crit = sessionFactory.openSession().createCriteria(Frame.class);
+        if (input.getBikeTypeId() != null)
+            crit.add(Restrictions.eq("bikeType",bikeTypeRepository.getOne(input.getBikeTypeId())));
+        if(input.getManufacturerId() != null)
+            crit.add(Restrictions.eq("manufacturer", manufacturerRepository.findOne(input.getManufacturerId())));
+        crit.setFirstResult(input.getItemsPerPage() * input.getPage());
+        crit.setMaxResults(input.getItemsPerPage());
+
+        List<Frame> ret = crit.list();
+        return ret;
     }
 
     @Transactional(readOnly=true)

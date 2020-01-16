@@ -15,6 +15,24 @@ public class FramesJSON {
     private String color;
     private Double price;
     private String description;
+    private Long manufacturerId;
+    private String manufacturerName;
+
+    public Long getManufacturerId() {
+        return manufacturerId;
+    }
+
+    public void setManufacturerId(Long manufacturerId) {
+        this.manufacturerId = manufacturerId;
+    }
+
+    public String getManufacturerName() {
+        return manufacturerName;
+    }
+
+    public void setManufacturerName(String manufacturerName) {
+        this.manufacturerName = manufacturerName;
+    }
 
     public Long getFrameId() {
         return frameId;
