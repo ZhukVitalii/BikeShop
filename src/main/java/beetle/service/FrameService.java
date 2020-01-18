@@ -1,5 +1,6 @@
 package beetle.service;
 
+import beetle.businessObjects.SearchResultBO;
 import beetle.entity.forks.BrakesType;
 import beetle.entity.forks.TubeDiameter;
 import beetle.entity.forks.WheelsDiam;
@@ -55,22 +56,6 @@ public interface FrameService {
 
     List<BrakesType> findBrakesType();
 
-    List<Frame> findByFrameMaker(Manufacturer frameMaker, Pageable pageable);
-
-    List<Frame> findByFrameSize(FrameSize frameSize, Pageable pageable);
-
-    List<Frame> findByWheelsDiam(WheelsDiam wheelsDiam, Pageable pageable);
-
-    List<Frame> findByUrl(String url, Pageable pageable);
-
-    List<Frame> findByArticle(Long article, Pageable pageable);
-
-    List<Frame> findByTypeAndSize(BikeType bikeType,FrameSize frameSize, Pageable pageable);
-
-    List<Frame> findBySize(FrameSize frameSize , Pageable pageable);
-
-    List<Frame> findByBikeType(BikeType bikeType, Pageable pageable);
-
     FrameSize findFrameSize(long id);
 
     Frame findFrame(Long id);
@@ -79,7 +64,5 @@ public interface FrameService {
 
     long count();
 
-    long countByFrameMaker(Manufacturer frameMaker);
-
-    List<Frame> searchByCriteria(FramesSearchInputJSON input);
+    SearchResultBO searchByCriteria(FramesSearchInputJSON input);
 }

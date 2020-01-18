@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class FrameMapper {
@@ -88,7 +89,6 @@ public class FrameMapper {
             ret.setItemsPerPage(input.getItemsPerPage());
             ret.setPage(input.getPage());
         }
-        ret.setTotalItems(frames.size());
         return ret;
     }
 

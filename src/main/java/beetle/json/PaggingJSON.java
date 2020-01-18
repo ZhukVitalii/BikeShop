@@ -3,13 +3,13 @@ package beetle.json;
 public class PaggingJSON {
     private int itemsPerPage;
     private int page;
-    private int totalItems;
+    private Long totalItems;
 
-    public int getTotalItems() {
+    public Long getTotalItems() {
         return totalItems;
     }
 
-    public void setTotalItems(int totalItems) {
+    public void setTotalItems(Long totalItems) {
         this.totalItems = totalItems;
     }
 

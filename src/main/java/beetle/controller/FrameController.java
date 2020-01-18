@@ -1,5 +1,6 @@
 package beetle.controller;
 
+import beetle.businessObjects.SearchResultBO;
 import beetle.entity.Manufacturer;
 import beetle.entity.frame.*;
 import beetle.exception.CustomWebException;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class FrameController {
@@ -30,27 +32,20 @@ public class FrameController {
 
 
     // for filter by Maker
-    @RequestMapping(value = "/frame-maker", method = RequestMethod.POST)
+    @RequestMapping(value = "/search-frames", method = RequestMethod.POST)
     @ResponseBody
-    public FrameSearchResultResponseJSON listByFrameMaker(@RequestBody FramesSearchInputJSON input) {
+    private FrameSearchResultResponseJSON listByFrameMaker(@RequestBody FramesSearchInputJSON input) {
         FrameSearchResultResponseJSON response = null;
         try {
-            response = frameMapper.toSearchResult(frameService.searchByCriteria(input),input);
+            SearchResultBO searchResult = frameService.searchByCriteria(input);
+            List<Frame> frames = searchResult.getSearchResult().stream().map(e -> (Frame) e).collect(Collectors.toList());
+            response = frameMapper.toSearchResult(frames,input);
+            response.setTotalItems(searchResult.getTotalCount());
         }
         catch (Exception ex){
             throw new CustomWebException(ex.getMessage());
         }
         return response;
-    }
-
-    @RequestMapping(value = "/get-frames", method = RequestMethod.POST)
-    @ResponseBody
-    public FrameSearchResultResponseJSON getFrames( @RequestBody FramesSearchInputJSON input) {
-
-        return frameMapper.toSearchResult(frameService.findByBikeType(frameService.findBikeType(input.getBikeTypeId()),
-                new PageRequest(input.getPage() < 0 ? 0 : input.getPage(),
-                        input.getItemsPerPage(),
-                        Sort.Direction.DESC, "id")), input);
     }
 
     @RequestMapping(value = "/get-frame-sizes", method = RequestMethod.GET)
@@ -59,23 +54,20 @@ public class FrameController {
         return frameMapper.toFrameSize(frameService.findFrameSize());
     }
 
-    @RequestMapping(value = "/frames-by-size", method = RequestMethod.POST)
-    @ResponseBody
-    public FrameSearchResultResponseJSON getFramesBySize(@RequestBody FramesSearchInputJSON input) {
-        return frameMapper.toSearchResult(frameService.findByTypeAndSize(frameService.findBikeType(input.getBikeTypeId()),
-                frameService.findFrameSize(input.getFrameSizeId()),
-                new PageRequest(input.getPage() < 0 ? 0 : input.getPage(),
-                        input.getItemsPerPage(),
-                        Sort.Direction.DESC, "id")), input);
-    }
-
     @RequestMapping("/show_frames")
     @ResponseBody
     public FrameSearchResultResponseJSON framesVeiw(@RequestBody FramesSearchInputJSON input) {
         List<Frame> frames = frameService
                 .findAll(new PageRequest(input.getPage(), input.getItemsPerPage(), Sort.Direction.DESC, "id"));
         FrameSearchResultResponseJSON ret = frameMapper.toSearchResult(frames,input);
+        ret.setTotalItems(frameService.count());
         return ret;
+    }
+
+    @RequestMapping(value = "/frame/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public FramesJSON getFrame(@PathVariable(value = "id") Long id) {
+        return frameMapper.toFrame(frameService.findFrame(id));
     }
 
     //Page for admin
@@ -85,7 +77,7 @@ public class FrameController {
         List<Frame> frames = frameService
                 .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         model.addAttribute("frames", frames);
-        model.addAttribute("allPages", getPageCount());
+        model.addAttribute("allPages", 200);
         return "framesAdmin";
     }
 
@@ -132,21 +124,5 @@ public class FrameController {
     public String groupAdd(@RequestParam String name) {
         frameService.addFrameMaker(new Manufacturer(name));
         return "redirect:/show_frames";
-    }
-
-    @RequestMapping(value = "/frame/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public FramesJSON listFrameUrl(
-            @PathVariable(value = "id") Long id) {
-        return frameMapper.toFrame(frameService.findFrame(id));
-    }
-
-    private long getPageCount() {
-        long totalCount = frameService.count();
-        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
-    }
-    private long getPageCount(Manufacturer frameMaker) {
-        long totalCount = frameService.countByFrameMaker(frameMaker);
-        return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
 }
