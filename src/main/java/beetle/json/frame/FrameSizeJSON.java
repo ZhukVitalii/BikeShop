@@ -1,4 +1,4 @@
-package beetle.json;
+package beetle.json.frame;
 
 public class FrameSizeJSON {
     private long id;

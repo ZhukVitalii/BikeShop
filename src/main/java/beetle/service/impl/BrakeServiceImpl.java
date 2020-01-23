@@ -1,14 +1,19 @@
 package beetle.service.impl;
 
+import beetle.businessObjects.SearchResultBO;
 import beetle.entity.Manufacturer;
-import beetle.entity.handlebars.HandlebarDiameter;
+import beetle.json.brakes.BrakeHandleSearchInputJSON;
+import beetle.json.brakes.BrakeSearchInputJSON;
 import beetle.repository.ManufacturerRepository;
 import beetle.repository.handlebars.HandlebarDiameterRepository;
-import beetle.entity.wheels.RotorFixType;
-import beetle.repository.wheels.RotorFixTypeRepository;
 import beetle.entity.brake.*;
 import beetle.repository.brake.*;
 import beetle.service.BrakeService;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,38 +27,23 @@ import java.util.List;
  */
 @Service
 public class BrakeServiceImpl implements BrakeService {
-    //main components
-    @Autowired
-    private BrakeHandleRepository brakeHandleRepository;
-    @Autowired
-    private BrakeVBrakeRepository brakeVBrakeRepository;
-    @Autowired
-    private BrakeDiscHydraulicRepository brakeDiscHydraulicRepository;
-    @Autowired
-    private BrakeDiscMechanikRepository brakeDiscMechanikRepository;
 
-    //auxiliary components
+    private final BrakeHandleRepository brakeHandleRepository;
+    private final BrakeRepository brakeRepository;
+    private final ManufacturerRepository manufacturerRepository;
+    private final SessionFactory sessionFactory;
+    private final HandlebarDiameterRepository handlebarDiameterRepository;
 
     @Autowired
-    private BrakeHandleCompatibilityRepository brakeHandleCompatibilityRepository;
-    @Autowired
-    private BrakeHandleLocationRepository brakeHandleLocationRepository;
-    @Autowired
-    private BrakeHandleWideRepository brakeHandleWideRepository;
-    @Autowired
-    private ManufacturerRepository manufacturerRepository;
-    @Autowired
-    private LengthHydrolineRepository lengthHydrolineRepository;
-    @Autowired
-    private LocationRepository locationRepository;
-    @Autowired
-    private RotorDiamRepository rotorDiamRepository;
-    @Autowired
-    private HandlebarDiameterRepository handlebarDiameterRepository;
-    @Autowired
-    private BrakeLiquidRepository brakeLiquidRepository;
-    @Autowired
-    private RotorFixTypeRepository rotorFixTypeRepository;
+    public BrakeServiceImpl(BrakeHandleRepository brakeHandleRepository, BrakeRepository brakeRepository,
+                            ManufacturerRepository manufacturerRepository, SessionFactory sessionFactory,
+                            HandlebarDiameterRepository handlebarDiameterRepository) {
+        this.brakeHandleRepository = brakeHandleRepository;
+        this.brakeRepository = brakeRepository;
+        this.manufacturerRepository = manufacturerRepository;
+        this.sessionFactory = sessionFactory;
+        this.handlebarDiameterRepository = handlebarDiameterRepository;
+    }
 
     //Lists with articles of components, that user added to cart
     public List<Long> articlesBrakeDiscHydraulic = new ArrayList<>();
@@ -121,20 +111,69 @@ public class BrakeServiceImpl implements BrakeService {
         return a;
     }
 
+
+    @Override
+    @Transactional
+    public SearchResultBO searchByCriteria(BrakeSearchInputJSON input){
+        SearchResultBO ret = new SearchResultBO();
+        Session session = sessionFactory.openSession();
+        Criteria searchCriteria = session.createCriteria(Brake.class);
+        if (input.getBrakeType() != null)
+            searchCriteria.add(Restrictions.eq("brakeType",input.getBrakeType()));
+        if(input.getManufacturerId() != null)
+            searchCriteria.add(Restrictions.eq("manufacturer", manufacturerRepository.findOne(input.getManufacturerId())));
+        if(input.getBrakeSubType() != null)
+            searchCriteria.add(Restrictions.eq("brakeSubType", input.getBrakeSubType()));
+        if (input.getLocation() != null)
+            searchCriteria.add(Restrictions.eq("location", input.getLocation()));
+        if (input.getRotorDiam() != null)
+            searchCriteria.add(Restrictions.eq("rotorDiam", input.getRotorDiam()));
+        if (input.getRotorFixType() != null)
+            searchCriteria.add(Restrictions.eq("rotorFixType", input.getRotorFixType()));
+        ret.setTotalCount(getCount(searchCriteria));
+        searchCriteria.setFirstResult(input.getItemsPerPage() * input.getPage());
+        searchCriteria.setMaxResults(input.getItemsPerPage());
+        ret.setSearchResult(searchCriteria.list());
+        session.close();
+        return ret;
+    }
+    @Override
+    @Transactional
+    public SearchResultBO searchByCriteria(BrakeHandleSearchInputJSON input){
+        SearchResultBO ret = new SearchResultBO();
+        Session session = sessionFactory.openSession();
+        Criteria searchCriteria = session.createCriteria(BrakeHandle.class);
+        if (input.getCompatibility() != null)
+            searchCriteria.add(Restrictions.eq("compatibility",input.getCompatibility()));
+        if(input.getManufacturerId() != null)
+            searchCriteria.add(Restrictions.eq("manufacturer", manufacturerRepository.findOne(input.getManufacturerId())));
+        if(input.getHandlebarDiameterId() != null)
+            searchCriteria.add(Restrictions.eq("handlebarDiameter",handlebarDiameterRepository.getOne(input.getHandlebarDiameterId())));
+        if (input.getLocation() != null)
+            searchCriteria.add(Restrictions.eq("location", input.getLocation()));
+        if (input.getWide() != null)
+            searchCriteria.add(Restrictions.eq("wide", input.getWide()));
+        ret.setTotalCount(getCount(searchCriteria));
+        searchCriteria.setFirstResult(input.getItemsPerPage() * input.getPage());
+        searchCriteria.setMaxResults(input.getItemsPerPage());
+        ret.setSearchResult(searchCriteria.list());
+        session.close();
+        return ret;
+    }
+
+    private Long getCount(Criteria searchCriteria) {
+        searchCriteria.setProjection(Projections.rowCount());
+        Long count =(Long) searchCriteria.uniqueResult();
+        searchCriteria.setProjection(null);
+        return count;
+    }
+
+
     // add
+    @Override
     @Transactional
-    public void addBrakeDiscHydraulic(BrakeDiscHydraulic brakeDiscHydraulic) {
-        brakeDiscHydraulicRepository.save(brakeDiscHydraulic);
-    }
-
-    @Transactional
-    public  void addBrakeDiscMechanik (BrakeDiscMechanik brakeDiscMechanik) {
-        brakeDiscMechanikRepository.save(brakeDiscMechanik);
-    }
-
-    @Transactional
-    public  void addBrakeVBrake (BrakeVBrake brakeVBrake) {
-        brakeVBrakeRepository.save(brakeVBrake);
+    public void addBrake(Brake brake) {
+        brakeRepository.save(brake);
     }
 
     @Transactional
@@ -147,59 +186,11 @@ public class BrakeServiceImpl implements BrakeService {
         manufacturerRepository.save(brakeMaker);
     }
 
-    @Transactional
-    public  void addBrakeHandleCompatibility(BrakeHandleCompatibility brakeHandleCompatibility) {
-        brakeHandleCompatibilityRepository.save(brakeHandleCompatibility);
-    }
 
     @Transactional
-    public  void addBrakeHandleLocation (BrakeHandleLocation brakeHandleLocation) {
-        brakeHandleLocationRepository.save(brakeHandleLocation);
-    }
-
-    @Transactional
-    public void addBrakeHandleWide(BrakeHandleWide brakeHandleWide) {
-        brakeHandleWideRepository.save(brakeHandleWide);
-    }
-
-    @Transactional
-    public void addBrakeLiquid(BrakeLiquid brakeLiquid) {
-        brakeLiquidRepository.save(brakeLiquid);
-    }
-
-    @Transactional
-    public void addLengthHydroline(LengthHydroline lengthHydroline) {
-        lengthHydrolineRepository.save(lengthHydroline);
-    }
-
-    @Transactional
-    public void addLocation(Location location) {
-        locationRepository.save(location);
-    }
-
-    @Transactional
-    public  void addRotorDiam (RotorDiam rotorDiam) {
-        rotorDiamRepository.save(rotorDiam);
-    }
-
-    //delete component from database for admin
-
-    @Transactional
-    public void deleteBrakeDiscHydraulic(long[] idList) {
+    public void deleteBrakes(long[] idList) {
         for (long id : idList)
-            brakeDiscHydraulicRepository.delete(id);
-    }
-
-    @Transactional
-    public void deleteBrakeDiscMechanik(long[] idList) {
-        for (long id : idList)
-            brakeDiscMechanikRepository.delete(id);
-    }
-
-    @Transactional
-    public void deleteBrakeVBrake(long[] idList) {
-        for (long id : idList)
-            brakeVBrakeRepository.delete(id);
+            brakeRepository.delete(id);
     }
 
     @Transactional
@@ -208,249 +199,34 @@ public class BrakeServiceImpl implements BrakeService {
             brakeHandleRepository.delete(id);
     }
 
-    //find all components from database
+    @Override
     @Transactional(readOnly=true)
-    public List<BrakeDiscHydraulic> findAll(Pageable pageable) {
-        return brakeDiscHydraulicRepository.findAll(pageable).getContent();
+    public List<Brake> findAllBrakes(Pageable pageable) {
+        return brakeRepository.findAll(pageable).getContent();
     }
 
+    @Override
     @Transactional(readOnly=true)
-    public List<BrakeDiscMechanik> findAllOne(Pageable pageable) {
-        return brakeDiscMechanikRepository.findAll(pageable).getContent();
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeVBrake> findAllTwo(Pageable pageable) {
-        return brakeVBrakeRepository.findAll(pageable).getContent();
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeHandle> findAllThree(Pageable pageable) {
+    public List<BrakeHandle> findAllHandles(Pageable pageable) {
         return brakeHandleRepository.findAll(pageable).getContent();
     }
 
+    @Override
+    @Transactional
+    public Brake getBrake(Long id){
+        return brakeRepository.getOne(id);
+    }
+
+    @Override
     @Transactional(readOnly=true)
     public List<Manufacturer> findBrakeMakers() {
         return manufacturerRepository.findAll();
     }
 
-    @Transactional(readOnly=true)
-    public List<BrakeHandleCompatibility> findBrakeHandleCompatibility() {
-        return brakeHandleCompatibilityRepository.findAll();
-    }
-
-    @Transactional(readOnly=true)
-    public List<Location> findLocation() {
-        return locationRepository.findAll();
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeHandleLocation> findBrakeHandleLocation() {
-        return brakeHandleLocationRepository.findAll();
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeHandleWide> findBrakeHandleWide() {
-        return brakeHandleWideRepository.findAll();
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeLiquid> findBrakeLiquid() {
-        return brakeLiquidRepository.findAll();
-    }
-
-    @Transactional(readOnly=true)
-    public List<LengthHydroline> findLengthHydroline() {
-        return lengthHydrolineRepository.findAll();
-    }
-
-    @Transactional(readOnly=true)
-    public List<RotorDiam> findRotorDiam() {
-        return rotorDiamRepository.findAll();
-    }
-
-    //select from database by parametrs
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscHydraulic> findByBrakeDiscHydraulicMakers(Manufacturer brakeMaker, Pageable pageable) {
-        return brakeDiscHydraulicRepository.findByBrakeMakers(brakeMaker, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscMechanik> findByBrakeDiscMechanikMakers(Manufacturer brakeMaker, Pageable pageable) {
-        return brakeDiscMechanikRepository.findByBrakeMakers(brakeMaker, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeVBrake> findByBrakeVBrakeMakers(Manufacturer brakeMaker, Pageable pageable) {
-        return brakeVBrakeRepository.findByBrakeMakers(brakeMaker, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeHandle> findByBrakeHandleMakers(Manufacturer brakeMaker, Pageable pageable) {
-        return brakeHandleRepository.findByBrakeMakers(brakeMaker, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscHydraulic> findBrakeDiscHydraulicByArticle(Long article, Pageable pageable) {
-        return brakeDiscHydraulicRepository.findByArticle(article, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscHydraulic> findBrakeDiscHydraulicByUrl(String url, Pageable pageable) {
-        return brakeDiscHydraulicRepository.findByUrl(url,pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscMechanik> findBrakeDiscMechanikByArticle(Long article, Pageable pageable) {
-        return brakeDiscMechanikRepository.findByArticle(article, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscMechanik> findBrakeDiscMechanikByUrl(String url, Pageable pageable) {
-        return brakeDiscMechanikRepository.findByUrl(url,pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeVBrake> findBrakeVBrakeByArticle(Long article, Pageable pageable) {
-        return brakeVBrakeRepository.findByArticle(article, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeVBrake> findBrakeVBrakeByUrl(String url, Pageable pageable) {
-        return brakeVBrakeRepository.findByUrl(url,pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeHandle> findBrakeHandleByArticle(Long article, Pageable pageable) {
-        return brakeHandleRepository.findByArticle(article, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeHandle> findBrakeHandleByUrl(String url, Pageable pageable) {
-        return brakeHandleRepository.findByUrl(url,pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscHydraulic> findByLocationHydraulic(Location location, Pageable pageable) {
-        return brakeDiscHydraulicRepository.findByLocation(location, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscHydraulic> findByLengthHydroline(LengthHydroline lengthHydroline, Pageable pageable) {
-        return brakeDiscHydraulicRepository.findByLengthHydroline(lengthHydroline, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscHydraulic> findByBrakeLiquid(BrakeLiquid brakeLiquid, Pageable pageable) {
-        return brakeDiscHydraulicRepository.findByBrakeLiquid(brakeLiquid, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscHydraulic> findByRotorDiam(RotorDiam rotorDiam, Pageable pageable) {
-        return brakeDiscHydraulicRepository.findByRotorDiam( rotorDiam, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscHydraulic> findByRotorFixType(RotorFixType rotorFixType, Pageable pageable) {
-        return brakeDiscHydraulicRepository.findByRotorFixType( rotorFixType, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscMechanik> findByLocationMechanik(Location location, Pageable pageable) {
-        return brakeDiscMechanikRepository.findByLocation(location, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscMechanik> findByRotorDiamMechanik(RotorDiam rotorDiam, Pageable pageable) {
-        return brakeDiscMechanikRepository.findByRotorDiam( rotorDiam, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscMechanik> findByRotorFixTypeMechanik(RotorFixType rotorFixType, Pageable pageable) {
-        return brakeDiscMechanikRepository.findByRotorFixType( rotorFixType, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeVBrake> findByLocationVBrake(Location location, Pageable pageable) {
-        return brakeVBrakeRepository.findByLocation(location, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeHandle> findByBrakeHandleLocation(BrakeHandleLocation brakeHandleLocation, Pageable pageable) {
-        return brakeHandleRepository.findByBrakeHandleLocation(brakeHandleLocation, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeHandle> findByBrakeHandleCompatibility (BrakeHandleCompatibility brakeHandleCompatibility, Pageable pageable) {
-        return brakeHandleRepository.findByBrakeHandleCompatibility(brakeHandleCompatibility, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeHandle> findByHandlebarDiameter (HandlebarDiameter handlebarDiameter, Pageable pageable) {
-        return brakeHandleRepository.findByHandlebarDiameter(handlebarDiameter, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeHandle> findByBrakeHandleWide (BrakeHandleWide brakeHandleWide, Pageable pageable) {
-        return brakeHandleRepository.findByBrakeHandleWide(brakeHandleWide, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscHydraulic> findByPatternDiscHydr(String pattern, Pageable pageable) {
-        return brakeDiscHydraulicRepository.findByPattern(pattern, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeDiscMechanik> findByPatternDiscMech(String pattern, Pageable pageable) {
-        return brakeDiscMechanikRepository.findByPattern(pattern, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeVBrake> findByPatternVBrake(String pattern, Pageable pageable) {
-        return  brakeVBrakeRepository.findByPattern(pattern, pageable);
-    }
-
-    @Transactional(readOnly=true)
-    public List<BrakeHandle> findByPatternBrakeHandle(String pattern, Pageable pageable) {
-        return  brakeHandleRepository.findByPattern(pattern, pageable);
-    }
-
-    // count by
-
-    @Transactional(readOnly = true)
-    public long countByBrakeMakerDiscHydr(Manufacturer brakeMaker) {
-        return brakeDiscHydraulicRepository.countByBrakeMakers(brakeMaker);
-    }
-
-    @Transactional(readOnly = true)
-    public long countByBrakeMakerDiscMech(Manufacturer brakeMaker) {
-        return brakeDiscMechanikRepository.countByBrakeMakers(brakeMaker);
-    }
-
-    @Transactional(readOnly = true)
-    public long countByBrakeMakerVBrake(Manufacturer brakeMaker) {
-        return brakeVBrakeRepository.countByBrakeMakers(brakeMaker);
-    }
-
-    @Transactional(readOnly = true)
-    public long countByBrakeMakerHandle(Manufacturer brakeMaker) {
-        return brakeHandleRepository.countByBrakeMakers(brakeMaker);
-    }
-
-    @Transactional(readOnly = true)
-    public long countBrakeDiscHydr() {
-        return brakeDiscHydraulicRepository.count();
-    }
-
-    @Transactional(readOnly = true)
-    public long countBrakeDiscMech() {
-        return brakeDiscMechanikRepository.count();
-    }
-
-    @Transactional(readOnly = true)
-    public long countVBrake() {
-        return brakeVBrakeRepository.count();
+    @Override
+    @Transactional
+    public BrakeHandle getBrakeHandle(Long id) {
+        return brakeHandleRepository.getOne(id);
     }
 
     @Transactional(readOnly = true)
@@ -465,38 +241,4 @@ public class BrakeServiceImpl implements BrakeService {
         return manufacturerRepository.findOne(id);
     }
 
-    @Transactional(readOnly=true)
-    public Location findLication(long id) {
-        return locationRepository.findOne(id);
-    }
-
-    @Transactional(readOnly=true)
-    public BrakeHandleCompatibility findBrakeHandleCompatibility(long id) {
-        return brakeHandleCompatibilityRepository.findOne(id);
-    }
-
-    @Transactional(readOnly=true)
-    public BrakeHandleLocation findBrakeHandleLocation(long id) {
-        return brakeHandleLocationRepository.findOne(id);
-    }
-
-    @Transactional(readOnly=true)
-    public BrakeHandleWide findBrakeHandleWide(long id) {
-        return brakeHandleWideRepository.findOne(id);
-    }
-
-    @Transactional(readOnly=true)
-    public BrakeLiquid findBrakeLiquid(long id) {
-        return brakeLiquidRepository.findOne(id);
-    }
-
-    @Transactional(readOnly=true)
-    public LengthHydroline  findLengthHydroline(long id) {
-        return lengthHydrolineRepository.findOne(id);
-    }
-
-    @Transactional(readOnly=true)
-    public RotorDiam  findRotorDiam(long id) {
-        return rotorDiamRepository.findOne(id);
-    }
 }

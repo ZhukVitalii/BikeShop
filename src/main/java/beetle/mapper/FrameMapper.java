@@ -7,14 +7,13 @@ import beetle.entity.forks.WheelsDiam;
 import beetle.entity.frame.*;
 import beetle.entity.handlebars.HeadsetType;
 import beetle.entity.transmission.BracketWide;
-import beetle.json.*;
+import beetle.json.frame.*;
 import beetle.service.impl.FrameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class FrameMapper {
@@ -26,7 +25,7 @@ public class FrameMapper {
         Frame ret = new Frame();
 
 
-        Manufacturer frameMaker = frameServiceImpl.findFrameMaker(input.getManufacturer());
+        Manufacturer frameMaker = frameServiceImpl.findFrameMaker(input.getManufacturerId());
         BikeType bikeType = frameServiceImpl.findBikeType(input.getBikeTypeId());
         FrameSize frameSize = frameServiceImpl.findFrameSize(input.getFrameSizeId());
         WheelsDiam wheelsDiam = frameServiceImpl.findWheelsDiam(input.getWheelsDiamId());

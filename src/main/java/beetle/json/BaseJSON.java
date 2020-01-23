@@ -1,7 +1,8 @@
 package beetle.json;
 
-public class BaseInputJSON {
-    private Long manufacturer;
+public class BaseJSON {
+    private String manufacturerName;
+    private Long manufacturerId;
     private Long article;
     private String url;
     private String name;
@@ -12,12 +13,20 @@ public class BaseInputJSON {
     private String material;
     private String weight;
 
-    public Long getManufacturer() {
-        return manufacturer;
+    public String getManufacturerName() {
+        return manufacturerName;
     }
 
-    public void setManufacturer(Long manufacturer) {
-        this.manufacturer = manufacturer;
+    public void setManufacturerName(String manufacturerName) {
+        this.manufacturerName = manufacturerName;
+    }
+
+    public Long getManufacturerId() {
+        return manufacturerId;
+    }
+
+    public void setManufacturerId(Long manufacturerId) {
+        this.manufacturerId = manufacturerId;
     }
 
     public Long getArticle() {

@@ -9,14 +9,9 @@ import beetle.entity.frame.Frame;
 import beetle.entity.handlebars.*;
 import beetle.entity.transmission.*;
 import beetle.entity.wheels.*;
-import beetle.json.FrameSearchResultResponseJSON;
-import beetle.json.FrameSizeJSON;
-import beetle.json.FramesJSON;
-import beetle.json.FramesSearchInputJSON;
 import beetle.mapper.FrameMapper;
 import beetle.service.*;
 import beetle.entity.brake.*;
-import beetle.service.impl.FrameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -222,103 +217,103 @@ public class UserController {
         model.addAttribute("pedals", pedals);
         return "pedalToBike";
     }
-    @RequestMapping("/chooseBrakes/{id}")
-    public String listBrakesForBike(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model) {
-        userService.addChosenId(PEDAL,id);
-        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
-        BrakesType brakesType = frame.getBrakesType();
-        int a = (int)brakesType.getId();
-        Location location = brakeService.findLication(1);
-        List<BrakeVBrake> brakeVBrakes = brakeService
-                .findByLocationVBrake(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeVBrakes", brakeVBrakes);
-        if (a == 1) {
-            return "brakesDiscSelect";
-        } else if (a == 2) {
-            return "brakesVBrakeFrontToBike";
-        } else {
-            return "brakesSelectType";
-        }
-    }
-    @RequestMapping("/chooseDiscHydraulic")
-    public String listDiscHydraulicFront(
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model) {
-        if (page < 0) page = 0;
-        Location location = brakeService.findLication(1);
-        List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
-                .findByLocationHydraulic(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
-        return "brakesHydraulicFrontToBike";
-    }
-    @RequestMapping("/chooseDiscHydraulicBack/{id}")
-    public String listDiscHydraulicBack(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
-        if (page < 0) page = 0;
-        userService.addChosenId(BRAKE_DISC_HYDRAULIC_FRONT,id);
-        Location location = brakeService.findLication(2);
-        List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
-                .findByLocationHydraulic(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
-
-        return "brakesHydraulicBackToBike";
-    }
-    @RequestMapping("/chooseDiscMechanik")
-    public String listDiscMechanik(
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model) {
-        if (page < 0) page = 0;
-        Location location = brakeService.findLication(1);
-        List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
-                .findByLocationMechanik(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
-        return "brakesMechanikFrontToBike";
-    }
-    @RequestMapping("/chooseDiscMechanikBack/{id}")
-    public String listDiscMechanikBack(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
-        if (page < 0) page = 0;
-        userService.addChosenId(BRAKE_DISC_MECHANIK_FRONT,id);
-        Location location = brakeService.findLication(2);
-        List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
-                .findByLocationMechanik(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
-        return "brakesMechanikBackToBike";
-    }
-    @RequestMapping("/chooseVBrakeFront")
-    public String listVBrakeFront(
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model) {
-        if (page < 0) page = 0;
-        Location location = brakeService.findLication(1);
-        List<BrakeVBrake> brakeVBrakes = brakeService
-                .findByLocationVBrake(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeVBrakes", brakeVBrakes);
-        return "brakesVBrakeFrontToBike";
-    }
-    @RequestMapping("/chooseVBrakeBack/{id}")
-    public String listVBrakeBack(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
-        if (page < 0) page = 0;
-        userService.addChosenId(BRAKE_DISC_MECHANIK_FRONT,id);
-        Location location = brakeService.findLication(2);
-        List<BrakeVBrake> brakeVBrakes = brakeService
-                .findByLocationVBrake(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brakeVBrakes", brakeVBrakes);
-        return "brakesVBrakeBackToBike";
-    }
+//    @RequestMapping("/chooseBrakes/{id}")
+//    public String listBrakesForBike(
+//            @PathVariable(value = "id") Long id,
+//            @RequestParam(required = false, defaultValue = "0") Integer page,
+//            Model model) {
+//        userService.addChosenId(PEDAL,id);
+//        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
+//        BrakesType brakesType = frame.getBrakesType();
+//        int a = (int)brakesType.getId();
+//        Location location = brakeService.findLication(1);
+//        List<BrakeVBrake> brakeVBrakes = brakeService
+//                .findByLocationVBrake(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        model.addAttribute("brakeVBrakes", brakeVBrakes);
+//        if (a == 1) {
+//            return "brakesDiscSelect";
+//        } else if (a == 2) {
+//            return "brakesVBrakeFrontToBike";
+//        } else {
+//            return "brakesSelectType";
+//        }
+//    }
+//    @RequestMapping("/chooseDiscHydraulic")
+//    public String listDiscHydraulicFront(
+//            @RequestParam(required = false, defaultValue = "0") Integer page,
+//            Model model) {
+//        if (page < 0) page = 0;
+//        Location location = brakeService.findLication(1);
+//        List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
+//                .findByLocationHydraulic(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
+//        return "brakesHydraulicFrontToBike";
+//    }
+//    @RequestMapping("/chooseDiscHydraulicBack/{id}")
+//    public String listDiscHydraulicBack(
+//            @PathVariable(value = "id") Long id,
+//            @RequestParam(required = false, defaultValue = "0") Integer page,
+//            Model model)
+//    {
+//        if (page < 0) page = 0;
+//        userService.addChosenId(BRAKE_DISC_HYDRAULIC_FRONT,id);
+//        Location location = brakeService.findLication(2);
+//        List<BrakeDiscHydraulic> brakeDiscHydraulics = brakeService
+//                .findByLocationHydraulic(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        model.addAttribute("brakeDiscHydraulics", brakeDiscHydraulics);
+//
+//        return "brakesHydraulicBackToBike";
+//    }
+//    @RequestMapping("/chooseDiscMechanik")
+//    public String listDiscMechanik(
+//            @RequestParam(required = false, defaultValue = "0") Integer page,
+//            Model model) {
+//        if (page < 0) page = 0;
+//        Location location = brakeService.findLication(1);
+//        List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
+//                .findByLocationMechanik(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
+//        return "brakesMechanikFrontToBike";
+//    }
+//    @RequestMapping("/chooseDiscMechanikBack/{id}")
+//    public String listDiscMechanikBack(
+//            @PathVariable(value = "id") Long id,
+//            @RequestParam(required = false, defaultValue = "0") Integer page,
+//            Model model)
+//    {
+//        if (page < 0) page = 0;
+//        userService.addChosenId(BRAKE_DISC_MECHANIK_FRONT,id);
+//        Location location = brakeService.findLication(2);
+//        List<BrakeDiscMechanik> brakeDiscMechaniks = brakeService
+//                .findByLocationMechanik(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        model.addAttribute("brakeDiscMechaniks", brakeDiscMechaniks);
+//        return "brakesMechanikBackToBike";
+//    }
+//    @RequestMapping("/chooseVBrakeFront")
+//    public String listVBrakeFront(
+//            @RequestParam(required = false, defaultValue = "0") Integer page,
+//            Model model) {
+//        if (page < 0) page = 0;
+//        Location location = brakeService.findLication(1);
+//        List<BrakeVBrake> brakeVBrakes = brakeService
+//                .findByLocationVBrake(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        model.addAttribute("brakeVBrakes", brakeVBrakes);
+//        return "brakesVBrakeFrontToBike";
+//    }
+//    @RequestMapping("/chooseVBrakeBack/{id}")
+//    public String listVBrakeBack(
+//            @PathVariable(value = "id") Long id,
+//            @RequestParam(required = false, defaultValue = "0") Integer page,
+//            Model model)
+//    {
+//        if (page < 0) page = 0;
+//        userService.addChosenId(BRAKE_DISC_MECHANIK_FRONT,id);
+//        Location location = brakeService.findLication(2);
+//        List<BrakeVBrake> brakeVBrakes = brakeService
+//                .findByLocationVBrake(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        model.addAttribute("brakeVBrakes", brakeVBrakes);
+//        return "brakesVBrakeBackToBike";
+//    }
     @RequestMapping("/chooseHandlebar/{type}/{id}")
     public String listHandlebarForBike(
             @PathVariable(value = "id") Long id,
@@ -363,38 +358,38 @@ public class UserController {
         model.addAttribute("stems", stems);
         return "stemsToHandlebar";
     }
-    @RequestMapping("/chooseBrakeHandle/{id}")
-    public String listBrakeHandleForHandlebar(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
-        if (page < 0) page = 0;
-        userService.addChosenId(STEM,id);
-        // If user chose Hydraulic Brakes - brake Handle are in the brakes kit
-        if(userService.getChosenId(BRAKE_DISC_HYDRAULIC_FRONT)!= 0) {
-            List<Grips> gripss = handlebarService.
-                    findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            model.addAttribute("gripss", gripss);
-            return "gripsToHandlebar";
-        } else if (userService.getChosenId(BRAKE_DISC_MECHANIK_FRONT) != 0) {
-            // 2 is Id of Mechanik Disc Brake in DB
-            BrakeHandleCompatibility brakeHandleCompatibility = brakeService.
-                    findBrakeHandleCompatibility(2);
-            List<BrakeHandle> brakeHandles = brakeService.
-                    findByBrakeHandleCompatibility(brakeHandleCompatibility,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            model.addAttribute("brakeHandles", brakeHandles);
-            return "brakesHandleToHandlebar";
-        } else {
-            // 3 is Id of V-Brake in DB
-            BrakeHandleCompatibility brakeHandleCompatibility = brakeService.
-                    findBrakeHandleCompatibility(3);
-            List<BrakeHandle> brakeHandles = brakeService.
-                    findByBrakeHandleCompatibility(brakeHandleCompatibility,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-            model.addAttribute("brakeHandles", brakeHandles);
-            return "brakesHandleToHandlebar";
-        }
-    }
+//    @RequestMapping("/chooseBrakeHandle/{id}")
+//    public String listBrakeHandleForHandlebar(
+//            @PathVariable(value = "id") Long id,
+//            @RequestParam(required = false, defaultValue = "0") Integer page,
+//            Model model)
+//    {
+//        if (page < 0) page = 0;
+//        userService.addChosenId(STEM,id);
+//        // If user chose Hydraulic Brakes - Brake Handle are in the brakes kit
+//        if(userService.getChosenId(BRAKE_DISC_HYDRAULIC_FRONT)!= 0) {
+//            List<Grips> gripss = handlebarService.
+//                    findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//            model.addAttribute("gripss", gripss);
+//            return "gripsToHandlebar";
+//        } else if (userService.getChosenId(BRAKE_DISC_MECHANIK_FRONT) != 0) {
+//            // 2 is Id of Mechanik Disc Brake in DB
+//            BrakeHandleCompatibilityEnum brakeHandleCompatibility = brakeService.
+//                    findBrakeHandleCompatibility(2);
+//            List<BrakeHandle> brakeHandles = brakeService.
+//                    findByBrakeHandleCompatibility(brakeHandleCompatibility,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//            model.addAttribute("brakeHandles", brakeHandles);
+//            return "brakesHandleToHandlebar";
+//        } else {
+//            // 3 is Id of V-Brake in DB
+//            BrakeHandleCompatibilityEnum brakeHandleCompatibility = brakeService.
+//                    findBrakeHandleCompatibility(3);
+//            List<BrakeHandle> brakeHandles = brakeService.
+//                    findByBrakeHandleCompatibility(brakeHandleCompatibility,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//            model.addAttribute("brakeHandles", brakeHandles);
+//            return "brakesHandleToHandlebar";
+//        }
+//    }
     @RequestMapping("/chooseGrips/{id}")
     public String listGripsForHandlebar(
             @PathVariable(value = "id") Long id,

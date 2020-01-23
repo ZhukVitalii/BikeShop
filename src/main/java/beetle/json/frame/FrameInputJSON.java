@@ -1,25 +1,32 @@
-package beetle.json;
+package beetle.json.frame;
 
-import beetle.enums.BikeTypeEnum;
+import beetle.json.BaseJSON;
 
-public class FramesSearchInputJSON extends PaggingJSON {
+public class FrameInputJSON extends BaseJSON {
     private Long bikeTypeId;
-    private BikeTypeEnum bikeType;
     private Long frameSizeId;
-    private Long manufacturerId;
     private Long wheelsDiamId;
     private Long bracketWideId;
     private Long headsetTypeId;
     private Long tubeDiameterId;
     private Long underSaddleTubeId;
     private Long brakesTypeId;
+    private Long trunkBindingId;
 
-    public Long getBrakesTypeId() {
-        return brakesTypeId;
+    public Long getBikeTypeId() {
+        return bikeTypeId;
     }
 
-    public void setBrakesTypeId(Long brakesTypeId) {
-        this.brakesTypeId = brakesTypeId;
+    public void setBikeTypeId(Long bikeTypeId) {
+        this.bikeTypeId = bikeTypeId;
+    }
+
+    public Long getFrameSizeId() {
+        return frameSizeId;
+    }
+
+    public void setFrameSizeId(Long frameSizeId) {
+        this.frameSizeId = frameSizeId;
     }
 
     public Long getWheelsDiamId() {
@@ -62,35 +69,19 @@ public class FramesSearchInputJSON extends PaggingJSON {
         this.underSaddleTubeId = underSaddleTubeId;
     }
 
-    public Long getManufacturerId() {
-        return manufacturerId;
+    public Long getBrakesTypeId() {
+        return brakesTypeId;
     }
 
-    public void setManufacturerId(Long manufacturerId) {
-        this.manufacturerId = manufacturerId;
+    public void setBrakesTypeId(Long brakesTypeId) {
+        this.brakesTypeId = brakesTypeId;
     }
 
-    public Long getBikeTypeId() {
-        return bikeTypeId;
+    public Long getTrunkBindingId() {
+        return trunkBindingId;
     }
 
-    public void setBikeTypeId(Long bikeTypeId) {
-        this.bikeTypeId = bikeTypeId;
-    }
-
-    public BikeTypeEnum getBikeType() {
-        return bikeType;
-    }
-
-    public void setBikeType(BikeTypeEnum bikeType) {
-        this.bikeType = bikeType;
-    }
-
-    public Long getFrameSizeId() {
-        return frameSizeId;
-    }
-
-    public void setFrameSizeId(Long frameSizeId) {
-        this.frameSizeId = frameSizeId;
+    public void setTrunkBindingId(Long trunkBindingId) {
+        this.trunkBindingId = trunkBindingId;
     }
 }

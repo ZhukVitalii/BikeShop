@@ -1,7 +1,9 @@
-package beetle.json;
+package beetle.json.frame;
 
 
-public class FramesJSON {
+import beetle.json.BaseJSON;
+
+public class FramesJSON extends BaseJSON {
     private Long frameId;
     private String bikeType;
     private String wheelsDiameter;
@@ -11,28 +13,7 @@ public class FramesJSON {
     private String underSaddleTubeDiameter;
     private String brakesType;
     private String trunkBinding;
-    private String weight;
-    private String color;
-    private Double price;
-    private String description;
-    private Long manufacturerId;
-    private String manufacturerName;
 
-    public Long getManufacturerId() {
-        return manufacturerId;
-    }
-
-    public void setManufacturerId(Long manufacturerId) {
-        this.manufacturerId = manufacturerId;
-    }
-
-    public String getManufacturerName() {
-        return manufacturerName;
-    }
-
-    public void setManufacturerName(String manufacturerName) {
-        this.manufacturerName = manufacturerName;
-    }
 
     public Long getFrameId() {
         return frameId;
@@ -106,35 +87,4 @@ public class FramesJSON {
         this.trunkBinding = trunkBinding;
     }
 
-    public String getWeight() {
-        return weight;
-    }
-
-    public void setWeight(String weight) {
-        this.weight = weight;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

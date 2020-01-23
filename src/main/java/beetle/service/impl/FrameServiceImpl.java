@@ -5,9 +5,8 @@ import beetle.entity.Manufacturer;
 import beetle.entity.forks.BrakesType;
 import beetle.entity.forks.TubeDiameter;
 import beetle.entity.forks.WheelsDiam;
-import beetle.json.FrameSearchParams;
 import beetle.entity.handlebars.HeadsetType;
-import beetle.json.FramesSearchInputJSON;
+import beetle.json.frame.FramesSearchInputJSON;
 import beetle.repository.ManufacturerRepository;
 import beetle.repository.forks.BrakesTypeRepository;
 import beetle.repository.forks.TubeDiameterRepository;
@@ -150,6 +149,7 @@ public class FrameServiceImpl implements FrameService {
         searchCriteria.setFirstResult(input.getItemsPerPage() * input.getPage());
         searchCriteria.setMaxResults(input.getItemsPerPage());
         ret.setSearchResult(searchCriteria.list());
+        session.close();
         return ret;
     }
 

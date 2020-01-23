@@ -8,7 +8,7 @@ import beetle.entity.Manufacturer;
 import beetle.entity.handlebars.HeadsetType;
 import beetle.entity.transmission.BracketWide;
 import beetle.entity.frame.*;
-import beetle.json.FramesSearchInputJSON;
+import beetle.json.frame.FramesSearchInputJSON;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;

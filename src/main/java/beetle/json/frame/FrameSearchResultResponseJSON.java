@@ -1,4 +1,7 @@
-package beetle.json;
+package beetle.json.frame;
+
+import beetle.json.PaggingJSON;
+import beetle.json.frame.FramesJSON;
 
 import java.util.List;
 

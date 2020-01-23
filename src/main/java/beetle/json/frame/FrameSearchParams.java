@@ -1,4 +1,4 @@
-package beetle.json;
+package beetle.json.frame;
 
 import beetle.entity.Manufacturer;
 import beetle.entity.forks.BrakesType;

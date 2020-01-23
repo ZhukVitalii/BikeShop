@@ -3,8 +3,8 @@ package beetle.mapper;
 
 import beetle.entity.frame.Frame;
 import beetle.entity.frame.FrameSize;
-import beetle.json.FrameSizeJSON;
-import beetle.json.FramesJSON;
+import beetle.json.frame.FrameSizeJSON;
+import beetle.json.frame.FramesJSON;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
