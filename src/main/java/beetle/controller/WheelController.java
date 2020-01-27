@@ -61,9 +61,9 @@ public class WheelController {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
         model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
         model.addAttribute("rimWide", wheelService.findRimWide());
-        model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
-        model.addAttribute("brakesType", forkService.findBrakesType());
-        model.addAttribute("bikeType", forkService.findBikeType());
+//        model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
+       // model.addAttribute("brakesType", forkService.findBrakesType());
+//        model.addAttribute("bikeType", forkService.findBikeType());
         model.addAttribute("etrtoSize", wheelService.findEtrtoSize());
         model.addAttribute("innerTubeDiameter", wheelService.findInnerTubeDiameter());
         model.addAttribute("rimHeight", wheelService.findRimHeight());
@@ -167,9 +167,9 @@ public class WheelController {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
         model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
         model.addAttribute("rimWide", wheelService.findRimWide());
-        model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
-        model.addAttribute("brakesType", forkService.findBrakesType());
-        model.addAttribute("bikeType", forkService.findBikeType());
+//        model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
+      //  model.addAttribute("brakesType", forkService.findBrakesType());
+//        model.addAttribute("bikeType", forkService.findBikeType());
         return "wheel_add_page";
     }
 
@@ -182,14 +182,14 @@ public class WheelController {
     @RequestMapping("/admin/rim_add_page")
     public String rimAddPage(Model model) {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
-        model.addAttribute("bikeType", forkService.findBikeType());
-        model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
+//        model.addAttribute("bikeType", forkService.findBikeType());
+//        model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
         model.addAttribute("etrtoSize", wheelService.findEtrtoSize());
         model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
         model.addAttribute("innerTubeDiameter", wheelService.findInnerTubeDiameter());
         model.addAttribute("rimWide", wheelService.findRimWide());
         model.addAttribute("rimHeight", wheelService.findRimHeight());
-        model.addAttribute("brakesType", forkService.findBrakesType());
+      //  model.addAttribute("brakesType", forkService.findBrakesType());
         model.addAttribute("nipple", wheelService.findNipple());
         return "rim_add_page";
     }
@@ -198,7 +198,7 @@ public class WheelController {
     public String frontHubAddPage(Model model) {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
         model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
-        model.addAttribute("brakesType", forkService.findBrakesType());
+      //  model.addAttribute("brakesType", forkService.findBrakesType());
         model.addAttribute("axisDiam", wheelService.findAxisDiam());
         model.addAttribute("axisLength", wheelService.findAxisLength());
         model.addAttribute("hubFixType", wheelService.findHubFixType());
@@ -211,7 +211,7 @@ public class WheelController {
     public String backHubAddPage(Model model) {
         model.addAttribute("wheelMakers", wheelService.findWheelMakers());
         model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
-        model.addAttribute("brakesType", forkService.findBrakesType());
+     //   model.addAttribute("brakesType", forkService.findBrakesType());
         model.addAttribute("axisDiam", wheelService.findAxisDiam());
         model.addAttribute("axisLength", wheelService.findAxisLength());
         model.addAttribute("hubFixType", wheelService.findHubFixType());
@@ -228,7 +228,7 @@ public class WheelController {
         model.addAttribute("tireType", wheelService.findTireType());
         model.addAttribute("cordType", wheelService.findCordType());
         model.addAttribute("tireWide", wheelService.findTireWide());
-        model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
+//        model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
         return "tire_add_page";
     }
 
@@ -337,9 +337,9 @@ public class WheelController {
     {
         //todo migrate to mapper
         Manufacturer wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
-        WheelsDiam wheelsDiam = (wheelsDiamId != DEFAULT_GROUP_ID) ? forkService.findWheelsDiam(wheelsDiamId) : null;
-        BikeType bikeType = (bikeTypeId != DEFAULT_GROUP_ID) ? forkService.findBikeType(bikeTypeId) : null;
-        BrakesType brakesType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
+       // WheelsDiam wheelsDiam = (wheelsDiamId != DEFAULT_GROUP_ID) ? forkService.findWheelsDiam(wheelsDiamId) : null;
+      //  BikeType bikeType = (bikeTypeId != DEFAULT_GROUP_ID) ? forkService.findBikeType(bikeTypeId) : null;
+     //   BrakesType brakesType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
         SpokeNumber spokeNumber = (spokeNumberId != DEFAULT_GROUP_ID) ? wheelService.findSpokeNumber(spokeNumberId) : null;
         RimWide rimWide = (rimWideId != DEFAULT_GROUP_ID) ? wheelService.findRimWide(rimWideId) : null;
 //        Wheel wheel = new Wheel(wheelMaker, article,url, name, wheelsDiam, bikeType, brakesType, spokeNumber,
@@ -394,11 +394,11 @@ public class WheelController {
     {
         //todo migrate to mapper
         Manufacturer wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
-        WheelsDiam wheelsDiam = (wheelsDiamId != DEFAULT_GROUP_ID) ? forkService.findWheelsDiam(wheelsDiamId) : null;
-        BikeType bikeType = (bikeTypeId != DEFAULT_GROUP_ID) ? forkService.findBikeType(bikeTypeId) : null;
+       // WheelsDiam wheelsDiam = (wheelsDiamId != DEFAULT_GROUP_ID) ? forkService.findWheelsDiam(wheelsDiamId) : null;
+      //  BikeType bikeType = (bikeTypeId != DEFAULT_GROUP_ID) ? forkService.findBikeType(bikeTypeId) : null;
         EtrtoSize etrtoSize = (etrtoSizeId != DEFAULT_GROUP_ID) ? wheelService.findEtrtoSize(etrtoSizeId) : null;
         InnerTubeDiameter innerTubeDiameter = (innerTubeDiameterId != DEFAULT_GROUP_ID) ? wheelService.findInnerTubeDiameter(innerTubeDiameterId) : null;
-        BrakesType brakesType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
+       // BrakesType brakesType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
         SpokeNumber spokeNumber = (spokeNumberId != DEFAULT_GROUP_ID) ? wheelService.findSpokeNumber(spokeNumberId) : null;
         RimWide rimWide = (rimWideId != DEFAULT_GROUP_ID) ? wheelService.findRimWide(rimWideId) : null;
         RimHeight rimHeight = (rimHeightId != DEFAULT_GROUP_ID) ? wheelService.findRimHeight(rimHeightId) : null;
@@ -434,7 +434,7 @@ public class WheelController {
         BearingType bearingType = (bearingTypeId != DEFAULT_GROUP_ID) ? wheelService.findBearingType(bearingTypeId) : null;
         AxisLength axisLength = (axisLengthId != DEFAULT_GROUP_ID) ? wheelService.findAxisLength(axisLengthId) : null;
         AxisDiam axisDiam = (axisDiamId != DEFAULT_GROUP_ID) ? wheelService.findAxisDiam(axisDiamId) : null;
-        BrakesType brakesType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
+       // BrakesType brakesType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
         RotorFixType rotorFixType = (rotorFixTypeId != DEFAULT_GROUP_ID) ? wheelService.findRotorFixType(rotorFixTypeId) : null;
         SpokeNumber spokeNumber = (spokeNumberId != DEFAULT_GROUP_ID) ? wheelService.findSpokeNumber(spokeNumberId) : null;
 //        FrontHub frontHub = new FrontHub (wheelMaker,article,url, name,hubFixType, bearingType, material,axisLength, axisDiam, brakesType,
@@ -471,7 +471,7 @@ public class WheelController {
         BearingType bearingType = (bearingTypeId != DEFAULT_GROUP_ID) ? wheelService.findBearingType(bearingTypeId) : null;
         AxisLength axisLength = (axisLengthId != DEFAULT_GROUP_ID) ? wheelService.findAxisLength(axisLengthId) : null;
         AxisDiam axisDiam = (axisDiamId != DEFAULT_GROUP_ID) ? wheelService.findAxisDiam(axisDiamId) : null;
-        BrakesType brakesType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
+      //  BrakesType brakesType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
         RotorFixType rotorFixType = (rotorFixTypeId != DEFAULT_GROUP_ID) ? wheelService.findRotorFixType(rotorFixTypeId) : null;
         SpokeNumber spokeNumber = (spokeNumberId != DEFAULT_GROUP_ID) ? wheelService.findSpokeNumber(spokeNumberId) : null;
         BackSprocketType backSprocketType = (backSprocketTypeId != DEFAULT_GROUP_ID) ? wheelService.findBackSprocketType(backSprocketTypeId) : null;
@@ -499,7 +499,7 @@ public class WheelController {
     {
         //todo migrate to mapper
         Manufacturer wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
-        WheelsDiam wheelsDiam = (wheelsDiamId != DEFAULT_GROUP_ID) ? forkService.findWheelsDiam(wheelsDiamId) : null;
+      //  WheelsDiam wheelsDiam = (wheelsDiamId != DEFAULT_GROUP_ID) ? forkService.findWheelsDiam(wheelsDiamId) : null;
         TireType tireType = (tireTypeId != DEFAULT_GROUP_ID) ? wheelService.findTireType(tireTypeId) : null;
         CordType cordType = (cordTypeId != DEFAULT_GROUP_ID) ? wheelService.findCordType(cordTypeId) : null;
         TireWide tireWide = (tireWideId != DEFAULT_GROUP_ID) ? wheelService.findTireWide(tireWideId) : null;

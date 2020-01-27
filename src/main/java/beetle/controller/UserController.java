@@ -68,16 +68,16 @@ public class UserController {
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
     {
-        if (page < 0) page = 0;
-        userService.addChosenId(FRAME,id);
-        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
-        BikeType bikeType = frame.getBikeType();
-        TubeDiameter tubeDiameter = frame.getTubeDiameter();
-        WheelsDiam wheelsDiam = frame.getWheelsDiam();
-        BrakesType brakesType = frame.getBrakesType();
-        List<Fork> forks = forkService.
-                findByTypeAndWhDiamAndTubeDiamAndBrType(bikeType,wheelsDiam,tubeDiameter,brakesType,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-     model.addAttribute("forks", forks);
+//        if (page < 0) page = 0;
+//        userService.addChosenId(FRAME,id);
+//        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
+//        BikeType bikeType = frame.getBikeType();
+//        TubeDiameter tubeDiameter = frame.getTubeDiameter();
+//        WheelsDiam wheelsDiam = frame.getWheelsDiam();
+//        BrakesType brakesType = frame.getBrakesType();
+//        List<Fork> forks = forkService.
+//                findByTypeAndWhDiamAndTubeDiamAndBrType(bikeType,wheelsDiam,tubeDiameter,brakesType,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//     model.addAttribute("forks", forks);
         return "forksToFrame";
     }
     // Select Wheels
@@ -224,7 +224,7 @@ public class UserController {
 //            Model model) {
 //        userService.addChosenId(PEDAL,id);
 //        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
-//        BrakesType brakesType = frame.getBrakesType();
+//        BrakesType brakesType = frame.getBrakeType();
 //        int a = (int)brakesType.getId();
 //        Location location = brakeService.findLication(1);
 //        List<BrakeVBrake> brakeVBrakes = brakeService

@@ -20,27 +20,6 @@ public class BrakesType {
     private long id;
     private String type;
 
-//    @OneToMany(mappedBy="brakesType", cascade=CascadeType.ALL)
-//    private List<Fork> forks = new ArrayList<Fork>();
-//
-//    @OneToMany(mappedBy="brakesType", cascade=CascadeType.ALL)
-//    private List<FrontHub> frontHubs = new ArrayList<FrontHub>();
-//
-//    @OneToMany(mappedBy="brakesType", cascade=CascadeType.ALL)
-//    private List<BackHub> backHubs = new ArrayList<BackHub>();
-//
-//    @OneToMany(mappedBy="brakesType", cascade=CascadeType.ALL)
-//    private List<Wheel> wheels = new ArrayList<Wheel>();
-//
-//    @OneToMany(mappedBy="brakesType", cascade=CascadeType.ALL)
-//    private List<Rim> rims = new ArrayList<Rim>();
-//
-//    @OneToMany(mappedBy="brakesType", cascade=CascadeType.ALL)
-//    private List<Frame> frames = new ArrayList<Frame>();
-//
-//    @OneToMany (mappedBy="brakesType", cascade= CascadeType.ALL)
-//    private List<BrakesType> brakesType = new ArrayList<BrakesType>();
-//
     public BrakesType(String type) {
         this.type = type;
     }

@@ -30,7 +30,7 @@ public class FrameController {
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     @ResponseBody
-    public FrameSearchResultResponseJSON listByFrameMaker(@RequestBody FramesSearchInputJSON input) {
+    public FrameSearchResultResponseJSON searchFrames(@RequestBody FramesSearchInputJSON input) {
         FrameSearchResultResponseJSON response = null;
         try {
             SearchResultBO searchResult = frameService.searchByCriteria(input);

@@ -1,5 +1,7 @@
 package beetle.service;
 
+import beetle.businessObjects.SearchResultBO;
+import beetle.json.fork.ForkSearchInputJSON;
 import beetle.repository.forks.BrakesTypeRepository;
 import beetle.repository.forks.ForkRepository;
 import beetle.repository.forks.TubeDiameterRepository;
@@ -38,45 +40,12 @@ public interface ForkService {
 
     void deleteForks(long[] idList);
 
-    List<Manufacturer> findForkMakers();
-
     List<Fork> findAll(Pageable pageable);
-
-    List<BikeType> findBikeType();
-
-    List<WheelsDiam> findWheelsDiam();
-
-    List<TubeDiameter> findTubeDiameter();
-
-    List<BrakesType> findBrakesType();
-
-    List<Fork> findByForkMakers(Manufacturer forkMaker, Pageable pageable);
-
-    List<Fork> findByBikeType(BikeType bikeType, Pageable pageable);
-
-    List<Fork> findByUrl(String url, Pageable pageable);
-
-    List<Fork> findByArticle(Long article, Pageable pageable);
-
-    List<Fork> findByPattern(String pattern, Pageable pageable);
-
-    List<Fork> findByTypeAndWhDiamAndTubeDiamAndBrType(BikeType bikeType, WheelsDiam wheelsDiam,TubeDiameter tubeDiameter, BrakesType brakesType, Pageable pageable);
-
-    long countByForkMaker(Manufacturer forkMaker);
 
     long count();
 
+    SearchResultBO searchByCriteria(ForkSearchInputJSON input);
+
     Fork findFork(Long id);
-
-    Manufacturer findForkMaker(long id);
-
-    BikeType findBikeType(long id);
-
-    TubeDiameter findTubeDiameter(long id);
-
-    WheelsDiam findWheelsDiam(long id);
-
-    BrakesType findBrakesType(long id);
-
 }
 

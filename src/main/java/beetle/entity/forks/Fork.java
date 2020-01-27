@@ -1,8 +1,8 @@
 package beetle.entity.forks;
 
-import beetle.entity.BaseEntity;
 import beetle.entity.Manufacturer;
 import beetle.entity.frame.BikeType;
+import beetle.enums.brakes.BrakeType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,9 +33,9 @@ public class Fork {
     @JoinColumn(name="tybe_d_id")
     private TubeDiameter tubeDiameter;
     private String stTubeLength;
-    @ManyToOne
-    @JoinColumn(name="tybe_br_id")
-    private BrakesType brakesType;
+    @Enumerated(EnumType.STRING)
+    @Column(name="brake_type")
+    private BrakeType brakeType;
 
     @ManyToOne
     @JoinColumn(name="maker_id")
@@ -163,11 +163,11 @@ public class Fork {
         this.stTubeLength = stTubeLength;
     }
 
-    public BrakesType getBrakesType() {
-        return brakesType;
+    public BrakeType getBrakeType() {
+        return brakeType;
     }
 
-    public void setBrakesType(BrakesType brakesType) {
-        this.brakesType = brakesType;
+    public void setBrakeType(BrakeType brakeType) {
+        this.brakeType = brakeType;
     }
 }

@@ -28,10 +28,6 @@ public class BrakeController {
     @Autowired
     private BrakeService brakeService;
     @Autowired
-    private WheelService wheelService;
-    @Autowired
-    private HandlebarService handlebarService;
-    @Autowired
     private BrakeMapper brakeMapper;
 
     //return page with links to pages with components

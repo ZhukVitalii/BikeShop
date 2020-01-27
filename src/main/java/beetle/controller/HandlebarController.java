@@ -61,7 +61,7 @@ public class HandlebarController {
         model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
         model.addAttribute("bikeType", handlebarService.findBikeType());
         model.addAttribute("handlebarDiameter", handlebarService.findHandlebarDiameter());
-        model.addAttribute("tubeDiameter", forkService.findTubeDiameter());
+       // model.addAttribute("tubeDiameter", forkService.findTubeDiameter());
         model.addAttribute("headsetType", handlebarService.findHeadsetType());
         model.addAttribute("handlebars", handlebars);
         model.addAttribute("windings", windings);
@@ -135,7 +135,7 @@ public class HandlebarController {
         model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
         model.addAttribute("bikeType", handlebarService.findBikeType());
         model.addAttribute("handlebarDiameter", handlebarService.findHandlebarDiameter());
-        model.addAttribute("tubeDiameter", forkService.findTubeDiameter());
+//        model.addAttribute("tubeDiameter", forkService.findTubeDiameter());
         return "handlebars_add_page";
     }
 
@@ -155,7 +155,7 @@ public class HandlebarController {
     public String headsetAddPage(Model model) {
         model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
         model.addAttribute("headsetType", handlebarService.findHeadsetType());
-        model.addAttribute("tubeDiameter", forkService.findTubeDiameter());
+//        model.addAttribute("tubeDiameter", forkService.findTubeDiameter());
         return "headset_add_page";
     }
 
@@ -163,7 +163,7 @@ public class HandlebarController {
     public String stemAddPage(Model model) {
         model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
         model.addAttribute("handlebarDiameter", handlebarService.findHandlebarDiameter());
-        model.addAttribute("tubeDiameter", forkService.findTubeDiameter());
+//        model.addAttribute("tubeDiameter", forkService.findTubeDiameter());
         return "stem_add_page";
     }
 
@@ -296,7 +296,7 @@ public class HandlebarController {
         //todo migrate to mapper
         Manufacturer handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
         HeadsetType headsetType = (headsetTypeId != DEFAULT_GROUP_ID) ?  handlebarService.findHeadsetType(headsetTypeId) : null;
-        TubeDiameter tubeDiameter = (tubeDiameterId != DEFAULT_GROUP_ID) ?  forkService.findTubeDiameter(tubeDiameterId) : null;
+      //  TubeDiameter tubeDiameter = (tubeDiameterId != DEFAULT_GROUP_ID) ?  forkService.findTubeDiameter(tubeDiameterId) : null;
 //        Headset headset = new Headset(handlebarMaker,article,url,  name, headsetType, tubeDiameter, material,size, color ,
 //                price, description, way);
 //        handlebarService.addHeadset(headset);
@@ -322,7 +322,7 @@ public class HandlebarController {
         // todo migrate to mapper
         Manufacturer handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
         HandlebarDiameter handlebarDiameter = (handlebarDiameterId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarDiameter(handlebarDiameterId) : null;
-        TubeDiameter tubeDiameter = (tubeDiameterId != DEFAULT_GROUP_ID) ?  forkService.findTubeDiameter(tubeDiameterId) : null;
+      //  TubeDiameter tubeDiameter = (tubeDiameterId != DEFAULT_GROUP_ID) ?  forkService.findTubeDiameter(tubeDiameterId) : null;
 //        Stem stem = new Stem(handlebarMaker, article, url, name, angle, handlebarDiameter, tubeDiameter, material,length, color ,
 //                price, description, way);
 //        handlebarService.addStem(stem);
