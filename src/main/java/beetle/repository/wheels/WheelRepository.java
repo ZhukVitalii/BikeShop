@@ -1,11 +1,8 @@
 package beetle.repository.wheels;
 
 import beetle.entity.Manufacturer;
-import beetle.entity.wheels.RimWide;
 import beetle.entity.wheels.SpokeNumber;
 import beetle.entity.wheels.Wheel;
-import beetle.entity.forks.BrakesType;
-import beetle.entity.frame.BikeType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,8 +21,6 @@ public interface WheelRepository extends JpaRepository<Wheel, Long> {
     @Query("SELECT c FROM Wheel c WHERE c.spokeNumber = :spokeNumber")
     List<Wheel> findBySpokeNumber(@Param("spokeNumber") SpokeNumber spokeNumber, Pageable pageable);
 
-    @Query("SELECT c FROM Wheel c WHERE c.rimWide = :rimWide")
-    List<Wheel> findByRimWide(@Param("rimWide") RimWide rimWide, Pageable pageable);
 
     @Query("SELECT c FROM Wheel c WHERE c.wheelsDiam = :wheelsDiam")
     List<Wheel> findByWheelsDiam(@Param("wheelsDiam")WheelsDiam wheelsDiam, Pageable pageable);
@@ -35,13 +30,6 @@ public interface WheelRepository extends JpaRepository<Wheel, Long> {
 
     @Query("SELECT c FROM Wheel c WHERE c.article = :article")
     List<Wheel> findByArticle(@Param("article") Long article, Pageable pageable);
-
-    @Query("SELECT c FROM Wheel c WHERE c.bikeType = :bikeType AND c.wheelsDiam = :wheelsDiam AND c.brakesType = :brakesType ")
-    List<Wheel> findByTypeAndWhDiamAndBrType(@Param("bikeType" )BikeType bikeType,
-                                                       @Param("wheelsDiam") WheelsDiam wheelsDiam,
-                                                       @Param("brakesType") BrakesType brakesType,
-                                                       Pageable pageable);
-
 
     @Query("SELECT COUNT(c) FROM Wheel c WHERE c.manufacturer = :manufacturer")
     long countByWheelMakers(@Param("manufacturer")  Manufacturer manufacturer);

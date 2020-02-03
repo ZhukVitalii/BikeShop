@@ -26,8 +26,6 @@ public interface BackHubRepository extends JpaRepository<BackHub, Long>  {
         @Query("SELECT c FROM BackHub c WHERE c.hubFixType = :hubFixType")
         List<BackHub> findByHubFixType(@Param("hubFixType") HubFixType hubFixType, Pageable pageable);
 
-        @Query("SELECT c FROM BackHub c WHERE c.bearingType = :bearingType")
-        List<BackHub> findByBearingType(@Param("bearingType") BearingType bearingType, Pageable pageable);
 
         @Query("SELECT c FROM BackHub c WHERE c.url = :url")
         List<BackHub> findByUrl(@Param("url") String url, Pageable pageable);

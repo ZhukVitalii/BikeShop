@@ -2,7 +2,7 @@ package beetle.json.brakes;
 
 import beetle.enums.brakes.BrakeSubTypeEnum;
 import beetle.enums.brakes.BrakeType;
-import beetle.enums.brakes.LocationType;
+import beetle.enums.LocationType;
 import beetle.json.BaseJSON;
 
 

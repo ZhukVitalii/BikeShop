@@ -74,30 +74,30 @@ public class UserController {
 //        BikeType bikeType = frame.getBikeType();
 //        TubeDiameter tubeDiameter = frame.getTubeDiameter();
 //        WheelsDiam wheelsDiam = frame.getWheelsDiam();
-//        BrakesType brakesType = frame.getBrakesType();
+//        BrakesType brakeType = frame.getBrakeType();
 //        List<Fork> forks = forkService.
-//                findByTypeAndWhDiamAndTubeDiamAndBrType(bikeType,wheelsDiam,tubeDiameter,brakesType,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//                findByTypeAndWhDiamAndTubeDiamAndBrType(bikeType,wheelsDiam,tubeDiameter,brakeType,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
 //     model.addAttribute("forks", forks);
         return "forksToFrame";
     }
     // Select Wheels
-    @RequestMapping("/chooseWheel/{id}")
-    public String listWheelForFork(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
-        if (page < 0) page = 0;
-        userService.addChosenId(FORK,id);
-        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
-        BikeType bikeType = frame.getBikeType();
-        WheelsDiam wheelsDiam = frame.getWheelsDiam();
-        BrakesType brakesType = frame.getBrakesType();
-        List<Wheel> wheels = wheelService.
-                findByTypeAndWhDiamAndBrType(bikeType,wheelsDiam,brakesType,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("wheels", wheels);
-        return "wheelsToFork";
-    }
+//    @RequestMapping("/chooseWheel/{id}")
+//    public String listWheelForFork(
+//            @PathVariable(value = "id") Long id,
+//            @RequestParam(required = false, defaultValue = "0") Integer page,
+//            Model model)
+//    {
+//        if (page < 0) page = 0;
+//        userService.addChosenId(FORK,id);
+//        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
+//        BikeType bikeType = frame.getBikeType();
+//        WheelsDiam wheelsDiam = frame.getWheelsDiam();
+//        BrakesType brakesType = frame.getBrakesType();
+//        List<Wheel> wheels = wheelService.
+//                findByTypeAndWhDiamAndBrType(bikeType,wheelsDiam,brakesType,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        model.addAttribute("wheels", wheels);
+//        return "wheelsToFork";
+//    }
     // Select Brackets
     @RequestMapping("/chooseBracket/{id}")
     public String listBracketForBike(
@@ -224,8 +224,8 @@ public class UserController {
 //            Model model) {
 //        userService.addChosenId(PEDAL,id);
 //        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
-//        BrakesType brakesType = frame.getBrakeType();
-//        int a = (int)brakesType.getId();
+//        BrakesType brakeType = frame.getBrakeType();
+//        int a = (int)brakeType.getId();
 //        Location location = brakeService.findLication(1);
 //        List<BrakeVBrake> brakeVBrakes = brakeService
 //                .findByLocationVBrake(location, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));

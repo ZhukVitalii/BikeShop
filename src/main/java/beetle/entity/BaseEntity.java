@@ -1,11 +1,17 @@
 package beetle.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
-@Entity
-@Table(name = "frames")
-public abstract class BaseEntity {
-    @Id
-    private long id;
+//@Entity
+//@Table(name = "frames")
+@MappedSuperclass
+@NoArgsConstructor
+@Getter
+@Setter
+public class BaseEntity {
     @ManyToOne
     @JoinColumn(name="maker_id")
     private Manufacturer manufacturer;
@@ -20,83 +26,16 @@ public abstract class BaseEntity {
     private Double price;
     private String way;
 
-    public Manufacturer getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(Manufacturer manufacturer) {
+    public BaseEntity(Manufacturer manufacturer, Long article, String url, String name, String weight, String material, String color, String description, Double price, String way) {
         this.manufacturer = manufacturer;
-    }
-
-    public Long getArticle() {
-        return article;
-    }
-
-    public void setArticle(Long article) {
         this.article = article;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getWay() {
-        return way;
-    }
-
-    public void setWay(String way) {
-        this.way = way;
-    }
-
-    public String getWeight() {
-        return weight;
-    }
-
-    public void setWeight(String weight) {
         this.weight = weight;
-    }
-
-    public String getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(String material) {
         this.material = material;
+        this.color = color;
+        this.description = description;
+        this.price = price;
+        this.way = way;
     }
 }

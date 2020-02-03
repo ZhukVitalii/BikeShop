@@ -2,8 +2,7 @@ package beetle.mapper;
 
 import beetle.entity.Manufacturer;
 import beetle.entity.brake.*;
-import beetle.enums.brakes.BrakeHandleCompatibilityEnum;
-import beetle.enums.brakes.BrakeHandleLocationEnum;
+import beetle.json.SearchResultResponseJSON;
 import beetle.json.brakes.*;
 import beetle.service.impl.BrakeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,9 @@ public class BrakeMapper {
         Manufacturer brakeMaker = brakeServiceImpl.findBrakeMaker(input.getManufacturerId());
 
         ret.setBrakeType(input.getBrakeType());
-        ret.setBrakeSubType(input.getBrakeSubType().name());
+        ret.setBrakeSubType(input.getBrakeSubType());
         ret.setBrakeLiquid(input.getBrakeLiquid());
-        ret.setBrakeWeight(input.getBrakeWeight());
+        ret.setWeight(input.getBrakeWeight());
         ret.setLengthHydroline(input.getLengthHydroline());
         ret.setLocation(input.getLocation());
         ret.setMaterialHandle(input.getMaterialHandle());
@@ -42,11 +41,11 @@ public class BrakeMapper {
         return ret;
     }
 
-    public BrakeSearchResultResponseJSON toSearchResult(List<Brake> brakes, BrakeSearchInputJSON input) {
+    public SearchResultResponseJSON toSearchResult(List<Brake> brakes, BrakeSearchInputJSON input) {
         if (brakes == null)
             return null;
-        BrakeSearchResultResponseJSON ret = new BrakeSearchResultResponseJSON();
-        ret.setBrakes(toBrakes(brakes));
+        SearchResultResponseJSON ret = new SearchResultResponseJSON();
+        ret.setResult(toBrakes(brakes));
         if (input != null) {
             ret.setItemsPerPage(input.getItemsPerPage());
             ret.setPage(input.getPage());
@@ -54,11 +53,11 @@ public class BrakeMapper {
         return ret;
     }
 
-    public BrakeHandleSearchResultResponseJSON toSearchResult(List<BrakeHandle> brakeHandles, BrakeHandleSearchInputJSON input) {
+    public SearchResultResponseJSON toSearchResult(List<BrakeHandle> brakeHandles, BrakeHandleSearchInputJSON input) {
         if (brakeHandles == null)
             return null;
-        BrakeHandleSearchResultResponseJSON ret = new BrakeHandleSearchResultResponseJSON();
-        ret.setBrakeHandles(toBrakeHandles(brakeHandles));
+        SearchResultResponseJSON ret = new SearchResultResponseJSON();
+        ret.setResult(toBrakeHandles(brakeHandles));
         if (input != null) {
             ret.setItemsPerPage(input.getItemsPerPage());
             ret.setPage(input.getPage());
@@ -88,7 +87,7 @@ public class BrakeMapper {
         ret.setBrakeLiquid(brake.getBrakeLiquid());
         ret.setBrakeSubType(brake.getBrakeSubType());
         ret.setBrakeType(brake.getBrakeType());
-        ret.setBrakeWeight(brake.getBrakeWeight());
+        ret.setBrakeWeight(brake.getWeight());
         ret.setLengthHydroline(brake.getLengthHydroline());
         ret.setLocation(brake.getLocation());
         ret.setMaterialHandle(brake.getMaterialHandle());
@@ -113,7 +112,7 @@ public class BrakeMapper {
             ret.setHandlebarDiameter(brakeHandle.getHandlebarDiameter().getDiam());
             ret.setLocation(brakeHandle.getLocation());
             ret.setMaterialCorp(brakeHandle.getMaterialCorp());
-            ret.setMaterialHandle(brakeHandle.getMaterialHandle());
+            ret.setMaterialHandle(brakeHandle.getMaterial());
             ret.setWide(brakeHandle.getWide());
             ret.setArticle(brakeHandle.getArticle());
             ret.setColor(brakeHandle.getColor());

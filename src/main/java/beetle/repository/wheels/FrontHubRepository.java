@@ -26,8 +26,6 @@ public interface FrontHubRepository extends JpaRepository<FrontHub, Long> {
     @Query("SELECT c FROM FrontHub c WHERE c.hubFixType = :hubFixType")
     List<FrontHub> findByHubFixType(@Param("hubFixType") HubFixType hubFixType, Pageable pageable);
 
-    @Query("SELECT c FROM FrontHub c WHERE c.bearingType = :bearingType")
-    List<FrontHub> findByBearingType(@Param("bearingType") BearingType bearingType, Pageable pageable);
 
     @Query("SELECT c FROM FrontHub c WHERE c.url = :url")
     List<FrontHub> findByUrl(@Param("url") String url, Pageable pageable);

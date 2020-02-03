@@ -1,9 +1,9 @@
 package beetle.mapper;
 
 import beetle.entity.forks.Fork;
+import beetle.json.SearchResultResponseJSON;
 import beetle.json.fork.ForkJSON;
 import beetle.json.fork.ForkSearchInputJSON;
-import beetle.json.fork.ForkSearchResultResponseJSON;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -42,11 +42,11 @@ public class ForkMapper {
         return ret;
     }
 
-    public ForkSearchResultResponseJSON toSearchResult(List<Fork> forks, ForkSearchInputJSON input) {
+    public SearchResultResponseJSON toSearchResult(List<Fork> forks, ForkSearchInputJSON input) {
         if (forks == null)
             return null;
-        ForkSearchResultResponseJSON ret = new ForkSearchResultResponseJSON();
-        ret.setForks(toForks(forks));
+        SearchResultResponseJSON ret = new SearchResultResponseJSON();
+        ret.setResult(toForks(forks));
         if (input != null) {
             ret.setItemsPerPage(input.getItemsPerPage());
             ret.setPage(input.getPage());

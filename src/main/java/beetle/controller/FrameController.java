@@ -3,7 +3,7 @@ package beetle.controller;
 import beetle.businessObjects.SearchResultBO;
 import beetle.entity.frame.*;
 import beetle.exception.CustomWebException;
-import beetle.json.frame.FrameSearchResultResponseJSON;
+import beetle.json.SearchResultResponseJSON;
 import beetle.json.frame.FrameSizeJSON;
 import beetle.json.frame.FramesJSON;
 import beetle.json.frame.FramesSearchInputJSON;
@@ -30,8 +30,8 @@ public class FrameController {
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     @ResponseBody
-    public FrameSearchResultResponseJSON searchFrames(@RequestBody FramesSearchInputJSON input) {
-        FrameSearchResultResponseJSON response = null;
+    public SearchResultResponseJSON searchFrames(@RequestBody FramesSearchInputJSON input) {
+        SearchResultResponseJSON response = null;
         try {
             SearchResultBO searchResult = frameService.searchByCriteria(input);
             List<Frame> frames = searchResult.getSearchResult().stream().map(e -> (Frame) e).collect(Collectors.toList());
@@ -52,10 +52,10 @@ public class FrameController {
 
     @RequestMapping("/show-frames")
     @ResponseBody
-    public FrameSearchResultResponseJSON framesVeiw(@RequestBody FramesSearchInputJSON input) {
+    public SearchResultResponseJSON framesVeiw(@RequestBody FramesSearchInputJSON input) {
         List<Frame> frames = frameService
                 .findAll(new PageRequest(input.getPage(), input.getItemsPerPage(), Sort.Direction.DESC, "id"));
-        FrameSearchResultResponseJSON ret = frameMapper.toSearchResult(frames,input);
+        SearchResultResponseJSON ret = frameMapper.toSearchResult(frames,input);
         ret.setTotalItems(frameService.count());
         return ret;
     }

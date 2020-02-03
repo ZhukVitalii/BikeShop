@@ -2,9 +2,6 @@ package beetle.repository.wheels;
 
 import beetle.entity.Manufacturer;
 import beetle.entity.wheels.Tire;
-import beetle.entity.wheels.TireType;
-import beetle.entity.wheels.TireWide;
-import beetle.entity.wheels.CordType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,15 +19,6 @@ public interface TireRepository extends JpaRepository<Tire, Long> {
 
     @Query("SELECT c FROM Tire c WHERE c.wheelsDiam = :wheelsDiam")
     List<Tire> findByWheelsDiam(@Param("wheelsDiam")WheelsDiam wheelsDiam, Pageable pageable);
-
-    @Query("SELECT c FROM Tire c WHERE c.tireType = :tireType")
-    List<Tire> findByTireType(@Param("tireType") TireType tireType, Pageable pageable);
-
-    @Query("SELECT c FROM Tire c WHERE c.cordType = :cordType")
-    List<Tire> findByCordType(@Param("cordType") CordType cordType, Pageable pageable);
-
-    @Query("SELECT c FROM Tire c WHERE c.tireWide = :tireWide")
-    List<Tire> findByTireWide(@Param("tireWide") TireWide tireWide, Pageable pageable);
 
     @Query("SELECT c FROM Tire c WHERE c.url = :url")
     List<Tire> findByUrl(@Param("url") String url, Pageable pageable);

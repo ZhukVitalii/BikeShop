@@ -7,6 +7,7 @@ import beetle.entity.forks.TubeDiameter;
 import beetle.entity.forks.WheelsDiam;
 import beetle.entity.frame.BikeType;
 import beetle.entity.frame.Frame;
+import beetle.entity.wheels.*;
 import beetle.json.frame.FrameInputJSON;
 import beetle.mapper.BrakeMapper;
 import beetle.mapper.FrameMapper;
@@ -371,7 +372,7 @@ public class AdminController {
             @RequestParam(value = "wheelsDiam") long wheelsDiamId,
             @RequestParam(value = "tubeDiameter") long tubeDiameterId,
             @RequestParam String stTubeLength,
-            @RequestParam(value = "brakesType") long brakesTypeId,
+            @RequestParam(value = "brakeType") long brakesTypeId,
             @RequestParam String forkMaterial,
             @RequestParam String weight,
             @RequestParam String color,
@@ -385,8 +386,8 @@ public class AdminController {
 //        BikeType bikeType = (bikeTypeId != DEFAULT_GROUP_ID) ? forkService.findBikeType(bikeTypeId) : null;
 //        TubeDiameter tubeDiameter = (tubeDiameterId != DEFAULT_GROUP_ID) ? forkService.findTubeDiameter(tubeDiameterId) : null;
 //        WheelsDiam wheelsDiam = (wheelsDiamId != DEFAULT_GROUP_ID) ? forkService.findWheelsDiam(wheelsDiamId) : null;
-       // BrakesType brakesType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
-//        Fork fork = new Fork(forkMaker,article,url,  name, bikeType,  wheelsDiam,  tubeDiameter, stTubeLength, brakesType,  forkMaterial ,
+       // BrakesType brakeType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
+//        Fork fork = new Fork(forkMaker,article,url,  name, bikeType,  wheelsDiam,  tubeDiameter, stTubeLength, brakeType,  forkMaterial ,
 //                weight, color, move, price, description, way);
 //        forkService.addFork(fork);
         return "redirect:/show_forks";
@@ -398,4 +399,366 @@ public class AdminController {
         forkService.addForkMaker(new Manufacturer(name));
         return "redirect:/show_forks";
     }
+
+    //for admin with all brakes components
+    @RequestMapping("/admin/show_wheels")
+    public String wheelsAdminVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+//        List<Wheel> wheels = wheelService
+//                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        List<Spoke> spokes = wheelService
+//                .findAllOne(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        List<Rim> rims = wheelService
+//                .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        List<FrontHub> frontHubs = wheelService
+//                .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        List<BackHub> backHubs = wheelService
+//                .findAllFor(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        List<Tire> tires = wheelService
+//                .findAllFive(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        model.addAttribute("wheelMakers", wheelService.findWheelMakers());
+//        model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
+//        model.addAttribute("rimWide", wheelService.findRimWide());
+//        model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
+        // model.addAttribute("brakeType", forkService.findBrakesType());
+//        model.addAttribute("bikeType", forkService.findBikeType());
+//        model.addAttribute("etrtoSize", wheelService.findEtrtoSize());
+//        model.addAttribute("innerTubeDiameter", wheelService.findInnerTubeDiameter());
+//        model.addAttribute("rimHeight", wheelService.findRimHeight());
+//        model.addAttribute("nipple", wheelService.findNipple());
+//        model.addAttribute("axisDiam", wheelService.findAxisDiam());
+//        model.addAttribute("axisLength", wheelService.findAxisLength());
+//        model.addAttribute("backSprocketType", wheelService.findBackSprocketType());
+//        model.addAttribute("backSprocketNumber", wheelService.findBackSprocketNumber());
+//        model.addAttribute("hubFixType", wheelService.findHubFixType());
+//        model.addAttribute("rotorFixType", wheelService.findRotorFixType());
+//        model.addAttribute("bearingType", wheelService.findBearingType());
+//        model.addAttribute("wheels", wheels);
+//        model.addAttribute("spokes", spokes);
+//        model.addAttribute("rims", rims);
+//        model.addAttribute("frontHubs", frontHubs);
+//        model.addAttribute("backHubs", backHubs);
+//        model.addAttribute("tires", tires);
+//        model.addAttribute("allPages", getPageCount());
+//        model.addAttribute("allPages", getPageCountSpoke());
+//        model.addAttribute("allPages", getPageCountRim());
+//        model.addAttribute("allPages", getPageCountTire());
+        return "wheelsAdmin";
+    }
+
+
+    //add components from browser
+
+    @RequestMapping("/admin/wheel_add_page")
+    public String wheelAddPage(Model model) {
+//        model.addAttribute("wheelMakers", wheelService.findWheelMakers());
+//        model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
+//        model.addAttribute("rimWide", wheelService.findRimWide());
+//        model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
+        //  model.addAttribute("brakeType", forkService.findBrakesType());
+//        model.addAttribute("bikeType", forkService.findBikeType());
+        return "wheel_add_page";
+    }
+
+    @RequestMapping("/admin/spoke_add_page")
+    public String spokeAddPage(Model model) {
+//        model.addAttribute("wheelMakers", wheelService.findWheelMakers());
+        return "spoke_add_page";
+    }
+
+    @RequestMapping("/admin/rim_add_page")
+    public String rimAddPage(Model model) {
+//        model.addAttribute("wheelMakers", wheelService.findWheelMakers());
+//        model.addAttribute("bikeType", forkService.findBikeType());
+//        model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
+//        model.addAttribute("etrtoSize", wheelService.findEtrtoSize());
+//        model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
+//        model.addAttribute("innerTubeDiameter", wheelService.findInnerTubeDiameter());
+//        model.addAttribute("rimWide", wheelService.findRimWide());
+//        model.addAttribute("rimHeight", wheelService.findRimHeight());
+        //  model.addAttribute("brakeType", forkService.findBrakesType());
+//        model.addAttribute("nipple", wheelService.findNipple());
+        return "rim_add_page";
+    }
+
+    @RequestMapping("/admin/frontHub_add_page")
+    public String frontHubAddPage(Model model) {
+//        model.addAttribute("wheelMakers", wheelService.findWheelMakers());
+//        model.addAttribute("spokeNumber", wheelService.findSpokeNumber());
+        //  model.addAttribute("brakeType", forkService.findBrakesType());
+//        model.addAttribute("axisDiam", wheelService.findAxisDiam());
+//        model.addAttribute("axisLength", wheelService.findAxisLength());
+//        model.addAttribute("hubFixType", wheelService.findHubFixType());
+//        model.addAttribute("rotorFixType", wheelService.findRotorFixType());
+//        model.addAttribute("bearingType", wheelService.findBearingType());
+        return "frontHub_add_page";
+    }
+
+    @RequestMapping("/admin/backHub_add_page")
+    public String backHubAddPage(Model model) {
+//        model.addAttribute("wheelMakers", wheelService.findWheelMaker
+        //   model.addAttribute("brakeType", forkService.findBrakesType());
+//        model.addAttribute("axisDiam", wheelService.findAxisDiam());
+//        model.addAttribute("axisLength", wheelService.findAxisLength());
+//        model.addAttribute("hubFixType", wheelService.findHubFixType());
+//        model.addAttribute("rotorFixType", wheelService.findRotorFixType());
+//        model.addAttribute("bearingType", wheelService.findBearingType());
+//        model.addAttribute("backSprocketType", wheelService.findBackSprocketType());
+//        model.addAttribute("backSprocketNumber", wheelService.findBackSprocketNumber());
+        return "backHub_add_page";
+    }
+
+    @RequestMapping("/admin/tire_add_page")
+    public String tireAddPage(Model model) {
+//        model.addAttribute("wheelMakers", wheelService.findWheelMakers());
+//        model.addAttribute("wheelsDiam", forkService.findWheelsDiam());
+        return "tire_add_page";
+    }
+
+    @RequestMapping("/admin/wheelMaker_add_page")
+    public String wheelMakerAddPage() {
+        return "wheelMaker_add_page";
+    }
+
+
+    @RequestMapping(value = "/admin/wheel/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deleteWh(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
+//        if (toDelete != null && toDelete.length > 0)
+//            wheelService.deleteWheel(toDelete);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/admin/spoke/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deleteSpoke(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
+//        if (toDelete != null && toDelete.length > 0)
+//            wheelService.deleteSpoke(toDelete);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/admin/rim/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deleteRim(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
+//        if (toDelete != null && toDelete.length > 0)
+//            wheelService.deleteRim(toDelete);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/admin/frontHub/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deleteFrintHub(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
+//        if (toDelete != null && toDelete.length > 0)
+//            wheelService.deleteFrontHub(toDelete);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/admin/backHub/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deleteFor(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
+//        if (toDelete != null && toDelete.length > 0)
+//            wheelService.deleteBackHub(toDelete);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/admin/tire/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deleteFive(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
+//        if (toDelete != null && toDelete.length > 0)
+//            wheelService.deleteTire(toDelete);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // Add components to database
+    @RequestMapping(value="/admin/wheel/add", method = RequestMethod.POST)
+    public String wheelAdd(
+            @RequestParam(value = "wheelMaker") long wheelMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
+            @RequestParam String name,
+            @RequestParam(value = "wheelsDiam") long wheelsDiamId,
+            @RequestParam(value = "bikeType") long bikeTypeId,
+            @RequestParam(value = "brakeType") long brakesTypeId,
+            @RequestParam(value = "spokeNumber") long spokeNumberId,
+            @RequestParam String rimName,
+            @RequestParam(value = "rimWide") long rimWideId,
+            @RequestParam String rimDescription,
+            @RequestParam String hubName,
+            @RequestParam String hubDescription,
+            @RequestParam String description,
+            @RequestParam Double price,
+            @RequestParam String way)
+    {
+        //todo migrate to mapper
+//        Manufacturer wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
+        // WheelsDiam wheelsDiam = (wheelsDiamId != DEFAULT_GROUP_ID) ? forkService.findWheelsDiam(wheelsDiamId) : null;
+        //  BikeType bikeType = (bikeTypeId != DEFAULT_GROUP_ID) ? forkService.findBikeType(bikeTypeId) : null;
+        //   BrakesType brakeType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
+//        SpokeNumber spokeNumber = (spokeNumberId != DEFAULT_GROUP_ID) ? wheelService.findSpokeNumber(spokeNumberId) : null;
+//        RimWide rimWide = (rimWideId != DEFAULT_GROUP_ID) ? wheelService.findRimWide(rimWideId) : null;
+//        Wheel wheel = new Wheel(wheelMaker, article,url, name, wheelsDiam, bikeType, brakeType, spokeNumber,
+//                rimName,rimWide, rimDescription , hubName, hubDescription, description,price,way);
+//        wheelService.addWheel(wheel);
+        return "redirect:/show_wheels";
+    }
+
+    @RequestMapping(value="/admin/spoke/add", method = RequestMethod.POST)
+    public String spokeAdd(
+            @RequestParam(value = "wheelMaker") long wheelMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
+            @RequestParam String name,
+            @RequestParam String length,
+            @RequestParam String diameter,
+            @RequestParam String material,
+            @RequestParam String color,
+            @RequestParam String description,
+            @RequestParam Double price,
+            @RequestParam String way)
+    {
+        //todo migrate to mapper
+//        Manufacturer wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
+//        Spoke spoke = new Spoke(wheelMaker,article,url, name, length, diameter, material, color ,
+//                description, price, way);
+//       wheelService.addSpoke(spoke);
+        return "redirect:/show_spokes";
+    }
+
+    @RequestMapping(value="/admin/rim/add", method = RequestMethod.POST)
+    public String rimAdd(
+            @RequestParam(value = "wheelMaker") long wheelMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
+            @RequestParam String name,
+            @RequestParam(value = "bikeType") long bikeTypeId,
+            @RequestParam(value = "wheelsDiam") long wheelsDiamId,
+            @RequestParam(value = "etrtoSize") long etrtoSizeId,
+            @RequestParam String material,
+            @RequestParam(value = "spokeNumber") long spokeNumberId,
+            @RequestParam(value = "innerTubeDiameter") long innerTubeDiameterId,
+            @RequestParam(value = "rimWide") long rimWideId,
+            @RequestParam(value = "rimHeight") long rimHeightId,
+            @RequestParam(value = "brakeType") long brakesTypeId,
+            @RequestParam String weight,
+            @RequestParam(value = "nipple") long nippleId,
+            @RequestParam String color,
+            @RequestParam String description,
+            @RequestParam Double price,
+            @RequestParam String way)
+    {
+        //todo migrate to mapper
+//        Manufacturer wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
+        // WheelsDiam wheelsDiam = (wheelsDiamId != DEFAULT_GROUP_ID) ? forkService.findWheelsDiam(wheelsDiamId) : null;
+        //  BikeType bikeType = (bikeTypeId != DEFAULT_GROUP_ID) ? forkService.findBikeType(bikeTypeId) : null;
+//        EtrtoSize etrtoSize = (etrtoSizeId != DEFAULT_GROUP_ID) ? wheelService.findEtrtoSize(etrtoSizeId) : null;
+//        InnerTubeDiameter innerTubeDiameter = (innerTubeDiameterId != DEFAULT_GROUP_ID) ? wheelService.findInnerTubeDiameter(innerTubeDiameterId) : null;
+        // BrakesType brakeType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
+//        SpokeNumber spokeNumber = (spokeNumberId != DEFAULT_GROUP_ID) ? wheelService.findSpokeNumber(spokeNumberId) : null;
+//        RimWide rimWide = (rimWideId != DEFAULT_GROUP_ID) ? wheelService.findRimWide(rimWideId) : null;
+//        RimHeight rimHeight = (rimHeightId != DEFAULT_GROUP_ID) ? wheelService.findRimHeight(rimHeightId) : null;
+//        Nipple nipple = (nippleId != DEFAULT_GROUP_ID) ? wheelService.findNipple(nippleId) : null;
+//        Rim rim = new Rim (wheelMaker,article,url, name, bikeType, wheelsDiam,etrtoSize, material, spokeNumber,
+//                innerTubeDiameter,rimWide,rimHeight,brakeType,weight, nipple ,color,description,price,way);
+//        wheelService.addRim(rim);
+        return "redirect:/show_rims";
+    }
+
+    @RequestMapping(value="/admin/frontHub/add", method = RequestMethod.POST)
+    public String frontHubAdd(
+            @RequestParam(value = "wheelMaker") long wheelMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
+            @RequestParam String name,
+            @RequestParam(value = "hubFixType") long hubFixTypeId,
+            @RequestParam(value = "bearingType") long bearingTypeId,
+            @RequestParam String material,
+            @RequestParam(value = "axisLength") long axisLengthId,
+            @RequestParam(value = "axisDiam") long axisDiamId,
+            @RequestParam(value = "brakeType") long brakesTypeId,
+            @RequestParam(value = "rotorFixType") long rotorFixTypeId,
+            @RequestParam(value = "spokeNumber") long spokeNumberId,
+            @RequestParam String weight,
+            @RequestParam String color,
+            @RequestParam String description,
+            @RequestParam Double price,
+            @RequestParam String way)
+    {
+//        Manufacturer wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
+//        HubFixType hubFixType = (hubFixTypeId != DEFAULT_GROUP_ID) ? wheelService.findHubFixType(hubFixTypeId) : null;
+//        BearingType bearingType = (bearingTypeId != DEFAULT_GROUP_ID) ? wheelService.findBearingType(bearingTypeId) : null;
+//        AxisLength axisLength = (axisLengthId != DEFAULT_GROUP_ID) ? wheelService.findAxisLength(axisLengthId) : null;
+//        AxisDiam axisDiam = (axisDiamId != DEFAULT_GROUP_ID) ? wheelService.findAxisDiam(axisDiamId) : null;
+        // BrakesType brakeType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
+//        RotorFixType rotorFixType = (rotorFixTypeId != DEFAULT_GROUP_ID) ? wheelService.findRotorFixType(rotorFixTypeId) : null;
+//        SpokeNumber spokeNumber = (spokeNumberId != DEFAULT_GROUP_ID) ? wheelService.findSpokeNumber(spokeNumberId) : null;
+//        FrontHub frontHub = new FrontHub (wheelMaker,article,url, name,hubFixType, bearingType, material,axisLength, axisDiam, brakeType,
+//                rotorFixType,spokeNumber,weight, color,description,price,way);
+//        wheelService.addFrontHub(frontHub);
+        return "redirect:/show_frontHubs";
+    }
+
+    @RequestMapping(value="/admin/backHub/add", method = RequestMethod.POST)
+    public String backHubAdd(
+            @RequestParam(value = "wheelMaker") long wheelMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
+            @RequestParam String name,
+            @RequestParam(value = "hubFixType") long hubFixTypeId,
+            @RequestParam(value = "bearingType") long bearingTypeId,
+            @RequestParam String material,
+            @RequestParam(value = "axisLength") long axisLengthId,
+            @RequestParam(value = "axisDiam") long axisDiamId,
+            @RequestParam(value = "brakeType") long brakesTypeId,
+            @RequestParam(value = "rotorFixType") long rotorFixTypeId,
+            @RequestParam(value = "spokeNumber") long spokeNumberId,
+            @RequestParam(value = "backSprocketType") long backSprocketTypeId,
+            @RequestParam(value = "backSprocketNumber") long backSprocketNumberId,
+            @RequestParam String weight,
+            @RequestParam String color,
+            @RequestParam String description,
+            @RequestParam Double price,
+            @RequestParam String way)
+    {
+        //todo migrate to mapper
+//        Manufacturer wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
+//        HubFixType hubFixType = (hubFixTypeId != DEFAULT_GROUP_ID) ? wheelService.findHubFixType(hubFixTypeId) : null;
+//        BearingType bearingType = (bearingTypeId != DEFAULT_GROUP_ID) ? wheelService.findBearingType(bearingTypeId) : null;
+//        AxisLength axisLength = (axisLengthId != DEFAULT_GROUP_ID) ? wheelService.findAxisLength(axisLengthId) : null;
+//        AxisDiam axisDiam = (axisDiamId != DEFAULT_GROUP_ID) ? wheelService.findAxisDiam(axisDiamId) : null;
+        //  BrakesType brakeType = (brakesTypeId != DEFAULT_GROUP_ID) ? forkService.findBrakesType(brakesTypeId) : null;
+//        RotorFixType rotorFixType = (rotorFixTypeId != DEFAULT_GROUP_ID) ? wheelService.findRotorFixType(rotorFixTypeId) : null;
+//        SpokeNumber spokeNumber = (spokeNumberId != DEFAULT_GROUP_ID) ? wheelService.findSpokeNumber(spokeNumberId) : null;
+//        BackSprocketType backSprocketType = (backSprocketTypeId != DEFAULT_GROUP_ID) ? wheelService.findBackSprocketType(backSprocketTypeId) : null;
+//        BackSprocketNumber backSprocketNumber = (backSprocketNumberId != DEFAULT_GROUP_ID) ? wheelService.findBackSprocketNumber(backSprocketNumberId) : null;
+//        BackHub backHub = new BackHub (wheelMaker,article,url, name,hubFixType, bearingType, material,axisLength, axisDiam, brakeType,
+//                rotorFixType,spokeNumber,backSprocketType,backSprocketNumber,weight, color,description,price,way);
+//        wheelService.addBackHub(backHub);
+        return "redirect:/show_backHubs";
+    }
+
+    @RequestMapping(value="/admin/tire/add", method = RequestMethod.POST)
+    public String tireAdd(
+            @RequestParam(value = "wheelMaker") long wheelMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
+            @RequestParam String name,
+            @RequestParam(value = "wheelsDiam") long wheelsDiamId,
+            @RequestParam(value = "tireType") long tireTypeId,
+            @RequestParam(value = "cordType") long cordTypeId,
+            @RequestParam(value = "tireWide") long tireWideId,
+            @RequestParam String color,
+            @RequestParam String description,
+            @RequestParam Double price,
+            @RequestParam String way)
+    {
+        //todo migrate to mapper
+//        Manufacturer wheelMaker = (wheelMakerId != DEFAULT_GROUP_ID) ? wheelService.findWheelMaker(wheelMakerId) : null;
+        //  WheelsDiam wheelsDiam = (wheelsDiamId != DEFAULT_GROUP_ID) ? forkService.findWheelsDiam(wheelsDiamId) : null;
+//        Tire tire = new Tire( wheelMaker,article,url, name, wheelsDiam, tireType, cordType, tireWide,
+//                color, description,price,way);
+//        wheelService.addTire(tire);
+        return "redirect:/show_tires";
+    }
+
+    //Add Maker to database
+    @RequestMapping(value="/admin/wheelMaker/add", method = RequestMethod.POST)
+    public String wheelMakerAdd(@RequestParam String name) {
+//        wheelService.addWheelMaker(new Manufacturer(name));
+        return "redirect:/show_wheels";
+    }
+
 }

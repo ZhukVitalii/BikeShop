@@ -7,6 +7,7 @@ import beetle.entity.forks.WheelsDiam;
 import beetle.entity.frame.*;
 import beetle.entity.handlebars.HeadsetType;
 import beetle.entity.transmission.BracketWide;
+import beetle.json.SearchResultResponseJSON;
 import beetle.json.frame.*;
 import beetle.service.impl.FrameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,11 +80,11 @@ public class FrameMapper {
         return ret;
     }
 
-    public FrameSearchResultResponseJSON toSearchResult(List<Frame> frames, FramesSearchInputJSON input) {
+    public SearchResultResponseJSON toSearchResult(List<Frame> frames, FramesSearchInputJSON input) {
         if (frames == null)
             return null;
-        FrameSearchResultResponseJSON ret = new FrameSearchResultResponseJSON();
-        ret.setFrames(toFrames(frames));
+        SearchResultResponseJSON ret = new SearchResultResponseJSON();
+        ret.setResult(toFrames(frames));
         if (input != null) {
             ret.setItemsPerPage(input.getItemsPerPage());
             ret.setPage(input.getPage());

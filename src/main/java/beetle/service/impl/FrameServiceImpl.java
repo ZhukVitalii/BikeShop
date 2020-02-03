@@ -144,7 +144,7 @@ public class FrameServiceImpl implements FrameService {
         if (input.getUnderSaddleTubeId() != null)
             searchCriteria.add(Restrictions.eq("underSaddleTube", underSaddleTubeRepository.findOne(input.getUnderSaddleTubeId())));
         if (input.getBrakesTypeId() != null)
-            searchCriteria.add(Restrictions.eq("brakesType", brakesTypeRepository.findOne(input.getBrakesTypeId())));
+            searchCriteria.add(Restrictions.eq("brakeType", brakesTypeRepository.findOne(input.getBrakesTypeId())));
         ret.setTotalCount(getCount(searchCriteria));
         searchCriteria.setFirstResult(input.getItemsPerPage() * input.getPage());
         searchCriteria.setMaxResults(input.getItemsPerPage());

@@ -2,6 +2,7 @@ package beetle.controller;
 
 import beetle.businessObjects.SearchResultBO;
 import beetle.exception.CustomWebException;
+import beetle.json.SearchResultResponseJSON;
 import beetle.json.brakes.*;
 import beetle.mapper.BrakeMapper;
 import beetle.service.BrakeService;
@@ -40,8 +41,8 @@ public class BrakeController {
 
     @RequestMapping("/search")
     @ResponseBody
-    public BrakeSearchResultResponseJSON brakesSearch(@RequestBody BrakeSearchInputJSON input){
-        BrakeSearchResultResponseJSON response = null;
+    public SearchResultResponseJSON brakesSearch(@RequestBody BrakeSearchInputJSON input){
+        SearchResultResponseJSON response = null;
         try {
         SearchResultBO searchResult = brakeService.searchByCriteria(input);
             List<Brake> brakes = searchResult.getSearchResult().stream().map(e -> (Brake) e).collect(Collectors.toList());
@@ -61,8 +62,8 @@ public class BrakeController {
     }
     @RequestMapping(value = "/brakes-handle/search", method = RequestMethod.POST)
     @ResponseBody
-    public BrakeHandleSearchResultResponseJSON searchBrakesHandles(@RequestBody BrakeHandleSearchInputJSON input) {
-        BrakeHandleSearchResultResponseJSON response = null;
+    public SearchResultResponseJSON searchBrakesHandles(@RequestBody BrakeHandleSearchInputJSON input) {
+        SearchResultResponseJSON response = null;
        try {
             SearchResultBO searchResult = brakeService.searchByCriteria(input);
             List<BrakeHandle> brakes = searchResult.getSearchResult().stream().map(e -> (BrakeHandle) e).collect(Collectors.toList());

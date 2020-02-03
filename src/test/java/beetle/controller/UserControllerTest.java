@@ -5,7 +5,8 @@ import beetle.entity.frame.BikeType;
 import beetle.entity.frame.Frame;
 import beetle.entity.frame.FrameSize;
 import beetle.enums.BikeTypeEnum;
-import beetle.json.frame.FrameSearchResultResponseJSON;
+import beetle.json.SearchResultResponseJSON;
+import beetle.json.frame.FramesJSON;
 import beetle.json.frame.FramesSearchInputJSON;
 import beetle.repository.ManufacturerRepository;
 import beetle.repository.forks.BrakesTypeRepository;
@@ -120,8 +121,9 @@ public class UserControllerTest {
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<FramesSearchInputJSON> request = new HttpEntity<>(buildRequest(), headers);
             restTemplate = new TestRestTemplate();
-            ResponseEntity<FrameSearchResultResponseJSON> response = restTemplate.postForEntity(new URL("http://localhost:" + 8080 + "/get-frames").toString(), request, FrameSearchResultResponseJSON.class);
-            assertEquals(bikeType.getType(), response.getBody().getFrames().get(0).getBikeType());
+            ResponseEntity<SearchResultResponseJSON> response = restTemplate.postForEntity(new URL("http://localhost:" + 8080 + "/get-frames").toString(), request, SearchResultResponseJSON.class);
+            FramesJSON frame =(FramesJSON) response.getBody().getResult().get(0);
+            assertEquals(bikeType.getType(), frame.getBikeType());
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

@@ -716,7 +716,7 @@ public class TransmissionController {
 
 
     private long getPageCount() {
-        long totalCount = wheelService.count();
+        long totalCount = 0;
         return (totalCount / ITEMS_PER_PAGE) + ((totalCount % ITEMS_PER_PAGE > 0) ? 1 : 0);
     }
     private long getPageCountBackDerailleurMaker(Manufacturer transmissionMaker) {

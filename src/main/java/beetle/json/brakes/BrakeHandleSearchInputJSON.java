@@ -1,24 +1,22 @@
 package beetle.json.brakes;
 
+import beetle.enums.LocationType;
 import beetle.enums.brakes.BrakeHandleCompatibilityEnum;
-import beetle.enums.brakes.BrakeHandleLocationEnum;
 import beetle.json.PaggingJSON;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class BrakeHandleSearchInputJSON extends PaggingJSON {
-    private BrakeHandleLocationEnum location;
+    private LocationType location;
     private BrakeHandleCompatibilityEnum compatibility;
     private Long handlebarDiameterId;
     private String wide;
     private Long manufacturerId;
 
-    public BrakeHandleLocationEnum getLocation() {
+    public LocationType getLocation() {
         return location;
     }
 
     public void setLocation(String location) {
-        this.location = BrakeHandleLocationEnum.valueOf(location);
+        this.location = LocationType.valueOf(location);
     }
 
     public BrakeHandleCompatibilityEnum getCompatibility() {
