@@ -50,7 +50,7 @@ public class BrakeController {
             response.setTotalItems(searchResult.getTotalCount());
         } catch (Exception ex){
             logger.error(ex.getMessage());
-            throw new CustomWebException(ex.getMessage());
+            throw new CustomWebException(ex);
        }
         return response;
     }
@@ -71,7 +71,7 @@ public class BrakeController {
             response.setTotalItems(searchResult.getTotalCount());
        } catch (Exception ex){
             logger.error(ex.getMessage());
-            throw new CustomWebException(ex.getMessage());
+            throw new CustomWebException(ex);
        }
         return response;
     }

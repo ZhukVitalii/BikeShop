@@ -4,10 +4,7 @@ import beetle.businessObjects.SearchResultBO;
 import beetle.entity.wheels.*;
 import beetle.exception.CustomWebException;
 import beetle.json.SearchResultResponseJSON;
-import beetle.json.wheel.HubJSON;
-import beetle.json.wheel.HubSearchInputJSON;
-import beetle.json.wheel.WheelJSON;
-import beetle.json.wheel.WheelSearchInputJSON;
+import beetle.json.wheel.*;
 import beetle.mapper.WheelMapper;
 import beetle.service.WheelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,22 +20,12 @@ import java.util.stream.Collectors;
  */
 @Controller
 public class WheelController {
-    static final int DEFAULT_GROUP_ID = -1;
-    static final int ITEMS_PER_PAGE = 6;
 
 
     @Autowired
     private WheelService wheelService;
     @Autowired
     private WheelMapper wheelMapper;
-
-    //return page with links to pages with components
-    @RequestMapping("/show_wheelsComponent")
-    public String wheelsComponentsVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        if (page < 0) page = 0;
-        return "wheelsComponent";
-    }
-
 
     @RequestMapping("wheel/search")
     @ResponseBody
@@ -51,7 +38,7 @@ public class WheelController {
             response.setTotalItems(searchResult.getTotalCount());
         }
         catch (Exception ex){
-            throw new CustomWebException(ex.getMessage());
+            throw new CustomWebException(ex);
         }
         return response;
     }
@@ -60,20 +47,65 @@ public class WheelController {
     @ResponseBody
     public SearchResultResponseJSON searchHubs(@RequestBody HubSearchInputJSON input) {
         SearchResultResponseJSON response = null;
-       // try {
+        try {
             SearchResultBO searchResult = wheelService.searchByCriteria(input);
             List<Hub> hubs = searchResult.getSearchResult().stream().map(e -> (Hub) e).collect(Collectors.toList());
             response = wheelMapper.toSearchResult(hubs,input,Hub.class);
             response.setTotalItems(searchResult.getTotalCount());
-       // }
-       // catch (Exception ex){
-       //     throw new CustomWebException(ex.getMessage());
-       // }
+        }
+        catch (Exception ex){
+            throw new CustomWebException(ex);
+        }
         return response;
     }
 
+    @RequestMapping("spoke/search")
+    @ResponseBody
+    public SearchResultResponseJSON searchSpokes(@RequestBody SpokeSearchInputJSON input) {
+        SearchResultResponseJSON response = null;
+        try {
+            SearchResultBO searchResult = wheelService.searchByCriteria(input);
+            List<Spoke> spokes = searchResult.getSearchResult().stream().map(e -> (Spoke) e).collect(Collectors.toList());
+            response = wheelMapper.toSearchResult(spokes,input,Spoke.class);
+            response.setTotalItems(searchResult.getTotalCount());
+        }
+        catch (Exception ex){
+            throw new CustomWebException(ex);
+        }
+        return response;
+    }
 
+    @RequestMapping("tire/search")
+    @ResponseBody
+    public SearchResultResponseJSON searchTires(@RequestBody TireSearchInputJSON input) {
+        SearchResultResponseJSON response = null;
+        try {
+            SearchResultBO searchResult = wheelService.searchByCriteria(input);
+            List<Tire> tires = searchResult.getSearchResult().stream().map(e -> (Tire) e).collect(Collectors.toList());
+            response = wheelMapper.toSearchResult(tires,input,Tire.class);
+            response.setTotalItems(searchResult.getTotalCount());
+        }
+        catch (Exception ex){
+            throw new CustomWebException(ex);
+        }
+        return response;
+    }
 
+    @RequestMapping("rim/search")
+    @ResponseBody
+    public SearchResultResponseJSON searchRims(@RequestBody RimSearchInputJSON input) {
+        SearchResultResponseJSON response = null;
+        try {
+            SearchResultBO searchResult = wheelService.searchByCriteria(input);
+            List<Rim> rims = searchResult.getSearchResult().stream().map(e -> (Rim) e).collect(Collectors.toList());
+            response = wheelMapper.toSearchResult(rims,input,Rim.class);
+            response.setTotalItems(searchResult.getTotalCount());
+        }
+        catch (Exception ex){
+            throw new CustomWebException(ex);
+        }
+        return response;
+    }
 
     @RequestMapping(value = "wheel/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -86,7 +118,22 @@ public class WheelController {
     public HubJSON getHub(@PathVariable(value = "id") Long id) {
         return wheelMapper.toHub(wheelService.getHub(id));
     }
+    @RequestMapping(value = "tire/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public TireJSON getTire(@PathVariable(value = "id") Long id) {
+        return wheelMapper.toTire(wheelService.getTire(id));
+    }
+    @RequestMapping(value = "spoke/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public SpokeJSON getSpokes(@PathVariable(value = "id") Long id) {
+        return wheelMapper.toSpoke(wheelService.getSpoke(id));
+    }
 
+    @RequestMapping(value = "rim/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public RimJSON getRims(@PathVariable(value = "id") Long id) {
+        return wheelMapper.toRim(wheelService.getRim(id));
+    }
 
 }
 

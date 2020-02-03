@@ -11,16 +11,11 @@ import beetle.enums.LocationType;
 import beetle.enums.brakes.BrakeType;
 import beetle.enums.transmission.CogsetType;
 import beetle.enums.transmission.HubBindingType;
-import beetle.json.wheel.HubSearchInputJSON;
-import beetle.json.wheel.RimSearchInputJSON;
-import beetle.json.wheel.WheelSearchInputJSON;
+import beetle.json.wheel.*;
 import beetle.repository.ManufacturerRepository;
 import beetle.repository.forks.WheelsDiamRepository;
 import beetle.repository.frame.BikeTypeRepository;
-import beetle.repository.wheels.HubRepository;
-import beetle.repository.wheels.RimRepository;
-import beetle.repository.wheels.RotorFixTypeRepository;
-import beetle.repository.wheels.WheelRepository;
+import beetle.repository.wheels.*;
 import beetle.service.WheelService;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -44,12 +39,15 @@ public class WheelServiceImpl implements WheelService{
     private final RotorFixTypeRepository rotorFixTypeRepository;
     private final HubRepository hubRepository;
     private final RimRepository rimRepository;
+    private final TireRepository tireRepository;
+    private final SpokeRepository spokeRepository;
 
     @Autowired
     public WheelServiceImpl(WheelRepository wheelRepository, WheelsDiamRepository wheelsDiamRepository,
                             SessionFactory sessionFactory, BikeTypeRepository bikeTypeRepository,
                             ManufacturerRepository manufacturerRepository, RotorFixTypeRepository rotorFixTypeRepository,
-                            HubRepository hubRepository, RimRepository rimRepository) {
+                            HubRepository hubRepository, RimRepository rimRepository,TireRepository tireRepository,
+                            SpokeRepository spokeRepository) {
         this.wheelRepository = wheelRepository;
         this.wheelsDiamRepository = wheelsDiamRepository;
         this.sessionFactory = sessionFactory;
@@ -58,6 +56,8 @@ public class WheelServiceImpl implements WheelService{
         this.rotorFixTypeRepository = rotorFixTypeRepository;
         this.hubRepository = hubRepository;
         this.rimRepository = rimRepository;
+        this.tireRepository = tireRepository;
+        this.spokeRepository = spokeRepository;
     }
 
     @Override
@@ -151,14 +151,69 @@ public class WheelServiceImpl implements WheelService{
         session.close();
         return ret;
     }
+
+    @Override
+    public SearchResultBO searchByCriteria(TireSearchInputJSON input) {
+        SearchResultBO ret = new SearchResultBO();
+        Session session = sessionFactory.openSession();
+        Criteria searchCriteria = session.createCriteria(Tire.class);
+        if(input.getManufacturerId() != null)
+            searchCriteria.add(Restrictions.eq("manufacturer", manufacturerRepository.findOne(input.getManufacturerId())));
+        if (input.getWheelsDiamId() != null)
+            searchCriteria.add(Restrictions.eq("wheelsDiam", wheelsDiamRepository.getOne(input.getWheelsDiamId())));
+        if (input.getTireType() != null)
+            searchCriteria.add(Restrictions.eq("tireType", input.getTireType()));
+        if (input.getTireWide() != null)
+            searchCriteria.add(Restrictions.eq("tireWide", input.getTireWide()));
+
+        ret.setTotalCount(getCount(searchCriteria));
+        searchCriteria.setFirstResult(input.getItemsPerPage() * input.getPage());
+        searchCriteria.setMaxResults(input.getItemsPerPage());
+        ret.setSearchResult(searchCriteria.list());
+        session.close();
+        return ret;
+    }
+
+    @Override
+    public SearchResultBO searchByCriteria(SpokeSearchInputJSON input) {
+        SearchResultBO ret = new SearchResultBO();
+        Session session = sessionFactory.openSession();
+        Criteria searchCriteria = session.createCriteria(Spoke.class);
+        if(input.getManufacturerId() != null)
+            searchCriteria.add(Restrictions.eq("manufacturer", manufacturerRepository.findOne(input.getManufacturerId())));
+
+        if(input.getDiameter() != null)
+            searchCriteria.add(Restrictions.eq("diameter", input.getDiameter()));
+        if(input.getLength() != null)
+            searchCriteria.add(Restrictions.eq("length", input.getLength()));
+
+        ret.setTotalCount(getCount(searchCriteria));
+        searchCriteria.setFirstResult(input.getItemsPerPage() * input.getPage());
+        searchCriteria.setMaxResults(input.getItemsPerPage());
+        ret.setSearchResult(searchCriteria.list());
+        session.close();
+        return ret;
+    }
+
     @Override
     public Rim getRim(Long id){
         return rimRepository.getOne(id);
     }
 
     @Override
+    public Tire getTire(Long id){
+        return tireRepository.getOne(id);
+    }
+
+
+    @Override
     public Hub getHub(Long id) {
         return hubRepository.getOne(id);
+    }
+
+    @Override
+    public Spoke getSpoke(Long id) {
+        return spokeRepository.getOne(id);
     }
 
     private Long getCount(Criteria searchCriteria) {
