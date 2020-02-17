@@ -1,18 +1,15 @@
 package beetle.json;
 
-import beetle.json.BaseJSON;
-import beetle.json.PaggingJSON;
-
 import java.util.List;
 
 public class SearchResultResponseJSON extends PaggingJSON {
-    private List<? extends BaseJSON> result;
+    private List<? extends BaseJSON> resultResponse;
 
-    public List<? extends BaseJSON> getResult() {
-        return result;
+    public List<? extends BaseJSON> getResultResponse() {
+        return resultResponse;
     }
 
-    public void setResult(List<? extends BaseJSON> result) {
-        this.result = result;
+    public void setResultResponse(List<? extends BaseJSON> resultResponse) {
+        this.resultResponse = resultResponse;
     }
 }

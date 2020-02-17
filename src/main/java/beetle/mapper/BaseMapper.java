@@ -25,7 +25,7 @@ public class BaseMapper {
         if (entities == null)
             return null;
         SearchResultResponseJSON ret = new SearchResultResponseJSON();
-        ret.setResult(toList(entities, inputClass));
+        ret.setResultResponse(toList(entities, inputClass));
         if (input != null) {
             ret.setItemsPerPage(input.getItemsPerPage());
             ret.setPage(input.getPage());

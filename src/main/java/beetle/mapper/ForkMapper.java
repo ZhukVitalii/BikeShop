@@ -36,7 +36,7 @@ public class ForkMapper extends BaseMapper{
         if (forks == null)
             return null;
         SearchResultResponseJSON ret = new SearchResultResponseJSON();
-        ret.setResult(toForks(forks));
+        ret.setResultResponse(toForks(forks));
         if (input != null) {
             ret.setItemsPerPage(input.getItemsPerPage());
             ret.setPage(input.getPage());

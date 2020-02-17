@@ -27,7 +27,7 @@ public class WheelController {
     @Autowired
     private WheelMapper wheelMapper;
 
-    @RequestMapping("wheel/search")
+    @RequestMapping(value = "wheel/search", method = RequestMethod.POST)
     @ResponseBody
     public SearchResultResponseJSON searchWheels(@RequestBody WheelSearchInputJSON input) {
         SearchResultResponseJSON response = null;
@@ -43,7 +43,7 @@ public class WheelController {
         return response;
     }
 
-    @RequestMapping("hub/search")
+    @RequestMapping(value = "hub/search", method = RequestMethod.POST)
     @ResponseBody
     public SearchResultResponseJSON searchHubs(@RequestBody HubSearchInputJSON input) {
         SearchResultResponseJSON response = null;
@@ -59,7 +59,7 @@ public class WheelController {
         return response;
     }
 
-    @RequestMapping("spoke/search")
+    @RequestMapping(value = "spoke/search", method = RequestMethod.POST)
     @ResponseBody
     public SearchResultResponseJSON searchSpokes(@RequestBody SpokeSearchInputJSON input) {
         SearchResultResponseJSON response = null;
@@ -75,7 +75,7 @@ public class WheelController {
         return response;
     }
 
-    @RequestMapping("tire/search")
+    @RequestMapping(value = "tire/search", method = RequestMethod.POST)
     @ResponseBody
     public SearchResultResponseJSON searchTires(@RequestBody TireSearchInputJSON input) {
         SearchResultResponseJSON response = null;
@@ -91,7 +91,7 @@ public class WheelController {
         return response;
     }
 
-    @RequestMapping("rim/search")
+    @RequestMapping(value = "rim/search", method = RequestMethod.POST)
     @ResponseBody
     public SearchResultResponseJSON searchRims(@RequestBody RimSearchInputJSON input) {
         SearchResultResponseJSON response = null;

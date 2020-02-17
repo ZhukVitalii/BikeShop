@@ -79,6 +79,7 @@ public class UserControllerTest {
     @Mock
     private WheelsDiamRepository wheelsDiamRepository ;
     @Mock
+    @Autowired
     private SessionFactory sessionFactory;
 
 
@@ -122,7 +123,7 @@ public class UserControllerTest {
             HttpEntity<FramesSearchInputJSON> request = new HttpEntity<>(buildRequest(), headers);
             restTemplate = new TestRestTemplate();
             ResponseEntity<SearchResultResponseJSON> response = restTemplate.postForEntity(new URL("http://localhost:" + 8080 + "/get-frames").toString(), request, SearchResultResponseJSON.class);
-            FramesJSON frame =(FramesJSON) response.getBody().getResult().get(0);
+            FramesJSON frame =(FramesJSON) response.getBody().getResultResponse().get(0);
             assertEquals(bikeType.getType(), frame.getBikeType());
         } catch (Exception e) {
             logger.error(e.getMessage());

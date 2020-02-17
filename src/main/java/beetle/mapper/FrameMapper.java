@@ -84,7 +84,7 @@ public class FrameMapper extends BaseMapper{
         if (frames == null)
             return null;
         SearchResultResponseJSON ret = new SearchResultResponseJSON();
-        ret.setResult(toFrames(frames));
+        ret.setResultResponse(toFrames(frames));
         if (input != null) {
             ret.setItemsPerPage(input.getItemsPerPage());
             ret.setPage(input.getPage());
