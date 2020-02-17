@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-master.yaml
+
+  - changeSet:
+      id: 17.02.2020_zhuk_vs_modify_frames_id
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE frames MODIFY COLUMN id bigint(20) auto_increment ;
+
+  - changeSet:
+      id: 17.02.2020_zhuk_vs_add_manufacturer
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: insert into manufacturer(name)
+            values ('Track');
+
+  - changeSet:
+      id: 17.02.2020_zhuk_vs_add_to_frame
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: insert into frames (article,color, description, material,name,price,way,weight,bike_type_id,bracket_wide_id, brakes_type_id, frame_size_id,headset_type_id,maker_id,trunk_id, tube_diam_id,under_sad_diam_id,whells_d_id)
+            values (7,'Чорний','Trek','Алюміній','Track 29', 18000,'/resources/images/frame_Track29.jpg','30000 г',1,2,1,2,1,27,2,1,12,5);
+
+
