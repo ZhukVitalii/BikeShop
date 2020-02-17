@@ -5,7 +5,6 @@ import beetle.entity.Manufacturer;
 import beetle.json.brakes.BrakeHandleSearchInputJSON;
 import beetle.json.brakes.BrakeSearchInputJSON;
 import beetle.repository.ManufacturerRepository;
-import beetle.repository.handlebars.HandlebarDiameterRepository;
 import beetle.entity.brake.*;
 import beetle.repository.brake.*;
 import beetle.service.BrakeService;
@@ -32,17 +31,14 @@ public class BrakeServiceImpl implements BrakeService {
     private final BrakeRepository brakeRepository;
     private final ManufacturerRepository manufacturerRepository;
     private final SessionFactory sessionFactory;
-    private final HandlebarDiameterRepository handlebarDiameterRepository;
 
     @Autowired
     public BrakeServiceImpl(BrakeHandleRepository brakeHandleRepository, BrakeRepository brakeRepository,
-                            ManufacturerRepository manufacturerRepository, SessionFactory sessionFactory,
-                            HandlebarDiameterRepository handlebarDiameterRepository) {
+                            ManufacturerRepository manufacturerRepository, SessionFactory sessionFactory) {
         this.brakeHandleRepository = brakeHandleRepository;
         this.brakeRepository = brakeRepository;
         this.manufacturerRepository = manufacturerRepository;
         this.sessionFactory = sessionFactory;
-        this.handlebarDiameterRepository = handlebarDiameterRepository;
     }
 
     //Lists with articles of components, that user added to cart
@@ -147,8 +143,8 @@ public class BrakeServiceImpl implements BrakeService {
             searchCriteria.add(Restrictions.eq("compatibility",input.getCompatibility()));
         if(input.getManufacturerId() != null)
             searchCriteria.add(Restrictions.eq("manufacturer", manufacturerRepository.findOne(input.getManufacturerId())));
-        if(input.getHandlebarDiameterId() != null)
-            searchCriteria.add(Restrictions.eq("handlebarDiameter",handlebarDiameterRepository.getOne(input.getHandlebarDiameterId())));
+        if(input.getHandlebarDiameter() != null)
+            searchCriteria.add(Restrictions.eq("handlebarDiameter",input.getHandlebarDiameter()));
         if (input.getLocation() != null)
             searchCriteria.add(Restrictions.eq("location", input.getLocation()));
         if (input.getWide() != null)

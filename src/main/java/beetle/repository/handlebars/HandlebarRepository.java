@@ -3,7 +3,6 @@ package beetle.repository.handlebars;
 import beetle.entity.Manufacturer;
 import beetle.entity.frame.BikeType;
 import beetle.entity.handlebars.Handlebar;
-import beetle.entity.handlebars.HandlebarDiameter;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,9 +18,6 @@ public interface HandlebarRepository extends JpaRepository<Handlebar, Long> {
 
     @Query("SELECT c FROM Handlebar c WHERE c.manufacturer = :manufacturer")
     List<Handlebar> findByHandlebarMakers(@Param("manufacturer") Manufacturer manufacturer, Pageable pageable);
-
-    @Query("SELECT c FROM Handlebar c WHERE c.handlebarDiameter = :handlebarDiameter")
-    List<Handlebar> findByHandlebarDiameter(@Param("handlebarDiameter") HandlebarDiameter handlebarDiameter, Pageable pageable);
 
     @Query("SELECT c FROM Handlebar c WHERE c.url = :url")
     List<Handlebar> findByUrl(@Param("url") String url, Pageable pageable);

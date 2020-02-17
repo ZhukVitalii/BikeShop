@@ -1,9 +1,11 @@
 package beetle.service;
 
+import beetle.businessObjects.SearchResultBO;
 import beetle.entity.forks.TubeDiameter;
 import beetle.entity.Manufacturer;
 import beetle.entity.frame.BikeType;
 import beetle.entity.handlebars.*;
+import beetle.json.handlebar.HandlebarSearchInputJSON;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -81,13 +83,7 @@ public interface HandlebarService {
 
     List<BikeType> findBikeType();
 
-    List<HandlebarDiameter> findHandlebarDiameter();
-
     List<HeadsetType> findHeadsetType();
-
-    List<Stem> findByHandlebarDiamAndTubeDiam(HandlebarDiameter handlebarDiameter,
-                                              TubeDiameter tubeDiameter,
-                                              Pageable pageable);
 
     List<Handlebar> findHandlebarByArticle(Long article, Pageable pageable);
 
@@ -125,9 +121,8 @@ public interface HandlebarService {
 
     BikeType findBikeType(long id);
 
-    HandlebarDiameter findHandlebarDiameter(long id);
-
     HeadsetType findHeadsetType(long id);
 
+    SearchResultBO searchByCriteria(HandlebarSearchInputJSON input);
 }
 

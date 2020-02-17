@@ -6,7 +6,6 @@ import beetle.enums.brakes.BrakeHandleCompatibilityEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import beetle.entity.handlebars.HandlebarDiameter;
 
 import javax.persistence.*;
 
@@ -29,9 +28,8 @@ public class BrakeHandle extends BaseEntity {
     @Column(name="compatibility")
     private BrakeHandleCompatibilityEnum compatibility;
     private String materialCorp;
-    @ManyToOne
-    @JoinColumn(name="diam_id")
-    private HandlebarDiameter handlebarDiameter;
+    @Column(name="")
+    private Double handlebarDiameter;
     private  String wide;
 
 }

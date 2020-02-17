@@ -13,46 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class WheelMapper {
+public class WheelMapper extends BaseMapper {
 
-    public SearchResultResponseJSON toSearchResult(List<? extends BaseEntity> entities, PaggingJSON input, Class<?> inputClass) {
-        if (entities == null)
-            return null;
-        SearchResultResponseJSON ret = new SearchResultResponseJSON();
-        ret.setResult(toList(entities, inputClass));
-        if (input != null) {
-            ret.setItemsPerPage(input.getItemsPerPage());
-            ret.setPage(input.getPage());
-        }
-        return ret;
-    }
 
-    private List<? extends BaseJSON> toList(List<? extends BaseEntity> results, Class<?> inputClass) {
-        List<? extends BaseJSON> ret = new ArrayList<>();
-        if (inputClass.equals(Wheel.class)) {
-            List<Wheel> wheels = results.stream().map(e -> (Wheel) e).collect(Collectors.toList());
-            ret = wheels.stream().map(e -> toWheel(e)).collect(Collectors.toList());
-        }
-        else if(inputClass.equals(Hub.class)){
-            List<Hub> hubs = results.stream().map(e -> (Hub) e).collect(Collectors.toList());
-            ret = hubs.stream().map(e -> toHub(e)).collect(Collectors.toList());
-        }
-        else if(inputClass.equals(Tire.class)){
-            List<Tire> tires = results.stream().map(e -> (Tire) e).collect(Collectors.toList());
-            ret = tires.stream().map(e -> toTire(e)).collect(Collectors.toList());
-        }
-        else if(inputClass.equals(Rim.class)){
-            List<Rim> rims = results.stream().map(e -> (Rim) e).collect(Collectors.toList());
-            ret = rims.stream().map(e -> toRim(e)).collect(Collectors.toList());
-        }
-        else if(inputClass.equals(Spoke.class)){
-            List<Spoke> spokes = results.stream().map(e -> (Spoke) e).collect(Collectors.toList());
-            ret = spokes.stream().map(e -> toSpoke(e)).collect(Collectors.toList());
-        }
-        return ret;
-    }
-
-    public WheelJSON toWheel(Wheel wheel) {
+    public static WheelJSON toWheel(Wheel wheel) {
         WheelJSON ret = new WheelJSON();
         ret.setId(wheel.getId());
         ret.setBikeType(wheel.getBikeType().getType());
@@ -70,7 +34,7 @@ public class WheelMapper {
         return ret;
     }
 
-    public TireJSON toTire(Tire tire){
+    public static TireJSON toTire(Tire tire){
         TireJSON ret = new TireJSON();
         ret.setCordType(tire.getCordType());
         ret.setId(tire.getId());
@@ -84,7 +48,7 @@ public class WheelMapper {
         return ret;
     }
 
-    public SpokeJSON toSpoke(Spoke spoke){
+    public static SpokeJSON toSpoke(Spoke spoke){
         SpokeJSON ret = new SpokeJSON();
         ret.setDiameter(spoke.getDiameter());
         ret.setLength(spoke.getLength());
@@ -92,7 +56,7 @@ public class WheelMapper {
         return ret;
     }
 
-    public RimJSON toRim(Rim rim){
+    public static RimJSON toRim(Rim rim){
         RimJSON ret = new RimJSON();
         if(rim.getBikeType() != null) {
             ret.setBikeType(rim.getBikeType().getType());
@@ -115,7 +79,7 @@ public class WheelMapper {
         }
 
 
-    public HubJSON toHub(Hub hub) {
+    public static HubJSON toHub(Hub hub) {
         HubJSON ret = new HubJSON();
 
         ret.setAxisDiam(hub.getAxisDiam());
@@ -134,22 +98,6 @@ public class WheelMapper {
         setBaseParameter(ret,hub);
 
         return ret;
-    }
-
-    private void setBaseParameter(BaseJSON baseJSON, BaseEntity baseEntity){
-        baseJSON.setArticle(baseEntity.getArticle());
-        baseJSON.setColor(baseEntity.getColor());
-        baseJSON.setDescription(baseEntity.getDescription());
-        if(baseEntity.getManufacturer() != null) {
-            baseJSON.setManufacturerId(baseEntity.getManufacturer().getId());
-            baseJSON.setManufacturerName(baseEntity.getManufacturer().getName());
-        }
-        baseJSON.setMaterial(baseEntity.getMaterial());
-        baseJSON.setName(baseEntity.getName());
-        baseJSON.setPrice(baseEntity.getPrice());
-        baseJSON.setUrl(baseEntity.getUrl());
-        baseJSON.setWay(baseEntity.getWay());
-        baseJSON.setWeight(baseEntity.getWeight());
     }
 
 }

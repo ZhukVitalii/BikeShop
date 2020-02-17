@@ -2,12 +2,9 @@ package beetle.service;
 
 import beetle.businessObjects.SearchResultBO;
 import beetle.entity.Manufacturer;
-import beetle.entity.handlebars.HandlebarDiameter;
-import beetle.entity.wheels.RotorFixType;
 import beetle.entity.brake.*;
 import beetle.json.brakes.BrakeHandleSearchInputJSON;
 import beetle.json.brakes.BrakeSearchInputJSON;
-import beetle.json.frame.FramesSearchInputJSON;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;

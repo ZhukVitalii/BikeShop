@@ -46,7 +46,7 @@ public class BrakeController {
         try {
         SearchResultBO searchResult = brakeService.searchByCriteria(input);
             List<Brake> brakes = searchResult.getSearchResult().stream().map(e -> (Brake) e).collect(Collectors.toList());
-            response = brakeMapper.toSearchResult(brakes,input);
+            response = brakeMapper.toSearchResult(brakes,input, Brake.class);
             response.setTotalItems(searchResult.getTotalCount());
         } catch (Exception ex){
             logger.error(ex.getMessage());
@@ -67,7 +67,7 @@ public class BrakeController {
        try {
             SearchResultBO searchResult = brakeService.searchByCriteria(input);
             List<BrakeHandle> brakes = searchResult.getSearchResult().stream().map(e -> (BrakeHandle) e).collect(Collectors.toList());
-            response = brakeMapper.toSearchResult(brakes,input);
+            response = brakeMapper.toSearchResult(brakes,input, BrakeHandle.class);
             response.setTotalItems(searchResult.getTotalCount());
        } catch (Exception ex){
             logger.error(ex.getMessage());

@@ -341,23 +341,23 @@ public class UserController {
         model.addAttribute("handlebars", handlebars);
         return "handlebarsToBike";
     }
-    @RequestMapping("/chooseStem/{id}")
-    public String listStemForHandlebar(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
-        if (page < 0) page = 0;
-        userService.addChosenId(HANDLEBAR,id);
-        Handlebar handlebar = handlebarService.findHandlebar(userService.getChosenId(HANDLEBAR));
-        Fork fork = forkService.findFork(userService.getChosenId(FORK));
-        HandlebarDiameter handlebarDiameter = handlebar.getHandlebarDiameter();
-        TubeDiameter tubeDiameter = fork.getTubeDiameter();
-        List<Stem> stems = handlebarService
-                .findByHandlebarDiamAndTubeDiam(handlebarDiameter,tubeDiameter,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("stems", stems);
-        return "stemsToHandlebar";
-    }
+//    @RequestMapping("/chooseStem/{id}")
+//    public String listStemForHandlebar(
+//            @PathVariable(value = "id") Long id,
+//            @RequestParam(required = false, defaultValue = "0") Integer page,
+//            Model model)
+//    {
+//        if (page < 0) page = 0;
+//        userService.addChosenId(HANDLEBAR,id);
+//        Handlebar handlebar = handlebarService.findHandlebar(userService.getChosenId(HANDLEBAR));
+//        Fork fork = forkService.findFork(userService.getChosenId(FORK));
+//        HandlebarDiameter handlebarDiameter = handlebar.getHandlebarDiameter();
+//        TubeDiameter tubeDiameter = fork.getTubeDiameter();
+//        List<Stem> stems = handlebarService
+//                .findByHandlebarDiamAndTubeDiam(handlebarDiameter,tubeDiameter,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        model.addAttribute("stems", stems);
+//        return "stemsToHandlebar";
+//    }
 //    @RequestMapping("/chooseBrakeHandle/{id}")
 //    public String listBrakeHandleForHandlebar(
 //            @PathVariable(value = "id") Long id,

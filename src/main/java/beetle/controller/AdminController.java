@@ -7,6 +7,7 @@ import beetle.entity.forks.TubeDiameter;
 import beetle.entity.forks.WheelsDiam;
 import beetle.entity.frame.BikeType;
 import beetle.entity.frame.Frame;
+import beetle.entity.handlebars.*;
 import beetle.entity.wheels.*;
 import beetle.json.frame.FrameInputJSON;
 import beetle.mapper.BrakeMapper;
@@ -761,4 +762,242 @@ public class AdminController {
         return "redirect:/show_wheels";
     }
 
+    //for admin with all handlebars components
+    @RequestMapping("/admin/show_handlebars")
+    public String handlebarsAdminVeiw(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<Handlebar> handlebars = handlebarService
+                .findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        List<Winding> windings = handlebarService
+                .findAllTwo(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        List<Grips> grips = handlebarService
+                .findAllThree(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        List<Headset> headsets = handlebarService
+                .findAllFor(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        List<Stem> stems = handlebarService
+                .findAllFive(new PageRequest(page,ITEMS_PER_PAGE,Sort.Direction.DESC,"id"));
+        model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
+        model.addAttribute("bikeType", handlebarService.findBikeType());
+//        model.addAttribute("handlebarDiameter", handlebarService.findHandlebarDiameter());
+        // model.addAttribute("tubeDiameter", forkService.findTubeDiameter());
+        model.addAttribute("headsetType", handlebarService.findHeadsetType());
+        model.addAttribute("handlebars", handlebars);
+        model.addAttribute("windings", windings);
+        model.addAttribute("grips", grips);
+        model.addAttribute("headsets", headsets);
+        model.addAttribute("stems", stems);
+       // model.addAttribute("allPages", getPageCount());
+        return "handlebarsAdmin";
+    }
+
+
+    //add components from browser
+
+    @RequestMapping("/admin/handlebars_add_page")
+    public String handelbarAddPage(Model model) {
+        model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
+        model.addAttribute("bikeType", handlebarService.findBikeType());
+//        model.addAttribute("handlebarDiameter", handlebarService.findHandlebarDiameter());
+//        model.addAttribute("tubeDiameter", forkService.findTubeDiameter());
+        return "handlebars_add_page";
+    }
+
+    @RequestMapping("/admin/winding_add_page")
+    public String windingAddPage(Model model) {
+        model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
+        return "winding_add_page";
+    }
+
+    @RequestMapping("/admin/grips_add_page")
+    public String gripsAddPage(Model model) {
+        model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
+        return "grips_add_page";
+    }
+
+    @RequestMapping("/admin/headset_add_page")
+    public String headsetAddPage(Model model) {
+        model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
+        model.addAttribute("headsetType", handlebarService.findHeadsetType());
+//        model.addAttribute("tubeDiameter", forkService.findTubeDiameter());
+        return "headset_add_page";
+    }
+
+    @RequestMapping("/admin/stem_add_page")
+    public String stemAddPage(Model model) {
+        model.addAttribute("handlebarMakers", handlebarService.findHandlebarMakers());
+//        model.addAttribute("handlebarDiameter", handlebarService.findHandlebarDiameter());
+//        model.addAttribute("tubeDiameter", forkService.findTubeDiameter());
+        return "stem_add_page";
+    }
+
+    @RequestMapping("/admin/handlebarMaker_add_page")
+    public String handlebarMakerAddPage() {
+        return "handlebarMaker_add_page";
+    }
+
+
+    @RequestMapping(value = "/admin/handlebar/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deletehandlebar(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
+        if (toDelete != null && toDelete.length > 0)
+            handlebarService.deleteHandlebar(toDelete);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/admin/winding/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deletewinding(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
+        if (toDelete != null && toDelete.length > 0)
+            handlebarService.deleteWinding(toDelete);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/admin/grips/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deletegrips(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
+        if (toDelete != null && toDelete.length > 0)
+            handlebarService.deleteGrips(toDelete);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/admin/headset/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deleteheadset(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
+        if (toDelete != null && toDelete.length > 0)
+            handlebarService.deleteHeadset(toDelete);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/admin/stem/delete", method = RequestMethod.POST)
+    public ResponseEntity<Void> deletestem(@RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
+        if (toDelete != null && toDelete.length > 0)
+            handlebarService.deleteStem(toDelete);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // Add components to database
+
+    @RequestMapping(value="/admin/handlebar/add", method = RequestMethod.POST)
+    public String handlebarAdd(
+            @RequestParam(value = "handlebarMaker") long handlebarMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
+            @RequestParam String name,
+            @RequestParam(value = "bikeType") long bikeTypeId,
+            @RequestParam String handlebarWide,
+            @RequestParam(value = "handlebarDiameter") long handlebarDiameterId,
+            @RequestParam String handlebarHeight,
+            @RequestParam String material,
+            @RequestParam String weight,
+            @RequestParam String color,
+            @RequestParam Double price,
+            @RequestParam String description,
+            @RequestParam String way)
+    {
+        //todo migrate to mapper
+        Manufacturer handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
+        BikeType bikeType = (bikeTypeId != DEFAULT_GROUP_ID) ? handlebarService.findBikeType(bikeTypeId) : null;
+//        HandlebarDiameter handlebarDiameter = (handlebarDiameterId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarDiameter(handlebarDiameterId) : null;
+//        Handlebar handlebar = new Handlebar(handlebarMaker,article, url,  name, bikeType, handlebarWide, handlebarDiameter, handlebarHeight,material,weight, color ,
+//                 price, description, way);
+//        handlebarService.addHandlebar(handlebar);
+        return "redirect:/show_handlebars";
+    }
+
+    @RequestMapping(value="/admin/winding/add", method = RequestMethod.POST)
+    public String windingAdd(
+            @RequestParam(value = "handlebarMaker") long handlebarMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
+            @RequestParam String name,
+            @RequestParam String length,
+            @RequestParam String wide,
+            @RequestParam String material,
+            @RequestParam String color,
+            @RequestParam Double price,
+            @RequestParam String description,
+            @RequestParam String way)
+    {
+        //todo migrate to mapper
+        Manufacturer handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
+//        Winding winding = new Winding(handlebarMaker,article,url,  name, length, wide, material, color ,
+//                price, description, way);
+//        handlebarService.addWinding(winding);
+        return "redirect:/show_windings";
+    }
+
+    @RequestMapping(value="/admin/headset/add", method = RequestMethod.POST)
+    public String headsetAdd(
+            @RequestParam(value = "handlebarMaker") long handlebarMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
+            @RequestParam String name,
+            @RequestParam(value = "headsetType") long headsetTypeId,
+            @RequestParam (value = "tubeDiameter") long tubeDiameterId,
+            @RequestParam String material,
+            @RequestParam String size,
+            @RequestParam String color,
+            @RequestParam Double price,
+            @RequestParam String description,
+            @RequestParam String way)
+    {
+        //todo migrate to mapper
+        Manufacturer handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
+        HeadsetType headsetType = (headsetTypeId != DEFAULT_GROUP_ID) ?  handlebarService.findHeadsetType(headsetTypeId) : null;
+        //  TubeDiameter tubeDiameter = (tubeDiameterId != DEFAULT_GROUP_ID) ?  forkService.findTubeDiameter(tubeDiameterId) : null;
+//        Headset headset = new Headset(handlebarMaker,article,url,  name, headsetType, tubeDiameter, material,size, color ,
+//                price, description, way);
+//        handlebarService.addHeadset(headset);
+        return "redirect:/show_headsets";
+    }
+
+    @RequestMapping(value="/admin/stem/add", method = RequestMethod.POST)
+    public String stemAdd(
+            @RequestParam(value = "handlebarMaker") long handlebarMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
+            @RequestParam String name,
+            @RequestParam String angle,
+            @RequestParam(value = "handlebarDiameter") long handlebarDiameterId,
+            @RequestParam (value = "tubeDiameter") long tubeDiameterId,
+            @RequestParam String material,
+            @RequestParam String length,
+            @RequestParam String color,
+            @RequestParam Double price,
+            @RequestParam String description,
+            @RequestParam String way)
+    {
+        // todo migrate to mapper
+        Manufacturer handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
+//        HandlebarDiameter handlebarDiameter = (handlebarDiameterId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarDiameter(handlebarDiameterId) : null;
+        //  TubeDiameter tubeDiameter = (tubeDiameterId != DEFAULT_GROUP_ID) ?  forkService.findTubeDiameter(tubeDiameterId) : null;
+//        Stem stem = new Stem(handlebarMaker, article, url, name, angle, handlebarDiameter, tubeDiameter, material,length, color ,
+//                price, description, way);
+//        handlebarService.addStem(stem);
+        return "redirect:/show_stems";
+    }
+
+    @RequestMapping(value="/admin/grips/add", method = RequestMethod.POST)
+    public String gripsAdd(
+            @RequestParam(value = "handlebarMaker") long handlebarMakerId,
+            @RequestParam Long article,
+            @RequestParam String url,
+            @RequestParam String name,
+            @RequestParam String length,
+            @RequestParam String weight,
+            @RequestParam String material,
+            @RequestParam String color,
+            @RequestParam Double price,
+            @RequestParam String description,
+            @RequestParam String way)
+    {
+        Manufacturer handlebarMaker = (handlebarMakerId != DEFAULT_GROUP_ID) ? handlebarService.findHandlebarMaker(handlebarMakerId) : null;
+        //todo migrate to mapper
+        //        Grips grips = new Grips(handlebarMaker,article,url, name, length, weight, material, color ,
+//                price, description, way);
+//        handlebarService.addGrips(grips);
+        return "redirect:/show_grips";
+    }
+
+    @RequestMapping(value="/admin/handlebarMaker/add", method = RequestMethod.POST)
+    public String handlebarMakerAdd(@RequestParam String name) {
+        handlebarService.addHandlebarMaker(new Manufacturer(name));
+        return "redirect:/show_handlebars";
+    }
 }

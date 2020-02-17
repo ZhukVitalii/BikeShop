@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 @Component
-public class ForkMapper {
+public class ForkMapper extends BaseMapper{
 
 
     public List<ForkJSON> toForks(List<Fork> dest){
@@ -28,17 +28,7 @@ public class ForkMapper {
         ret.setStTubeLength(forkEntity.getStTubeLength());
         ret.setTubeDiameter(forkEntity.getTubeDiameter().getDiam());
         ret.setWheelsDiam(forkEntity.getWheelsDiam().getDiam());
-        ret.setArticle(forkEntity.getArticle());
-        ret.setColor(forkEntity.getColor());
-        ret.setDescription(forkEntity.getDescription());
-        ret.setManufacturerId(forkEntity.getManufacturer().getId());
-        ret.setManufacturerName(forkEntity.getManufacturer().getName());
-        ret.setMaterial(forkEntity.getMaterial());
-        ret.setName(forkEntity.getName());
-        ret.setPrice(forkEntity.getPrice());
-        ret.setUrl(forkEntity.getUrl());
-        ret.setWay(forkEntity.getWay());
-        ret.setWeight(forkEntity.getWeight());
+        setBaseParameter(ret, forkEntity);
         return ret;
     }
 

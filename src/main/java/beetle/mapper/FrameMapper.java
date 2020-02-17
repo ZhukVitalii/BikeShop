@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class FrameMapper {
+public class FrameMapper extends BaseMapper{
 
     @Autowired
     private FrameServiceImpl frameServiceImpl;
@@ -97,18 +97,13 @@ public class FrameMapper {
         ret.setFrameId(frame.getId());
         ret.setBikeType(frame.getBikeType().getType());
         ret.setBrakesType(frame.getBrakesType().getType());
-        ret.setColor(frame.getColor());
-        ret.setDescription(frame.getDescription());
         ret.setHeadsetType(frame.getHeadsetType().getType());
         ret.setMaterial(frame.getMaterial());
-        ret.setPrice(frame.getPrice());
         ret.setTrunkBinding(frame.getTrunkBinding().getTrunk());
         ret.setTubeDiameter(frame.getTubeDiameter().getDiam());
         ret.setUnderSaddleTubeDiameter(frame.getUnderSaddleTube().getDiam());
-        ret.setWeight(frame.getWeight());
         ret.setWheelsDiameter(frame.getWheelsDiam().getDiam());
-        ret.setManufacturerId(frame.getManufacturer().getId());
-        ret.setManufacturerName(frame.getManufacturer().getName());
+        setBaseParameter(ret, frame);
         return ret;
     }
 }

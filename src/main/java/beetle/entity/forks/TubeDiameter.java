@@ -19,33 +19,4 @@ public class TubeDiameter {
     @GeneratedValue
     private long id;
     private String diam;
-
-////    @OneToMany(mappedBy="tubeDiameter", cascade=CascadeType.ALL)
-////    private List<Fork> forks = new ArrayList<Fork>();
-////
-////    @OneToMany(mappedBy="tubeDiameter", cascade=CascadeType.ALL)
-////    private List<Frame> frames = new ArrayList<Frame>();
-////
-////    @OneToMany (mappedBy="tubeDiameter", cascade= CascadeType.ALL)
-////    private List<TubeDiameter> tubeDiameter = new ArrayList<TubeDiameter>();
-//
-    public TubeDiameter(String diam) {
-        this.diam = diam;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getDiam() {
-        return diam;
-    }
-
-    public void setDiam(String diam) {
-        this.diam = diam;
-    }
 }

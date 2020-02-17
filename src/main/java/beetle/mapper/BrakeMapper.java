@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class BrakeMapper {
+public class BrakeMapper extends BaseMapper {
     @Autowired
     private BrakeServiceImpl brakeServiceImpl;
     public Brake toBrake(BrakeJSON input) {
@@ -41,47 +41,7 @@ public class BrakeMapper {
         return ret;
     }
 
-    public SearchResultResponseJSON toSearchResult(List<Brake> brakes, BrakeSearchInputJSON input) {
-        if (brakes == null)
-            return null;
-        SearchResultResponseJSON ret = new SearchResultResponseJSON();
-        ret.setResult(toBrakes(brakes));
-        if (input != null) {
-            ret.setItemsPerPage(input.getItemsPerPage());
-            ret.setPage(input.getPage());
-        }
-        return ret;
-    }
-
-    public SearchResultResponseJSON toSearchResult(List<BrakeHandle> brakeHandles, BrakeHandleSearchInputJSON input) {
-        if (brakeHandles == null)
-            return null;
-        SearchResultResponseJSON ret = new SearchResultResponseJSON();
-        ret.setResult(toBrakeHandles(brakeHandles));
-        if (input != null) {
-            ret.setItemsPerPage(input.getItemsPerPage());
-            ret.setPage(input.getPage());
-        }
-        return ret;
-    }
-
-    private List<BrakeHandleJSON> toBrakeHandles(List<BrakeHandle> brakeHandles) {
-        List<BrakeHandleJSON> ret = new ArrayList<>();
-        for (BrakeHandle brakeHandle : brakeHandles) {
-            ret.add(toBrakeHandle(brakeHandle));
-        }
-        return  ret;
-    }
-
-    private List<BrakeJSON> toBrakes(List<Brake> brakes) {
-        List<BrakeJSON> ret = new ArrayList<>();
-        for (Brake brake : brakes) {
-            ret.add(toBrake(brake));
-        }
-        return ret;
-    }
-
-    public BrakeJSON toBrake(Brake brake) {
+    public static BrakeJSON toBrake(Brake brake) {
         BrakeJSON ret = new BrakeJSON();
         ret.setId(brake.getId());
         ret.setBrakeLiquid(brake.getBrakeLiquid());
@@ -94,35 +54,20 @@ public class BrakeMapper {
         ret.setRotorDiam(brake.getRotorDiam());
         ret.setRotorFixType(brake.getRotorFixType());
         ret.setRotorWeight(brake.getRotorWeight());
-        ret.setArticle(brake.getArticle());
-        ret.setColor(brake.getColor());
-        ret.setDescription(brake.getDescription());
-        ret.setManufacturerId(brake.getManufacturer().getId());
-        ret.setManufacturerName(brake.getManufacturer().getName());
-        ret.setName(brake.getName());
-        ret.setPrice(brake.getPrice());
-        ret.setWay(brake.getWay());
+        setBaseParameter(ret, brake);
         return ret;
     }
 
-    public BrakeHandleJSON toBrakeHandle(BrakeHandle brakeHandle){
+    public static BrakeHandleJSON toBrakeHandle(BrakeHandle brakeHandle){
         BrakeHandleJSON ret = new BrakeHandleJSON();
             ret.setId(brakeHandle.getId());
             ret.setCompatibility(brakeHandle.getCompatibility());
-            ret.setHandlebarDiameter(brakeHandle.getHandlebarDiameter().getDiam());
+            ret.setHandlebarDiameter(brakeHandle.getHandlebarDiameter());
             ret.setLocation(brakeHandle.getLocation());
             ret.setMaterialCorp(brakeHandle.getMaterialCorp());
             ret.setMaterialHandle(brakeHandle.getMaterial());
-            ret.setWide(brakeHandle.getWide());
-            ret.setArticle(brakeHandle.getArticle());
-            ret.setColor(brakeHandle.getColor());
-            ret.setDescription(brakeHandle.getDescription());
-            ret.setManufacturerId(brakeHandle.getManufacturer().getId());
-            ret.setManufacturerName(brakeHandle.getManufacturer().getName());
-            ret.setName(brakeHandle.getName());
-            ret.setPrice(brakeHandle.getPrice());
-            ret.setWay(brakeHandle.getWay());
-            ret.setWeight(brakeHandle.getWeight());
+
+            setBaseParameter(ret, brakeHandle);
         return ret;
     }
 }

@@ -1,13 +1,22 @@
 package beetle.service.impl;
 
+import beetle.businessObjects.SearchResultBO;
+import beetle.entity.brake.Brake;
 import beetle.entity.forks.TubeDiameter;
 import beetle.entity.Manufacturer;
 import beetle.entity.frame.BikeType;
 import beetle.entity.handlebars.*;
+import beetle.json.brakes.BrakeSearchInputJSON;
+import beetle.json.handlebar.HandlebarSearchInputJSON;
 import beetle.repository.ManufacturerRepository;
 import beetle.repository.frame.BikeTypeRepository;
 import beetle.repository.handlebars.*;
 import beetle.service.HandlebarService;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,25 +26,31 @@ import java.util.ArrayList;
 import java.util.List;
 @Service
 public class HandlebarServiceImpl  implements HandlebarService {
-    @Autowired
-    private HandlebarRepository handlebarRepository;
-    @Autowired
-    private WindingRepository windingRepository;
-    @Autowired
-    private GripsRepository gripsRepository;
-    @Autowired
-    private HeadsetRepository headsetRepository;
-    @Autowired
-    private StemRepository stemRepository;
+    private final HandlebarRepository handlebarRepository;
+    private final WindingRepository windingRepository;
+    private final GripsRepository gripsRepository;
+    private final HeadsetRepository headsetRepository;
+    private final StemRepository stemRepository;
+    private final ManufacturerRepository manufacturerRepository;
+    private final HeadsetTypeRepository headsetTypeRepository ;
+    private final BikeTypeRepository bikeTypeRepository;
+    private final SessionFactory sessionFactory;
 
-    @Autowired
-    private HandlebarDiameterRepository handlebarDiameterRepository ;
-    @Autowired
-    private ManufacturerRepository manufacturerRepository;
-    @Autowired
-    private HeadsetTypeRepository headsetTypeRepository ;
-    @Autowired
-    private BikeTypeRepository bikeTypeRepository;
+    public HandlebarServiceImpl(HandlebarRepository handlebarRepository, WindingRepository windingRepository,
+                                GripsRepository gripsRepository, HeadsetRepository headsetRepository,
+                                StemRepository stemRepository, ManufacturerRepository manufacturerRepository,
+                                HeadsetTypeRepository headsetTypeRepository, BikeTypeRepository bikeTypeRepository,
+                                SessionFactory sessionFactory) {
+        this.handlebarRepository = handlebarRepository;
+        this.windingRepository = windingRepository;
+        this.gripsRepository = gripsRepository;
+        this.headsetRepository = headsetRepository;
+        this.stemRepository = stemRepository;
+        this.manufacturerRepository = manufacturerRepository;
+        this.headsetTypeRepository = headsetTypeRepository;
+        this.bikeTypeRepository = bikeTypeRepository;
+        this.sessionFactory = sessionFactory;
+    }
 
     //Lists with articles of components, that user added to cart
     public List<Long> articlesHandlebar = new ArrayList<>();
@@ -230,26 +245,12 @@ public class HandlebarServiceImpl  implements HandlebarService {
         return bikeTypeRepository.findAll();
     }
 
-    @Transactional(readOnly=true)
-    public List<HandlebarDiameter> findHandlebarDiameter() {
-        return handlebarDiameterRepository.findAll();
-    }
 
     @Transactional(readOnly=true)
     public List<HeadsetType> findHeadsetType() {
         return headsetTypeRepository.findAll();
     }
 
-    //select from database by parametrs
-
-    @Transactional(readOnly=true)
-    public List<Stem> findByHandlebarDiamAndTubeDiam(HandlebarDiameter handlebarDiameter,
-                                                     TubeDiameter tubeDiameter,
-                                                     Pageable pageable) {
-        return stemRepository.findByHandlebarDiamAndTubeDiam(handlebarDiameter,
-                tubeDiameter,
-                pageable);
-    }
 
     @Transactional(readOnly=true)
     public List<Handlebar> findHandlebarByArticle(Long article, Pageable pageable) {
@@ -345,12 +346,39 @@ public class HandlebarServiceImpl  implements HandlebarService {
     }
 
     @Transactional(readOnly=true)
-    public HandlebarDiameter findHandlebarDiameter(long id) {
-        return handlebarDiameterRepository.findOne(id);
-    }
-
-    @Transactional(readOnly=true)
     public HeadsetType findHeadsetType(long id) {
         return headsetTypeRepository.findOne(id);
+    }
+
+
+    @Override
+    @Transactional
+    public SearchResultBO searchByCriteria(HandlebarSearchInputJSON input){
+        SearchResultBO ret = new SearchResultBO();
+        Session session = sessionFactory.openSession();
+        Criteria searchCriteria = session.createCriteria(Handlebar.class);
+        if (input.getBikeTypeId() != null)
+            searchCriteria.add(Restrictions.eq("bikeType",bikeTypeRepository.findOne(input.getBikeTypeId())));
+        if(input.getManufacturerId() != null)
+            searchCriteria.add(Restrictions.eq("manufacturer", manufacturerRepository.findOne(input.getManufacturerId())));
+        if(input.getHandlebarDiameter() != null)
+            searchCriteria.add(Restrictions.eq("handlebarDiameter", input.getHandlebarDiameter()));
+        if (input.getHandlebarHeight() != null)
+            searchCriteria.add(Restrictions.eq("handlebarHeight", input.getHandlebarHeight()));
+        if (input.getHandlebarWide() != null)
+            searchCriteria.add(Restrictions.eq("handlebarWide", input.getHandlebarWide()));
+        ret.setTotalCount(getCount(searchCriteria));
+        searchCriteria.setFirstResult(input.getItemsPerPage() * input.getPage());
+        searchCriteria.setMaxResults(input.getItemsPerPage());
+        ret.setSearchResult(searchCriteria.list());
+        session.close();
+        return ret;
+    }
+
+    private Long getCount(Criteria searchCriteria) {
+        searchCriteria.setProjection(Projections.rowCount());
+        Long count =(Long) searchCriteria.uniqueResult();
+        searchCriteria.setProjection(null);
+        return count;
     }
 }

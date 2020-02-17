@@ -14,6 +14,6 @@ public class BrakeHandleJSON extends BaseJSON {
     private BrakeHandleCompatibilityEnum compatibility;
     private String materialHandle;
     private String materialCorp;
-    private String handlebarDiameter;
+    private Double handlebarDiameter;
     private String wide;
 }

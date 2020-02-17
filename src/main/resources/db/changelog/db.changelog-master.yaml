@@ -23,5 +23,54 @@ databaseChangeLog:
       - sql:
           sql: insert into frames (article,color, description, material,name,price,way,weight,bike_type_id,bracket_wide_id, brakes_type_id, frame_size_id,headset_type_id,maker_id,trunk_id, tube_diam_id,under_sad_diam_id,whells_d_id)
             values (7,'Чорний','Trek','Алюміній','Track 29', 18000,'/resources/images/frame_Track29.jpg','30000 г',1,2,1,2,1,27,2,1,12,5);
+#modify handlebar
+  - changeSet:
+      id: 17.02.2020_zhuk_vs_remove_FK_handlebar
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE handlebars DROP FOREIGN KEY `FK16wskjeo4qui5faa8361gn1qj`;
+
+  - changeSet:
+      id: 17.02.2020_zhuk_vs_remove_INDEX_handlebar
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE handlebars DROP INDEX  `FK16wskjeo4qui5faa8361gn1qj`;
+
+  - changeSet:
+      id: 17.02.2020_zhuk_vs_remove_change_column_handlebar
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE handlebars CHANGE diam_id handlebar_diam DOUBLE;
+
+
+
+#modify brake_handle
+  - changeSet:
+      id: 17.02.2020_zhuk_vs_remove_FK_brake_handle
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE brake_handles DROP FOREIGN KEY `FKpsys3v7p6qd2yvq59dxywag2n`;
+
+  - changeSet:
+      id: 17.02.2020_zhuk_vs_remove_INDEX_brake_handle
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE brake_handles DROP INDEX  `FKpsys3v7p6qd2yvq59dxywag2n`;
+
+  - changeSet:
+      id: 17.02.2020_zhuk_vs_remove_change_column_brake_handle
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE brake_handles CHANGE diam_id handlebar_diam DOUBLE;
+
+
+
+
 
 

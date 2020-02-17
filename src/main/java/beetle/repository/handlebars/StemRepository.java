@@ -2,7 +2,6 @@ package beetle.repository.handlebars;
 
 import beetle.entity.forks.TubeDiameter;
 import beetle.entity.Manufacturer;
-import beetle.entity.handlebars.HandlebarDiameter;
 import beetle.entity.handlebars.Stem;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,10 +25,5 @@ public interface StemRepository extends JpaRepository<Stem, Long> {
 
     @Query("SELECT c FROM Stem c WHERE c.article = :article")
     List<Stem> findByArticle(@Param("article") Long article, Pageable pageable);
-
-    @Query("SELECT c FROM Stem c WHERE c.handlebarDiameter = :handlebarDiameter AND c.tubeDiameter = :tubeDiameter ")
-    List<Stem> findByHandlebarDiamAndTubeDiam(@Param("handlebarDiameter" ) HandlebarDiameter handlebarDiameter,
-                                          @Param("tubeDiameter")TubeDiameter tubeDiameter,
-                                          Pageable pageable);
 
 }
