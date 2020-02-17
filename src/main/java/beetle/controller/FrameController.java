@@ -39,7 +39,7 @@ public class FrameController {
             response.setTotalItems(searchResult.getTotalCount());
         }
         catch (Exception ex){
-            throw new CustomWebException(ex.getMessage());
+            throw new CustomWebException(ex);
         }
         return response;
     }

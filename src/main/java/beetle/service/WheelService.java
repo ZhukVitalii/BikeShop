@@ -6,9 +6,7 @@ import beetle.entity.forks.BrakesType;
 import beetle.entity.forks.WheelsDiam;
 import beetle.entity.frame.BikeType;
 import beetle.entity.wheels.*;
-import beetle.json.wheel.HubSearchInputJSON;
-import beetle.json.wheel.RimSearchInputJSON;
-import beetle.json.wheel.WheelSearchInputJSON;
+import beetle.json.wheel.*;
 import beetle.repository.ManufacturerRepository;
 import beetle.repository.forks.BrakesTypeRepository;
 import beetle.repository.forks.WheelsDiamRepository;
@@ -33,9 +31,17 @@ public interface WheelService {
 
     SearchResultBO searchByCriteria(RimSearchInputJSON input);
 
+    SearchResultBO searchByCriteria(TireSearchInputJSON input);
+
+    SearchResultBO searchByCriteria(SpokeSearchInputJSON input);
+
     Wheel getWheel(Long id);
 
     Hub getHub(Long id);
 
     Rim getRim(Long id);
+
+    Tire getTire(Long id);
+
+    Spoke getSpoke(Long id);
 }

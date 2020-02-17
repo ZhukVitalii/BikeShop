@@ -8,5 +8,6 @@ import lombok.Setter;
 @Setter
 public class SpokeSearchInputJSON extends PaggingJSON {
     private String diameter;
+    private String length;
     private Long manufacturerId;
 }
