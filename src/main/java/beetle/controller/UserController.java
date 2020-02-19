@@ -99,21 +99,21 @@ public class UserController {
 //        return "wheelsToFork";
 //    }
     // Select Brackets
-    @RequestMapping("/chooseBracket/{id}")
-    public String listBracketForBike(
-            @PathVariable(value = "id") Long id,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
-        if (page < 0) page = 0;
-        userService.addChosenId(WHEEL,id);
-        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
-        BracketWide bracketWide = frame.getBracketWide();
-        List<Bracket> brackets = transmissionService.
-                findByBracketWide(bracketWide,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-        model.addAttribute("brackets", brackets);
-        return "bracketsToFork";
-    }
+//    @RequestMapping("/chooseBracket/{id}")
+//    public String listBracketForBike(
+//            @PathVariable(value = "id") Long id,
+//            @RequestParam(required = false, defaultValue = "0") Integer page,
+//            Model model)
+//    {
+//        if (page < 0) page = 0;
+//        userService.addChosenId(WHEEL,id);
+//        Frame frame = frameService.findFrame(userService.getChosenId(FRAME));
+//        BracketWide bracketWide = frame.getBracketWide();
+//        List<Bracket> brackets = transmissionService.
+//                findByBracketWide(bracketWide,new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+//        model.addAttribute("brackets", brackets);
+//        return "bracketsToFork";
+//    }
     // Select Cranks
     @RequestMapping("/chooseCrank/{id}")
     public String listCrankForBracket(

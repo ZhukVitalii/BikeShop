@@ -31,9 +31,8 @@ public class Frame extends BaseEntity{
     @ManyToOne
     @JoinColumn(name="whells_d_id")
     private WheelsDiam wheelsDiam;
-    @ManyToOne
-    @JoinColumn(name="bracket_wide_id")
-    private BracketWide bracketWide;
+    @Column(name="bracket_wide")
+    private Double bracketWide;
     @ManyToOne
     @JoinColumn(name="headset_type_id")
     private HeadsetType headsetType;

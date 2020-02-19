@@ -30,7 +30,6 @@ public class FrameMapper extends BaseMapper{
         BikeType bikeType = frameServiceImpl.findBikeType(input.getBikeTypeId());
         FrameSize frameSize = frameServiceImpl.findFrameSize(input.getFrameSizeId());
         WheelsDiam wheelsDiam = frameServiceImpl.findWheelsDiam(input.getWheelsDiamId());
-        BracketWide bracketWide = frameServiceImpl.findBracketWide(input.getBracketWideId()) ;
         HeadsetType headsetType = frameServiceImpl.findHeadsetType(input.getHeadsetTypeId());
         TubeDiameter tubeDiameter = frameServiceImpl.findTubeDiameter(input.getTubeDiameterId()) ;
         UnderSaddleTube underSaddleTube = frameServiceImpl.findUnderSaddleTuber(input.getUnderSaddleTubeId()) ;
@@ -38,7 +37,7 @@ public class FrameMapper extends BaseMapper{
         TrunkBinding trunkBinding = frameServiceImpl.findTrunkBinding(input.getTrunkBindingId()) ;
 
         ret.setBikeType(bikeType);
-        ret.setBracketWide(bracketWide);
+        ret.setBracketWide(input.getBracketWide());
         ret.setBrakesType(brakesType);
         ret.setFrameSize(frameSize);
         ret.setHeadsetType(headsetType);
@@ -103,6 +102,7 @@ public class FrameMapper extends BaseMapper{
         ret.setTubeDiameter(frame.getTubeDiameter().getDiam());
         ret.setUnderSaddleTubeDiameter(frame.getUnderSaddleTube().getDiam());
         ret.setWheelsDiameter(frame.getWheelsDiam().getDiam());
+        ret.setBracketWide(frame.getBracketWide());
         setBaseParameter(ret, frame);
         return ret;
     }

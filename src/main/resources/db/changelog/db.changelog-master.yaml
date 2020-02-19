@@ -68,9 +68,24 @@ databaseChangeLog:
       changes:
       - sql:
           sql: ALTER TABLE brake_handles CHANGE diam_id handlebar_diam DOUBLE;
+#modify frames
+  - changeSet:
+      id: 18.02.2020_zhuk_vs_remove_FK_frame
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE frames DROP FOREIGN KEY `FK9ebf6h4uubgey90db32f62kcx`;
 
+  - changeSet:
+      id: 18.02.2020_zhuk_vs_remove_INDEX_frame
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE frames DROP INDEX `FK9ebf6h4uubgey90db32f62kcx`;
 
-
-
-
-
+  - changeSet:
+      id: 17.02.2020_zhuk_vs_remove_change_column_frame
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE frames CHANGE bracket_wide_id bracket_wide DOUBLE;
