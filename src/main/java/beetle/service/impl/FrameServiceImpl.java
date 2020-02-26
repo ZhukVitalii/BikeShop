@@ -96,7 +96,7 @@ public class FrameServiceImpl implements FrameService {
     }
 
     @Transactional
-    public void addFrameSize(FrameSize frameSize) {
+    public void addFrameSize(FrameSizeType frameSize) {
         frameSizeRepository.save(frameSize);
     }
 
@@ -134,7 +134,7 @@ public class FrameServiceImpl implements FrameService {
         if(input.getManufacturerId() != null)
             searchCriteria.add(Restrictions.eq("manufacturer", manufacturerRepository.findOne(input.getManufacturerId())));
         if(input.getFrameSizeId() != null)
-            searchCriteria.add(Restrictions.eq("frameSize", frameSizeRepository.findOne(input.getFrameSizeId())));
+            searchCriteria.add(Restrictions.eq("frameSizeType", frameSizeRepository.findOne(input.getFrameSizeId())));
         if (input.getWheelsDiamId() != null)
             searchCriteria.add(Restrictions.eq("wheelsDiam", wheelsDiamRepository.findOne(input.getWheelsDiamId())));
         if (input.getBracketWideId() != null)
@@ -166,7 +166,7 @@ public class FrameServiceImpl implements FrameService {
     }
 
     @Transactional(readOnly=true)
-    public List<FrameSize> findFrameSize() {
+    public List<FrameSizeType> findFrameSize() {
         return frameSizeRepository.findAll();
     }
 
@@ -234,7 +234,7 @@ public class FrameServiceImpl implements FrameService {
 
     @Override
     @Transactional(readOnly=true)
-    public FrameSize findFrameSize(long id) {
+    public FrameSizeType findFrameSize(long id) {
         return frameSizeRepository.findOne(id);
     }
 

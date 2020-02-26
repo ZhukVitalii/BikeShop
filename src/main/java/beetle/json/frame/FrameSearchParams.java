@@ -17,7 +17,7 @@ public class FrameSearchParams implements Serializable {
     private String url;
     private String name;
     private BikeType bikeType;
-    private FrameSize frameSize;
+    private FrameSizeType frameSize;
     private WheelsDiam wheelsDiam;
     private String material;
     private BracketWide bracketWide;
@@ -81,11 +81,11 @@ public class FrameSearchParams implements Serializable {
         this.bikeType = bikeType;
     }
 
-    public FrameSize getFrameSize() {
+    public FrameSizeType getFrameSize() {
         return frameSize;
     }
 
-    public void setFrameSize(FrameSize frameSize) {
+    public void setFrameSize(FrameSizeType frameSize) {
         this.frameSize = frameSize;
     }
 

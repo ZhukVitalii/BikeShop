@@ -89,3 +89,37 @@ databaseChangeLog:
       changes:
       - sql:
           sql: ALTER TABLE frames CHANGE bracket_wide_id bracket_wide DOUBLE;
+
+
+
+
+  - changeSet:
+      id: 20.02.2020_rename_table_frame_size
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: rename table frame_sizes to frame_size_type;
+
+
+  - changeSet:
+      id: 20.02.2020_remove_FK_frame
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE frames DROP FOREIGN KEY `FKcrr09ve5670ixmbgns5ebm0gt`;
+
+  - changeSet:
+      id: 20.02.2020_remove_INDEX_frame
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE frames DROP INDEX `FKcrr09ve5670ixmbgns5ebm0gt`;
+
+  - changeSet:
+      id: 20.02.2020_remove_frame_size_id
+      author: zhuk_vs
+      changes:
+      - sql:
+          sql: ALTER TABLE frames drop column frame_size_id;
+
+

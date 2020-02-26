@@ -3,7 +3,7 @@ package beetle.controller;
 import beetle.businessObjects.SearchResultBO;
 import beetle.entity.frame.BikeType;
 import beetle.entity.frame.Frame;
-import beetle.entity.frame.FrameSize;
+import beetle.entity.frame.FrameSizeType;
 import beetle.enums.BikeTypeEnum;
 import beetle.json.SearchResultResponseJSON;
 import beetle.json.frame.FramesJSON;
@@ -88,20 +88,20 @@ public class UserControllerTest {
             headsetTypeRepository,tubeDiameterRepository,bracketWideRepository,wheelsDiamRepository,sessionFactory);
 
     private final static BikeType bikeType = new BikeType("MTB");
-    private final static FrameSize frameSize = new FrameSize("M");
+    //private final static FrameSizeType frameSize = new FrameSizeType("M");
     private final static String mockFrameName = "MockFrameName";
     private final static String mockFrameDescription = "MockDescription";
     private final static Double mockFramePrice = new Double(158.5);
 
 
-    @BeforeEach
-    void setMockOutput() {
-        SearchResultBO searchResult = new SearchResultBO();
-        searchResult.setSearchResult(Arrays.asList(new Frame(bikeType, frameSize, mockFrameName, mockFrameDescription, mockFramePrice)));
-        searchResult.setTotalCount(12L);
-        bikeType.setId(1L);
-        when(frameService.searchByCriteria(buildRequest())).thenReturn(searchResult);
-    }
+//    @BeforeEach
+//    void setMockOutput() {
+//        SearchResultBO searchResult = new SearchResultBO();
+//        searchResult.setSearchResult(Arrays.asList(new Frame(bikeType, frameSize, mockFrameName, mockFrameDescription, mockFramePrice)));
+//        searchResult.setTotalCount(12L);
+//        bikeType.setId(1L);
+//        when(frameService.searchByCriteria(buildRequest())).thenReturn(searchResult);
+//    }
 
 
 //    @DisplayName("Test Mock Search Frame")

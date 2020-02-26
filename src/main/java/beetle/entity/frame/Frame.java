@@ -1,17 +1,16 @@
 package beetle.entity.frame;
 
-import beetle.entity.Manufacturer;
 import beetle.entity.forks.BrakesType;
 import beetle.entity.forks.TubeDiameter;
 import beetle.entity.forks.WheelsDiam;
 import beetle.entity.handlebars.HeadsetType;
 import beetle.entity.BaseEntity;
-import beetle.entity.transmission.BracketWide;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="frames")
@@ -25,9 +24,13 @@ public class Frame extends BaseEntity{
     @ManyToOne
     @JoinColumn(name="bike_type_id")
     private BikeType bikeType;
-    @ManyToOne
-    @JoinColumn(name="frame_size_id")
-    private FrameSize frameSize;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name="frame_sizes",
+            joinColumns = {@JoinColumn(name = "frame_id")},
+            inverseJoinColumns = {@JoinColumn(name = "frame_size_id")}
+    )
+    private Set<FrameSizeType> frameSizeTypes;
     @ManyToOne
     @JoinColumn(name="whells_d_id")
     private WheelsDiam wheelsDiam;
@@ -49,9 +52,4 @@ public class Frame extends BaseEntity{
     @JoinColumn(name="trunk_id")
     private TrunkBinding trunkBinding;
 
-    public Frame(BikeType bikeType, FrameSize frameSize, String name, String description, Double price) {
-        super(null,null,null,name,null,null,null,null,price,null);
-        this.bikeType = bikeType;
-        this.frameSize = frameSize;
-    }
 }

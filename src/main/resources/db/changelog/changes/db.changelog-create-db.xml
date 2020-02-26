@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <changeSet author="zhuk_vs" id="21.02.2020_modify_frame_sise_types">
+        <sql>
+            ALTER TABLE frame_size_type modify id bigint(20) AUTO_INCREMENT;
+        </sql>
+    </changeSet>
+
+    <changeSet author="zhuk_vs" id="21.02.2020_create_table_frame_sizes">
+        <sql> CREATE TABLE if not exists  frame_sizes (
+            id bigint(20) not null primary key auto_increment,
+            frame_id bigint(20) not null,
+            size_id bigint(20) not null,
+            KEY size_id (size_id),
+            CONSTRAINT frame_size_ibfc_1
+            FOREIGN KEY (frame_id) REFERENCES frames(id),
+            CONSTRAINT frame_size_ibfc_2 FOREIGN KEY (size_id) REFERENCES frame_size_type(id) ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

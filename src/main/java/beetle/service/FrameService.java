@@ -24,7 +24,7 @@ public interface FrameService {
 
     void addFrameMaker(Manufacturer frameMaker);
 
-    void addFrameSize(FrameSize frameSize);
+    void addFrameSize(FrameSizeType frameSize);
 
     void addTrunkBinding(TrunkBinding trunkBinding);
 
@@ -36,7 +36,7 @@ public interface FrameService {
 
     List<Manufacturer> findFrameMakers();
 
-    List<FrameSize> findFrameSize();
+    List<FrameSizeType> findFrameSize();
 
     List<WheelsDiam> findWheelsDiam();
 
@@ -56,7 +56,7 @@ public interface FrameService {
 
     List<BrakesType> findBrakesType();
 
-    FrameSize findFrameSize(long id);
+    FrameSizeType findFrameSize(long id);
 
     Frame findFrame(Long id);
 

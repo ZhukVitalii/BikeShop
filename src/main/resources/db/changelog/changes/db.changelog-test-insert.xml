@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="21.02.2020_insert_into_frame_sizes" author="zhuk_vs">
+        <sql>
+            insert into frame_sizes (frame_id, size_id) values (1,1);
+            insert into frame_sizes (frame_id, size_id) values (1,2);
+            insert into frame_sizes (frame_id, size_id) values (1,3);
+            insert into frame_sizes (frame_id, size_id) values (2,1);
+            insert into frame_sizes (frame_id, size_id) values (2,2);
+            insert into frame_sizes (frame_id, size_id) values (3,3);
+
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

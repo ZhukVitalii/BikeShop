@@ -2,7 +2,7 @@ package beetle.mapper;
 
 
 import beetle.entity.frame.Frame;
-import beetle.entity.frame.FrameSize;
+import beetle.entity.frame.FrameSizeType;
 import beetle.json.frame.FrameSizeJSON;
 import beetle.json.frame.FramesJSON;
 import org.springframework.stereotype.Component;
@@ -14,10 +14,10 @@ import java.util.List;
 public class JSONMapper {
 
 
-    public List<FrameSizeJSON> toFrameSize(List<FrameSize> frameSizes) {
+    public List<FrameSizeJSON> toFrameSize(List<FrameSizeType> frameSizes) {
         List<FrameSizeJSON> ret = new ArrayList<>();
 
-        for (FrameSize frameSize : frameSizes) {
+        for (FrameSizeType frameSize : frameSizes) {
             FrameSizeJSON sizeJSON = new FrameSizeJSON();
             sizeJSON.setId(frameSize.getId());
             sizeJSON.setSize(frameSize.getSize());

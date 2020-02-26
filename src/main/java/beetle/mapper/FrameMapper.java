@@ -6,7 +6,6 @@ import beetle.entity.forks.TubeDiameter;
 import beetle.entity.forks.WheelsDiam;
 import beetle.entity.frame.*;
 import beetle.entity.handlebars.HeadsetType;
-import beetle.entity.transmission.BracketWide;
 import beetle.json.SearchResultResponseJSON;
 import beetle.json.frame.*;
 import beetle.service.impl.FrameServiceImpl;
@@ -28,7 +27,7 @@ public class FrameMapper extends BaseMapper{
 
         Manufacturer frameMaker = frameServiceImpl.findFrameMaker(input.getManufacturerId());
         BikeType bikeType = frameServiceImpl.findBikeType(input.getBikeTypeId());
-        FrameSize frameSize = frameServiceImpl.findFrameSize(input.getFrameSizeId());
+//        FrameSizeType frameSize = frameServiceImpl.findFrameSize(input.getFrameSizeId());
         WheelsDiam wheelsDiam = frameServiceImpl.findWheelsDiam(input.getWheelsDiamId());
         HeadsetType headsetType = frameServiceImpl.findHeadsetType(input.getHeadsetTypeId());
         TubeDiameter tubeDiameter = frameServiceImpl.findTubeDiameter(input.getTubeDiameterId()) ;
@@ -39,7 +38,7 @@ public class FrameMapper extends BaseMapper{
         ret.setBikeType(bikeType);
         ret.setBracketWide(input.getBracketWide());
         ret.setBrakesType(brakesType);
-        ret.setFrameSize(frameSize);
+//        ret.setFrameSizeType(frameSize);
         ret.setHeadsetType(headsetType);
         ret.setTrunkBinding(trunkBinding);
         ret.setTubeDiameter(tubeDiameter);
@@ -58,10 +57,10 @@ public class FrameMapper extends BaseMapper{
         return ret;
     }
 
-    public List<FrameSizeJSON> toFrameSize(List<FrameSize> frameSizes) {
+    public List<FrameSizeJSON> toFrameSize(List<FrameSizeType> frameSizes) {
         List<FrameSizeJSON> ret = new ArrayList<>();
 
-        for (FrameSize frameSize : frameSizes) {
+        for (FrameSizeType frameSize : frameSizes) {
             FrameSizeJSON sizeJSON = new FrameSizeJSON();
             sizeJSON.setId(frameSize.getId());
             sizeJSON.setSize(frameSize.getSize());
