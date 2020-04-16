@@ -1,12 +1,9 @@
 package beetle.service.impl;
 
-import beetle.businessObjects.SearchResultBO;
-import beetle.entity.brake.Brake;
-import beetle.entity.forks.TubeDiameter;
+import beetle.bo.SearchResultBO;
 import beetle.entity.Manufacturer;
 import beetle.entity.frame.BikeType;
 import beetle.entity.handlebars.*;
-import beetle.json.brakes.BrakeSearchInputJSON;
 import beetle.json.handlebar.HandlebarSearchInputJSON;
 import beetle.repository.ManufacturerRepository;
 import beetle.repository.frame.BikeTypeRepository;
@@ -17,7 +14,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

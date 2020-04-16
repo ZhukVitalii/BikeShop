@@ -1,4 +1,4 @@
-package beetle.Secirity;
+package beetle.security;
 
 import beetle.enums.UserRoleEnum;
 import lombok.Getter;

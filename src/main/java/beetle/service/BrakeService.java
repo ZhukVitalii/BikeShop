@@ -1,6 +1,6 @@
 package beetle.service;
 
-import beetle.businessObjects.SearchResultBO;
+import beetle.bo.SearchResultBO;
 import beetle.entity.Manufacturer;
 import beetle.entity.brake.*;
 import beetle.json.brakes.BrakeHandleSearchInputJSON;

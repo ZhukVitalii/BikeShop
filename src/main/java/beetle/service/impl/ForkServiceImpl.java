@@ -1,17 +1,10 @@
 package beetle.service.impl;
 
-import beetle.businessObjects.SearchResultBO;
+import beetle.bo.SearchResultBO;
 import beetle.entity.Manufacturer;
-import beetle.entity.forks.BrakesType;
 import beetle.entity.forks.Fork;
-import beetle.entity.forks.TubeDiameter;
-import beetle.entity.forks.WheelsDiam;
-import beetle.entity.frame.BikeType;
-import beetle.entity.frame.Frame;
 import beetle.json.fork.ForkSearchInputJSON;
-import beetle.json.frame.FramesSearchInputJSON;
 import beetle.repository.ManufacturerRepository;
-import beetle.repository.forks.BrakesTypeRepository;
 import beetle.repository.forks.ForkRepository;
 import beetle.repository.forks.TubeDiameterRepository;
 import beetle.repository.forks.WheelsDiamRepository;

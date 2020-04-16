@@ -1,6 +1,6 @@
 package beetle.controller;
 
-import beetle.businessObjects.SearchResultBO;
+import beetle.bo.SearchResultBO;
 import beetle.entity.forks.Fork;
 import beetle.json.SearchResultResponseJSON;
 import beetle.json.fork.ForkJSON;
@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
  */
 @Controller
 @RequestMapping("/fork")
+@CrossOrigin
 public class ForkController {
     @Autowired
     private ForkService forkService;

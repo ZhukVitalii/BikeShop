@@ -1,6 +1,6 @@
 package beetle.service.impl;
 
-import beetle.businessObjects.SearchResultBO;
+import beetle.bo.SearchResultBO;
 import beetle.entity.Manufacturer;
 import beetle.entity.forks.BrakesType;
 import beetle.entity.forks.TubeDiameter;
@@ -21,14 +21,17 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FrameServiceImpl implements FrameService {
@@ -123,35 +126,135 @@ public class FrameServiceImpl implements FrameService {
         return frameRepository.findAll(pageable).getContent();
     }
 
-    @Override
+//    @Override
+//    @Transactional
+//    public SearchResultBO searchByCriteria(FramesSearchInputJSON input){
+//        SearchResultBO ret = new SearchResultBO();
+//        Session session = sessionFactory.openSession();
+//        Criteria searchCriteria = session.createCriteria(Frame.class);
+//        if (input.getBikeTypeId() != null)
+//            searchCriteria.add(Restrictions.eq("bikeType",bikeTypeRepository.getOne(input.getBikeTypeId())));
+//        if(input.getManufacturerId() != null)
+//            searchCriteria.add(Restrictions.eq("manufacturer", manufacturerRepository.findOne(input.getManufacturerId())));
+////        if(input.getFrameSizeId() != null)
+////            searchCriteria.add(Restrictions.in("frameSizeTypes", frameSizeRepository.findOne(input.getFrameSizeId())));
+//        if(input.getFrameSizeId() != null) {
+//            searchCriteria.setResultTransformer(Criteria.ROOT_ENTITY);
+//            searchCriteria.createAlias("frameSizeTypes", "frameSizeTypesAlias");
+//            searchCriteria.add(Restrictions.in("frameSizeTypesAlias.size", Arrays.asList("1","2","3","4")));
+//        }
+//        if (input.getWheelsDiamId() != null)
+//            searchCriteria.add(Restrictions.eq("wheelsDiam", wheelsDiamRepository.findOne(input.getWheelsDiamId())));
+//        if (input.getBracketWideId() != null)
+//            searchCriteria.add(Restrictions.eq("bracketWide", bracketWideRepository.findOne(input.getBracketWideId())));
+//        if (input.getTubeDiameterId() != null)
+//            searchCriteria.add(Restrictions.eq("tubeDiameter", tubeDiameterRepository.findOne(input.getTubeDiameterId())));
+//        if (input.getUnderSaddleTubeId() != null)
+//            searchCriteria.add(Restrictions.eq("underSaddleTube", underSaddleTubeRepository.findOne(input.getUnderSaddleTubeId())));
+//        if (input.getBrakesTypeId() != null)
+//            searchCriteria.add(Restrictions.eq("brakeType", brakesTypeRepository.findOne(input.getBrakesTypeId())));
+//        ret.setTotalCount(getCount(searchCriteria));
+//        searchCriteria.setFirstResult(input.getItemsPerPage() * input.getPage());
+//        searchCriteria.setMaxResults(input.getItemsPerPage());
+//        ret.setSearchResult(searchCriteria.list());
+//        session.close();
+//        return ret;
+//    }
     @Transactional
-    public SearchResultBO searchByCriteria(FramesSearchInputJSON input){
+    public SearchResultBO searchByCriteria(FramesSearchInputJSON input) {
+        ParameterExpression<String> frameSizeParam = null;
         SearchResultBO ret = new SearchResultBO();
         Session session = sessionFactory.openSession();
-        Criteria searchCriteria = session.createCriteria(Frame.class);
-        if (input.getBikeTypeId() != null)
-            searchCriteria.add(Restrictions.eq("bikeType",bikeTypeRepository.getOne(input.getBikeTypeId())));
-        if(input.getManufacturerId() != null)
-            searchCriteria.add(Restrictions.eq("manufacturer", manufacturerRepository.findOne(input.getManufacturerId())));
-        if(input.getFrameSizeId() != null)
-            searchCriteria.add(Restrictions.eq("frameSizeType", frameSizeRepository.findOne(input.getFrameSizeId())));
-        if (input.getWheelsDiamId() != null)
-            searchCriteria.add(Restrictions.eq("wheelsDiam", wheelsDiamRepository.findOne(input.getWheelsDiamId())));
-        if (input.getBracketWideId() != null)
-            searchCriteria.add(Restrictions.eq("bracketWide", bracketWideRepository.findOne(input.getBracketWideId())));
-        if (input.getTubeDiameterId() != null)
-            searchCriteria.add(Restrictions.eq("tubeDiameter", tubeDiameterRepository.findOne(input.getTubeDiameterId())));
-        if (input.getUnderSaddleTubeId() != null)
-            searchCriteria.add(Restrictions.eq("underSaddleTube", underSaddleTubeRepository.findOne(input.getUnderSaddleTubeId())));
-        if (input.getBrakesTypeId() != null)
-            searchCriteria.add(Restrictions.eq("brakeType", brakesTypeRepository.findOne(input.getBrakesTypeId())));
-        ret.setTotalCount(getCount(searchCriteria));
-        searchCriteria.setFirstResult(input.getItemsPerPage() * input.getPage());
-        searchCriteria.setMaxResults(input.getItemsPerPage());
-        ret.setSearchResult(searchCriteria.list());
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Frame> searchQuery = cb.createQuery(Frame.class);
+        Root<Frame> root = searchQuery.from(Frame.class);
+        List<Predicate> predicates = buildPredicates(root,cb,input);
+
+        if(input.getFrameSize() != null) {
+            Join<Frame, FrameSizeType> frameSizeType = root.join("frameSizeTypes");
+            frameSizeParam = cb.parameter(String.class);
+            predicates.add(cb.equal(frameSizeType.get("size"), frameSizeParam));
+        }
+        Predicate[] predicatesArray = predicates.stream().toArray(Predicate[]::new);
+        searchQuery.select(root).where(predicatesArray);
+        TypedQuery<Frame> query = session.createQuery(searchQuery);
+
+        if(input.getFrameSize() != null) {
+            query.setParameter(frameSizeParam, input.getFrameSize());
+        }
+        Long count = new Long (query.getResultList().size());
+        setPagging(query,input);
+        List<Frame> frames = query.getResultList();
+        ret.setTotalCount(count);
+        ret.setSearchResult(frames.stream().map( e -> (Object) e).collect(Collectors.toList()));
         session.close();
         return ret;
     }
+
+//    private Long getCount(Predicate[] predicatesArray, Session session,CriteriaBuilder cb){
+//        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
+//        countQuery.select(cb.count(countQuery.from(Frame.class)));
+//        session.createQuery(countQuery);
+//        countQuery.where(predicatesArray);
+//
+//        return session.createQuery(countQuery).getSingleResult();
+//    }
+
+
+// todo migrate to this method
+    private Long getCount(FramesSearchInputJSON input){
+        Session session = sessionFactory.openSession();
+        ParameterExpression<Long> frameSizeParam = null;
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
+        Root<Frame> root = countQuery.from(Frame.class);
+
+        List<Predicate> predicates = buildPredicates(root,cb,input);
+
+        if(input.getFrameSizeId() != null) {
+            Join<Object, Object> frameSizeType = root.join("frameSizeTypes",JoinType.INNER);
+            frameSizeParam = cb.parameter(Long.class);
+            predicates.add(cb.equal(frameSizeType.get("id"), frameSizeParam));
+        }
+
+        countQuery.select(cb.count(countQuery.from(Frame.class))).where(predicates.stream().toArray(Predicate[]::new));
+        Query<Long> query = session.createQuery(countQuery);
+        if(input.getFrameSizeId() != null) {
+            query.setParameter(frameSizeParam, input.getFrameSizeId());
+        }
+
+        Long count = query.getSingleResult();
+        session.close();
+        return count;
+    }
+
+
+    private void setPagging(TypedQuery<Frame> query,FramesSearchInputJSON input){
+        query.setFirstResult(input.getItemsPerPage() * input.getPage());
+        query.setMaxResults(input.getItemsPerPage());
+    }
+    private List<Predicate> buildPredicates(Root<Frame> root,CriteriaBuilder cb,FramesSearchInputJSON input){
+        List<Predicate> predicates = new ArrayList<>();
+        if (input.getBikeTypeId() != null)
+            predicates.add(cb.equal(root.get("bikeType"),bikeTypeRepository.getOne(input.getBikeTypeId())));
+        if(input.getManufacturerId() != null)
+            predicates.add(cb.equal(root.get("manufacturer"),manufacturerRepository.findOne(input.getManufacturerId())));
+        if (input.getWheelsDiamId() != null)
+            predicates.add(cb.equal(root.get("wheelsDiam"),wheelsDiamRepository.findOne(input.getWheelsDiamId())));
+        if (input.getBracketWideId() != null)
+            predicates.add(cb.equal(root.get("bracketWide"),bracketWideRepository.findOne(input.getBracketWideId())));
+        if (input.getTubeDiameterId() != null)
+            predicates.add(cb.equal(root.get("tubeDiameter"),tubeDiameterRepository.findOne(input.getTubeDiameterId())));
+        if (input.getUnderSaddleTubeId() != null)
+            predicates.add(cb.equal(root.get("underSaddleTube"),underSaddleTubeRepository.findOne(input.getUnderSaddleTubeId())));
+        if (input.getBrakesTypeId() != null)
+            predicates.add(cb.equal(root.get("brakeType"),brakesTypeRepository.findOne(input.getBrakesTypeId())));
+
+
+        return predicates;
+    }
+
+
 
     private Long getCount(Criteria searchCriteria) {
         searchCriteria.setProjection(Projections.rowCount());

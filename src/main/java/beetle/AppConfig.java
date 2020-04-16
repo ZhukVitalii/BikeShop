@@ -4,10 +4,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.jpa.HibernateEntityManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -42,7 +40,7 @@ public class AppConfig{
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
         return new JpaTransactionManager(emf);
     }
-
+    @Primary
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory
             (DataSource dataSource, JpaVendorAdapter jpaVendeorAdapter) {
@@ -68,6 +66,11 @@ public class AppConfig{
     @Bean
     public SessionFactory sessionFactory(HibernateEntityManagerFactory hemf){
         return hemf.getSessionFactory();
+    }
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer configurer() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
 
 //    @Bean

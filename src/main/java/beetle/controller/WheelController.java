@@ -1,6 +1,6 @@
 package beetle.controller;
 
-import beetle.businessObjects.SearchResultBO;
+import beetle.bo.SearchResultBO;
 import beetle.entity.wheels.*;
 import beetle.exception.CustomWebException;
 import beetle.json.SearchResultResponseJSON;
@@ -9,7 +9,6 @@ import beetle.mapper.WheelMapper;
 import beetle.service.WheelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

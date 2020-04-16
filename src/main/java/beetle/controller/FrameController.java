@@ -1,8 +1,7 @@
 package beetle.controller;
 
-import beetle.businessObjects.SearchResultBO;
+import beetle.bo.SearchResultBO;
 import beetle.entity.frame.*;
-import beetle.exception.CustomWebException;
 import beetle.json.SearchResultResponseJSON;
 import beetle.json.frame.FrameSizeJSON;
 import beetle.json.frame.FramesJSON;
@@ -33,15 +32,15 @@ public class FrameController {
     @ResponseBody
     public SearchResultResponseJSON searchFrames(@RequestBody FramesSearchInputJSON input) {
         SearchResultResponseJSON response = null;
-        try {
+//        try {
             SearchResultBO searchResult = frameService.searchByCriteria(input);
             List<Frame> frames = searchResult.getSearchResult().stream().map(e -> (Frame) e).collect(Collectors.toList());
             response = frameMapper.toSearchResult(frames,input);
             response.setTotalItems(searchResult.getTotalCount());
-        }
-        catch (Exception ex){
-            throw new CustomWebException(ex);
-        }
+//        }
+//        catch (Exception ex){
+//            throw new CustomWebException(ex);
+//        }
         return response;
     }
 

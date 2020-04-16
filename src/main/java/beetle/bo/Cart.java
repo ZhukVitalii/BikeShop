@@ -1,4 +1,4 @@
-package beetle.businessObjects;
+package beetle.bo;
 
 import beetle.enums.ComponentType;
 import org.springframework.web.context.annotation.SessionScope;

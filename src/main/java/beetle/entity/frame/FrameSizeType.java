@@ -18,7 +18,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class FrameSizeType {
+public class
+FrameSizeType {
     @Id
     @GeneratedValue
     private long id;

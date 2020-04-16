@@ -24,11 +24,11 @@ public class Frame extends BaseEntity{
     @ManyToOne
     @JoinColumn(name="bike_type_id")
     private BikeType bikeType;
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
             name="frame_sizes",
             joinColumns = {@JoinColumn(name = "frame_id")},
-            inverseJoinColumns = {@JoinColumn(name = "frame_size_id")}
+            inverseJoinColumns = {@JoinColumn(name = "size_id")}
     )
     private Set<FrameSizeType> frameSizeTypes;
     @ManyToOne

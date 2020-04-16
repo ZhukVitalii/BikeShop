@@ -1,7 +1,7 @@
 package beetle.controller;
 
 import beetle.enums.ComponentType;
-import beetle.json.AddToCartInputJSON;
+import beetle.json.cart.AddToCartInputJSON;
 import beetle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

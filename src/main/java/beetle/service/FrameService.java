@@ -1,6 +1,6 @@
 package beetle.service;
 
-import beetle.businessObjects.SearchResultBO;
+import beetle.bo.SearchResultBO;
 import beetle.entity.forks.BrakesType;
 import beetle.entity.forks.TubeDiameter;
 import beetle.entity.forks.WheelsDiam;

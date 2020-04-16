@@ -1,4 +1,4 @@
-package beetle.Secirity;
+package beetle.security;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

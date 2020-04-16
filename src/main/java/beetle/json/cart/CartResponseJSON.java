@@ -1,4 +1,4 @@
-package beetle.json;
+package beetle.json.cart;
 
 import java.util.List;
 

@@ -1,16 +1,7 @@
 package beetle.service.impl;
 
-import beetle.businessObjects.SearchResultBO;
-import beetle.entity.Manufacturer;
-import beetle.entity.forks.BrakesType;
-import beetle.entity.forks.WheelsDiam;
-import beetle.entity.frame.BikeType;
-import beetle.entity.frame.Frame;
+import beetle.bo.SearchResultBO;
 import beetle.entity.wheels.*;
-import beetle.enums.LocationType;
-import beetle.enums.brakes.BrakeType;
-import beetle.enums.transmission.CogsetType;
-import beetle.enums.transmission.HubBindingType;
 import beetle.json.wheel.*;
 import beetle.repository.ManufacturerRepository;
 import beetle.repository.forks.WheelsDiamRepository;
@@ -23,11 +14,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class WheelServiceImpl implements WheelService{

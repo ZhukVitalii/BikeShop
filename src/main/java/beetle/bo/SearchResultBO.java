@@ -1,4 +1,4 @@
-package beetle.businessObjects;
+package beetle.bo;
 
 import java.util.List;
 

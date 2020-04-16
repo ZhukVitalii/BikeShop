@@ -1,9 +1,6 @@
 package beetle.controller;
 
-import beetle.businessObjects.SearchResultBO;
 import beetle.entity.frame.BikeType;
-import beetle.entity.frame.Frame;
-import beetle.entity.frame.FrameSizeType;
 import beetle.enums.BikeTypeEnum;
 import beetle.json.SearchResultResponseJSON;
 import beetle.json.frame.FramesJSON;
@@ -20,7 +17,6 @@ import beetle.service.impl.FrameServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
@@ -40,10 +36,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import java.net.URL;
-import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+
 @Slf4j
 @RunWith(JUnitPlatform.class)
 @SpringBootTest

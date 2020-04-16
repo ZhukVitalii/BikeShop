@@ -1,13 +1,11 @@
 package beetle.service;
 
-import beetle.businessObjects.SearchResultBO;
-import beetle.entity.forks.TubeDiameter;
+import beetle.bo.SearchResultBO;
 import beetle.entity.Manufacturer;
 import beetle.entity.frame.BikeType;
 import beetle.entity.handlebars.*;
 import beetle.json.handlebar.HandlebarSearchInputJSON;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

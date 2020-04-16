@@ -1,26 +1,15 @@
 package beetle.controller;
 
-import beetle.businessObjects.SearchResultBO;
-import beetle.entity.Manufacturer;
-import beetle.entity.brake.Brake;
+import beetle.bo.SearchResultBO;
 import beetle.exception.CustomWebException;
 import beetle.json.SearchResultResponseJSON;
-import beetle.json.brakes.BrakeSearchInputJSON;
 import beetle.json.handlebar.HandlebarSearchInputJSON;
 import beetle.mapper.HandlebarMapper;
 import beetle.service.HandlebarService;
-import beetle.entity.frame.BikeType;
-import beetle.service.ForkService;
-import beetle.entity.forks.TubeDiameter;
 import beetle.entity.handlebars.*;
-import beetle.service.impl.FrameServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
